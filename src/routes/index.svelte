@@ -31,7 +31,7 @@
 	<li>Support programmatic resizing</li>
 	<li>Support programmatic splitter add/remove</li>
 	<li>Support for legacy browser such as IE 11</li>
-	<li>upport for touch devices</li>
+	<li>Support for touch devices</li>
 </ul>
 
 <MinMax />

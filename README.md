@@ -1,6 +1,6 @@
 # Svelte-Splitpanes
 
-Create resizible views panels in Svelte 3, a radical new approach to building user interfaces.
+Create resizable views panels in Svelte 3, a radical new approach to building user interfaces.
 
 ![screenshot](./static/screenshot.jpg)
 
