@@ -58,11 +58,14 @@
 	// used to detect double clicks
 	let timeoutId: NodeJS.Timeout | null;
 	// panes per insertion order (pane.index is the order index)
-	let panes = writable<Array<IPane>>([]);
+	let panes = new Array<IPane>();
+
+	let isHorizontal = writable<boolean>(horizontal);
 
 	// REACTIVE ----------------
 
 	$: firstSplitter, redoSplitters();
+	$: $isHorizontal = horizontal;
 
 	setContext<SplitContext>(contextKey, {
 		isHorizontal,
@@ -70,10 +73,6 @@
 		onPaneAdd,
 		onPaneRemove
 	});
-
-	function isHorizontal() {
-		return horizontal;
-	}
 
 	async function onPaneAdd(pane: IPane) {
 		// console.log('onPaneAdd');
@@ -86,13 +85,10 @@
 		});
 
 		//inserts pane at proper array index
-		panes.update((p) => {
-			p.splice(index, 0, pane);
-			return p;
-		});
+		panes.splice(index, 0, pane);
 
 		// reindex panes
-		$panes.forEach((p, i) => (p.index = i));
+		panes.forEach((p, i) => (p.index = i));
 
 		if (isReady) {
 			await tick();
@@ -101,28 +97,24 @@
 			redoSplitters();
 
 			// 3. Resize the panes.
-			resetPaneSizes($panes[index], undefined);
+			resetPaneSizes(panes[index], undefined);
 
 			// 4. Fire `pane-add` event.
 			dispatch('pane-add', {
 				index,
-				panes: $panes.map((pane) => ({ min: pane.min, max: pane.max, size: pane.sz() }))
+				panes: panes.map((pane) => ({ min: pane.min, max: pane.max, size: pane.sz() }))
 			});
 		}
 	}
 
 	async function onPaneRemove(uid: string) {
 		// 1. Remove the pane from array and redo indexes.
-		const index = $panes.findIndex((p) => p.uid === uid);
+		const index = panes.findIndex((p) => p.uid === uid);
 
-		let removed: IPane;
-		panes.update((p) => {
-			removed = p.splice(index, 1)[0];
-			return p;
-		});
+		const removed = panes.splice(index, 1)[0];
 
 		// reindex panes
-		$panes.forEach((p, i) => (p.index = i));
+		panes.forEach((p, i) => (p.index = i));
 
 		await tick();
 
@@ -135,7 +127,7 @@
 		// 4. Fire `pane-remove` event.
 		dispatch('pane-remove', {
 			removed,
-			panes: $panes.map((pane) => ({ min: pane.min(), max: pane.max(), size: pane.sz() } as IPaneSizingEvent))
+			panes: panes.map((pane) => ({ min: pane.min(), max: pane.max(), size: pane.sz() } as IPaneSizingEvent))
 		});
 	}
 
@@ -143,7 +135,7 @@
 	function onPaneClick(_event: MouseEvent, uid: string) {
 		dispatch(
 			'pane-click',
-			$panes.find((pane) => {
+			panes.find((pane) => {
 				pane.uid == uid;
 			})
 		);
@@ -202,7 +194,7 @@
 			calculatePanesSize(getCurrentMouseDrag(event));
 			dispatch(
 				'resize',
-				$panes.map((pane) => ({ min: pane.min(), max: pane.max(), size: pane.sz() } as IPaneSizingEvent))
+				panes.map((pane) => ({ min: pane.min(), max: pane.max(), size: pane.sz() } as IPaneSizingEvent))
 			);
 		}
 	}
@@ -212,7 +204,7 @@
 		if (isDragging) {
 			dispatch(
 				'resized',
-				$panes.map((pane) => ({ min: pane.min(), max: pane.max(), size: pane.sz() } as IPaneSizingEvent))
+				panes.map((pane) => ({ min: pane.min(), max: pane.max(), size: pane.sz() } as IPaneSizingEvent))
 			);
 		}
 		isMouseDown = false;
@@ -245,21 +237,20 @@
 			}
 		}
 
-		if (!isDragging) dispatch('splitter-click', $panes[splitterIndex]);
+		if (!isDragging) dispatch('splitter-click', panes[splitterIndex]);
 	}
 
 	// On splitter dbl click or dbl tap maximize this pane.
 	function onSplitterDblClick(_event: MouseEvent, splitterIndex: number) {
 		let totalMinSizes = 0;
-		const ps = $panes;
 
-		ps.forEach((pane, i) => {
+		panes.forEach((pane, i) => {
 			const sz = i === splitterIndex ? pane.max() : pane.min();
 			pane.setSz(sz);
 			if (i !== splitterIndex) totalMinSizes += pane.min();
 		});
 
-		const splitterPane = ps[splitterIndex];
+		const splitterPane = panes[splitterIndex];
 		const sz = splitterPane.sz() - totalMinSizes;
 		splitterPane.setSz(sz);
 
@@ -267,7 +258,7 @@
 
 		typedEventDispatch(
 			'resized',
-			ps.map((pane) => ({
+			panes.map((pane) => ({
 				min: pane.min(),
 				max: pane.max(),
 				size: pane.sz()
@@ -323,8 +314,8 @@
 
 		// If not pushing other panes, panes to resize are right before and right after splitter.
 		let panesToResize = [splitterIndex, splitterIndex + 1];
-		let paneBefore = $panes[panesToResize[0]] || null;
-		let paneAfter = $panes[panesToResize[1]] || null;
+		let paneBefore = panes[panesToResize[0]] || null;
+		let paneAfter = panes[panesToResize[1]] || null;
 
 		const paneBeforeMaxReached = paneBefore.max() < 100 && dragPercentage >= paneBefore.max() + sums.prevPanesSize;
 		const paneAfterMaxReached =
@@ -347,8 +338,8 @@
 					return; // Prevent other calculation.
 				}
 				({ sums, panesToResize } = vars);
-				paneBefore = $panes[panesToResize[0]] || null;
-				paneAfter = $panes[panesToResize[1]] || null;
+				paneBefore = panes[panesToResize[0]] || null;
+				paneAfter = panes[panesToResize[1]] || null;
 			}
 
 			if (paneBefore !== null) {
@@ -377,14 +368,14 @@
 		const panesToResize: Array<number> = [splitterIndex, splitterIndex + 1];
 		// Pushing Down.
 		// Going smaller than the current pane min size: take the previous expanded pane.
-		if (dragPercentage < sums.prevPanesSize + $panes[panesToResize[0]].min()) {
+		if (dragPercentage < sums.prevPanesSize + panes[panesToResize[0]].min()) {
 			//@ts-ignore
 			panesToResize[0] = findPrevExpandedPane(splitterIndex)?.index;
 
 			sums.prevReachedMinPanes = 0;
 			// If pushing a n-2 or less pane, from splitter, then make sure all in between is at min size.
 			if (panesToResize[0] < splitterIndex) {
-				$panes.forEach((pane, i) => {
+				panes.forEach((pane, i) => {
 					if (i > panesToResize[0] && i <= splitterIndex) {
 						pane.setSz(pane.min());
 						sums.prevReachedMinPanes += pane.min();
@@ -395,27 +386,27 @@
 			// If nothing else to push down, cancel dragging.
 			if (panesToResize[0] === undefined) {
 				sums.prevReachedMinPanes = 0;
-				$panes[0].setSz($panes[0].min());
-				$panes.forEach((pane, i) => {
+				panes[0].setSz(panes[0].min());
+				panes.forEach((pane, i) => {
 					if (i > 0 && i <= splitterIndex) {
 						pane.setSz(pane.min());
 						sums.prevReachedMinPanes += pane.min();
 					}
 				});
-				$panes[panesToResize[1]].setSz(
-					100 - sums.prevReachedMinPanes - $panes[0].min() - sums.prevPanesSize - sums.nextPanesSize
+				panes[panesToResize[1]].setSz(
+					100 - sums.prevReachedMinPanes - panes[0].min() - sums.prevPanesSize - sums.nextPanesSize
 				);
 				return null;
 			}
 		}
 		// Pushing Up.
 		// Pushing up beyond min size is reached: take the next expanded pane.
-		if (dragPercentage > 100 - sums.nextPanesSize - $panes[panesToResize[1]].min()) {
+		if (dragPercentage > 100 - sums.nextPanesSize - panes[panesToResize[1]].min()) {
 			panesToResize[1] = findNextExpandedPane(splitterIndex)?.index;
 			sums.nextReachedMinPanes = 0;
 			// If pushing a n+2 or more pane, from splitter, then make sure all in between is at min size.
 			if (panesToResize[1] > splitterIndex + 1) {
-				$panes.forEach((pane, i) => {
+				panes.forEach((pane, i) => {
 					if (i > splitterIndex && i < panesToResize[1]) {
 						pane.sz = pane.min;
 						sums.nextReachedMinPanes += pane.min();
@@ -425,18 +416,18 @@
 			sums.nextPanesSize = sumNextPanesSize(panesToResize[1] - 1);
 			// If nothing else to push up, cancel dragging.
 
-			const panesCount = $panes.length;
+			const panesCount = panes.length;
 			if (panesToResize[1] === undefined) {
 				sums.nextReachedMinPanes = 0;
-				$panes[panesCount - 1].sz = $panes[panesCount - 1].min;
-				$panes.forEach((pane, i) => {
+				panes[panesCount - 1].sz = panes[panesCount - 1].min;
+				panes.forEach((pane, i) => {
 					if (i < panesCount - 1 && i >= splitterIndex + 1) {
 						pane.sz = pane.min;
 						sums.nextReachedMinPanes += pane.min();
 					}
 				});
-				$panes[panesToResize[0]].setSz(
-					100 - sums.prevPanesSize - sums.nextReachedMinPanes - $panes[panesCount - 1].min() - sums.nextPanesSize
+				panes[panesToResize[0]].setSz(
+					100 - sums.prevPanesSize - sums.nextReachedMinPanes - panes[panesCount - 1].min() - sums.nextPanesSize
 				);
 				return null;
 			}
@@ -445,22 +436,22 @@
 	}
 
 	function sumPrevPanesSize(splitterIndex: number) {
-		return $panes.reduce((total, pane, i) => total + (i < splitterIndex ? pane.sz() : 0), 0);
+		return panes.reduce((total, pane, i) => total + (i < splitterIndex ? pane.sz() : 0), 0);
 	}
 
 	function sumNextPanesSize(splitterIndex: number) {
-		return $panes.reduce((total, pane, i) => total + (i > splitterIndex + 1 ? pane.sz() : 0), 0);
+		return panes.reduce((total, pane, i) => total + (i > splitterIndex + 1 ? pane.sz() : 0), 0);
 	}
 
 	// Return the previous pane from siblings which has a size (width for vert or height for horz) of more than 0.
 	function findPrevExpandedPane(splitterIndex: number): IPane | null {
-		const pane = [...$panes].reverse().find((p) => p.index < splitterIndex && p.sz() > p.min());
+		const pane = [...panes].reverse().find((p) => p.index < splitterIndex && p.sz() > p.min());
 		return pane || null;
 	}
 
 	// Return the next pane from siblings which has a size (width for vert or height for horz) of more than 0.
 	function findNextExpandedPane(splitterIndex: number): IPane | null {
-		const pane = $panes.find((p) => p.index > splitterIndex + 1 && p.sz() > p.min());
+		const pane = panes.find((p) => p.index > splitterIndex + 1 && p.sz() > p.min());
 		return pane || null;
 	}
 
@@ -486,9 +477,7 @@
 			elm.onclick = (event) => onSplitterClick(event, splitterIndex + 1);
 		}
 
-		if (dblClickSplitter) {
-			elm.ondblclick = (event) => onSplitterDblClick(event, splitterIndex + 1);
-		}
+		if (dblClickSplitter) elm.ondblclick = (event) => onSplitterDblClick(event, splitterIndex + 1);
 
 		nextPaneNode.parentNode?.insertBefore(elm, nextPaneNode);
 	}
@@ -536,14 +525,14 @@
 		if (!addedPane && !removedPane) {
 			// on initialization
 			initialPanesSizing();
-		} else if ($panes.some((pane) => pane.givenSize !== null || pane.min() || pane.max() < 100))
+		} else if (panes.some((pane) => pane.givenSize !== null || pane.min() || pane.max() < 100))
 			equalizeAfterAddOrRemove(addedPane);
 		else equalize();
 
 		if (isReady) {
 			typedEventDispatch(
 				'resized',
-				$panes.map((pane) => ({ min: pane.min(), max: pane.max(), size: pane.sz() }))
+				panes.map((pane) => ({ min: pane.min(), max: pane.max(), size: pane.sz() }))
 			);
 		}
 	}
@@ -553,13 +542,13 @@
 	 */
 	function equalize() {
 		// console.log('equalize');
-		const panesCount = $panes.length;
+		const panesCount = panes.length;
 		const equalSpace = 100 / panesCount;
 		let leftToAllocate = 0;
 		let ungrowable: Array<string> = [];
 		let unshrinkable: Array<string> = [];
 
-		$panes.forEach((pane) => {
+		panes.forEach((pane) => {
 			const min = pane.min();
 			const max = pane.max();
 			const sz = Math.max(Math.min(equalSpace, max), min);
@@ -580,8 +569,7 @@
 		let definedSizes = 0;
 
 		// Check if pre-allocated space is 100%.
-		const ps = $panes;
-		ps.forEach((pane) => {
+		panes.forEach((pane) => {
 			const sz = pane.sz();
 			leftToAllocate -= sz;
 			if (pane.givenSize !== null) definedSizes++;
@@ -592,9 +580,9 @@
 		// set pane sizes if not set.
 		let leftToAllocate2 = 100;
 		if (leftToAllocate > 0.1) {
-			ps.forEach((pane) => {
+			panes.forEach((pane) => {
 				if (pane.givenSize === null) {
-					const panesCount = $panes.length;
+					const panesCount = panes.length;
 					const sz = Math.max(Math.min(leftToAllocate / (panesCount - definedSizes), pane.max()), pane.min());
 					pane.setSz(sz);
 				}
@@ -607,7 +595,7 @@
 
 	function equalizeAfterAddOrRemove(addedPane?: IPane) {
 		// console.log('equalizeAfterAddOrRemove');
-		const panesCount = $panes.length;
+		const panesCount = panes.length;
 		let equalSpace = 100 / panesCount;
 		let leftToAllocate = 0;
 		let ungrowable: Array<string> = [];
@@ -618,7 +606,7 @@
 		}
 
 		// Check if pre-allocated space is 100%.
-		$panes.forEach((pane) => {
+		panes.forEach((pane) => {
 			const sz = pane.sz();
 			leftToAllocate -= sz;
 			if (sz >= pane.max()) ungrowable.push(pane.uid);
@@ -627,7 +615,7 @@
 
 		if (Math.abs(leftToAllocate) < 0.1) return; // Ok.
 
-		$panes.forEach((pane) => {
+		panes.forEach((pane) => {
 			const max = pane.max();
 			const min = pane.min();
 			if (addedPane && addedPane.givenSize !== null && addedPane.uid === pane.uid) {
@@ -645,12 +633,12 @@
 	// Second loop to adjust sizes now that we know more about the panes constraints.
 	async function readjustSizes(leftToAllocate: number, ungrowable: Array<string>, unshrinkable: Array<string>) {
 		// console.log('readjustSizes');
-		const panesCount = $panes.length;
+		const panesCount = panes.length;
 		let equalSpaceToAllocate: number;
 		if (leftToAllocate > 0) equalSpaceToAllocate = leftToAllocate / (panesCount - ungrowable.length);
 		else equalSpaceToAllocate = leftToAllocate / (panesCount - unshrinkable.length);
 
-		$panes.forEach((pane) => {
+		panes.forEach((pane) => {
 			const sz = pane.sz();
 			if (leftToAllocate > 0 && !ungrowable.includes(pane.uid)) {
 				// Need to diff the size before and after to get the exact allocated space.

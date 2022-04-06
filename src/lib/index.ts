@@ -1,13 +1,14 @@
+import type { Writable } from 'svelte/store';
+
 export { default as Splitpanes } from './Splitpanes.svelte';
 export { default as Pane } from './Pane.svelte';
 
 // methods passed from splitpane to children panes
 export interface SplitContext {
-	isHorizontal: () => boolean;
+	isHorizontal: Writable<boolean>;
 	onPaneAdd: (pane: IPane) => Promise<void>;
 	onPaneRemove: (uid: string) => Promise<void>;
 	onPaneClick: (_event: MouseEvent, uid: string) => void;
-	//	setAllPaneDimensions: () => void;
 }
 
 export interface IPaneSizingEvent {
@@ -35,5 +36,6 @@ export interface IPane {
 	givenSize: string | null;
 }
 
+// used to identify the context between parent children
 const contextKey = Symbol();
 export { contextKey };

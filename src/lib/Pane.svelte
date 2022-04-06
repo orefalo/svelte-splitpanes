@@ -59,7 +59,7 @@
 	class="splitpanes__pane"
 	bind:this={element}
 	on:click={handleMouseClick}
-	style="{(isHorizontal() ? 'height:' : 'width:') + sz}%"
+	style="{($isHorizontal ? 'height:' : 'width:') + sz}%"
 >
 	<slot />
 </div>
