@@ -1,7 +1,22 @@
 <script>
 	export let value = '';
 	export let minRows = 1;
-	export let maxRows;
+	export let maxRows = 40;
+
+	const splitLines = (str) => str.split(/\r?\n/);
+
+	function stripLines(value, max) {
+		const array = splitLines(value);
+		array.length = max;
+		const text = array.reduce(function (previousValue, currentValue) {
+			return previousValue + '\n' + currentValue;
+		});
+		return text;
+	}
+
+	$: {
+		value = stripLines(value, maxRows);
+	}
 
 	$: minHeight = `${1 + minRows * 1.2}em`;
 	$: maxHeight = maxRows ? `${1 + maxRows * 1.2}em` : `auto`;

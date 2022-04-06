@@ -9,11 +9,11 @@
 	<link rel="stylesheet" href="/svelte-splitpanes/_app/assets/vendor-f4e6b62f.css">
 	<link rel="stylesheet" href="/svelte-splitpanes/_app/assets/pages/__layout.svelte-be346e26.css">
 	<link rel="stylesheet" href="/svelte-splitpanes/_app/assets/ListenToEvents-2521fd5d.css">
-	<link rel="modulepreload" href="/svelte-splitpanes/_app/start-eb8cf567.js">
+	<link rel="modulepreload" href="/svelte-splitpanes/_app/start-c16d1b85.js">
 	<link rel="modulepreload" href="/svelte-splitpanes/_app/chunks/vendor-189ee4c6.js">
 	<link rel="modulepreload" href="/svelte-splitpanes/_app/pages/__layout.svelte-4e628cb6.js">
-	<link rel="modulepreload" href="/svelte-splitpanes/_app/pages/test.svelte-87687781.js">
-	<link rel="modulepreload" href="/svelte-splitpanes/_app/chunks/ListenToEvents-251f3499.js">
+	<link rel="modulepreload" href="/svelte-splitpanes/_app/pages/test.svelte-ea0709fd.js">
+	<link rel="modulepreload" href="/svelte-splitpanes/_app/chunks/ListenToEvents-93000ade.js">
 	</head>
 	<body>
 		<div>
@@ -47,23 +47,53 @@
 		</div>
 </div>
 <p>Try resizing panes and check the logs bellow.</p>
-<div class="container svelte-1gm0t61"><pre aria-hidden="true" style="min-height: 5.8em; max-height: 49em" class="svelte-1gm0t61">// Event name: Event params   (Last event at bottom top)
+<div class="container svelte-1gm0t61"><pre aria-hidden="true" style="min-height: 5.8em; max-height: 49em" class="svelte-1gm0t61">// Event name: Event params   (Last event at the top)
 </pre>
-	<textarea readonly style="outline: none;" class="svelte-1gm0t61">// Event name: Event params   (Last event at bottom top)</textarea>
+	<textarea readonly style="outline: none;" class="svelte-1gm0t61">// Event name: Event params   (Last event at the top)</textarea>
 </div>
 
 
   
   <pre data-language="svelte" class=" svelte-1xjucv4"><code class="hljs"><!-- HTML_TAG_START -->
-TODO<!-- HTML_TAG_END --></code></pre>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
+	let val = &#x27;// Event name: Event params   (Last event at the top)&#x27;;
+
+	function handleMessage(event) {
+		if (event.detail) val = event.type + &#x27; &#x27; + JSON.stringify(event.detail) + &#x27;
+&#x27; + val;
+		else val = event.type + &#x27;
+&#x27; + val;
+	}
+<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">Splitpanes</span>
+	<span class="hljs-attr">class</span>=<span class="hljs-string">&quot;default-theme&quot;</span>
+	<span class="hljs-attr">style</span>=<span class="hljs-string">&quot;height: 400px&quot;</span>
+	<span class="hljs-attr">on:ready</span>=<span class="hljs-string">{handleMessage}</span>
+	<span class="hljs-attr">on:resize</span>=<span class="hljs-string">{handleMessage}</span>
+	<span class="hljs-attr">on:resized</span>=<span class="hljs-string">{handleMessage}</span>
+	<span class="hljs-attr">on:pane-click</span>=<span class="hljs-string">{handleMessage}</span>
+	<span class="hljs-attr">on:pane-maximize</span>=<span class="hljs-string">{handleMessage}</span>
+	<span class="hljs-attr">on:pane-add</span>=<span class="hljs-string">{handleMessage}</span>
+	<span class="hljs-attr">on:pane-remove</span>=<span class="hljs-string">{handleMessage}</span>
+	<span class="hljs-attr">on:splitter-click</span>=<span class="hljs-string">{handleMessage}</span>
+&gt;</span>
+	{#each { length: 3 } as _, i}
+		<span class="hljs-tag">&lt;<span class="hljs-name">Pane</span> <span class="hljs-attr">minSize</span>=<span class="hljs-string">&quot;10&quot;</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{i + 1}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
+	{/each}
+<span class="hljs-tag">&lt;/<span class="hljs-name">Splitpanes</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Try resizing panes and check the logs bellow.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">TextArea</span> <span class="hljs-attr">bind:value</span>=<span class="hljs-string">{val}</span> <span class="hljs-attr">minRows</span>=<span class="hljs-string">{4}</span> <span class="hljs-attr">maxRows</span>=<span class="hljs-string">{40}</span> /&gt;</span>    
+<!-- HTML_TAG_END --></code></pre>
 
 </div>
 
 
-		<script type="module" data-hydrate="gqukrz">
-		import { start } from "/svelte-splitpanes/_app/start-eb8cf567.js";
+		<script type="module" data-hydrate="1e09x9a">
+		import { start } from "/svelte-splitpanes/_app/start-c16d1b85.js";
 		start({
-			target: document.querySelector('[data-hydrate="gqukrz"]').parentNode,
+			target: document.querySelector('[data-hydrate="1e09x9a"]').parentNode,
 			paths: {"base":"/svelte-splitpanes","assets":"/svelte-splitpanes"},
 			session: {},
 			route: true,
@@ -74,7 +104,7 @@ TODO<!-- HTML_TAG_END --></code></pre>
 				error: null,
 				nodes: [
 					import("/svelte-splitpanes/_app/pages/__layout.svelte-4e628cb6.js"),
-						import("/svelte-splitpanes/_app/pages/test.svelte-87687781.js")
+						import("/svelte-splitpanes/_app/pages/test.svelte-ea0709fd.js")
 				],
 				params: {},
 				routeId: "test"
