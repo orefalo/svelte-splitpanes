@@ -27,7 +27,7 @@ Create resizible views panels in Svelte 3, a radical new approach to building us
 
 ## Todo
 
-- If a not all pane default sizes are provided, calculate the missing ones
+- If some panes miss sizing defaults, calculate them
 - If the total pane sizes is > 100, prorate them
 
 ## Browser Support
@@ -94,3 +94,23 @@ The component can be further styled after the props have been defined by overrid
 ## Contributing
 
 If you have any idea, feel free to open an issue to discuss an idea or new feature, yuo may also fork Splitpanes and submit your changes back.
+
+### npm package
+
+```shell
+# generate the package in /package
+npm package
+# publish it (requires to be logged into npm from the cli)
+cd package
+npm publish --access public
+
+```
+
+### GH Pages
+
+```shell
+# generate new site to /docs
+$ npm run build
+# then commit and push changes to git, github will auto publish
+```
+
