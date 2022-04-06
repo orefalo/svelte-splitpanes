@@ -59,7 +59,7 @@
 	let timeoutId: NodeJS.Timeout | null;
 	// panes per insertion order (pane.index is the order index)
 	let panes = new Array<IPane>();
-
+	// passed to the children via the context - writable to ensure proper reactivity
 	let isHorizontal = writable<boolean>(horizontal);
 
 	// REACTIVE ----------------
