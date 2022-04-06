@@ -7,13 +7,13 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta http-equiv="content-security-policy" content=""><title>Svelte-Splitpanes</title><meta name="description" content="A Fantastic pane splitter for Svelte" data-svelte="svelte-1twey94"><!-- HTML_TAG_START --><style>pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}.hljs{background:#011627;color:#d6deeb}.hljs-keyword{color:#c792ea;font-style:italic}.hljs-built_in{color:#addb67;font-style:italic}.hljs-type{color:#82aaff}.hljs-literal{color:#ff5874}.hljs-number{color:#f78c6c}.hljs-regexp{color:#5ca7e4}.hljs-string{color:#ecc48d}.hljs-subst{color:#d3423e}.hljs-symbol{color:#82aaff}.hljs-class{color:#ffcb8b}.hljs-function{color:#82aaff}.hljs-title{color:#dcdcaa;font-style:italic}.hljs-params{color:#7fdbca}.hljs-comment{color:#637777;font-style:italic}.hljs-doctag{color:#7fdbca}.hljs-meta,.hljs-meta .hljs-keyword{color:#82aaff}.hljs-meta .hljs-string{color:#ecc48d}.hljs-section{color:#82b1ff}.hljs-attr,.hljs-name,.hljs-tag{color:#7fdbca}.hljs-attribute{color:#80cbc4}.hljs-variable{color:#addb67}.hljs-bullet{color:#d9f5dd}.hljs-code{color:#80cbc4}.hljs-emphasis{color:#c792ea;font-style:italic}.hljs-strong{color:#addb67;font-weight:700}.hljs-formula{color:#c792ea}.hljs-link{color:#ff869a}.hljs-quote{color:#697098;font-style:italic}.hljs-selector-tag{color:#ff6363}.hljs-selector-id{color:#fad430}.hljs-selector-class{color:#addb67;font-style:italic}.hljs-selector-attr,.hljs-selector-pseudo{color:#c792ea;font-style:italic}.hljs-template-tag{color:#c792ea}.hljs-template-variable{color:#addb67}.hljs-addition{color:#addb67ff;font-style:italic}.hljs-deletion{color:#ef535090;font-style:italic}</style><!-- HTML_TAG_END -->
 	<link rel="stylesheet" href="/svelte-splitpanes/_app/assets/vendor-f4e6b62f.css">
-	<link rel="stylesheet" href="/svelte-splitpanes/_app/assets/pages/__layout.svelte-c27f7eb3.css">
-	<link rel="stylesheet" href="/svelte-splitpanes/_app/assets/pages/index.svelte-61781dd8.css">
+	<link rel="stylesheet" href="/svelte-splitpanes/_app/assets/pages/__layout.svelte-be346e26.css">
+	<link rel="stylesheet" href="/svelte-splitpanes/_app/assets/pages/index.svelte-f6535c2a.css">
 	<link rel="stylesheet" href="/svelte-splitpanes/_app/assets/TextAreaAutosize-dad67764.css">
-	<link rel="modulepreload" href="/svelte-splitpanes/_app/start-374b2776.js">
+	<link rel="modulepreload" href="/svelte-splitpanes/_app/start-1f38de2f.js">
 	<link rel="modulepreload" href="/svelte-splitpanes/_app/chunks/vendor-189ee4c6.js">
-	<link rel="modulepreload" href="/svelte-splitpanes/_app/pages/__layout.svelte-1b021512.js">
-	<link rel="modulepreload" href="/svelte-splitpanes/_app/pages/index.svelte-2974e070.js">
+	<link rel="modulepreload" href="/svelte-splitpanes/_app/pages/__layout.svelte-4e628cb6.js">
+	<link rel="modulepreload" href="/svelte-splitpanes/_app/pages/index.svelte-91624e13.js">
 	<link rel="modulepreload" href="/svelte-splitpanes/_app/chunks/TextAreaAutosize-52ce3af3.js">
 	</head>
 	<body>
@@ -21,7 +21,26 @@
 
 
 
-<div class="page-container svelte-mmqs7q"><h1>Svelte-Splitpane demo</h1>
+<div class="page-container svelte-3k55ko"><h1>Svelte-Splitpane demo</h1>
+
+<a href="https://github.com/orefalo/svelte-splitpanes">https://github.com/orefalo/svelte-splitpanes</a>
+
+<h2>Features</h2>
+
+<ul><li>Size is less than 2 kb</li>
+	<li>Support both dynamic horizontal and vertical splits</li>
+	<li>Support defaults, min and max sizes</li>
+	<li>Support multiple splits</li>
+	<li>Support lifecyle events</li>
+	<li>Support custom divider size or overlay</li>
+	<li>Support splitter pane pushing</li>
+	<li>Support RTL rendering</li>
+	<li>Support first splitter on/off</li>
+	<li>Support pane toggle</li>
+	<li>Support programmatic resizing</li>
+	<li>Support programmatic splitter add/remove</li>
+	<li>Support for legacy browser such as IE 11</li>
+	<li>upport for touch devices</li></ul>
 
 <h2>Horizontal layout, push other panes, min &amp; max use, doubleclick</h2>
 <p>You can double click a splitter to maximize the next pane!<br>
@@ -153,11 +172,11 @@
 <hr>
 <h2>Adding splitters programmatically</h2>
 
-<button style="--color: #fff;--font-size: .875rem;--bg-color: 74, 64, 212;--bg-hover: 74, 64, 212;--bg-active: 74, 64, 212;--radius: 0.2rem;--ripple: #838de7;--height: 36px;--width: 115px;--shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);--shadow-h: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);--shadow-a: 0 1px 2px 0 rgba(0, 0, 0, 0.05)" class="svelte-1qdiyma"><span class="svelte-1qdiyma">+ ADD PANE</span>
-	<svg class="svelte-1qdiyma"></svg>
+<button style="--color: #fff;--font-size: .875rem;--bg-color: 74, 64, 212;--bg-hover: 74, 64, 212;--bg-active: 74, 64, 212;--radius: 0.2rem;--ripple: #838de7;--height: 36px;--width: 140px;--shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);--shadow-h: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);--shadow-a: 0 1px 2px 0 rgba(0, 0, 0, 0.05)" class="svelte-c42aw5"><span class="svelte-c42aw5">+ ADD PANE</span>
+	<svg class="svelte-c42aw5"></svg>
 </button>
-<button style="--color: #fff;--font-size: .875rem;--bg-color: 74, 64, 212;--bg-hover: 74, 64, 212;--bg-active: 74, 64, 212;--radius: 0.2rem;--ripple: #838de7;--height: 36px;--width: 115px;--shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);--shadow-h: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);--shadow-a: 0 1px 2px 0 rgba(0, 0, 0, 0.05)" class="svelte-1qdiyma"><span class="svelte-1qdiyma">- REMOVE PANE</span>
-	<svg class="svelte-1qdiyma"></svg>
+<button style="--color: #fff;--font-size: .875rem;--bg-color: 74, 64, 212;--bg-hover: 74, 64, 212;--bg-active: 74, 64, 212;--radius: 0.2rem;--ripple: #838de7;--height: 36px;--width: 140px;--shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);--shadow-h: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);--shadow-a: 0 1px 2px 0 rgba(0, 0, 0, 0.05)" class="svelte-c42aw5"><span class="svelte-c42aw5">- REMOVE PANE</span>
+	<svg class="svelte-c42aw5"></svg>
 </button>
 
 <div class="splitpanes default-theme  splitpanes--vertical" style="height: 400px"><div class="splitpanes__pane" style="width:0%"><span>1</span>
@@ -198,11 +217,11 @@
 	The first splitter does not allow to resize the next pane.
 </p>
 
-<button style="--color: #fff;--font-size: .875rem;--bg-color: 74, 64, 212;--bg-hover: 74, 64, 212;--bg-active: 74, 64, 212;--radius: 0.2rem;--ripple: #838de7;--height: 36px;--width: 115px;--shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);--shadow-h: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);--shadow-a: 0 1px 2px 0 rgba(0, 0, 0, 0.05)" class="svelte-1qdiyma"><span class="svelte-1qdiyma">Turn to Horizontal</span>
-	<svg class="svelte-1qdiyma"></svg>
+<button style="--color: #fff;--font-size: .875rem;--bg-color: 74, 64, 212;--bg-hover: 74, 64, 212;--bg-active: 74, 64, 212;--radius: 0.2rem;--ripple: #838de7;--height: 36px;--width: 140px;--shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);--shadow-h: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);--shadow-a: 0 1px 2px 0 rgba(0, 0, 0, 0.05)" class="svelte-c42aw5"><span class="svelte-c42aw5">Turn to Horizontal</span>
+	<svg class="svelte-c42aw5"></svg>
 </button>
-<button style="--color: #fff;--font-size: .875rem;--bg-color: 74, 64, 212;--bg-hover: 74, 64, 212;--bg-active: 74, 64, 212;--radius: 0.2rem;--ripple: #838de7;--height: 36px;--width: 115px;--shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);--shadow-h: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);--shadow-a: 0 1px 2px 0 rgba(0, 0, 0, 0.05)" class="svelte-1qdiyma"><span class="svelte-1qdiyma">Show first Splitter</span>
-	<svg class="svelte-1qdiyma"></svg>
+<button style="--color: #fff;--font-size: .875rem;--bg-color: 74, 64, 212;--bg-hover: 74, 64, 212;--bg-active: 74, 64, 212;--radius: 0.2rem;--ripple: #838de7;--height: 36px;--width: 140px;--shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);--shadow-h: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);--shadow-a: 0 1px 2px 0 rgba(0, 0, 0, 0.05)" class="svelte-c42aw5"><span class="svelte-c42aw5">Show first Splitter</span>
+	<svg class="svelte-c42aw5"></svg>
 </button>
 <div class="splitpanes default-theme  splitpanes--vertical" style="height: 400px"><div class="splitpanes__pane" style="width:0%"><span>1</span>
 		</div><div class="splitpanes__pane" style="width:0%"><span>2</span>
@@ -270,8 +289,8 @@
 <hr>
 <h2>Toggle a pane on/off</h2>
 
-<button style="--color: #fff;--font-size: .875rem;--bg-color: 74, 64, 212;--bg-hover: 74, 64, 212;--bg-active: 74, 64, 212;--radius: 0.2rem;--ripple: #838de7;--height: 36px;--width: 115px;--shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);--shadow-h: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);--shadow-a: 0 1px 2px 0 rgba(0, 0, 0, 0.05)" class="svelte-1qdiyma"><span class="svelte-1qdiyma">Hide</span>
-	<svg class="svelte-1qdiyma"></svg>
+<button style="--color: #fff;--font-size: .875rem;--bg-color: 74, 64, 212;--bg-hover: 74, 64, 212;--bg-active: 74, 64, 212;--radius: 0.2rem;--ripple: #838de7;--height: 36px;--width: 140px;--shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);--shadow-h: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);--shadow-a: 0 1px 2px 0 rgba(0, 0, 0, 0.05)" class="svelte-c42aw5"><span class="svelte-c42aw5">Hide</span>
+	<svg class="svelte-c42aw5"></svg>
 </button>
 <div class="splitpanes default-theme  splitpanes--vertical" style="height: 400px"><div class="splitpanes__pane" style="width:0%"><span>1</span></div>
 	<div class="splitpanes__pane" style="width:0%"><span>2</span></div>
@@ -339,7 +358,7 @@
 
   
   <pre data-language="svelte" class=" svelte-1xjucv4"><code class="hljs"><!-- HTML_TAG_START -->
-<span class="hljs-selector-tag">code</span> here<!-- HTML_TAG_END --></code></pre>
+TODO<!-- HTML_TAG_END --></code></pre>
 
 <hr>
 <h2>Styling Splitters</h2>
@@ -359,10 +378,10 @@ TODO<!-- HTML_TAG_END --></code></pre>
 </div>
 
 
-		<script type="module" data-hydrate="cb6c9a">
-		import { start } from "/svelte-splitpanes/_app/start-374b2776.js";
+		<script type="module" data-hydrate="1o8kq1z">
+		import { start } from "/svelte-splitpanes/_app/start-1f38de2f.js";
 		start({
-			target: document.querySelector('[data-hydrate="cb6c9a"]').parentNode,
+			target: document.querySelector('[data-hydrate="1o8kq1z"]').parentNode,
 			paths: {"base":"/svelte-splitpanes","assets":"/svelte-splitpanes"},
 			session: {},
 			route: true,
@@ -372,8 +391,8 @@ TODO<!-- HTML_TAG_END --></code></pre>
 				status: 200,
 				error: null,
 				nodes: [
-					import("/svelte-splitpanes/_app/pages/__layout.svelte-1b021512.js"),
-						import("/svelte-splitpanes/_app/pages/index.svelte-2974e070.js")
+					import("/svelte-splitpanes/_app/pages/__layout.svelte-4e628cb6.js"),
+						import("/svelte-splitpanes/_app/pages/index.svelte-91624e13.js")
 				],
 				params: {},
 				routeId: ""

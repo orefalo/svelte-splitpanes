@@ -109,6 +109,6 @@ npm publish --access public
 
 ```shell
 # generate new site to /docs
-$ npm run build
+$ npm run build-ghpages
 # then commit and push changes to git, github will auto publish
 ```
