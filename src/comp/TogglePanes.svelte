@@ -1,8 +1,8 @@
 <script>
-	import Pane from '$lib/splitpanes/Pane.svelte';
-	import Splitpanes from '$lib/splitpanes/Splitpanes.svelte';
+	import Pane from '$lib/Pane.svelte';
+	import Splitpanes from '$lib/Splitpanes.svelte';
 	import { HighlightSvelte } from 'svelte-highlight';
-	import Button from '$lib/extras/Button.svelte';
+	import Button from '$comp/extras/Button.svelte';
 
 	function onClick() {
 		visible = !visible;

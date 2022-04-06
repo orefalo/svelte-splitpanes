@@ -25,6 +25,7 @@ export interface IPane {
 	uid: string;
 	element: HTMLElement;
 	// 0....N index in pane array
+	// TODO: REMOVE THIS - it's implicitly the array index
 	index?: number;
 	min: () => number;
 	max: () => number;
@@ -32,8 +33,6 @@ export interface IPane {
 	setSz: (number) => void;
 	//TODO consider number with -1 for null
 	givenSize: string | null;
-	//setDimension: (dimension: string) => void;
-	//[index: string]: any;
 }
 
 const contextKey = Symbol();

@@ -1,5 +1,6 @@
 import adapter from '@sveltejs/adapter-static';
 import preprocess from 'svelte-preprocess';
+import path from 'path';
 
 const dev = process.env.NODE_ENV === 'development';
 
@@ -23,6 +24,12 @@ const config = {
 		vite: {
 			optimizeDeps: {
 				include: ['highlight.js', 'highlight.js/lib/core']
+			},
+			resolve: {
+				alias: {
+					$comp: path.resolve('./src/comp'),
+					$lib: path.resolve('./src/lib')
+				}
 			}
 		}
 	}

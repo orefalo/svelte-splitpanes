@@ -1,6 +1,6 @@
 <script>
-	import Pane from '$lib/splitpanes/Pane.svelte';
-	import Splitpanes from '$lib/splitpanes/Splitpanes.svelte';
+	import Pane from '$lib/Pane.svelte';
+	import Splitpanes from '$lib/Splitpanes.svelte';
 	import { HighlightSvelte } from 'svelte-highlight';
 
 	import RangeSlider from 'svelte-range-slider-pips';

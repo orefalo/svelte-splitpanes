@@ -1,6 +1,13 @@
 {
 	"name": "svelte-splitpanes",
-	"version": "0.0.1",
+	"version": "0.1.0",
+	"author": {
+		"name": "Olivier Refalo",
+		"url": "https://github.com/orefalo"
+	},
+	"bugs": "https://github.com/orefalo/svelte-splitpanes/issues",
+	"homepage": "https://orefalo.github.io/svelte-splitpanes/",
+	"license": "MIT",
 	"scripts": {
 		"dev": "svelte-kit dev",
 		"build": "svelte-kit build",

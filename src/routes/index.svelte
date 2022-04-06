@@ -1,14 +1,14 @@
 <script lang="ts">
-	import MinMax from '$lib/MinMax.svelte';
-	import DefaultSize from '$lib/DefaultSize.svelte';
-	import LockLayout from '$lib/LockLayout.svelte';
-	import PushOtherPanes from '$lib/PushOtherPanes.svelte';
-	import AddRemoveSplitter from '$lib/AddRemoveSplitter.svelte';
-	import ChangeOrientation from '$lib/ChangeOrientation.svelte';
-	import ProgResize from '$lib/ProgResize.svelte';
-	import TogglePanes from '$lib/TogglePanes.svelte';
-	import ListenToEvents from '$lib/ListenToEvents.svelte';
-	import StyleSplitters from '$lib/StyleSplitters.svelte';
+	import MinMax from '$comp/MinMax.svelte';
+	import DefaultSize from '$comp/DefaultSize.svelte';
+	import LockLayout from '$comp/LockLayout.svelte';
+	import PushOtherPanes from '$comp/PushOtherPanes.svelte';
+	import AddRemoveSplitter from '$comp/AddRemoveSplitter.svelte';
+	import ChangeOrientation from '$comp/ChangeOrientation.svelte';
+	import ProgResize from '$comp/ProgResize.svelte';
+	import TogglePanes from '$comp/TogglePanes.svelte';
+	import ListenToEvents from '$comp/ListenToEvents.svelte';
+	import StyleSplitters from '$comp/StyleSplitters.svelte';
 </script>
 
 <h1>Svelte-Splitpane demo</h1>

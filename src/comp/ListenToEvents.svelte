@@ -1,8 +1,8 @@
 <script>
-	import Pane from '$lib/splitpanes/Pane.svelte';
-	import Splitpanes from '$lib/splitpanes/Splitpanes.svelte';
+	import Pane from '$lib/Pane.svelte';
+	import Splitpanes from '$lib/Splitpanes.svelte';
 	import { HighlightSvelte } from 'svelte-highlight';
-	import TextArea from '$lib/extras/TextAreaAutosize.svelte';
+	import TextArea from '$comp/extras/TextAreaAutosize.svelte';
 
 	let val = `// Event name: Event params   (Last event at bottom top)`;
 
