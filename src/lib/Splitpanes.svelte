@@ -577,6 +577,13 @@
 			if (sz <= pane.min()) unshrinkable.push(pane.uid);
 		});
 
+		//test if we have 100%
+		// else
+		// total sizes > 100 all panes.sz defined => prorate
+		// total sizes < 100 all panes.sz defined => prorate
+		// total sizes < 100 some panes.sz defined -> assume missing are leftover/#undfined panes
+		// total sizes > 100 some panes.sz defined => assume missing are 0, prorate
+
 		// set pane sizes if not set.
 		let leftToAllocate2 = 100;
 		if (leftToAllocate > 0.1) {
