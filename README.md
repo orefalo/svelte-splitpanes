@@ -25,11 +25,6 @@ Create resizable view panels in Svelte 3, a radical new approach to building use
 - Support for legacy browser such as IE 11
 - Support for touch devices
 
-## Todo
-
-- If some panes miss sizing defaults, calculate them
-- If the total pane sizes is > 100, prorate them
-
 ## Browser Support
 
 | ![Chrome](https://raw.github.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png) | ![Firefox](https://raw.github.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png) | ![Safari](https://raw.github.com/alrra/browser-logos/master/src/safari/safari_48x48.png) | ![Opera](https://raw.github.com/alrra/browser-logos/master/src/opera/opera_48x48.png) | ![Edge](https://raw.github.com/alrra/browser-logos/master/src/edge/edge_48x48.png) | ![IE](https://raw.github.com/alrra/browser-logos/master/src/archive/internet-explorer_9-11/internet-explorer_9-11_48x48.png) |

@@ -75,8 +75,6 @@
 	});
 
 	async function onPaneAdd(pane: IPane) {
-		// console.log('onPaneAdd');
-
 		// 1. Add pane to array at the same index it was inserted in the <splitpanes> tag.
 		let index = -1;
 		Array.from(pane.element.parentNode.children).some((el: Element) => {
@@ -142,7 +140,6 @@
 	}
 
 	onMount(() => {
-		// console.log('onMount Splitpanes');
 		checkSplitpanesNodes();
 		redoSplitters();
 		resetPaneSizes();
@@ -179,14 +176,12 @@
 	}
 
 	function onMouseDown(_event: TouchEvent | MouseEvent, splitterIndex: number) {
-		// console.log('mouseDown');
 		bindEvents();
 		isMouseDown = true;
 		activeSplitter = splitterIndex;
 	}
 
 	function onMouseMove(event: MouseEvent | TouchEvent) {
-		// console.log('mouseMove');
 		if (isMouseDown) {
 			// Prevent scrolling while touch dragging (only works with an active event, eg. passive: false).
 			event.preventDefault();
@@ -200,7 +195,6 @@
 	}
 
 	function onMouseUp() {
-		// console.log('mouseUp');
 		if (isDragging) {
 			dispatch(
 				'resized',
@@ -299,7 +293,6 @@
 	 * Called when slitters are moving to adjust pane sizes
 	 */
 	function calculatePanesSize(drag: MousePosition) {
-		// console.log('calculatePanesSize');
 		const splitterIndex = activeSplitter;
 		let sums: Sums = {
 			prevPanesSize: sumPrevPanesSize(splitterIndex),
@@ -363,7 +356,6 @@
 	}
 
 	function doPushOtherPanes(sums: Sums, dragPercentage: number) {
-		// console.log('doPushOtherPanes');
 		const splitterIndex = activeSplitter;
 		const panesToResize: Array<number> = [splitterIndex, splitterIndex + 1];
 		// Pushing Down.
@@ -463,7 +455,6 @@
 	 * @param isVeryFirst
 	 */
 	function addSplitter(paneIndex: number, nextPaneNode: HTMLElement, isVeryFirst = false) {
-		// console.log('addSplitter');
 		const splitterIndex = paneIndex - 1;
 		const elm = document.createElement('div');
 		elm.classList.add('splitpanes__splitter');
@@ -499,7 +490,6 @@
 	 */
 	function redoSplitters() {
 		if (container) {
-			// console.log('redoSplitters');
 			const children = Array.from(container.children) as Array<HTMLElement>;
 			children.forEach((el) => {
 				if (el.className.includes('splitpanes__splitter')) removeSplitter(el as HTMLElement);
@@ -521,7 +511,6 @@
 	 * @param removedPane
 	 */
 	function resetPaneSizes(addedPane?: IPane, removedPane?: { [key: string]: any }) {
-		// console.log('resetPaneSizes');
 		if (!addedPane && !removedPane) {
 			// on initialization
 			initialPanesSizing();
@@ -541,12 +530,11 @@
 	 * Ensures all panes have the same size
 	 */
 	function equalize() {
-		// console.log('equalize');
 		const panesCount = panes.length;
 		const equalSpace = 100 / panesCount;
 		let leftToAllocate = 0;
-		let ungrowable: Array<string> = [];
-		let unshrinkable: Array<string> = [];
+		let ungrowable = Array<string>();
+		let unshrinkable = Array<string>();
 
 		panes.forEach((pane) => {
 			const min = pane.min();
@@ -562,10 +550,9 @@
 	}
 
 	function initialPanesSizing() {
-		// console.log('initialPanesSizing');
 		let leftToAllocate = 100;
-		let ungrowable: Array<string> = [];
-		let unshrinkable: Array<string> = [];
+		let ungrowable = Array<string>();
+		let unshrinkable = Array<string>();
 		let definedSizes = 0;
 
 		// Check if pre-allocated space is 100%.
@@ -576,13 +563,6 @@
 			if (sz >= pane.max()) ungrowable.push(pane.uid);
 			if (sz <= pane.min()) unshrinkable.push(pane.uid);
 		});
-
-		//test if we have 100%
-		// else
-		// total sizes > 100 all panes.sz defined => prorate
-		// total sizes < 100 all panes.sz defined => prorate
-		// total sizes < 100 some panes.sz defined -> assume missing are leftover/#undfined panes
-		// total sizes > 100 some panes.sz defined => assume missing are 0, prorate
 
 		// set pane sizes if not set.
 		let leftToAllocate2 = 100;
@@ -601,12 +581,11 @@
 	}
 
 	function equalizeAfterAddOrRemove(addedPane?: IPane) {
-		// console.log('equalizeAfterAddOrRemove');
 		const panesCount = panes.length;
 		let equalSpace = 100 / panesCount;
 		let leftToAllocate = 0;
-		let ungrowable: Array<string> = [];
-		let unshrinkable: Array<string> = [];
+		let ungrowable = new Array<string>();
+		let unshrinkable = new Array<string>();
 
 		if (addedPane && addedPane.givenSize !== null) {
 			equalSpace = (100 - parseFloat(addedPane.givenSize)) / (panesCount - 1);
@@ -639,7 +618,6 @@
 
 	// Second loop to adjust sizes now that we know more about the panes constraints.
 	async function readjustSizes(leftToAllocate: number, ungrowable: Array<string>, unshrinkable: Array<string>) {
-		// console.log('readjustSizes');
 		const panesCount = panes.length;
 		let equalSpaceToAllocate: number;
 		if (leftToAllocate > 0) equalSpaceToAllocate = leftToAllocate / (panesCount - ungrowable.length);
@@ -678,8 +656,6 @@
 	 */
 	function checkSplitpanesNodes() {
 		if (container) {
-			// console.log('checkSplitpanesNodes');
-
 			const children = Array.from(container.children) as Array<HTMLElement>;
 			children.forEach((child) => {
 				const isPane = child.classList.contains('splitpanes__pane');
