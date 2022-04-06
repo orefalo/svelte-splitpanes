@@ -13,7 +13,7 @@
 		rippleColor = '#838de7',
 		round = '0.2rem',
 		height = 36,
-		width = 115,
+		width = 140,
 		sizeIn = 20,
 		opacityIn = 0.5,
 		shadow = 5,
@@ -127,7 +127,7 @@
 		width: var(--width);
 		max-width: 100%;
 		margin: 0;
-		padding: 0;
+		padding: 5px;
 		position: relative;
 		border-radius: var(--radius);
 		cursor: pointer;

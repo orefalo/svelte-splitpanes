@@ -14,7 +14,11 @@
 <style>
 	:global(body) {
 		font-family: Helvetica, Arial, sans-serif;
-		color: rgba(116, 103, 103, 0.6);
+		color: rgba(116, 103, 103);
+	}
+
+	:global(h1 h2) {
+		color: #000;
 	}
 
 	:global(.splitpanes__pane) {

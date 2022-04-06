@@ -13,7 +13,7 @@
 	}
 
 	let code = `
-code here`;
+TODO`;
 </script>
 
 <h2>Listening to emitted events</h2>

@@ -88,7 +88,7 @@ Properties that apply to <Pane>
 The component can be further styled after the props have been defined by overriding the default css styling. The best way to do this is to use a class differenciator or the id="" prop and then scope your global css with this class/id.
 
 ```css
-
+TODO
 ```
 
 ## Contributing
@@ -99,11 +99,10 @@ If you have any idea, feel free to open an issue to discuss an idea or new featu
 
 ```shell
 # generate the package in /package
-npm package
+npm run package
 # publish it (requires to be logged into npm from the cli)
 cd package
 npm publish --access public
-
 ```
 
 ### GH Pages
@@ -113,4 +112,3 @@ npm publish --access public
 $ npm run build
 # then commit and push changes to git, github will auto publish
 ```
-
