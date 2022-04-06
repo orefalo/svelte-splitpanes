@@ -1,0 +1,56 @@
+<script>
+	import Pane from '$lib/splitpanes/Pane.svelte';
+	import Splitpanes from '$lib/splitpanes/Splitpanes.svelte';
+	import { HighlightSvelte } from 'svelte-highlight';
+	import TextArea from '$lib/extras/TextAreaAutosize.svelte';
+
+	let val = `// Event name: Event params   (Last event at bottom top)`;
+
+	function handleMessage(event) {
+		console.log(event);
+		val += '\n' + event.type;
+		console.log(val);
+	}
+
+	let code = `
+code here`;
+</script>
+
+<h2>Listening to emitted events</h2>
+
+<p>Here is the list of events that are emitted from splitpanes:</p>
+
+<ul>
+	<li>ready has no parameter and fires when splitpanes is ready</li>
+	<li>
+		resize fires while resizing (on mousemove/touchmove) and returns an array of all the panes objects with their
+		dimensions
+	</li>
+	<li>
+		resized fires once when the resizing stops after user drag (on mouseup/touchend). it returns an array of all the
+		panes objects with their dimensions. The event also fires after adding or removing a pane.
+	</li>
+	<li>pane-click returns the clicked pane object with its dimensions.</li>
+	<li>pane-maximize returns the maximized pane object with its dimensions.</li>
+	<li>pane-add returns an object containing the index of the added pane and the new array of panes after resize.</li>
+	<li>
+		pane-remove returns an object containing the removed pane and an array of all the remaining panes objects with their
+		dimensions after resize.
+	</li>
+	<li>
+		splitter-click returns the next pane object (with its dimensions) directly after the clicked splitter. This event is
+		only emitted if dragging did not occur between mousedown and mouseup.
+	</li>
+</ul>
+
+<Splitpanes class="default-theme" style="height: 400px" on:message={handleMessage}>
+	{#each { length: 3 } as _, i}
+		<Pane minSize="10">
+			<span>{i + 1}</span>
+		</Pane>
+	{/each}
+</Splitpanes>
+<p>Try resizing panes and check the logs bellow.</p>
+<TextArea bind:value={val} minRows={4} maxRows={40} />
+
+<HighlightSvelte {code} />
