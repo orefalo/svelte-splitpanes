@@ -1,10 +1,20 @@
 {
 	"name": "svelte-splitpanes",
-	"version": "0.4.0",
+	"version": "0.5.0",
+	"description": "A full featured resizable pane layout splitter",
 	"author": {
 		"name": "Olivier Refalo",
 		"url": "https://github.com/orefalo"
 	},
+	"keywords": [
+		"layout",
+		"split",
+		"splitter",
+		"pane",
+		"resize",
+		"resizable",
+		"svelte"
+	],
 	"bugs": "https://github.com/orefalo/svelte-splitpanes/issues",
 	"homepage": "https://orefalo.github.io/svelte-splitpanes/",
 	"repository": {
