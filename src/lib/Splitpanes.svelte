@@ -1,8 +1,11 @@
+<script context="module">
+	export const KEY = {};
+</script>
+
 <script lang="ts">
 	import { onMount, onDestroy, setContext, createEventDispatcher, tick } from 'svelte';
 	import { writable } from 'svelte/store';
 	import type { IPane, IPaneSizingEvent, SplitContext } from '.';
-	import { contextKey } from '.';
 
 	// TYPE DECLARATIONS ----------------
 
@@ -67,7 +70,7 @@
 	$: firstSplitter, redoSplitters();
 	$: $isHorizontal = horizontal;
 
-	setContext<SplitContext>(contextKey, {
+	setContext<SplitContext>(KEY, {
 		isHorizontal,
 		onPaneClick,
 		onPaneAdd,

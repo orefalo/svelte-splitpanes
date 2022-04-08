@@ -33,7 +33,3 @@ export interface IPane {
 	setSz: (number) => void;
 	givenSize: string | null;
 }
-
-// used to identify the context between parent children
-const contextKey = Symbol();
-export { contextKey };
