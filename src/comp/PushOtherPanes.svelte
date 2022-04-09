@@ -1,6 +1,5 @@
 <script>
-	import Pane from '$lib/Pane.svelte';
-	import Splitpanes from '$lib/Splitpanes.svelte';
+	import { Pane, Splitpanes } from '$lib/.';
 	import { HighlightSvelte } from 'svelte-highlight';
 
 	let code = `

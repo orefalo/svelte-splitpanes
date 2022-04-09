@@ -10,7 +10,7 @@ Create resizable view panels in Svelte 3, a radical new approach to building use
 
 ## Features
 
-- Size is less than 2 kb
+- Size is less than 4 kb
 - Support both dynamic horizontal and vertical splits
 - Support defaults, min and max sizes
 - Support multiple splits
@@ -44,6 +44,9 @@ $ npm i svelte-splitpanes
 ## Usage
 
 ```html
+<script>
+import { Pane, Splitpanes } from 'svelte-splitpanes';
+<\/script>
 <Splitpanes class="default-theme" style="height: 400px">
 	<Pane minSize="20">1<br /><em class="specs">I have a min width of 20%</em></Pane>
 	<Pane>

@@ -18,7 +18,7 @@
 <h2>Features</h2>
 
 <ul>
-	<li>Size is less than 2 kb</li>
+	<li>Size is less than 4 kb</li>
 	<li>Support both dynamic horizontal and vertical splits</li>
 	<li>Support defaults, min and max sizes</li>
 	<li>Support multiple splits</li>
