@@ -40,6 +40,7 @@
 		left: 0;
 		right: 0;
 		text-align: center;
+		font-size: 0.5em;
 	}
 
 	.page-container {

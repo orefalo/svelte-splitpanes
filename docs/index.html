@@ -7,21 +7,21 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta http-equiv="content-security-policy" content=""><title>Svelte-Splitpanes</title><meta name="description" content="A Fantastic pane splitter for Svelte" data-svelte="svelte-1twey94"><!-- HTML_TAG_START --><style>pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}.hljs{background:#011627;color:#d6deeb}.hljs-keyword{color:#c792ea;font-style:italic}.hljs-built_in{color:#addb67;font-style:italic}.hljs-type{color:#82aaff}.hljs-literal{color:#ff5874}.hljs-number{color:#f78c6c}.hljs-regexp{color:#5ca7e4}.hljs-string{color:#ecc48d}.hljs-subst{color:#d3423e}.hljs-symbol{color:#82aaff}.hljs-class{color:#ffcb8b}.hljs-function{color:#82aaff}.hljs-title{color:#dcdcaa;font-style:italic}.hljs-params{color:#7fdbca}.hljs-comment{color:#637777;font-style:italic}.hljs-doctag{color:#7fdbca}.hljs-meta,.hljs-meta .hljs-keyword{color:#82aaff}.hljs-meta .hljs-string{color:#ecc48d}.hljs-section{color:#82b1ff}.hljs-attr,.hljs-name,.hljs-tag{color:#7fdbca}.hljs-attribute{color:#80cbc4}.hljs-variable{color:#addb67}.hljs-bullet{color:#d9f5dd}.hljs-code{color:#80cbc4}.hljs-emphasis{color:#c792ea;font-style:italic}.hljs-strong{color:#addb67;font-weight:700}.hljs-formula{color:#c792ea}.hljs-link{color:#ff869a}.hljs-quote{color:#697098;font-style:italic}.hljs-selector-tag{color:#ff6363}.hljs-selector-id{color:#fad430}.hljs-selector-class{color:#addb67;font-style:italic}.hljs-selector-attr,.hljs-selector-pseudo{color:#c792ea;font-style:italic}.hljs-template-tag{color:#c792ea}.hljs-template-variable{color:#addb67}.hljs-addition{color:#addb67ff;font-style:italic}.hljs-deletion{color:#ef535090;font-style:italic}</style><!-- HTML_TAG_END -->
 	<link rel="stylesheet" href="/svelte-splitpanes/_app/assets/vendor-f4e6b62f.css">
-	<link rel="stylesheet" href="/svelte-splitpanes/_app/assets/pages/__layout.svelte-be346e26.css">
-	<link rel="stylesheet" href="/svelte-splitpanes/_app/assets/pages/index.svelte-dfde8d06.css">
-	<link rel="stylesheet" href="/svelte-splitpanes/_app/assets/Pane-522d8cdf.css">
-	<link rel="modulepreload" href="/svelte-splitpanes/_app/start-bd762f44.js">
-	<link rel="modulepreload" href="/svelte-splitpanes/_app/chunks/vendor-3c0c8c42.js">
-	<link rel="modulepreload" href="/svelte-splitpanes/_app/pages/__layout.svelte-828f71b5.js">
-	<link rel="modulepreload" href="/svelte-splitpanes/_app/pages/index.svelte-8966dd2c.js">
-	<link rel="modulepreload" href="/svelte-splitpanes/_app/chunks/Pane-6b7cec2d.js">
+	<link rel="stylesheet" href="/svelte-splitpanes/_app/assets/pages/__layout.svelte-eb807ecf.css">
+	<link rel="stylesheet" href="/svelte-splitpanes/_app/assets/pages/index.svelte-e3cf71c5.css">
+	<link rel="stylesheet" href="/svelte-splitpanes/_app/assets/Pane-ec78f827.css">
+	<link rel="modulepreload" href="/svelte-splitpanes/_app/start-6ba30b2c.js">
+	<link rel="modulepreload" href="/svelte-splitpanes/_app/chunks/vendor-83ea861a.js">
+	<link rel="modulepreload" href="/svelte-splitpanes/_app/pages/__layout.svelte-4b846b0a.js">
+	<link rel="modulepreload" href="/svelte-splitpanes/_app/pages/index.svelte-ede3d4b4.js">
+	<link rel="modulepreload" href="/svelte-splitpanes/_app/chunks/Pane-adc31469.js">
 	</head>
 	<body>
 		<div>
 
 
 
-<div class="page-container svelte-3k55ko"><h1>Svelte-Splitpane demo</h1>
+<div class="page-container svelte-q0xk31"><h1>Svelte-Splitpane demo</h1>
 
 <a href="https://github.com/orefalo/svelte-splitpanes">https://github.com/orefalo/svelte-splitpanes</a>
 
@@ -393,25 +393,81 @@
 <hr>
 <h2>Styling Splitters</h2>
 
-<div id="mytheme" class="splitpanes  splitpanes--horizontal" style="height: 400px"><div class="splitpanes__pane" style="height:0%"><div class="splitpanes   splitpanes--vertical"><div class="splitpanes__pane" style="width:0%"><span>1</span></div>
+<div class="splitpanes  splitpanes--horizontal" style="height: 400px"><div class="splitpanes__pane" style="height:0%"><div class="splitpanes   splitpanes--vertical"><div class="splitpanes__pane" style="width:0%"><span>1</span></div>
 			<div class="splitpanes__pane" style="width:0%"><span>2</span></div>
 			<div class="splitpanes__pane" style="width:0%"><span>3</span></div>
 </div></div>
-	<div class="splitpanes__pane" style="height:0%"><p>In this example the splitters are thin lines but the reactive touch zone is spread to 30 pixels all around!</p></div>
+	<div class="splitpanes__pane" style="height:0%"><em class="specs"><p>In this example the splitters are thin lines but the reactive touch zone is spread to 30 pixels all around!</p></em></div>
 </div>
 
 
   
   <pre data-language="svelte" class=" svelte-1xjucv4"><code class="hljs"><!-- HTML_TAG_START -->
-TODO<!-- HTML_TAG_END --></code></pre>
+<span class="hljs-tag">&lt;<span class="hljs-name">Splitpanes</span> <span class="hljs-attr">horizontal</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;height: 400px&quot;</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">Pane</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">Splitpanes</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">Pane</span>&gt;</span>
+				<span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+			<span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">Pane</span>&gt;</span>
+				<span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>2<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+			<span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">Pane</span>&gt;</span>
+				<span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>3<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+			<span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">Splitpanes</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">Pane</span>
+		&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">em</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;specs&quot;</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>In this example the splitters are thin lines but the reactive touch zone is spread to 30 pixels all around!<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">em</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Splitpanes</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">style</span> <span class="hljs-attr">global</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;scss&quot;</span>&gt;</span><span class="language-css">:<span class="hljs-built_in">global</span>(.splitpanes) {
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#f8f8f8</span>;
+}
+
+:<span class="hljs-built_in">global</span>(.splitpanes__splitter) {
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#ccc</span>;
+  <span class="hljs-attribute">position</span>: relative;
+}
+
+:<span class="hljs-built_in">global</span>(.splitpanes__splitter:before) {
+  <span class="hljs-attribute">content</span>: <span class="hljs-string">&quot;&quot;</span>;
+  <span class="hljs-attribute">position</span>: absolute;
+  <span class="hljs-attribute">left</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">top</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">transition</span>: opacity <span class="hljs-number">0.4s</span>;
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-built_in">rgba</span>(<span class="hljs-number">255</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.3</span>);
+  <span class="hljs-attribute">opacity</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">z-index</span>: <span class="hljs-number">1</span>;
+}
+
+:<span class="hljs-built_in">global</span>(.splitpanes__splitter:hover:before) {
+  <span class="hljs-attribute">opacity</span>: <span class="hljs-number">1</span>;
+}
+
+:<span class="hljs-built_in">global</span>(.splitpanes--vertical) &gt; :<span class="hljs-built_in">global</span>(.splitpanes__splitter:before) {
+  <span class="hljs-attribute">left</span>: -<span class="hljs-number">30px</span>;
+  <span class="hljs-attribute">right</span>: -<span class="hljs-number">30px</span>;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">100%</span>;
+}
+
+:<span class="hljs-built_in">global</span>(.splitpanes--horizontal) &gt; :<span class="hljs-built_in">global</span>(.splitpanes__splitter:before) {
+  <span class="hljs-attribute">top</span>: -<span class="hljs-number">30px</span>;
+  <span class="hljs-attribute">bottom</span>: -<span class="hljs-number">30px</span>;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+}</span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+<!-- HTML_TAG_END --></code></pre>
 
 </div>
 
 
-		<script type="module" data-hydrate="q7skx1">
-		import { start } from "/svelte-splitpanes/_app/start-bd762f44.js";
+		<script type="module" data-hydrate="zlpn1k">
+		import { start } from "/svelte-splitpanes/_app/start-6ba30b2c.js";
 		start({
-			target: document.querySelector('[data-hydrate="q7skx1"]').parentNode,
+			target: document.querySelector('[data-hydrate="zlpn1k"]').parentNode,
 			paths: {"base":"/svelte-splitpanes","assets":"/svelte-splitpanes"},
 			session: {},
 			route: true,
@@ -421,8 +477,8 @@ TODO<!-- HTML_TAG_END --></code></pre>
 				status: 200,
 				error: null,
 				nodes: [
-					import("/svelte-splitpanes/_app/pages/__layout.svelte-828f71b5.js"),
-						import("/svelte-splitpanes/_app/pages/index.svelte-8966dd2c.js")
+					import("/svelte-splitpanes/_app/pages/__layout.svelte-4b846b0a.js"),
+						import("/svelte-splitpanes/_app/pages/index.svelte-ede3d4b4.js")
 				],
 				params: {},
 				routeId: ""

@@ -690,123 +690,113 @@
 	<slot />
 </div>
 
-<style>
-	:global(.splitpanes) {
+<style global lang="scss">
+	.splitpanes {
 		display: flex;
 		width: 100%;
 		height: 100%;
+		&--vertical {
+			flex-direction: row;
+		}
+		&--horizontal {
+			flex-direction: column;
+		}
+		&--dragging * {
+			user-select: none;
+		}
+		&__pane {
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			.splitpanes--vertical & {
+				transition: width 0.2s ease-out;
+			}
+			.splitpanes--horizontal & {
+				transition: height 0.2s ease-out;
+			}
+			.splitpanes--dragging & {
+				transition: none;
+			}
+		}
+		// Disable default zoom behavior on touch device when double tapping splitter.
+		&__splitter {
+			touch-action: none;
+		}
+		&--vertical > .splitpanes__splitter {
+			min-width: 1px;
+			cursor: col-resize;
+		}
+		&--horizontal > .splitpanes__splitter {
+			min-height: 1px;
+			cursor: row-resize;
+		}
 	}
-	:global(.splitpanes--vertical) {
-		flex-direction: row;
+	.splitpanes.default-theme {
+		.splitpanes__pane {
+			background-color: #f2f2f2;
+		}
+		.splitpanes__splitter {
+			background-color: #fff;
+			box-sizing: border-box;
+			position: relative;
+			flex-shrink: 0;
+			&:before,
+			&:after {
+				content: '';
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				background-color: rgba(0, 0, 0, 0.15);
+				transition: background-color 0.3s;
+			}
+			&:hover:before,
+			&:hover:after {
+				background-color: rgba(0, 0, 0, 0.25);
+			}
+			&:first-child {
+				cursor: auto;
+			}
+		}
 	}
-	:global(.splitpanes--horizontal) {
-		flex-direction: column;
-	}
-	:global(.splitpanes--dragging *) {
-		user-select: none;
-	}
-	:global(.splitpanes__pane) {
-		width: 100%;
-		height: 100%;
-		overflow: hidden;
-	}
-	:global(.splitpanes--vertical .splitpanes__pane) {
-		transition: width 0.2s ease-out;
-	}
-	:global(.splitpanes--horizontal .splitpanes__pane) {
-		transition: height 0.2s ease-out;
-	}
-	:global(.splitpanes--dragging .splitpanes__pane) {
-		transition: none;
-	}
-	:global(.splitpanes__splitter) {
-		touch-action: none;
-	}
-	:global(.splitpanes--vertical > .splitpanes__splitter) {
-		min-width: 1px;
-		cursor: col-resize;
-	}
-	:global(.splitpanes--horizontal > .splitpanes__splitter) {
-		min-height: 1px;
-		cursor: row-resize;
-	}
-	:global(.splitpanes.default-theme .splitpanes__pane) {
-		background-color: #f2f2f2;
-	}
-	:global(.splitpanes.default-theme .splitpanes__splitter) {
-		background-color: #fff;
-		box-sizing: border-box;
-		position: relative;
-		flex-shrink: 0;
-	}
-	:global(.splitpanes.default-theme .splitpanes__splitter:before, .splitpanes.default-theme
-			.splitpanes__splitter:after) {
-		content: '';
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		background-color: rgba(0, 0, 0, 0.15);
-		transition: background-color 0.3s;
-	}
-	:global(.splitpanes.default-theme .splitpanes__splitter:hover:before, .splitpanes.default-theme
-			.splitpanes__splitter:hover:after) {
-		background-color: rgba(0, 0, 0, 0.25);
-	}
-	:global(.splitpanes.default-theme .splitpanes__splitter:first-child) {
-		cursor: auto;
-	}
-	:global(.default-theme.splitpanes .splitpanes .splitpanes__splitter) {
-		z-index: 1;
-	}
-	:global(.default-theme.splitpanes--vertical > .splitpanes__splitter, .default-theme
-			.splitpanes--vertical
-			> .splitpanes__splitter) {
-		width: 7px;
-		border-left: 1px solid #eee;
-		margin-left: -1px;
-	}
-	:global(.default-theme.splitpanes--vertical > .splitpanes__splitter:before, .default-theme
-			.splitpanes--vertical
-			> .splitpanes__splitter:before, .default-theme.splitpanes--vertical > .splitpanes__splitter:after, .default-theme
-			.splitpanes--vertical
-			> .splitpanes__splitter:after) {
-		transform: translateY(-50%);
-		width: 1px;
-		height: 30px;
-	}
-	:global(.default-theme.splitpanes--vertical > .splitpanes__splitter:before, .default-theme
-			.splitpanes--vertical
-			> .splitpanes__splitter:before) {
-		margin-left: -2px;
-	}
-	:global(.default-theme.splitpanes--vertical > .splitpanes__splitter:after, .default-theme
-			.splitpanes--vertical
-			> .splitpanes__splitter:after) {
-		margin-left: 1px;
-	}
-	:global(.default-theme.splitpanes--horizontal > .splitpanes__splitter, .default-theme
-			.splitpanes--horizontal
-			> .splitpanes__splitter) {
-		height: 7px;
-		border-top: 1px solid #eee;
-		margin-top: -1px;
-	}
-	:global(.default-theme.splitpanes--horizontal > .splitpanes__splitter:before, .default-theme
-			.splitpanes--horizontal
-			> .splitpanes__splitter:before, .default-theme.splitpanes--horizontal
-			> .splitpanes__splitter:after, .default-theme .splitpanes--horizontal > .splitpanes__splitter:after) {
-		transform: translateX(-50%);
-		width: 30px;
-		height: 1px;
-	}
-	:global(.default-theme.splitpanes--horizontal > .splitpanes__splitter:before, .default-theme
-			.splitpanes--horizontal
-			> .splitpanes__splitter:before) {
-		margin-top: -2px;
-	}
-	:global(.default-theme.splitpanes--horizontal > .splitpanes__splitter:after, .default-theme
-			.splitpanes--horizontal
-			> .splitpanes__splitter:after) {
-		margin-top: 1px;
+	.default-theme {
+		&.splitpanes .splitpanes .splitpanes__splitter {
+			z-index: 1;
+		}
+		&.splitpanes--vertical > .splitpanes__splitter,
+		.splitpanes--vertical > .splitpanes__splitter {
+			width: 7px;
+			border-left: 1px solid #eee;
+			margin-left: -1px;
+			&:before,
+			&:after {
+				transform: translateY(-50%);
+				width: 1px;
+				height: 30px;
+			}
+			&:before {
+				margin-left: -2px;
+			}
+			&:after {
+				margin-left: 1px;
+			}
+		}
+		&.splitpanes--horizontal > .splitpanes__splitter,
+		.splitpanes--horizontal > .splitpanes__splitter {
+			height: 7px;
+			border-top: 1px solid #eee;
+			margin-top: -1px;
+			&:before,
+			&:after {
+				transform: translateX(-50%);
+				width: 30px;
+				height: 1px;
+			}
+			&:before {
+				margin-top: -2px;
+			}
+			&:after {
+				margin-top: 1px;
+			}
+		}
 	}
 </style>
