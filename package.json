@@ -1,6 +1,6 @@
 {
 	"name": "svelte-splitpanes",
-	"version": "0.6.0",
+	"version": "0.6.1",
 	"description": "A full featured resizable pane layout splitter, ported from vue-splitpanes",
 	"author": {
 		"name": "Olivier Refalo",
@@ -13,6 +13,7 @@
 		"split",
 		"splitter",
 		"pane",
+		"panel",
 		"resize",
 		"resizable"
 	],
@@ -45,7 +46,6 @@
 		"eslint": "^8.13.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-svelte3": "^3.4.1",
-		"nanoid": "^3.3.2",
 		"prettier": "^2.6.2",
 		"prettier-plugin-svelte": "^2.7.0",
 		"sass": "^1.50.0",

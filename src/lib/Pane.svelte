@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getContext, onMount, onDestroy } from 'svelte';
-	import { nanoid } from 'nanoid';
+	import { nanoid } from './browserNanoid';
 	import { KEY } from './Splitpanes.svelte';
 	import type { IPane, SplitContext } from '.';
 	const { onPaneAdd, onPaneRemove, onPaneClick, isHorizontal } = getContext<SplitContext>(KEY);

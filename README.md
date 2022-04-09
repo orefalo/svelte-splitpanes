@@ -83,7 +83,39 @@ Properties that apply to <Pane>
 The component can be further styled after the props have been defined by overriding the default css styling. The best way to do this is to use a class differenciator or the id="" prop and then scope your global css with this class/id.
 
 ```css
-TODO
+/* The followinf classes can be used to style the splitter, see demos*/
+
+.splitpanes {
+	background-color: #f8f8f8;
+}
+
+.splitpanes__splitter {
+	background-color: #ccc;
+	position: relative;
+}
+.splitpanes__splitter:before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	transition: opacity 0.4s;
+	background-color: rgba(255, 0, 0, 0.3);
+	opacity: 0;
+	z-index: 1;
+}
+.splitpanes__splitter:hover:before {
+	opacity: 1;
+}
+.splitpanes--vertical > .splitpanes__splitter:before {
+	left: -30px;
+	right: -30px;
+	height: 100%;
+}
+.splitpanes--horizontal > .splitpanes__splitter:before {
+	top: -30px;
+	bottom: -30px;
+	width: 100%;
+}
 ```
 
 ## Contributing
