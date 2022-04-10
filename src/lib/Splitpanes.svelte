@@ -48,7 +48,7 @@
 	const dispatch = createEventDispatcher();
 	// the splitpane component
 	let container: HTMLElement;
-	// true when ready, prevent emitting console warnings on hot reloading.
+	// true when component is ready, prevents emitting console warnings on hot reloading.
 	let isReady = false;
 	// true when mouse is down
 	let isMouseDown = false;
@@ -106,7 +106,7 @@
 			// 4. Fire `pane-add` event.
 			dispatch('pane-add', {
 				index,
-				panes: panes.map((pane) => ({ min: pane.min, max: pane.max, size: pane.sz() }))
+				panes: prepareSizeEvent()
 			});
 		}
 	}
@@ -134,7 +134,7 @@
 		// 4. Fire `pane-remove` event.
 		dispatch('pane-remove', {
 			removed,
-			panes: panes.map((pane) => ({ min: pane.min(), max: pane.max(), size: pane.sz() } as IPaneSizingEvent))
+			panes: prepareSizeEvent()
 		});
 	}
 
@@ -152,8 +152,8 @@
 		checkSplitpanesNodes();
 		redoSplitters();
 		resetPaneSizes();
-		dispatch('ready');
 		isReady = true;
+		dispatch('ready');
 	});
 
 	onDestroy(() => {
@@ -196,19 +196,13 @@
 			event.preventDefault();
 			isDragging = true;
 			calculatePanesSize(getCurrentMouseDrag(event));
-			dispatch(
-				'resize',
-				panes.map((pane) => ({ min: pane.min(), max: pane.max(), size: pane.sz() } as IPaneSizingEvent))
-			);
+			dispatchSizeEvent('resize');
 		}
 	}
 
 	function onMouseUp() {
 		if (isDragging) {
-			dispatch(
-				'resized',
-				panes.map((pane) => ({ min: pane.min(), max: pane.max(), size: pane.sz() } as IPaneSizingEvent))
-			);
+			dispatchSizeEvent('resized');
 		}
 		isMouseDown = false;
 		// Keep dragging flag until click event is finished (click happens immediately after mouseup)
@@ -259,20 +253,25 @@
 		splitterPane.setSz(sz);
 
 		dispatch('pane-maximize', splitterPane);
+		dispatchSizeEvent('resized');
+	}
 
-		typedEventDispatch(
-			'resized',
-			panes.map((pane) => ({
+	function prepareSizeEvent(): IPaneSizingEvent[] {
+		const arr: Array<IPaneSizingEvent> = new Array(panes.length);
+		for (let i = 0; i < panes.length; i++) {
+			const pane = panes[i];
+			arr[i] = {
 				min: pane.min(),
 				max: pane.max(),
 				size: pane.sz()
-			}))
-		);
+			};
+		}
+		return arr;
 	}
 
 	// function to ensure proper typing
-	function typedEventDispatch(name: string, data: Array<IPaneSizingEvent>) {
-		dispatch(name, data);
+	function dispatchSizeEvent(name: string) {
+		dispatch(name, prepareSizeEvent());
 	}
 
 	// Get the cursor position relative to the splitpane container.
@@ -362,7 +361,6 @@
 				);
 			}
 		}
-		//	setAllPaneDimensions();
 	}
 
 	function doPushOtherPanes(sums: Sums, dragPercentage: number) {
@@ -535,10 +533,7 @@
 		else equalize();
 
 		if (isReady) {
-			typedEventDispatch(
-				'resized',
-				panes.map((pane) => ({ min: pane.min(), max: pane.max(), size: pane.sz() }))
-			);
+			dispatchSizeEvent('resized');
 		}
 	}
 
