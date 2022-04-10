@@ -89,7 +89,10 @@
 		panes.splice(index, 0, pane);
 
 		// reindex panes
-		panes.forEach((p, i) => (p.index = i));
+		for (let i = 0; i < panes.length; i++) {
+			const p = panes[i];
+			p.index = i;
+		}
 
 		if (isReady) {
 			await tick();
@@ -115,7 +118,10 @@
 		const removed = panes.splice(index, 1)[0];
 
 		// reindex panes
-		panes.forEach((p, i) => (p.index = i));
+		for (let i = 0; i < panes.length; i++) {
+			const p = panes[i];
+			p.index = i;
+		}
 
 		await tick();
 
@@ -241,11 +247,12 @@
 	function onSplitterDblClick(_event: MouseEvent, splitterIndex: number) {
 		let totalMinSizes = 0;
 
-		panes.forEach((pane, i) => {
+		for (let i = 0; i < panes.length; i++) {
+			const pane = panes[i];
 			const sz = i === splitterIndex ? pane.max() : pane.min();
 			pane.setSz(sz);
 			if (i !== splitterIndex) totalMinSizes += pane.min();
-		});
+		}
 
 		const splitterPane = panes[splitterIndex];
 		const sz = splitterPane.sz() - totalMinSizes;
@@ -370,24 +377,27 @@
 			sums.prevReachedMinPanes = 0;
 			// If pushing a n-2 or less pane, from splitter, then make sure all in between is at min size.
 			if (panesToResize[0] < splitterIndex) {
-				panes.forEach((pane, i) => {
+				for (let i = 0; i < panes.length; i++) {
+					const pane = panes[i];
 					if (i > panesToResize[0] && i <= splitterIndex) {
 						pane.setSz(pane.min());
 						sums.prevReachedMinPanes += pane.min();
 					}
-				});
+				}
 			}
 			sums.prevPanesSize = sumPrevPanesSize(panesToResize[0]);
 			// If nothing else to push down, cancel dragging.
 			if (panesToResize[0] === undefined) {
 				sums.prevReachedMinPanes = 0;
 				panes[0].setSz(panes[0].min());
-				panes.forEach((pane, i) => {
+				for (let i = 0; i < panes.length; i++) {
+					const pane = panes[i];
 					if (i > 0 && i <= splitterIndex) {
 						pane.setSz(pane.min());
 						sums.prevReachedMinPanes += pane.min();
 					}
-				});
+				}
+
 				panes[panesToResize[1]].setSz(
 					100 - sums.prevReachedMinPanes - panes[0].min() - sums.prevPanesSize - sums.nextPanesSize
 				);
@@ -401,12 +411,13 @@
 			sums.nextReachedMinPanes = 0;
 			// If pushing a n+2 or more pane, from splitter, then make sure all in between is at min size.
 			if (panesToResize[1] > splitterIndex + 1) {
-				panes.forEach((pane, i) => {
+				for (let i = 0; i < panes.length; i++) {
+					const pane = panes[i];
 					if (i > splitterIndex && i < panesToResize[1]) {
 						pane.sz = pane.min;
 						sums.nextReachedMinPanes += pane.min();
 					}
-				});
+				}
 			}
 			sums.nextPanesSize = sumNextPanesSize(panesToResize[1] - 1);
 			// If nothing else to push up, cancel dragging.
@@ -415,12 +426,15 @@
 			if (panesToResize[1] === undefined) {
 				sums.nextReachedMinPanes = 0;
 				panes[panesCount - 1].sz = panes[panesCount - 1].min;
-				panes.forEach((pane, i) => {
+
+				for (let i = 0; i < panes.length; i++) {
+					const pane = panes[i];
 					if (i < panesCount - 1 && i >= splitterIndex + 1) {
 						pane.sz = pane.min;
 						sums.nextReachedMinPanes += pane.min();
 					}
-				});
+				}
+
 				panes[panesToResize[0]].setSz(
 					100 - sums.prevPanesSize - sums.nextReachedMinPanes - panes[panesCount - 1].min() - sums.nextPanesSize
 				);
@@ -494,17 +508,16 @@
 	function redoSplitters() {
 		if (container) {
 			const children = Array.from(container.children) as Array<HTMLElement>;
-			children.forEach((el) => {
-				if (el.className.includes('splitpanes__splitter')) removeSplitter(el as HTMLElement);
-			});
 			let paneIndex = 0;
-			children.forEach((el) => {
+			for (let i = 0; i < children.length; i++) {
+				const el = children[i];
+				if (el.className.includes('splitpanes__splitter')) removeSplitter(el as HTMLElement);
 				if (el.className.includes('splitpanes__pane')) {
 					if (paneIndex > 0) addSplitter(paneIndex, el);
 					else if (firstSplitter) addSplitter(paneIndex, el, true);
 					paneIndex++;
 				}
-			});
+			}
 		}
 	}
 
@@ -539,7 +552,8 @@
 		let ungrowable = Array<string>();
 		let unshrinkable = Array<string>();
 
-		panes.forEach((pane) => {
+		for (let i = 0; i < panes.length; i++) {
+			const pane = panes[i];
 			const min = pane.min();
 			const max = pane.max();
 			const sz = Math.max(Math.min(equalSpace, max), min);
@@ -547,7 +561,7 @@
 			leftToAllocate -= sz;
 			if (sz >= max) ungrowable.push(pane.uid);
 			if (sz <= min) unshrinkable.push(pane.uid);
-		});
+		}
 
 		if (leftToAllocate > 0.1) readjustSizes(leftToAllocate, ungrowable, unshrinkable);
 	}
@@ -558,26 +572,27 @@
 		let unshrinkable = Array<string>();
 		let definedSizes = 0;
 
-		// Check if pre-allocated space is 100%.
-		panes.forEach((pane) => {
+		for (let i = 0; i < panes.length; i++) {
+			const pane = panes[i];
 			const sz = pane.sz();
 			leftToAllocate -= sz;
 			if (pane.givenSize !== null) definedSizes++;
 			if (sz >= pane.max()) ungrowable.push(pane.uid);
 			if (sz <= pane.min()) unshrinkable.push(pane.uid);
-		});
+		}
 
 		// set pane sizes if not set.
 		let leftToAllocate2 = 100;
 		if (leftToAllocate > 0.1) {
-			panes.forEach((pane) => {
+			for (let i = 0; i < panes.length; i++) {
+				const pane = panes[i];
 				if (pane.givenSize === null) {
 					const panesCount = panes.length;
 					const sz = Math.max(Math.min(leftToAllocate / (panesCount - definedSizes), pane.max()), pane.min());
 					pane.setSz(sz);
 				}
 				leftToAllocate2 -= pane.sz();
-			});
+			}
 
 			if (leftToAllocate2 > 0.1) readjustSizes(leftToAllocate, ungrowable, unshrinkable);
 		}
@@ -594,17 +609,18 @@
 			equalSpace = (100 - parseFloat(addedPane.givenSize)) / (panesCount - 1);
 		}
 
-		// Check if pre-allocated space is 100%.
-		panes.forEach((pane) => {
+		for (let i = 0; i < panes.length; i++) {
+			const pane = panes[i];
 			const sz = pane.sz();
 			leftToAllocate -= sz;
 			if (sz >= pane.max()) ungrowable.push(pane.uid);
 			if (sz <= pane.min()) unshrinkable.push(pane.uid);
-		});
+		}
 
 		if (Math.abs(leftToAllocate) < 0.1) return; // Ok.
 
-		panes.forEach((pane) => {
+		for (let i = 0; i < panes.length; i++) {
+			const pane = panes[i];
 			const max = pane.max();
 			const min = pane.min();
 			if (addedPane && addedPane.givenSize !== null && addedPane.uid === pane.uid) {
@@ -614,7 +630,7 @@
 			leftToAllocate -= sz;
 			if (sz >= max) ungrowable.push(pane.uid);
 			if (sz <= min) unshrinkable.push(pane.uid);
-		});
+		}
 
 		if (leftToAllocate > 0.1) readjustSizes(leftToAllocate, ungrowable, unshrinkable);
 	}
@@ -626,7 +642,8 @@
 		if (leftToAllocate > 0) equalSpaceToAllocate = leftToAllocate / (panesCount - ungrowable.length);
 		else equalSpaceToAllocate = leftToAllocate / (panesCount - unshrinkable.length);
 
-		panes.forEach((pane) => {
+		for (let i = 0; i < panes.length; i++) {
+			const pane = panes[i];
 			const sz = pane.sz();
 			if (leftToAllocate > 0 && !ungrowable.includes(pane.uid)) {
 				// Need to diff the size before and after to get the exact allocated space.
@@ -641,7 +658,7 @@
 				leftToAllocate -= allocated;
 				pane.setSz(newPaneSize);
 			}
-		});
+		}
 
 		if (Math.abs(leftToAllocate) > 0.1) {
 			// > 0.1: Prevent maths rounding issues due to bytes.
@@ -660,7 +677,9 @@
 	function checkSplitpanesNodes() {
 		if (container) {
 			const children = Array.from(container.children) as Array<HTMLElement>;
-			children.forEach((child) => {
+
+			for (let i = 0; i < children.length; i++) {
+				const child = children[i];
 				const isPane = child.classList.contains('splitpanes__pane');
 				const isSplitter = child.classList.contains('splitpanes__splitter');
 
@@ -673,7 +692,7 @@
 					);
 					return;
 				}
-			});
+			}
 		}
 	}
 </script>
