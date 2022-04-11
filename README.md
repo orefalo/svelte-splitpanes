@@ -24,6 +24,7 @@ Create resizable view panels in Svelte 3, a radical new approach to building use
 - Support programmatic splitter add/remove
 - Support for legacy browser such as IE 11
 - Support for touch devices
+- Sveltekit & Typescript friendly
 
 ## Browser Support
 

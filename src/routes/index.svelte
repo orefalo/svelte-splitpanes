@@ -32,6 +32,7 @@
 	<li>Support programmatic splitter add/remove</li>
 	<li>Support for legacy browser such as IE 11</li>
 	<li>Support for touch devices</li>
+	<li>Sveltekit & Typescript friendly</li>
 </ul>
 
 <MinMax />
