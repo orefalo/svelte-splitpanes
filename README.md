@@ -34,7 +34,8 @@ Create resizable view panels in Svelte 3, a radical new approach to building use
 
 ## Demo & Documentation
 
-[https://orefalo.github.io/svelte-splitpanes/](https://orefalo.github.io/svelte-splitpanes/)
+[REPL Demo](https://svelte.dev/repl/1e96cbd4bcd148e3b85a4c8ca76d7309?version=3.48.0)
+[More complex demos and examples](https://orefalo.github.io/svelte-splitpanes/)
 
 ## Installation
 
@@ -47,7 +48,7 @@ $ npm i svelte-splitpanes
 ```html
 <script>
 import { Pane, Splitpanes } from 'svelte-splitpanes';
-<\/script>
+</script>
 <Splitpanes class="default-theme" style="height: 400px">
 	<Pane minSize="20">1<br /><em class="specs">I have a min width of 20%</em></Pane>
 	<Pane>
