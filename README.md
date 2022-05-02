@@ -34,8 +34,8 @@ Create resizable view panels in Svelte 3, a radical new approach to building use
 
 ## Demo & Documentation
 
-[REPL Demo](https://svelte.dev/repl/1e96cbd4bcd148e3b85a4c8ca76d7309?version=3.48.0)
-[More complex demos and examples](https://orefalo.github.io/svelte-splitpanes/)
+* [REPL Demo](https://svelte.dev/repl/1e96cbd4bcd148e3b85a4c8ca76d7309?version=3.48.0)
+* [More complex demos and examples](https://orefalo.github.io/svelte-splitpanes/)
 
 ## Installation
 
