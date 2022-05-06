@@ -10,11 +10,11 @@
 	<link rel="stylesheet" href="/svelte-splitpanes/_app/assets/pages/__layout.svelte-eb807ecf.css">
 	<link rel="stylesheet" href="/svelte-splitpanes/_app/assets/pages/index.svelte-e3cf71c5.css">
 	<link rel="stylesheet" href="/svelte-splitpanes/_app/assets/Pane-ec78f827.css">
-	<link rel="modulepreload" href="/svelte-splitpanes/_app/start-be52c55e.js">
+	<link rel="modulepreload" href="/svelte-splitpanes/_app/start-2994412f.js">
 	<link rel="modulepreload" href="/svelte-splitpanes/_app/chunks/vendor-e09f8588.js">
 	<link rel="modulepreload" href="/svelte-splitpanes/_app/pages/__layout.svelte-d63a585b.js">
-	<link rel="modulepreload" href="/svelte-splitpanes/_app/pages/index.svelte-d857c385.js">
-	<link rel="modulepreload" href="/svelte-splitpanes/_app/chunks/Pane-042acfce.js">
+	<link rel="modulepreload" href="/svelte-splitpanes/_app/pages/index.svelte-15efd7e6.js">
+	<link rel="modulepreload" href="/svelte-splitpanes/_app/chunks/Pane-24d5f8ab.js">
 	</head>
 	<body>
 		<div>
@@ -40,18 +40,19 @@
 	<li>Support programmatic resizing</li>
 	<li>Support programmatic splitter add/remove</li>
 	<li>Support for legacy browser such as IE 11</li>
-	<li>Support for touch devices</li></ul>
+	<li>Support for touch devices</li>
+	<li>Sveltekit &amp; Typescript friendly</li></ul>
 
 <h2>Horizontal layout, push other panes, min &amp; max use, doubleclick</h2>
 <p>You can double click a splitter to maximize the next pane!<br>
 	If you want to disable the &#39;double click splitter to maximize&#39; behavior, you can add this attribute: dblClickSplitter=false.
 </p>
 
-<div class="splitpanes default-theme splitpanes--horizontal" style="height: 400px"><div class="splitpanes__pane" style="height:0%"><span>1
+<div class="splitpanes default-theme splitpanes--horizontal" style="height: 400px"><div class="splitpanes__pane " style="height:0%"><span>1
 			<br>
 			<em class="specs">I have a min height of 20% &amp; max height of 70%</em></span></div>
-	<div class="splitpanes__pane" style="height:0%"><span>2</span></div>
-	<div class="splitpanes__pane" style="height:0%"><span>3
+	<div class="splitpanes__pane " style="height:0%"><span>2</span></div>
+	<div class="splitpanes__pane " style="height:0%"><span>3
 
 			<br>
 			<em class="specs">I have a max height of 70%</em></span></div>
@@ -88,9 +89,9 @@
 		missing a default size, then all the panes will have the same size.</b><br> Note that setting a default value is different than setting a min or max value.
 </p>
 
-<div class="splitpanes default-theme splitpanes--horizontal" style="height: 400px"><div class="splitpanes__pane" style="height:65%"><span>1</span></div>
-	<div class="splitpanes__pane" style="height:10%"><span>2</span></div>
-	<div class="splitpanes__pane" style="height:25%"><span>3</span></div>
+<div class="splitpanes default-theme splitpanes--horizontal" style="height: 400px"><div class="splitpanes__pane " style="height:65%"><span>1</span></div>
+	<div class="splitpanes__pane " style="height:10%"><span>2</span></div>
+	<div class="splitpanes__pane " style="height:25%"><span>3</span></div>
 </div>
 
 
@@ -111,12 +112,12 @@
 <hr>
 <h2>Locking layout by prevent pushing other panes</h2>
 
-<div class="splitpanes default-theme splitpanes--horizontal" style="height: 400px"><div class="splitpanes__pane" style="height:0%"><span>1</span></div>
-	<div class="splitpanes__pane" style="height:0%"><div class="splitpanes   splitpanes--vertical"><div class="splitpanes__pane" style="width:0%"><span>2</span></div>
-			<div class="splitpanes__pane" style="width:0%"><span>3</span></div>
-			<div class="splitpanes__pane" style="width:0%"><span>4</span></div>
+<div class="splitpanes default-theme splitpanes--horizontal" style="height: 400px"><div class="splitpanes__pane " style="height:0%"><span>1</span></div>
+	<div class="splitpanes__pane " style="height:0%"><div class="splitpanes   splitpanes--vertical"><div class="splitpanes__pane " style="width:0%"><span>2</span></div>
+			<div class="splitpanes__pane " style="width:0%"><span>3</span></div>
+			<div class="splitpanes__pane " style="width:0%"><span>4</span></div>
 </div></div>
-	<div class="splitpanes__pane" style="height:0%"><span>5</span></div>
+	<div class="splitpanes__pane " style="height:0%"><span>5</span></div>
 </div>
 
 
@@ -147,14 +148,14 @@
 <hr>
 <h2>Lots of splitters &amp; push other panes - all panes have a min width of 5%</h2>
 
-<div class="splitpanes default-theme  splitpanes--vertical" style="height: 400px"><div class="splitpanes__pane" style="width:0%"><span>1</span>
-		</div><div class="splitpanes__pane" style="width:0%"><span>2</span>
-		</div><div class="splitpanes__pane" style="width:0%"><span>3</span>
-		</div><div class="splitpanes__pane" style="width:0%"><span>4</span>
-		</div><div class="splitpanes__pane" style="width:0%"><span>5</span>
-		</div><div class="splitpanes__pane" style="width:0%"><span>6</span>
-		</div><div class="splitpanes__pane" style="width:0%"><span>7</span>
-		</div><div class="splitpanes__pane" style="width:0%"><span>8</span>
+<div class="splitpanes default-theme  splitpanes--vertical" style="height: 400px"><div class="splitpanes__pane " style="width:0%"><span>1</span>
+		</div><div class="splitpanes__pane " style="width:0%"><span>2</span>
+		</div><div class="splitpanes__pane " style="width:0%"><span>3</span>
+		</div><div class="splitpanes__pane " style="width:0%"><span>4</span>
+		</div><div class="splitpanes__pane " style="width:0%"><span>5</span>
+		</div><div class="splitpanes__pane " style="width:0%"><span>6</span>
+		</div><div class="splitpanes__pane " style="width:0%"><span>7</span>
+		</div><div class="splitpanes__pane " style="width:0%"><span>8</span>
 		</div>
 </div>
 
@@ -179,9 +180,9 @@
 	<svg class="svelte-c42aw5"></svg>
 </button>
 
-<div class="splitpanes default-theme  splitpanes--vertical" style="height: 400px"><div class="splitpanes__pane" style="width:0%"><span>1</span>
-		</div><div class="splitpanes__pane" style="width:0%"><span>2</span>
-		</div><div class="splitpanes__pane" style="width:0%"><span>3</span>
+<div class="splitpanes default-theme  splitpanes--vertical" style="height: 400px"><div class="splitpanes__pane " style="width:0%"><span>1</span>
+		</div><div class="splitpanes__pane " style="width:0%"><span>2</span>
+		</div><div class="splitpanes__pane " style="width:0%"><span>3</span>
 		</div>
 </div>
 
@@ -223,9 +224,9 @@
 <button style="--color: #fff;--font-size: .875rem;--bg-color: 74, 64, 212;--bg-hover: 74, 64, 212;--bg-active: 74, 64, 212;--radius: 0.2rem;--ripple: #838de7;--height: 36px;--width: 140px;--shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);--shadow-h: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);--shadow-a: 0 1px 2px 0 rgba(0, 0, 0, 0.05)" class="svelte-c42aw5"><span class="svelte-c42aw5">Show first Splitter</span>
 	<svg class="svelte-c42aw5"></svg>
 </button>
-<div class="splitpanes default-theme  splitpanes--vertical" style="height: 400px"><div class="splitpanes__pane" style="width:0%"><span>1</span>
-		</div><div class="splitpanes__pane" style="width:0%"><span>2</span>
-		</div><div class="splitpanes__pane" style="width:0%"><span>3</span>
+<div class="splitpanes default-theme  splitpanes--vertical" style="height: 400px"><div class="splitpanes__pane " style="width:0%"><span>1</span>
+		</div><div class="splitpanes__pane " style="width:0%"><span>2</span>
+		</div><div class="splitpanes__pane " style="width:0%"><span>3</span>
 		</div>
 </div>
 
@@ -266,8 +267,8 @@
   </div>
 
 
-<div class="splitpanes default-theme  splitpanes--vertical" style="height: 400px"><div class="splitpanes__pane" style="width:50%"><span>50%</span></div>
-	<div class="splitpanes__pane" style="width:50%"><span>50%</span></div>
+<div class="splitpanes default-theme  splitpanes--vertical" style="height: 400px"><div class="splitpanes__pane " style="width:50%"><span>50%</span></div>
+	<div class="splitpanes__pane " style="width:50%"><span>50%</span></div>
 </div>
 
 
@@ -292,9 +293,9 @@
 <button style="--color: #fff;--font-size: .875rem;--bg-color: 74, 64, 212;--bg-hover: 74, 64, 212;--bg-active: 74, 64, 212;--radius: 0.2rem;--ripple: #838de7;--height: 36px;--width: 140px;--shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);--shadow-h: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);--shadow-a: 0 1px 2px 0 rgba(0, 0, 0, 0.05)" class="svelte-c42aw5"><span class="svelte-c42aw5">Hide</span>
 	<svg class="svelte-c42aw5"></svg>
 </button>
-<div class="splitpanes default-theme  splitpanes--vertical" style="height: 400px"><div class="splitpanes__pane" style="width:0%"><span>1</span></div>
-	<div class="splitpanes__pane" style="width:0%"><span>2</span></div>
-	<div class="splitpanes__pane" style="width:0%"><span>3</span></div>
+<div class="splitpanes default-theme  splitpanes--vertical" style="height: 400px"><div class="splitpanes__pane " style="width:0%"><span>1</span></div>
+	<div class="splitpanes__pane " style="width:0%"><span>2</span></div>
+	<div class="splitpanes__pane " style="width:0%"><span>3</span></div>
 </div>
 
 
@@ -344,9 +345,9 @@
 		only emitted if dragging did not occur between mousedown and mouseup.
 	</li></ul>
 
-<div class="splitpanes default-theme  splitpanes--vertical" style="height: 400px"><div class="splitpanes__pane" style="width:0%"><span>1</span>
-		</div><div class="splitpanes__pane" style="width:0%"><span>2</span>
-		</div><div class="splitpanes__pane" style="width:0%"><span>3</span>
+<div class="splitpanes default-theme  splitpanes--vertical" style="height: 400px"><div class="splitpanes__pane " style="width:0%"><span>1</span>
+		</div><div class="splitpanes__pane " style="width:0%"><span>2</span>
+		</div><div class="splitpanes__pane " style="width:0%"><span>3</span>
 		</div>
 </div>
 <p>Try resizing panes and check the logs bellow.</p>
@@ -393,11 +394,11 @@
 <hr>
 <h2>Styling Splitters</h2>
 
-<div class="splitpanes  splitpanes--horizontal" style="height: 400px"><div class="splitpanes__pane" style="height:0%"><div class="splitpanes   splitpanes--vertical"><div class="splitpanes__pane" style="width:0%"><span>1</span></div>
-			<div class="splitpanes__pane" style="width:0%"><span>2</span></div>
-			<div class="splitpanes__pane" style="width:0%"><span>3</span></div>
+<div class="splitpanes  splitpanes--horizontal" style="height: 400px"><div class="splitpanes__pane " style="height:0%"><div class="splitpanes   splitpanes--vertical"><div class="splitpanes__pane " style="width:0%"><span>1</span></div>
+			<div class="splitpanes__pane " style="width:0%"><span>2</span></div>
+			<div class="splitpanes__pane " style="width:0%"><span>3</span></div>
 </div></div>
-	<div class="splitpanes__pane" style="height:0%"><em class="specs"><p>In this example the splitters are thin lines but the reactive touch zone is spread to 30 pixels all around!</p></em></div>
+	<div class="splitpanes__pane " style="height:0%"><em class="specs"><p>In this example the splitters are thin lines but the reactive touch zone is spread to 30 pixels all around!</p></em></div>
 </div>
 
 
@@ -464,10 +465,10 @@
 </div>
 
 
-		<script type="module" data-hydrate="z6ve6">
-		import { start } from "/svelte-splitpanes/_app/start-be52c55e.js";
+		<script type="module" data-hydrate="ujx2ag">
+		import { start } from "/svelte-splitpanes/_app/start-2994412f.js";
 		start({
-			target: document.querySelector('[data-hydrate="z6ve6"]').parentNode,
+			target: document.querySelector('[data-hydrate="ujx2ag"]').parentNode,
 			paths: {"base":"/svelte-splitpanes","assets":"/svelte-splitpanes"},
 			session: {},
 			route: true,
@@ -478,7 +479,7 @@
 				error: null,
 				nodes: [
 					import("/svelte-splitpanes/_app/pages/__layout.svelte-d63a585b.js"),
-						import("/svelte-splitpanes/_app/pages/index.svelte-d857c385.js")
+						import("/svelte-splitpanes/_app/pages/index.svelte-15efd7e6.js")
 				],
 				params: {},
 				routeId: ""
