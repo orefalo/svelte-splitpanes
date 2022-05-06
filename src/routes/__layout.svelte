@@ -23,10 +23,10 @@
 
 	:global(p) {
 		color: #999;
-        font-size: medium;
-        padding-top: 1em;
-        padding-bottom: 1em;
-        font-style: italic;
+		font-size: medium;
+		padding-top: 1em;
+		padding-bottom: 1em;
+		font-style: italic;
 	}
 
 	:global(.splitpanes__pane) {

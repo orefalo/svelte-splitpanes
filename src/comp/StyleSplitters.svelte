@@ -138,14 +138,16 @@
 
 <p>
 	Styling splitters is fully customizable using CSS (or SCSS), the `theme` property is used to select the proper styling
-	class and apply it to the SpliPanes component.<br/>
-    The default style is called `default-theme`, its SCSS definition can be found below:
+	class and apply it to the SpliPanes component.<br />
+	The default style is called `default-theme`, its SCSS definition can be found below:
 </p>
 
 <HighlightSvelte code={theme} />
 
-<p>By altering the above styles, it is possible to achieve neat visual adjustments. Please note how each Splitpanes
-references our new `theme="my-theme"`</p>
+<p>
+	By altering the above styles, it is possible to achieve neat visual adjustments. Please note how each Splitpanes
+	references our new `theme="my-theme"`
+</p>
 
 <Splitpanes theme="my-theme" horizontal style="height: 400px">
 	<Pane>
