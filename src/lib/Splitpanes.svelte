@@ -38,6 +38,8 @@
 	export let firstSplitter: boolean = false;
 	// css style
 	export let style: string | null = null;
+	// the splitter theme to use
+	export let theme = 'default-theme';
 	// css class
 	let clazz = '';
 	export { clazz as class };
@@ -695,7 +697,7 @@
 <div
 	{id}
 	bind:this={container}
-	class={`splitpanes ${clazz || ''}`}
+	class={`splitpanes ${theme || ''} ${clazz || ''}`}
 	class:splitpanes--horizontal={horizontal}
 	class:splitpanes--vertical={!horizontal}
 	class:splitpanes--dragging={isDragging}

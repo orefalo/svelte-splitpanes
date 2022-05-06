@@ -74,6 +74,7 @@ Here is the list of properties that apply to <Splitpanes>
 | rtl              | false                       | Supports Right to left direction                                                                             |
 | firstSplitter    | false                       | Displays the first splitter when set to true. This allows maximizing the first pane on splitter double click |
 | id               | undefined                   | Provide an optional id attribute to the component for styling/other reasons                                  |
+| theme            | 'default-theme'             | Used to styles the splitters using a different css class                                                     |
 | class            | undefined                   | Any additional css classes to be added to the component                                                      |
 
 Properties that apply to <Pane>

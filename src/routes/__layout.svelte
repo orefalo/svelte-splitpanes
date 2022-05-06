@@ -21,6 +21,14 @@
 		color: #000;
 	}
 
+	:global(p) {
+		color: #999;
+        font-size: medium;
+        padding-top: 1em;
+        padding-bottom: 1em;
+        font-style: italic;
+	}
+
 	:global(.splitpanes__pane) {
 		box-shadow: 0 0 3px rgba(0, 0, 0, 0.2) inset;
 		justify-content: center;

@@ -10,7 +10,7 @@
 	export let size: string | null = null;
 	export let minSize: string = '0';
 	export let maxSize: string = '100';
-    // css class
+	// css class
 	let clazz = '';
 	export { clazz as class };
 
@@ -35,8 +35,6 @@
 	}
 
 	onMount(() => {
-		// console.log('onMount Pane');
-
 		min = isNaN(parseFloat(minSize)) ? 0 : min;
 		max = isNaN(parseFloat(maxSize)) ? 100 : max;
 		const inst: IPane = {
@@ -59,7 +57,7 @@
 </script>
 
 <div
-    class={`splitpanes__pane ${clazz || ''}`}
+	class={`splitpanes__pane ${clazz || ''}`}
 	bind:this={element}
 	on:click={handleMouseClick}
 	style="{($isHorizontal ? 'height:' : 'width:') + sz}%"

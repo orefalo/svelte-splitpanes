@@ -9,6 +9,7 @@
 	import TogglePanes from '$comp/TogglePanes.svelte';
 	import ListenToEvents from '$comp/ListenToEvents.svelte';
 	import StyleSplitters from '$comp/StyleSplitters.svelte';
+	import StyleSplittersModern from '$comp/StyleSplittersModern.svelte';
 </script>
 
 <h1>Svelte-Splitpane demo</h1>
@@ -54,3 +55,5 @@
 <ListenToEvents />
 <hr />
 <StyleSplitters />
+<hr />
+<StyleSplittersModern />
