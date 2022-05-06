@@ -74,6 +74,7 @@ Here is the list of properties that apply to <Splitpanes>
 | rtl              | false                       | Supports Right to left direction                                                                             |
 | firstSplitter    | false                       | Displays the first splitter when set to true. This allows maximizing the first pane on splitter double click |
 | id               | undefined                   | Provide an optional id attribute to the component for styling/other reasons                                  |
+| class            | undefined                   | Any additional css classes to be added to the component                                                      |
 
 Properties that apply to <Pane>
 
@@ -82,6 +83,7 @@ Properties that apply to <Pane>
 | minSize        | 0         | minimum pane size in % |
 | maxSize        | 100       | maximum pane size in % |
 | size           | undefined | pane size in %         |
+| class          | undefined | Any additional css classes to be added to the component |
 
 ### Styling
 

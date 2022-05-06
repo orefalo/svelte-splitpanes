@@ -10,6 +10,9 @@
 	export let size: string | null = null;
 	export let minSize: string = '0';
 	export let maxSize: string = '100';
+    // css class
+	let clazz = '';
+	export { clazz as class };
 
 	// VARIABLES
 
@@ -56,7 +59,7 @@
 </script>
 
 <div
-	class="splitpanes__pane"
+    class={`splitpanes__pane ${clazz || ''}`}
 	bind:this={element}
 	on:click={handleMouseClick}
 	style="{($isHorizontal ? 'height:' : 'width:') + sz}%"
