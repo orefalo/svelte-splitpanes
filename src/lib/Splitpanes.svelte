@@ -740,11 +740,11 @@
 		}
 		&--vertical > .splitpanes__splitter {
 			min-width: 1px;
-			cursor: col-resize;
+			// cursor: col-resize;
 		}
 		&--horizontal > .splitpanes__splitter {
 			min-height: 1px;
-			cursor: row-resize;
+			// cursor: row-resize;
 		}
 	}
 	.splitpanes.default-theme {
@@ -783,6 +783,7 @@
 			width: 7px;
 			border-left: 1px solid #eee;
 			margin-left: -1px;
+            cursor: col-resize;
 			&:before,
 			&:after {
 				transform: translateY(-50%);
@@ -801,6 +802,7 @@
 			height: 7px;
 			border-top: 1px solid #eee;
 			margin-top: -1px;
+            cursor: row-resize;
 			&:before,
 			&:after {
 				transform: translateX(-50%);

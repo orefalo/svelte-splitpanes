@@ -25,40 +25,42 @@
 </Splitpanes>
 
 <style global lang="scss">
-	.splitpanes.my-theme {
-		.splitpanes__pane {
-			background-color: #f8f8f8;
-		}
-		.splitpanes__splitter {
-			background-color: #ccc;
-			position: relative;
-			&:before {
-				content: '';
-				position: absolute;
-				left: 0;
-				top: 0;
-				transition: opacity 0.4s;
-				background-color: rgba(255, 0, 0, 0.3);
-				opacity: 0;
-				z-index: 1;
-			}
-			&:hover:before {
-				opacity: 1;
-			}
-		}
-	}
-	.my-theme {
-		&.splitpanes--horizontal > .splitpanes__splitter:before {
-			top: -30px;
-			bottom: -30px;
-			width: 100%;
-		}
-		&.splitpanes--vertical > .splitpanes__splitter:before {
-			left: -30px;
-			right: -30px;
-			height: 100%;
-		}
-	}
+.splitpanes.my-theme {
+    .splitpanes__pane {
+        background-color: #f8f8f8;
+    }
+    .splitpanes__splitter {
+        background-color: #ccc;
+        position: relative;
+        &:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            transition: opacity 0.4s;
+            background-color: rgba(255, 0, 0, 0.3);
+            opacity: 0;
+            z-index: 1;
+        }
+        &:hover:before {
+            opacity: 1;
+        }
+    }
+}
+.my-theme {
+    &.splitpanes--vertical > .splitpanes__splitter:before {
+        left: -30px;
+        right: -30px;
+        height: 100%;
+        cursor: col-resize;
+    }
+    &.splitpanes--horizontal > .splitpanes__splitter:before {
+        top: -30px;
+        bottom: -30px;
+        width: 100%;
+        cursor: row-resize;
+    }
+}
 </style>
 `;
 
@@ -99,6 +101,7 @@
         width: 7px;
         border-left: 1px solid #eee;
         margin-left: -1px;
+        cursor: col-resize;
         &:before,
         &:after {
             transform: translateY(-50%);
@@ -117,6 +120,7 @@
         height: 7px;
         border-top: 1px solid #eee;
         margin-top: -1px;
+        cursor: row-resize;
         &:before,
         &:after {
             transform: translateX(-50%);
@@ -196,15 +200,17 @@
 		}
 	}
 	.my-theme {
-		&.splitpanes--horizontal > .splitpanes__splitter:before {
-			top: -30px;
-			bottom: -30px;
-			width: 100%;
-		}
 		&.splitpanes--vertical > .splitpanes__splitter:before {
 			left: -30px;
 			right: -30px;
 			height: 100%;
+            cursor: col-resize;
+		}
+        &.splitpanes--horizontal > .splitpanes__splitter:before {
+			top: -30px;
+			bottom: -30px;
+			width: 100%;
+            cursor: row-resize;
 		}
 	}
 </style>

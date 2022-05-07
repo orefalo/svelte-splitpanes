@@ -30,7 +30,6 @@
 	}
 
 	:global(.splitpanes__pane) {
-		box-shadow: 0 0 3px rgba(0, 0, 0, 0.2) inset;
 		justify-content: center;
 		align-items: center;
 		color: rgba(106, 106, 106, 0.6);

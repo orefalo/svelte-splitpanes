@@ -7,13 +7,13 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta http-equiv="content-security-policy" content=""><title>Svelte-Splitpanes</title><meta name="description" content="A Fantastic pane splitter for Svelte" data-svelte="svelte-1twey94"><!-- HTML_TAG_START --><style>pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}.hljs{background:#011627;color:#d6deeb}.hljs-keyword{color:#c792ea;font-style:italic}.hljs-built_in{color:#addb67;font-style:italic}.hljs-type{color:#82aaff}.hljs-literal{color:#ff5874}.hljs-number{color:#f78c6c}.hljs-regexp{color:#5ca7e4}.hljs-string{color:#ecc48d}.hljs-subst{color:#d3423e}.hljs-symbol{color:#82aaff}.hljs-class{color:#ffcb8b}.hljs-function{color:#82aaff}.hljs-title{color:#dcdcaa;font-style:italic}.hljs-params{color:#7fdbca}.hljs-comment{color:#637777;font-style:italic}.hljs-doctag{color:#7fdbca}.hljs-meta,.hljs-meta .hljs-keyword{color:#82aaff}.hljs-meta .hljs-string{color:#ecc48d}.hljs-section{color:#82b1ff}.hljs-attr,.hljs-name,.hljs-tag{color:#7fdbca}.hljs-attribute{color:#80cbc4}.hljs-variable{color:#addb67}.hljs-bullet{color:#d9f5dd}.hljs-code{color:#80cbc4}.hljs-emphasis{color:#c792ea;font-style:italic}.hljs-strong{color:#addb67;font-weight:700}.hljs-formula{color:#c792ea}.hljs-link{color:#ff869a}.hljs-quote{color:#697098;font-style:italic}.hljs-selector-tag{color:#ff6363}.hljs-selector-id{color:#fad430}.hljs-selector-class{color:#addb67;font-style:italic}.hljs-selector-attr,.hljs-selector-pseudo{color:#c792ea;font-style:italic}.hljs-template-tag{color:#c792ea}.hljs-template-variable{color:#addb67}.hljs-addition{color:#addb67ff;font-style:italic}.hljs-deletion{color:#ef535090;font-style:italic}</style><!-- HTML_TAG_END -->
 	<link rel="stylesheet" href="/svelte-splitpanes/_app/assets/vendor-f4e6b62f.css">
-	<link rel="stylesheet" href="/svelte-splitpanes/_app/assets/pages/__layout.svelte-e4b70c42.css">
-	<link rel="stylesheet" href="/svelte-splitpanes/_app/assets/pages/index.svelte-e2e4fb33.css">
-	<link rel="stylesheet" href="/svelte-splitpanes/_app/assets/Pane-ec78f827.css">
-	<link rel="modulepreload" href="/svelte-splitpanes/_app/start-e6a30891.js">
+	<link rel="stylesheet" href="/svelte-splitpanes/_app/assets/pages/__layout.svelte-2d50f436.css">
+	<link rel="stylesheet" href="/svelte-splitpanes/_app/assets/pages/index.svelte-487d249b.css">
+	<link rel="stylesheet" href="/svelte-splitpanes/_app/assets/Pane-c39fd01b.css">
+	<link rel="modulepreload" href="/svelte-splitpanes/_app/start-ab19a63c.js">
 	<link rel="modulepreload" href="/svelte-splitpanes/_app/chunks/vendor-e09f8588.js">
-	<link rel="modulepreload" href="/svelte-splitpanes/_app/pages/__layout.svelte-716820cc.js">
-	<link rel="modulepreload" href="/svelte-splitpanes/_app/pages/index.svelte-aeb72997.js">
+	<link rel="modulepreload" href="/svelte-splitpanes/_app/pages/__layout.svelte-0c718887.js">
+	<link rel="modulepreload" href="/svelte-splitpanes/_app/pages/index.svelte-be0fce7b.js">
 	<link rel="modulepreload" href="/svelte-splitpanes/_app/chunks/Pane-57e3e9bd.js">
 	</head>
 	<body>
@@ -21,7 +21,7 @@
 
 
 
-<div class="page-container svelte-1ow8lxy"><h1>Svelte-Splitpane demo</h1>
+<div class="page-container svelte-urtswo"><h1>Svelte-Splitpane demo</h1>
 
 <a href="https://github.com/orefalo/svelte-splitpanes">https://github.com/orefalo/svelte-splitpanes</a>
 
@@ -438,6 +438,7 @@
         <span class="hljs-attribute">width</span>: <span class="hljs-number">7px</span>;
         <span class="hljs-attribute">border-left</span>: <span class="hljs-number">1px</span> solid <span class="hljs-number">#eee</span>;
         <span class="hljs-attribute">margin-left</span>: -<span class="hljs-number">1px</span>;
+        <span class="hljs-attribute">cursor</span>: col-resize;
         &amp;<span class="hljs-selector-pseudo">:before</span>,
         &amp;<span class="hljs-selector-pseudo">:after</span> {
             <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateY</span>(-<span class="hljs-number">50%</span>);
@@ -456,6 +457,7 @@
         <span class="hljs-attribute">height</span>: <span class="hljs-number">7px</span>;
         <span class="hljs-attribute">border-top</span>: <span class="hljs-number">1px</span> solid <span class="hljs-number">#eee</span>;
         <span class="hljs-attribute">margin-top</span>: -<span class="hljs-number">1px</span>;
+        <span class="hljs-attribute">cursor</span>: row-resize;
         &amp;<span class="hljs-selector-pseudo">:before</span>,
         &amp;<span class="hljs-selector-pseudo">:after</span> {
             <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateX</span>(-<span class="hljs-number">50%</span>);
@@ -529,15 +531,17 @@
   <span class="hljs-attribute">opacity</span>: <span class="hljs-number">1</span>;
 }
 
-:<span class="hljs-built_in">global</span>(.my-theme.splitpanes--horizontal) &gt; :<span class="hljs-built_in">global</span>(.splitpanes__splitter:before) {
-  <span class="hljs-attribute">top</span>: -<span class="hljs-number">30px</span>;
-  <span class="hljs-attribute">bottom</span>: -<span class="hljs-number">30px</span>;
-  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
-}
 :<span class="hljs-built_in">global</span>(.my-theme.splitpanes--vertical) &gt; :<span class="hljs-built_in">global</span>(.splitpanes__splitter:before) {
   <span class="hljs-attribute">left</span>: -<span class="hljs-number">30px</span>;
   <span class="hljs-attribute">right</span>: -<span class="hljs-number">30px</span>;
   <span class="hljs-attribute">height</span>: <span class="hljs-number">100%</span>;
+  <span class="hljs-attribute">cursor</span>: col-resize;
+}
+:<span class="hljs-built_in">global</span>(.my-theme.splitpanes--horizontal) &gt; :<span class="hljs-built_in">global</span>(.splitpanes__splitter:before) {
+  <span class="hljs-attribute">top</span>: -<span class="hljs-number">30px</span>;
+  <span class="hljs-attribute">bottom</span>: -<span class="hljs-number">30px</span>;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+  <span class="hljs-attribute">cursor</span>: row-resize;
 }</span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
 <!-- HTML_TAG_END --></code></pre>
 
@@ -563,29 +567,31 @@
   
   <pre data-language="svelte" class=" svelte-1xjucv4"><code class="hljs"><!-- HTML_TAG_START -->
 <span class="hljs-tag">&lt;<span class="hljs-name">Splitpanes</span> <span class="hljs-attr">theme</span>=<span class="hljs-string">&quot;no-splitter&quot;</span> <span class="hljs-attr">horizontal</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;height: 400px&quot;</span> <span class="hljs-attr">dblClickSplitter</span>=<span class="hljs-string">{false}</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">Pane</span> <span class="hljs-attr">size</span>=<span class="hljs-string">6</span> <span class="hljs-attr">minSize</span>=<span class="hljs-string">6</span> <span class="hljs-attr">maxSize</span>=<span class="hljs-string">6</span> &gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>MenuBar<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">Pane</span> <span class="hljs-attr">size</span>=<span class="hljs-string">6</span> <span class="hljs-attr">minSize</span>=<span class="hljs-string">6</span> <span class="hljs-attr">maxSize</span>=<span class="hljs-string">6</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>ToolBar<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">Pane</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">Splitpanes</span> <span class="hljs-attr">theme</span>=<span class="hljs-string">&quot;modern-theme&quot;</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">Pane</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Folder<span class="hljs-tag">&lt;<span class="hljs-name">br</span>/&gt;</span>
-            Try those --&gt;<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">Pane</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Views<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">Pane</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Details<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">Splitpanes</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">Pane</span> <span class="hljs-attr">size</span>=<span class="hljs-string">6</span> <span class="hljs-attr">minSize</span>=<span class="hljs-string">6</span> <span class="hljs-attr">maxSize</span>=<span class="hljs-string">6</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>statusbar<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">Pane</span> <span class="hljs-attr">size</span>=<span class="hljs-string">&quot;6&quot;</span> <span class="hljs-attr">minSize</span>=<span class="hljs-string">&quot;6&quot;</span> <span class="hljs-attr">maxSize</span>=<span class="hljs-string">&quot;6&quot;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>MenuBar<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">Pane</span> <span class="hljs-attr">size</span>=<span class="hljs-string">&quot;6&quot;</span> <span class="hljs-attr">minSize</span>=<span class="hljs-string">&quot;6&quot;</span> <span class="hljs-attr">maxSize</span>=<span class="hljs-string">&quot;6&quot;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>ToolBar<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">Pane</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">Splitpanes</span> <span class="hljs-attr">theme</span>=<span class="hljs-string">&quot;modern-theme&quot;</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">Pane</span>&gt;</span>
+				<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>
+					Folder<span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span>
+					Try those --&gt;
+				<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+			<span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">Pane</span>&gt;</span>
+				<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Views<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+			<span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">Pane</span>&gt;</span>
+				<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Details<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+			<span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">Splitpanes</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">Pane</span> <span class="hljs-attr">size</span>=<span class="hljs-string">&quot;6&quot;</span> <span class="hljs-attr">minSize</span>=<span class="hljs-string">&quot;6&quot;</span> <span class="hljs-attr">maxSize</span>=<span class="hljs-string">&quot;6&quot;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>statusbar<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">Splitpanes</span>&gt;</span>
 
 <span class="hljs-tag">&lt;<span class="hljs-name">style</span> <span class="hljs-attr">global</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;scss&quot;</span>&gt;</span><span class="language-css">:<span class="hljs-built_in">global</span>(.splitpanes.modern-theme) :<span class="hljs-built_in">global</span>(.splitpanes__pane) {
@@ -609,15 +615,17 @@
   <span class="hljs-attribute">opacity</span>: <span class="hljs-number">1</span>;
 }
 
-:<span class="hljs-built_in">global</span>(.modern-theme.splitpanes--horizontal) &gt; :<span class="hljs-built_in">global</span>(.splitpanes__splitter:before) {
-  <span class="hljs-attribute">top</span>: -<span class="hljs-number">3px</span>;
-  <span class="hljs-attribute">bottom</span>: -<span class="hljs-number">3px</span>;
-  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
-}
 :<span class="hljs-built_in">global</span>(.modern-theme.splitpanes--vertical) &gt; :<span class="hljs-built_in">global</span>(.splitpanes__splitter:before) {
   <span class="hljs-attribute">left</span>: -<span class="hljs-number">3px</span>;
   <span class="hljs-attribute">right</span>: -<span class="hljs-number">3px</span>;
   <span class="hljs-attribute">height</span>: <span class="hljs-number">100%</span>;
+  <span class="hljs-attribute">cursor</span>: col-resize;
+}
+:<span class="hljs-built_in">global</span>(.modern-theme.splitpanes--horizontal) &gt; :<span class="hljs-built_in">global</span>(.splitpanes__splitter:before) {
+  <span class="hljs-attribute">top</span>: -<span class="hljs-number">3px</span>;
+  <span class="hljs-attribute">bottom</span>: -<span class="hljs-number">3px</span>;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+  <span class="hljs-attribute">cursor</span>: row-resize;
 }
 
 :<span class="hljs-built_in">global</span>(.splitpanes.no-splitter) :<span class="hljs-built_in">global</span>(.splitpanes__pane) {
@@ -631,20 +639,22 @@
 :<span class="hljs-built_in">global</span>(.no-splitter.splitpanes--horizontal) &gt; :<span class="hljs-built_in">global</span>(.splitpanes__splitter:before) {
   <span class="hljs-attribute">width</span>: <span class="hljs-number">0.125rem</span>;
   <span class="hljs-attribute">pointer-events</span>: none;
+  <span class="hljs-attribute">cursor</span>: none;
 }
 :<span class="hljs-built_in">global</span>(.no-splitter.splitpanes--vertical) &gt; :<span class="hljs-built_in">global</span>(.splitpanes__splitter:before) {
   <span class="hljs-attribute">height</span>: <span class="hljs-number">0.125rem</span>;
   <span class="hljs-attribute">pointer-events</span>: none;
+  <span class="hljs-attribute">cursor</span>: none;
 }</span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
 <!-- HTML_TAG_END --></code></pre>
 
 </div>
 
 
-		<script type="module" data-hydrate="13p5rz9">
-		import { start } from "/svelte-splitpanes/_app/start-e6a30891.js";
+		<script type="module" data-hydrate="bzdzt7">
+		import { start } from "/svelte-splitpanes/_app/start-ab19a63c.js";
 		start({
-			target: document.querySelector('[data-hydrate="13p5rz9"]').parentNode,
+			target: document.querySelector('[data-hydrate="bzdzt7"]').parentNode,
 			paths: {"base":"/svelte-splitpanes","assets":"/svelte-splitpanes"},
 			session: {},
 			route: true,
@@ -654,8 +664,8 @@
 				status: 200,
 				error: null,
 				nodes: [
-					import("/svelte-splitpanes/_app/pages/__layout.svelte-716820cc.js"),
-						import("/svelte-splitpanes/_app/pages/index.svelte-aeb72997.js")
+					import("/svelte-splitpanes/_app/pages/__layout.svelte-0c718887.js"),
+						import("/svelte-splitpanes/_app/pages/index.svelte-be0fce7b.js")
 				],
 				params: {},
 				routeId: ""
