@@ -15,7 +15,7 @@ Use dynamic and predictable view panels to layout an application.
 - Support defaults, min and max sizes
 - Support multiple splits
 - Support lifecyle events
-- Support custom divider size or overlay
+- Support custom divider size and overlay (css)
 - Support splitter pane pushing
 - Support RTL rendering
 - Support first splitter on/off
@@ -24,6 +24,7 @@ Use dynamic and predictable view panels to layout an application.
 - Support programmatic splitter add/remove
 - Support for legacy browser such as IE 11
 - Support for touch devices
+- Support for fixed splitters
 - Sveltekit & Typescript friendly
 
 ## Browser Support
