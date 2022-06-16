@@ -204,13 +204,13 @@
 			left: -30px;
 			right: -30px;
 			height: 100%;
-            cursor: col-resize;
+			cursor: col-resize;
 		}
-        &.splitpanes--horizontal > .splitpanes__splitter:before {
+		&.splitpanes--horizontal > .splitpanes__splitter:before {
 			top: -30px;
 			bottom: -30px;
 			width: 100%;
-            cursor: row-resize;
+			cursor: row-resize;
 		}
 	}
 </style>

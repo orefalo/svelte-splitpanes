@@ -17,7 +17,7 @@ Use dynamic and predictable view panels to layout an application.
 - Support lifecyle events
 - Support custom divider size and overlay (css)
 - Support splitter pane pushing
-- Support RTL rendering
+- Support RTL rendering with auto-detection
 - Support first splitter on/off
 - Support pane toggle
 - Support programmatic resizing
@@ -67,16 +67,16 @@ import { Pane, Splitpanes } from 'svelte-splitpanes';
 
 Here is the list of properties that apply to <Splitpanes>
 
-| Parameter name   | Default                     | Comments                                                                                                     |
-| ---------------- | --------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| horizontal       | false (Vertical by default) | The orientation of the split panes.                                                                          |
-| pushOtherPanes   | true                        | Whether a splitter should push the next splitter when dragging.                                              |
-| dblClickSplitter | true                        | Double click on splitter to maximize the next pane                                                           |
-| rtl              | false                       | Supports Right to left direction                                                                             |
+| Parameter name   | Default                     | Comments                                                     |
+| ---------------- | --------------------------- | ------------------------------------------------------------ |
+| horizontal       | false (Vertical by default) | The orientation of the split panes.                          |
+| pushOtherPanes   | true                        | Whether a splitter should push the next splitter when dragging. |
+| dblClickSplitter | true                        | Double click on splitter to maximize the next pane           |
+| rtl              | "auto"                      | Supports Right to left, by default will auto detect          |
 | firstSplitter    | false                       | Displays the first splitter when set to true. This allows maximizing the first pane on splitter double click |
-| id               | undefined                   | Provide an optional id attribute to the component for styling/other reasons                                  |
-| theme            | 'default-theme'             | Used to styles the splitters using a different css class                                                     |
-| class            | undefined                   | Any additional css classes to be added to the component                                                      |
+| id               | undefined                   | Provide an optional id attribute to the component for styling/other reasons |
+| theme            | 'default-theme'             | Used to styles the splitters using a different css class     |
+| class            | undefined                   | Any additional css classes to be added to the component      |
 
 Properties that apply to <Pane>
 

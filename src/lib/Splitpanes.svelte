@@ -27,15 +27,15 @@
 
 	export let id: string = undefined;
 	// horiz or verti?
-	export let horizontal: boolean = false;
+	export let horizontal = false;
 	// when true, moving a splitter can push other panes
 	export let pushOtherPanes = true;
 	// open/close on double click
 	export let dblClickSplitter = true;
 	// true if RTL
-	export let rtl = false;
+	export let rtl = 'auto';
 	// true to display the first splitter
-	export let firstSplitter: boolean = false;
+	export let firstSplitter = false;
 	// css style
 	export let style: string | null = null;
 	// the splitter theme to use
@@ -66,6 +66,8 @@
 	let panes = new Array<IPane>();
 	// passed to the children via the context - writable to ensure proper reactivity
 	let isHorizontal = writable<boolean>(horizontal);
+	// rtl handling
+	let isRTL = false;
 
 	// REACTIVE ----------------
 
@@ -154,6 +156,14 @@
 		checkSplitpanesNodes();
 		redoSplitters();
 		resetPaneSizes();
+
+		if (rtl === 'auto') {
+			// the try catch is to support old browser, flag is preset to false
+			try {
+				isRTL = window.getComputedStyle(container).direction === 'rtl';
+			} catch (err) {}
+		} else isRTL = rtl === 'true';
+
 		isReady = true;
 		dispatch('ready');
 	});
@@ -295,7 +305,7 @@
 		let tdrag = drag[horizontal ? 'y' : 'x'];
 		// In the code bellow 'size' refers to 'width' for vertical and 'height' for horizontal layout.
 		const containerSize = container[horizontal ? 'clientHeight' : 'clientWidth'];
-		if (rtl && !horizontal) tdrag = containerSize - tdrag;
+		if (isRTL && !horizontal) tdrag = containerSize - tdrag;
 
 		return (tdrag * 100) / containerSize;
 	}
@@ -783,7 +793,7 @@
 			width: 7px;
 			border-left: 1px solid #eee;
 			margin-left: -1px;
-            cursor: col-resize;
+			cursor: col-resize;
 			&:before,
 			&:after {
 				transform: translateY(-50%);
@@ -802,7 +812,7 @@
 			height: 7px;
 			border-top: 1px solid #eee;
 			margin-top: -1px;
-            cursor: row-resize;
+			cursor: row-resize;
 			&:before,
 			&:after {
 				transform: translateX(-50%);

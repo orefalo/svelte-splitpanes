@@ -140,7 +140,7 @@
 		.splitpanes__splitter {
 			background-color: #ccc;
 			position: relative;
-       
+
 			&:before {
 				content: '';
 				position: absolute;
@@ -161,13 +161,13 @@
 			left: -3px;
 			right: -3px;
 			height: 100%;
-            cursor: col-resize;
+			cursor: col-resize;
 		}
-        &.splitpanes--horizontal > .splitpanes__splitter:before {
+		&.splitpanes--horizontal > .splitpanes__splitter:before {
 			top: -3px;
 			bottom: -3px;
 			width: 100%;
-            cursor: row-resize;
+			cursor: row-resize;
 		}
 	}
 
@@ -184,12 +184,12 @@
 		&.splitpanes--horizontal > .splitpanes__splitter:before {
 			width: 0.125rem;
 			pointer-events: none;
-            cursor: none;
+			cursor: none;
 		}
 		&.splitpanes--vertical > .splitpanes__splitter:before {
 			height: 0.125rem;
 			pointer-events: none;
-            cursor: none;
+			cursor: none;
 		}
 	}
 </style>

@@ -8,8 +8,8 @@
 	// PROPS
 
 	export let size: string | null = null;
-	export let minSize: string = '0';
-	export let maxSize: string = '100';
+	export let minSize = '0';
+	export let maxSize = '100';
 	// css class
 	let clazz = '';
 	export { clazz as class };
