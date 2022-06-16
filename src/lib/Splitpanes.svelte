@@ -710,7 +710,7 @@
 	class={`splitpanes ${theme || ''} ${clazz || ''}`}
 	class:splitpanes--horizontal={horizontal}
 	class:splitpanes--vertical={!horizontal}
-	class:splitpanes--dragging={isDragging}
+	class:splitpanes--dragging={isMouseDown || isDragging}
 	{style}
 >
 	<slot />
