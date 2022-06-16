@@ -742,6 +742,7 @@
 			}
 			.splitpanes--dragging & {
 				transition: none;
+				pointer-events: none;
 			}
 		}
 		// Disable default zoom behavior on touch device when double tapping splitter.
