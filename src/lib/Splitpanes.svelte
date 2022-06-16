@@ -33,7 +33,7 @@
 	// open/close on double click
 	export let dblClickSplitter = true;
 	// true if RTL
-	export let rtl = 'auto';
+	export let rtl: boolean | 'auto' = 'auto';
 	// true to display the first splitter
 	export let firstSplitter = false;
 	// css style
@@ -66,8 +66,6 @@
 	let panes = new Array<IPane>();
 	// passed to the children via the context - writable to ensure proper reactivity
 	let isHorizontal = writable<boolean>(horizontal);
-	// rtl handling
-	let isRTL = false;
 
 	// REACTIVE ----------------
 
@@ -157,13 +155,6 @@
 		redoSplitters();
 		resetPaneSizes();
 
-		if (rtl === 'auto') {
-			// the try catch is to support old browser, flag is preset to false
-			try {
-				isRTL = window.getComputedStyle(container).direction === 'rtl';
-			} catch (err) {}
-		} else isRTL = rtl === 'true';
-
 		isReady = true;
 		dispatch('ready');
 	});
@@ -172,6 +163,18 @@
 		// Prevent emitting console warnings on hot reloading.
 		isReady = false;
 	});
+
+	// Tells in the current DOM state if we are in RTL direction or not.
+	function isRTL() {
+		if (rtl === 'auto') {
+			// the try catch is to support old browser, flag is preset to false
+			try {
+				return window.getComputedStyle(container).direction === 'rtl';
+			} catch (err) {}
+		}
+		
+		return rtl === true;
+	}
 
 	function bindEvents() {
 		document.addEventListener('mousemove', onMouseMove, { passive: false });
@@ -305,7 +308,7 @@
 		let tdrag = drag[horizontal ? 'y' : 'x'];
 		// In the code bellow 'size' refers to 'width' for vertical and 'height' for horizontal layout.
 		const containerSize = container[horizontal ? 'clientHeight' : 'clientWidth'];
-		if (isRTL && !horizontal) tdrag = containerSize - tdrag;
+		if (isRTL() && !horizontal) tdrag = containerSize - tdrag;
 
 		return (tdrag * 100) / containerSize;
 	}
