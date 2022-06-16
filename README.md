@@ -6,7 +6,7 @@ Use dynamic and predictable view panels to layout an application.
 
 > This library is a port from the excellent [vue-splitpanes](https://antoniandre.github.io/splitpanes/), if you are using this library for business or leasure, please consider [backing the original author](https://github.com/sponsors/antoniandre)!
 
-> While you are at it, you may also [back the developer](https://www.buymeacoffee.com/orefalo) who ported the code to Svelte. :blush:
+> While you are at it, you may also [back the developer](https://ko-fi.com/orefalo) who ported the code to Svelte. :blush:
 
 ## Features
 
