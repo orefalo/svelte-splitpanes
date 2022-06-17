@@ -25,17 +25,29 @@
 
 	$: {
 		sz = size === null ? 0 : parseFloat(size);
-		min = parseFloat(minSize);
-		max = parseFloat(maxSize);
+
+		const minSizeF = parseFloat(minSize);
+		if (!isNaN(minSizeF)) {
+			min = minSizeF;
+		}
+
+		const maxSizeF = parseFloat(maxSize);
+		if (!isNaN(maxSizeF)) {
+			max = maxSizeF;
+		}
 	}
+
+	$: style = [
+		((min > 0) ? ($isHorizontal ? 'min-height: ' : 'min-width: ') + min + '%;' : undefined),
+		((max < 100) ? ($isHorizontal ? 'max-height: ' : 'max-width: ') + max + '%;' : undefined),
+		((typeof window !== 'undefined') ? (($isHorizontal ? 'height: ' : 'width: ') + sz + '%;') : undefined)
+		].filter(value => value !== undefined).join(' ') || undefined;
 
 	function handleMouseClick(event: MouseEvent) {
 		onPaneClick(event, key);
 	}
 
 	onMount(() => {
-		min = isNaN(parseFloat(minSize)) ? 0 : min;
-		max = isNaN(parseFloat(maxSize)) ? 100 : max;
 		const inst: IPane = {
 			key,
 			element: element,
@@ -59,7 +71,7 @@
 	class={`splitpanes__pane ${clazz || ''}`}
 	bind:this={element}
 	on:click={handleMouseClick}
-	style="{($isHorizontal ? 'height:' : 'width:') + sz}%"
+	{style}
 >
 	<slot />
 </div>
