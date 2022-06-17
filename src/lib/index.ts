@@ -7,8 +7,8 @@ export { default as Pane } from './Pane.svelte';
 export interface SplitContext {
 	isHorizontal: Writable<boolean>;
 	onPaneAdd: (pane: IPane) => Promise<void>;
-	onPaneRemove: (uid: string) => Promise<void>;
-	onPaneClick: (_event: MouseEvent, uid: string) => void;
+	onPaneRemove: (key: any) => Promise<void>;
+	onPaneClick: (_event: MouseEvent, key: any) => void;
 }
 
 export interface IPaneSizingEvent {
@@ -22,8 +22,8 @@ export interface IPaneSizingEvent {
 
 // the definition of a pane
 export interface IPane {
-	// unique 23 chars id, used in indexedPane
-	uid: string;
+	// unique key per pane
+	key: any;
 	element: HTMLElement;
 	// 0....N index in pane array
 	index?: number;

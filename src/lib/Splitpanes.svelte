@@ -113,9 +113,9 @@
 		}
 	}
 
-	async function onPaneRemove(uid: string) {
+	async function onPaneRemove(key: any) {
 		// 1. Remove the pane from array and redo indexes.
-		const index = panes.findIndex((p) => p.uid === uid);
+		const index = panes.findIndex((p) => p.key === key);
 
 		const removed = panes.splice(index, 1)[0];
 
@@ -141,11 +141,11 @@
 	}
 
 	// called by sub-panes
-	function onPaneClick(_event: MouseEvent, uid: string) {
+	function onPaneClick(_event: MouseEvent, key: any) {
 		dispatch(
 			'pane-click',
 			panes.find((pane) => {
-				pane.uid == uid;
+				pane.key == key;
 			})
 		);
 	}
@@ -569,8 +569,8 @@
 			const sz = Math.max(Math.min(equalSpace, max), min);
 			pane.setSz(sz);
 			leftToAllocate -= sz;
-			if (sz >= max) ungrowable.push(pane.uid);
-			if (sz <= min) unshrinkable.push(pane.uid);
+			if (sz >= max) ungrowable.push(pane.key);
+			if (sz <= min) unshrinkable.push(pane.key);
 		}
 
 		if (leftToAllocate > 0.1) readjustSizes(leftToAllocate, ungrowable, unshrinkable);
@@ -587,8 +587,8 @@
 			const sz = pane.sz();
 			leftToAllocate -= sz;
 			if (pane.givenSize !== null) definedSizes++;
-			if (sz >= pane.max()) ungrowable.push(pane.uid);
-			if (sz <= pane.min()) unshrinkable.push(pane.uid);
+			if (sz >= pane.max()) ungrowable.push(pane.key);
+			if (sz <= pane.min()) unshrinkable.push(pane.key);
 		}
 
 		// set pane sizes if not set.
@@ -623,8 +623,8 @@
 			const pane = panes[i];
 			const sz = pane.sz();
 			leftToAllocate -= sz;
-			if (sz >= pane.max()) ungrowable.push(pane.uid);
-			if (sz <= pane.min()) unshrinkable.push(pane.uid);
+			if (sz >= pane.max()) ungrowable.push(pane.key);
+			if (sz <= pane.min()) unshrinkable.push(pane.key);
 		}
 
 		if (Math.abs(leftToAllocate) < 0.1) return; // Ok.
@@ -633,13 +633,13 @@
 			const pane = panes[i];
 			const max = pane.max();
 			const min = pane.min();
-			if (addedPane && addedPane.givenSize !== null && addedPane.uid === pane.uid) {
+			if (addedPane && addedPane.givenSize !== null && addedPane.key === pane.key) {
 			} else pane.setSz(Math.max(Math.min(equalSpace, max), min));
 
 			const sz = pane.sz();
 			leftToAllocate -= sz;
-			if (sz >= max) ungrowable.push(pane.uid);
-			if (sz <= min) unshrinkable.push(pane.uid);
+			if (sz >= max) ungrowable.push(pane.key);
+			if (sz <= min) unshrinkable.push(pane.key);
 		}
 
 		if (leftToAllocate > 0.1) readjustSizes(leftToAllocate, ungrowable, unshrinkable);
@@ -655,13 +655,13 @@
 		for (let i = 0; i < panes.length; i++) {
 			const pane = panes[i];
 			const sz = pane.sz();
-			if (leftToAllocate > 0 && !ungrowable.includes(pane.uid)) {
+			if (leftToAllocate > 0 && !ungrowable.includes(pane.key)) {
 				// Need to diff the size before and after to get the exact allocated space.
 				const newPaneSize = Math.max(Math.min(sz + equalSpaceToAllocate, pane.max()), pane.min());
 				const allocated = newPaneSize - sz;
 				leftToAllocate -= allocated;
 				pane.setSz(newPaneSize);
-			} else if (!unshrinkable.includes(pane.uid)) {
+			} else if (!unshrinkable.includes(pane.key)) {
 				// Need to diff the size before and after to get the exact allocated space.
 				const newPaneSize = Math.max(Math.min(sz + equalSpaceToAllocate, pane.max()), pane.min());
 				const allocated = newPaneSize - sz;

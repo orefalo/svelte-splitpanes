@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { getContext, onMount, onDestroy } from 'svelte';
-	import { nanoid } from './browserNanoid';
 	import { KEY } from './Splitpanes.svelte';
 	import type { IPane, SplitContext } from '.';
 	const { onPaneAdd, onPaneRemove, onPaneClick, isHorizontal } = getContext<SplitContext>(KEY);
@@ -16,7 +15,7 @@
 
 	// VARIABLES
 
-	const uid: string = nanoid();
+	const key = {};
 	let element: HTMLElement;
 	let sz: number;
 	let min: number;
@@ -31,14 +30,14 @@
 	}
 
 	function handleMouseClick(event: MouseEvent) {
-		onPaneClick(event, uid);
+		onPaneClick(event, key);
 	}
 
 	onMount(() => {
 		min = isNaN(parseFloat(minSize)) ? 0 : min;
 		max = isNaN(parseFloat(maxSize)) ? 100 : max;
 		const inst: IPane = {
-			uid: uid,
+			key,
 			element: element,
 			givenSize: size,
 			sz: () => sz,
@@ -52,7 +51,7 @@
 	});
 
 	onDestroy(() => {
-		onPaneRemove(uid);
+		onPaneRemove(key);
 	});
 </script>
 
