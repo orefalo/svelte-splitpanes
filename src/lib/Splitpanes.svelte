@@ -269,6 +269,10 @@
 
 		dispatch('pane-maximize', splitterPane);
 		dispatchSizeEvent('resized');
+
+		// onMouseUp might not be called on the second click, so update the mouse state.
+		// TODO: Should also check and unbind events, but better IMO to not bind&unbind on every click, so ignored for now.
+		isMouseDown = false;
 	}
 
 	function prepareSizeEvent(): IPaneSizingEvent[] {
