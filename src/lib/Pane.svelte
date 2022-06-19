@@ -21,6 +21,8 @@
 	let min: number;
 	let max: number;
 
+	const isBrowser = typeof window !== 'undefined';
+
 	// REACTIVE
 
 	$: {
@@ -37,11 +39,13 @@
 		}
 	}
 
-	$: style = [
-		((min > 0) ? ($isHorizontal ? 'min-height: ' : 'min-width: ') + min + '%;' : undefined),
-		((max < 100) ? ($isHorizontal ? 'max-height: ' : 'max-width: ') + max + '%;' : undefined),
-		((typeof window !== 'undefined') ? (($isHorizontal ? 'height: ' : 'width: ') + sz + '%;') : undefined)
-		].filter(value => value !== undefined).join(' ') || undefined;
+	$: dimension = $isHorizontal ? 'height' : 'width';
+
+	$: style = ([
+			((!isBrowser && (min > 0)) ? `min-${dimension}: ${min}%;` : undefined),
+			((!isBrowser && (max < 100)) ? `max-${dimension}: ${max}%;` : undefined),
+			((isBrowser || (size !== null)) ? `${dimension}: ${sz}%;` : undefined),
+		].filter(value => value !== undefined).join(' ') || undefined);
 
 	function handleMouseClick(event: MouseEvent) {
 		onPaneClick(event, key);
