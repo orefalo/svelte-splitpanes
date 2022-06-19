@@ -5,7 +5,7 @@
 <script lang="ts">
 	import { onMount, onDestroy, setContext, createEventDispatcher, tick } from 'svelte';
 	import { writable } from 'svelte/store';
-	import type { IPane, IPaneSizingEvent, SplitContext } from '.';
+	import type { IPane, IPaneSizingEvent, SplitContext, PaneInitFunction } from '.';
 
 	// TYPE DECLARATIONS ----------------
 
@@ -66,16 +66,54 @@
 	let panes = new Array<IPane>();
 	// passed to the children via the context - writable to ensure proper reactivity
 	let isHorizontal = writable<boolean>(horizontal);
+	const showFirstSplitter = writable<boolean>(firstSplitter);
+	// tells the key of the very first pane, or undefined if not recieved yet
+	const veryFirstPaneKey = writable<any>(undefined);
 
 	// REACTIVE ----------------
 
-	$: firstSplitter, redoSplitters();
 	$: $isHorizontal = horizontal;
+	$: $showFirstSplitter = firstSplitter;
+
+	function indexOfPane(key: any) {
+		return panes.findIndex((pane: IPane) => {
+			return pane.key === key;
+		});
+	}
+
+	const onPaneInit: PaneInitFunction = (key: any) => {
+		if ($veryFirstPaneKey === undefined) {
+			$veryFirstPaneKey = key;
+		}
+
+		return {
+			onSplitterDown: e => {
+				const index = indexOfPane(key);
+				if (index > 0) {
+					onMouseDown(e, index - 1);
+				}
+			},
+			onSplitterClick: e =>  {
+				const index = indexOfPane(key);
+				if (index > 0) {
+					onSplitterClick(e, index);
+				}
+			},
+			onSplitterDblClick: e => {
+				if (dblClickSplitter) {
+					onSplitterDblClick(e, indexOfPane(key));
+				}
+			},
+		};
+	};
 
 	setContext<SplitContext>(KEY, {
+		showFirstSplitter,
+		veryFirstPaneKey,
 		isHorizontal,
-		onPaneClick,
+		onPaneInit,
 		onPaneAdd,
+		onPaneClick,
 		onPaneRemove
 	});
 
@@ -86,6 +124,11 @@
 			if (el.className.includes('splitpanes__pane')) index++;
 			return el === pane.element;
 		});
+
+		if (index === 0) {
+			// Need to update the first pane key, because the first pane can be changed in runtime.
+			$veryFirstPaneKey = pane.key;
+		}
 
 		//inserts pane at proper array index
 		panes.splice(index, 0, pane);
@@ -99,13 +142,10 @@
 		if (isReady) {
 			await tick();
 
-			// 2. Add the splitter.
-			redoSplitters();
-
-			// 3. Resize the panes.
+			// 2. Resize the panes.
 			resetPaneSizes(panes[index], undefined);
 
-			// 4. Fire `pane-add` event.
+			// 3. Fire `pane-add` event.
 			dispatch('pane-add', {
 				index,
 				panes: prepareSizeEvent()
@@ -125,10 +165,11 @@
 			p.index = i;
 		}
 
-		await tick();
+		if (index === 0) {
+			$veryFirstPaneKey = panes.length > 0 ? panes[0].key : undefined;
+		}
 
-		// 2. Remove the splitter.
-		redoSplitters();
+		await tick();
 
 		// 3. Resize the panes.
 		resetPaneSizes(undefined, { ...removed, index });
@@ -152,7 +193,6 @@
 
 	onMount(() => {
 		checkSplitpanesNodes();
-		redoSplitters();
 		resetPaneSizes();
 
 		isReady = true;
@@ -475,63 +515,6 @@
 	function findNextExpandedPane(splitterIndex: number): IPane | null {
 		const pane = panes.find((p) => p.index > splitterIndex + 1 && p.sz() > p.min());
 		return pane || null;
-	}
-
-	/**
-	 * Inserts a splitter in the DOM at given position
-	 *
-	 * @param paneIndex
-	 * @param nextPaneNode
-	 * @param isVeryFirst
-	 */
-	function addSplitter(paneIndex: number, nextPaneNode: HTMLElement, isVeryFirst = false) {
-		const splitterIndex = paneIndex - 1;
-		const elm = document.createElement('div');
-		elm.classList.add('splitpanes__splitter');
-
-		if (!isVeryFirst) {
-			elm.onmousedown = (event) => onMouseDown(event, splitterIndex);
-
-			if (typeof window !== 'undefined' && 'ontouchstart' in window) {
-				elm.ontouchstart = (event) => onMouseDown(event, splitterIndex);
-			}
-			elm.onclick = (event) => onSplitterClick(event, splitterIndex + 1);
-		}
-
-		if (dblClickSplitter) elm.ondblclick = (event) => onSplitterDblClick(event, splitterIndex + 1);
-
-		nextPaneNode.parentNode?.insertBefore(elm, nextPaneNode);
-	}
-
-	/**
-	 * Remove the splitter from the given node
-	 *
-	 * @param node
-	 */
-	function removeSplitter(node: HTMLElement) {
-		node.onmousedown = null;
-		node.onclick = null;
-		node.ondblclick = null;
-		node.parentNode?.removeChild(node); // el.remove() doesn't work on IE11.
-	}
-
-	/**
-	 * Recreates all splitters in the DOM
-	 */
-	function redoSplitters() {
-		if (container) {
-			const children = Array.from(container.children) as Array<HTMLElement>;
-			let paneIndex = 0;
-			for (let i = 0; i < children.length; i++) {
-				const el = children[i];
-				if (el.className.includes('splitpanes__splitter')) removeSplitter(el as HTMLElement);
-				if (el.className.includes('splitpanes__pane')) {
-					if (paneIndex > 0) addSplitter(paneIndex, el);
-					else if (firstSplitter) addSplitter(paneIndex, el, true);
-					paneIndex++;
-				}
-			}
-		}
 	}
 
 	/**
