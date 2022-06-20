@@ -1,9 +1,11 @@
 <script lang="ts">
 	import { getContext, onMount, onDestroy } from 'svelte';
-	import { nanoid } from './browserNanoid';
+	import type { Action } from 'svelte/action';
 	import { KEY } from './Splitpanes.svelte';
 	import type { IPane, SplitContext } from '.';
-	const { onPaneAdd, onPaneRemove, onPaneClick, isHorizontal } = getContext<SplitContext>(KEY);
+
+	const { onPaneInit, onPaneAdd, onPaneRemove, onPaneClick, isHorizontal,
+		showFirstSplitter, veryFirstPaneKey } = getContext<SplitContext>(KEY);
 
 	// PROPS
 
@@ -16,29 +18,68 @@
 
 	// VARIABLES
 
-	const uid: string = nanoid();
+	const key = {};
 	let element: HTMLElement;
 	let sz: number;
 	let min: number;
 	let max: number;
 
+	const isBrowser = typeof window !== 'undefined';
+
 	// REACTIVE
 
 	$: {
 		sz = size === null ? 0 : parseFloat(size);
-		min = parseFloat(minSize);
-		max = parseFloat(maxSize);
+
+		const minSizeF = parseFloat(minSize);
+		if (!isNaN(minSizeF)) {
+			min = minSizeF;
+		}
+
+		const maxSizeF = parseFloat(maxSize);
+		if (!isNaN(maxSizeF)) {
+			max = maxSizeF;
+		}
 	}
 
+	$: dimension = $isHorizontal ? 'height' : 'width';
+
+	$: style = ([
+			((!isBrowser && (min > 0)) ? `min-${dimension}: ${min}%;` : undefined),
+			((!isBrowser && (max < 100)) ? `max-${dimension}: ${max}%;` : undefined),
+			((isBrowser || (size !== null)) ? `${dimension}: ${sz}%;` : undefined),
+		].filter(value => value !== undefined).join(' ') || undefined);
+	
+	const { onSplitterDown, onSplitterClick, onSplitterDblClick } = onPaneInit(key);
+
 	function handleMouseClick(event: MouseEvent) {
-		onPaneClick(event, uid);
+		onPaneClick(event, key);
+	}
+
+	const splitterAction: Action = (splitter: HTMLElement) => {
+		splitter.onmousedown = onSplitterDown;
+		if ('ontouchstart' in window) {
+			splitter.ontouchstart = onSplitterDown;
+		}
+		splitter.onclick = onSplitterClick;
+		splitter.ondblclick = onSplitterDblClick;
+		
+		// This what should be done on destruction, but commented out since the DOM element gets destroyed anyway
+		// return {
+		// 	destroy: () => {
+		// 		splitter.onmousedown = null;
+		// 		if ('ontouchstart' in window) {
+		// 			splitter.ontouchstart = null;
+		// 		}
+		// 		splitter.onclick = null;
+		// 		splitter.ondblclick = null;
+		// 	},
+		// };
 	}
 
 	onMount(() => {
-		min = isNaN(parseFloat(minSize)) ? 0 : min;
-		max = isNaN(parseFloat(maxSize)) ? 100 : max;
 		const inst: IPane = {
-			uid: uid,
+			key,
 			element: element,
 			givenSize: size,
 			sz: () => sz,
@@ -46,21 +87,31 @@
 				sz = v;
 			},
 			min: () => min,
-			max: () => max
+			max: () => max,
 		};
 		onPaneAdd(inst);
 	});
 
 	onDestroy(() => {
-		onPaneRemove(uid);
+		onPaneRemove(key);
 	});
 </script>
 
+<!-- Splitter -->
+<!-- TODO: Support aria role="separator" and make this a focusable separtor. Sources:
+	* https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/roles/separator_role
+	* https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/
+-->
+{#if ($veryFirstPaneKey !== key) || $showFirstSplitter}
+<div use:splitterAction class="splitpanes__splitter"></div>
+{/if}
+
+<!-- Pane -->
 <div
 	class={`splitpanes__pane ${clazz || ''}`}
 	bind:this={element}
 	on:click={handleMouseClick}
-	style="{($isHorizontal ? 'height:' : 'width:') + sz}%"
+	{style}
 >
 	<slot />
 </div>
