@@ -8,6 +8,10 @@ Use dynamic and predictable view panels to layout an application.
 
 > While you are at it, you may also [back the developer](https://ko-fi.com/orefalo) who ported the code to Svelte. :blush:
 
+## Why?
+
+I couldn't find a decent split pane layout component in the svelte eco system. But I did find one written in vue.js!
+
 ## Features
 
 - Size is less than 4 kb
