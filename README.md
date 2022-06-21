@@ -10,7 +10,12 @@ Use dynamic and predictable view panels to layout an application.
 
 ## Why?
 
-I couldn't find a decent split pane layout component in the svelte eco system. But I did find one written in vue.js!
+To be sucessful, a good framework must come with good components.  
+Unfortunatly, we couldn't find any decent split pane layout in the Svelte eco-system.  
+  
+But we did find one written in vue.js.  
+  
+So we decided to port it and enhance it. :smile:
 
 ## Features
 
