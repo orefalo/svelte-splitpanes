@@ -201,6 +201,12 @@
 	});
 
 	onDestroy(() => {
+		if (isReady) {
+			// this is to solve an edge case:
+			// when the user starts dragging and the component is destroyed, leaving behind hanging events
+			unbindEvents();
+		}
+
 		// Prevent emitting console warnings on hot reloading.
 		isReady = false;
 	});
