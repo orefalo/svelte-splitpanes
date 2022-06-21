@@ -708,6 +708,13 @@
 </div>
 
 <style global lang="scss">
+	div.splitpanes--horizontal.splitpanes--dragging {
+		cursor: row-resize;
+	}
+	div.splitpanes--vertical.splitpanes--dragging {
+		cursor: col-resize;
+	}
+
 	.splitpanes {
 		display: flex;
 		width: 100%;
@@ -742,11 +749,9 @@
 		}
 		&--vertical > .splitpanes__splitter {
 			min-width: 1px;
-			// cursor: col-resize;
 		}
 		&--horizontal > .splitpanes__splitter {
 			min-height: 1px;
-			// cursor: row-resize;
 		}
 	}
 	.splitpanes.default-theme {
