@@ -66,7 +66,6 @@
 	let panes = new Array<IPane>();
 	// passed to the children via the context - writable to ensure proper reactivity
 	let isHorizontal = writable<boolean>(horizontal);
-	// true when the first splitter is displayed
 	const showFirstSplitter = writable<boolean>(firstSplitter);
 	// tells the key of the very first pane, or undefined if not recieved yet
 	const veryFirstPaneKey = writable<any>(undefined);
@@ -88,23 +87,23 @@
 		}
 
 		return {
-			onSplitterDown: (e) => {
+			onSplitterDown: e => {
 				const index = indexOfPane(key);
 				if (index > 0) {
 					onMouseDown(e, index - 1);
 				}
 			},
-			onSplitterClick: (e) => {
+			onSplitterClick: e =>  {
 				const index = indexOfPane(key);
 				if (index > 0) {
 					onSplitterClick(e, index);
 				}
 			},
-			onSplitterDblClick: (e) => {
+			onSplitterDblClick: e => {
 				if (dblClickSplitter) {
 					onSplitterDblClick(e, indexOfPane(key));
 				}
-			}
+			},
 		};
 	};
 
@@ -219,7 +218,7 @@
 				return window.getComputedStyle(container).direction === 'rtl';
 			} catch (err) {}
 		}
-
+		
 		return rtl === true;
 	}
 
