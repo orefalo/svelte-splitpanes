@@ -533,8 +533,8 @@
 	 * @param removedPane
 	 */
 	function resetPaneSizes(addedPane?: IPane, removedPane?: { [key: string]: any }) {
-		if (!addedPane && !removedPane) {
-			// on initialization
+		if ((!addedPane && !removedPane) || panes.length === 1) {
+			// on initialization or if we have only one pane now
 			initialPanesSizing();
 		} else if (panes.some((pane) => pane.givenSize !== null || pane.min() || pane.max() < 100))
 			equalizeAfterAddOrRemove(addedPane);
