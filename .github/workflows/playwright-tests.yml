@@ -1,0 +1,53 @@
+name: Playwright Tests
+
+on: [push, pull_request]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    
+    steps:
+      # Checkout
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Setup Node.js
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+      
+      # Caching Dependecies
+      - name: Caching dependecies
+        uses: bahmutov/npm-install@v1.4.5
+      
+      # Cache Playwright
+      - name: Cache Playwright
+        uses: actions/cache@v3
+        id: playwright_cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }} # (not a good key)
+      
+      # Install Playwright
+      - name: Install Playwright
+        # if: steps.cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps
+      
+      # Build Frontend
+      - name: Build Frontend
+        run: npm run build
+      
+      # Run Tests
+      - name: Test
+        run: npm run test
+        env:
+          DEBUG: pw:webserver
+      
+      # Upload test results
+      - name: Upload test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: test-results
