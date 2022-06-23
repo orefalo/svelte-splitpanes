@@ -47,7 +47,16 @@
 	// VARIABLES ----------------
 
 	//used to bubble events up
-	const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher<{
+		'pane-add': { index: number, panes: IPaneSizingEvent[] },
+		'pane-remove': { removed: IPane, panes: IPaneSizingEvent[] },
+		'pane-click': IPane,
+		'ready': void,
+		'resize': void,
+		'resized': void,
+		'splitter-click': IPane,
+		'pane-maximize': IPane,
+		}>();
 	// the splitpane component
 	let container: HTMLElement;
 	// true when component is ready, prevents emitting console warnings on hot reloading.

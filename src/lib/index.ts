@@ -40,6 +40,6 @@ export interface IPane {
 	min: () => number;
 	max: () => number;
 	sz: () => number;
-	setSz: (number) => void;
+	setSz: (number: number) => void;
 	givenSize: string | null;
 }
