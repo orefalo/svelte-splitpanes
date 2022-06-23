@@ -60,6 +60,6 @@
 	},
 	"type": "module",
 	"optionalDependencies": {
-		"@playwright/test": "^1.22"
+		"@playwright/test": "^1.22.2"
 	}
 }
