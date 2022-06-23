@@ -38,7 +38,6 @@
 		"format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. src/"
 	},
 	"devDependencies": {
-		"@playwright/test": "1.22.2",
 		"@sveltejs/adapter-static": "next",
 		"@sveltejs/kit": "next",
 		"@typescript-eslint/eslint-plugin": "5.28.0",
@@ -59,5 +58,8 @@
 		"typescript": "4.7.3",
 		"vite": "2.9.12"
 	},
-	"type": "module"
+	"type": "module",
+	"optionalDependencies": {
+		"@playwright/test": "^1.22"
+	}
 }
