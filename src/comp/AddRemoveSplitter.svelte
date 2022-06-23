@@ -26,8 +26,7 @@
 			<span>{i + 1}</span>
 		</Pane>
 	{/each}
-</Splitpanes>
-<HighlightSvelte {code} />`;
+</Splitpanes>`;
 </script>
 
 <h2>Adding splitters programmatically</h2>
