@@ -3,6 +3,7 @@ import { type PlaywrightTestConfig, devices } from '@playwright/test';
 const config: PlaywrightTestConfig = {
 	forbidOnly: !!process.env.CI,
 	retries: process.env.CI ? 2 : 0,
+	timeout: 5 * 60 * 1000,
 	webServer: {
 		command: 'npm run preview',
 		port: 3000
