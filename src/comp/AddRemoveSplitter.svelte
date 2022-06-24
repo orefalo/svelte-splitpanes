@@ -15,6 +15,7 @@
 	}}>+ ADD PANE</Button
 >
 <Button
+	disabled={panesNumber <= 0}
 	on:click={() => {
 		if (panesNumber > 0) panesNumber--;
 	}}>- REMOVE PANE</Button
@@ -37,6 +38,7 @@
 	}}>+ ADD PANE</Button
 >
 <Button
+	disabled={panesNumber <= 0}
 	on:click={() => {
 		if (panesNumber > 0) panesNumber--;
 	}}>- REMOVE PANE</Button
