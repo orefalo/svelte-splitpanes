@@ -18,7 +18,8 @@
 		opacityIn = 0.5,
 		shadow = 5,
 		shadowHover = 5,
-		shadowActive = 2;
+		shadowActive = 2,
+		disabled = false;
 
 	let shadows = {
 			none: 'none',
@@ -96,6 +97,7 @@
 </script>
 
 <button
+	{disabled}
 	on:click
 	style="--color: {color};--font-size: {fontSize};--bg-color: {bgColor};--bg-hover: {bgHover};--bg-active: {bgActive};--radius: {round};--ripple: {rippleColor};--height: {height}px;--width: {width}px;--shadow: {shadows[
 		shadow
@@ -157,6 +159,17 @@
 		background-color: rgba(var(--bg-active), 0.7);
 		box-shadow: var(--shadow-a);
 	}
+
+	button:disabled {
+		opacity: 0.6;
+		cursor: not-allowed;
+
+		/* Reset these properties, since the button might be active/hovered */
+		outline: inherit;
+		background-color: rgba(var(--bg-color), 1);
+		box-shadow: var(--shadow);
+	}
+
 	span {
 		position: relative;
 		height: 100%;
