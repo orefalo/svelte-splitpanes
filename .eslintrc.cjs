@@ -8,9 +8,15 @@ module.exports = {
 	settings: {
 		'svelte3/typescript': () => require('typescript')
 	},
+	rules: {
+		"@typescript-eslint/no-explicit-any": "off"
+	},
 	parserOptions: {
 		sourceType: 'module',
 		ecmaVersion: 2020
+	},
+	globals: {
+		NodeJS: true
 	},
 	env: {
 		browser: true,

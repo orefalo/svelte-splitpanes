@@ -8,7 +8,7 @@
 	let code = `
 <script>
     let panesNumber = 3;
-<\/script>    
+<${'/'}script>
 <Button
 	on:click={() => {
 		if (panesNumber >= 0) panesNumber++;

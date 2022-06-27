@@ -16,7 +16,7 @@ let visible = true;
 function onClick() {
     visible = !visible;
 }
-<\/script>
+<${'/'}script>
 <Button on:click={onClick}>{visible ? 'Hide' : 'Show'}</Button>
 <Splitpanes class="default-theme" style="height: 400px">
     <Pane>

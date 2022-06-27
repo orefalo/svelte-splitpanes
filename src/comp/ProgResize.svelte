@@ -9,7 +9,7 @@
 	let code = `
 <script>
     let value = [50, 100];
-<\/script>
+<${'/'}script>
 <Slider bind:value />
 <Splitpanes class="default-theme" style="height: 400px">
 	<Pane size={value[0] + ''}>

@@ -1,5 +1,4 @@
 <script>
-	// @ts-nocheck
 	import { onMount } from 'svelte';
 	import { tweened } from 'svelte/motion';
 	import { backOut } from 'svelte/easing';

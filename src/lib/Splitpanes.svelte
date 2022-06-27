@@ -225,7 +225,9 @@
 			// the try catch is to support old browser, flag is preset to false
 			try {
 				return window.getComputedStyle(container).direction === 'rtl';
-			} catch (err) {}
+			} catch (err) {
+				// We want application to not crush, but don't care about the message
+			}
 		}
 
 		return rtl === true;
@@ -345,9 +347,10 @@
 	function getCurrentMouseDrag(event: MouseEvent | TouchEvent): MousePosition {
 		const rect = container.getBoundingClientRect();
 
-		const { clientX, clientY } =
-			//@ts-ignore
-			'ontouchstart' in window && event.touches ? event.touches[0] : event;
+		const eventMouse = event as MouseEvent;
+		const eventTouch = event as TouchEvent;
+
+		const { clientX, clientY } = 'ontouchstart' in window && eventTouch.touches ? eventTouch.touches[0] : eventMouse;
 		return {
 			x: clientX - rect.left,
 			y: clientY - rect.top
@@ -626,6 +629,7 @@
 			const max = pane.max();
 			const min = pane.min();
 			if (addedPane && addedPane.givenSize !== null && addedPane.key === pane.key) {
+				// TODO: Check why is it empty here?
 			} else pane.setSz(Math.max(Math.min(equalSpace, max), min));
 
 			const sz = pane.sz();

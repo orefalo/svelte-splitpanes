@@ -10,7 +10,7 @@
 <script>
 	let horizontal = false;
 	let firstSplitter = false;
-<\/script>
+<${'/'}script>
 <Button
 	on:click={() => {
 		horizontal = !horizontal;
