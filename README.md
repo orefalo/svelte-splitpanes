@@ -94,6 +94,7 @@ Properties that apply to <Pane>
 | minSize        | 0         | minimum pane size in % |
 | maxSize        | 100       | maximum pane size in % |
 | size           | undefined | pane size in %         |
+| snapSize       | 0         | snap size in %         |
 | class          | undefined | Any additional css classes to be added to the component |
 
 ### Styling

@@ -340,10 +340,16 @@
 			arr[i] = {
 				min: pane.min(),
 				max: pane.max(),
-				size: pane.sz()
+				size: pane.sz(),
+				snap: pane.snap()
 			};
 		}
 		return arr;
+	}
+
+	// function to ensure proper typing
+	function dispatchSizeEvent(name) {
+		dispatch(name, prepareSizeEvent());
 	}
 
 	// Get the cursor position relative to the splitpane container.
@@ -385,12 +391,34 @@
 
 		const minDrag = 0 + (pushOtherPanes ? 0 : sums.prevPanesSize);
 		const maxDrag = 100 - (pushOtherPanes ? 0 : sums.nextPanesSize);
-		const dragPercentage = Math.max(Math.min(getCurrentDragPercentage(drag), maxDrag), minDrag);
-
+		
 		// If not pushing other panes, panes to resize are right before and right after splitter.
 		let panesToResize = [splitterIndex, splitterIndex + 1];
 		let paneBefore = panes[panesToResize[0]] || null;
 		let paneAfter = panes[panesToResize[1]] || null;
+		
+		// Calculate drag percentage
+		const mouseDragPercentage = Math.max(Math.min(getCurrentDragPercentage(drag), maxDrag), minDrag);
+
+		// Handle snap
+		const paneBeforeSnap = Math.max(
+			// Snap due to the previous pane reaching minimum size
+			sums.prevPanesSize + paneBefore.min() + paneBefore.snap(),
+			// and to the next one reaching maximum size
+			100 - (sums.nextPanesSize + paneAfter.max()) + paneBefore.snap()
+		);
+		const paneAfterSnap = Math.min(
+			100 - (sums.nextPanesSize + paneAfter.min() + paneAfter.snap()),
+			sums.prevPanesSize + paneBefore.max() - paneAfter.snap()
+		);
+
+		const dragPercentage = mouseDragPercentage <= paneBeforeSnap ?
+			Math.max(paneBefore.min() + sums.prevPanesSize, 100 - (paneAfter.max() + sums.nextPanesSize)):
+			(mouseDragPercentage >= paneAfterSnap ?
+				Math.min(100 - (paneAfter.min() + sums.nextPanesSize), paneBefore.max() + sums.prevPanesSize) :
+				mouseDragPercentage
+			);
+
 
 		const paneBeforeMaxReached = paneBefore.max() < 100 && dragPercentage >= paneBefore.max() + sums.prevPanesSize;
 		const paneAfterMaxReached =
