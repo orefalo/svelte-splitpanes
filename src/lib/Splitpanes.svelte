@@ -48,15 +48,15 @@
 
 	//used to bubble events up
 	const dispatch = createEventDispatcher<{
-		'pane-add': { index: number, panes: IPaneSizingEvent[] },
-		'pane-remove': { removed: IPane, panes: IPaneSizingEvent[] },
-		'pane-click': IPane,
-		'ready': void,
-		'resize': void,
-		'resized': void,
-		'splitter-click': IPane,
-		'pane-maximize': IPane,
-		}>();
+		'pane-add': { index: number; panes: IPaneSizingEvent[] };
+		'pane-remove': { removed: IPane; panes: IPaneSizingEvent[] };
+		'pane-click': IPane;
+		ready: void;
+		resize: void;
+		resized: void;
+		'splitter-click': IPane;
+		'pane-maximize': IPane;
+	}>();
 	// the splitpane component
 	let container: HTMLElement;
 	// true when component is ready, prevents emitting console warnings on hot reloading.
@@ -96,23 +96,23 @@
 		}
 
 		return {
-			onSplitterDown: e => {
+			onSplitterDown: (e) => {
 				const index = indexOfPane(key);
 				if (index > 0) {
 					onMouseDown(e, index - 1);
 				}
 			},
-			onSplitterClick: e =>  {
+			onSplitterClick: (e) => {
 				const index = indexOfPane(key);
 				if (index > 0) {
 					onSplitterClick(e, index);
 				}
 			},
-			onSplitterDblClick: e => {
+			onSplitterDblClick: (e) => {
 				if (dblClickSplitter) {
 					onSplitterDblClick(e, indexOfPane(key));
 				}
-			},
+			}
 		};
 	};
 
@@ -227,7 +227,7 @@
 				return window.getComputedStyle(container).direction === 'rtl';
 			} catch (err) {}
 		}
-		
+
 		return rtl === true;
 	}
 

@@ -4,8 +4,8 @@
 	import { KEY } from './Splitpanes.svelte';
 	import type { IPane, SplitContext } from '.';
 
-	const { onPaneInit, onPaneAdd, onPaneRemove, onPaneClick, isHorizontal,
-		showFirstSplitter, veryFirstPaneKey } = getContext<SplitContext>(KEY);
+	const { onPaneInit, onPaneAdd, onPaneRemove, onPaneClick, isHorizontal, showFirstSplitter, veryFirstPaneKey } =
+		getContext<SplitContext>(KEY);
 
 	// PROPS
 
@@ -44,12 +44,15 @@
 
 	$: dimension = $isHorizontal ? 'height' : 'width';
 
-	$: style = ([
-			((!isBrowser && (min > 0)) ? `min-${dimension}: ${min}%;` : undefined),
-			((!isBrowser && (max < 100)) ? `max-${dimension}: ${max}%;` : undefined),
-			((isBrowser || (size !== null)) ? `${dimension}: ${sz}%;` : undefined),
-		].filter(value => value !== undefined).join(' ') || undefined);
-	
+	$: style =
+		[
+			!isBrowser && min > 0 ? `min-${dimension}: ${min}%;` : undefined,
+			!isBrowser && max < 100 ? `max-${dimension}: ${max}%;` : undefined,
+			isBrowser || size !== null ? `${dimension}: ${sz}%;` : undefined
+		]
+			.filter((value) => value !== undefined)
+			.join(' ') || undefined;
+
 	const { onSplitterDown, onSplitterClick, onSplitterDblClick } = onPaneInit(key);
 
 	function handleMouseClick(event: MouseEvent) {
@@ -63,7 +66,7 @@
 		}
 		splitter.onclick = onSplitterClick;
 		splitter.ondblclick = onSplitterDblClick;
-		
+
 		// This what should be done on destruction, but commented out since the DOM element gets destroyed anyway
 		// return {
 		// 	destroy: () => {
@@ -75,7 +78,7 @@
 		// 		splitter.ondblclick = null;
 		// 	},
 		// };
-	}
+	};
 
 	onMount(() => {
 		const inst: IPane = {
@@ -87,7 +90,7 @@
 				sz = v;
 			},
 			min: () => min,
-			max: () => max,
+			max: () => max
 		};
 		onPaneAdd(inst);
 	});
@@ -102,16 +105,11 @@
 	* https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/roles/separator_role
 	* https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/
 -->
-{#if ($veryFirstPaneKey !== key) || $showFirstSplitter}
-<div use:splitterAction class="splitpanes__splitter"></div>
+{#if $veryFirstPaneKey !== key || $showFirstSplitter}
+	<div use:splitterAction class="splitpanes__splitter" />
 {/if}
 
 <!-- Pane -->
-<div
-	class={`splitpanes__pane ${clazz || ''}`}
-	bind:this={element}
-	on:click={handleMouseClick}
-	{style}
->
+<div class={`splitpanes__pane ${clazz || ''}`} bind:this={element} on:click={handleMouseClick} {style}>
 	<slot />
 </div>

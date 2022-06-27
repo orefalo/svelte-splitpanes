@@ -4,10 +4,10 @@ export { default as Splitpanes } from './Splitpanes.svelte';
 export { default as Pane } from './Pane.svelte';
 
 export type PaneInitFunction = (key: any) => {
-	onSplitterDown: (_event: TouchEvent | MouseEvent) => void,
-	onSplitterClick: (event: MouseEvent) => void,
-	onSplitterDblClick: (_event: MouseEvent) => void,
-}
+	onSplitterDown: (_event: TouchEvent | MouseEvent) => void;
+	onSplitterClick: (event: MouseEvent) => void;
+	onSplitterDblClick: (_event: MouseEvent) => void;
+};
 
 // methods passed from splitpane to children panes
 export interface SplitContext {
@@ -15,7 +15,7 @@ export interface SplitContext {
 	veryFirstPaneKey: Readable<any>;
 	isHorizontal: Readable<boolean>;
 	showFirstSplitter: Readable<boolean>;
-	onPaneInit: PaneInitFunction,
+	onPaneInit: PaneInitFunction;
 	onPaneAdd: (pane: IPane) => Promise<void>;
 	onPaneRemove: (key: any) => Promise<void>;
 	onPaneClick: (_event: MouseEvent, key: any) => void;
