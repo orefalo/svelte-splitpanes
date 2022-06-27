@@ -1,11 +1,11 @@
-<script>
+<script lang="ts">
 	import { Pane, Splitpanes } from '$lib/.';
 	import { HighlightSvelte } from 'svelte-highlight';
 	import TextArea from '$comp/extras/TextAreaAutosize.svelte';
 
 	let val = '// Event name: Event params   (Last event at the top)';
 
-	function handleMessage(event) {
+	function handleMessage(event: any) {
 		if (event.detail) val = event.type + ' ' + JSON.stringify(event.detail) + '\n' + val;
 		else val = event.type + '\n' + val;
 	}

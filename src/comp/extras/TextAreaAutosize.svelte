@@ -1,14 +1,14 @@
-<script>
+<script lang="ts">
 	export let value = '';
 	export let minRows = 1;
 	export let maxRows = 40;
 
-	const splitLines = (str) => str.split(/\r?\n/);
+	const splitLines = (str: string) => str.split(/\r?\n/);
 
-	function stripLines(value, max) {
+	function stripLines(value: string, max: number) {
 		const array = splitLines(value);
 		array.length = max;
-		const text = array.reduce(function (previousValue, currentValue) {
+		const text = array.reduce(function (previousValue: string, currentValue: string) {
 			return previousValue + '\n' + currentValue;
 		});
 		return text;

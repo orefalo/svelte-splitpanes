@@ -52,8 +52,8 @@
 		'pane-remove': { removed: IPane; panes: IPaneSizingEvent[] };
 		'pane-click': IPane;
 		ready: void;
-		resize: void;
-		resized: void;
+		resize: IPaneSizingEvent[];
+		resized: IPaneSizingEvent[];
 		'splitter-click': IPane;
 		'pane-maximize': IPane;
 	}>();
@@ -266,13 +266,13 @@
 			event.preventDefault();
 			isDragging = true;
 			calculatePanesSize(getCurrentMouseDrag(event));
-			dispatchSizeEvent('resize');
+			dispatch('resize', prepareSizeEvent());
 		}
 	}
 
 	function onMouseUp() {
 		if (isDragging) {
-			dispatchSizeEvent('resized');
+			dispatch('resized', prepareSizeEvent());
 		}
 		isMouseDown = false;
 		// Keep dragging flag until click event is finished (click happens immediately after mouseup)
@@ -323,7 +323,7 @@
 		splitterPane.setSz(sz);
 
 		dispatch('pane-maximize', splitterPane);
-		dispatchSizeEvent('resized');
+		dispatch('resized', prepareSizeEvent());
 
 		// onMouseUp might not be called on the second click, so update the mouse state.
 		// TODO: Should also check and unbind events, but better IMO to not bind&unbind on every click, so ignored for now.
@@ -341,11 +341,6 @@
 			};
 		}
 		return arr;
-	}
-
-	// function to ensure proper typing
-	function dispatchSizeEvent(name: string) {
-		dispatch(name, prepareSizeEvent());
 	}
 
 	// Get the cursor position relative to the splitpane container.
@@ -403,7 +398,7 @@
 				paneAfter.setSz(Math.max(100 - paneBefore.max() - sums.prevPanesSize - sums.nextPanesSize, 0));
 			} else {
 				paneBefore.setSz(Math.max(100 - paneAfter.max() - sums.prevPanesSize - sumNextPanesSize(splitterIndex + 1), 0));
-				paneAfter.setSz(paneAfter.max);
+				paneAfter.setSz(paneAfter.max());
 			}
 		} else {
 			// When pushOtherPanes = true, find the closest expanded pane on each side of the splitter.
@@ -443,7 +438,6 @@
 		// Pushing Down.
 		// Going smaller than the current pane min size: take the previous expanded pane.
 		if (dragPercentage < sums.prevPanesSize + panes[panesToResize[0]].min()) {
-			//@ts-ignore
 			panesToResize[0] = findPrevExpandedPane(splitterIndex)?.index;
 
 			sums.prevReachedMinPanes = 0;
@@ -549,9 +543,7 @@
 			equalizeAfterAddOrRemove(addedPane);
 		else equalize();
 
-		if (isReady) {
-			dispatchSizeEvent('resized');
-		}
+		if (isReady) dispatch('resized', prepareSizeEvent());
 	}
 
 	/**

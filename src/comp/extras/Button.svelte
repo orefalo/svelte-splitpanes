@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
 	import Ripple from './Ripple.svelte';
@@ -22,17 +22,15 @@
 		disabled = false;
 
 	let shadows = {
-			none: 'none',
-			1: '0 0 0 1px rgba(0, 0, 0, 0.05)',
-			2: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-			3: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-			4: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-			5: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-			6: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
-			7: '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
-		},
-		mouseX,
-		mouseY;
+		none: 'none',
+		1: '0 0 0 1px rgba(0, 0, 0, 0.05)',
+		2: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+		3: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+		4: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+		5: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+		6: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+		7: '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
+	};
 
 	function handleRipple() {
 		const ripples = writable([]);
@@ -40,13 +38,13 @@
 		return {
 			subscribe: ripples.subscribe,
 
-			add: (item) => {
+			add: (item: { x: number; y: number; size: number }) => {
 				ripples.update((items) => {
 					return [...items, item];
 				});
 			},
 			clear: () => {
-				ripples.update((items) => {
+				ripples.update(() => {
 					return [];
 				});
 			}
@@ -55,7 +53,18 @@
 
 	export const ripples = handleRipple();
 
-	let rect, rippleBtn, w, h, x, y, offsetX, offsetY, deltaX, deltaY, locationY, locationX, scale_ratio, timer;
+	let rect: DOMRect,
+		rippleBtn: HTMLButtonElement,
+		w: number,
+		h: number,
+		offsetX: number,
+		offsetY: number,
+		deltaX: number,
+		deltaY: number,
+		locationY: number,
+		locationX: number,
+		scale_ratio: number,
+		timer: NodeJS.Timer;
 
 	let coords = { x: 50, y: 50 };
 
@@ -72,9 +81,9 @@
 		}, speed + speed * 2);
 	};
 
-	let touch;
+	let touch: boolean;
 
-	function handleClick(e, type) {
+	function handleClick(e: MouseEvent | Touch, type: string) {
 		if (type == 'touch') {
 			touch = true;
 			ripples.add({ x: e.pageX - locationX, y: e.pageY - locationY, size: scale_ratio });
@@ -94,6 +103,14 @@
 		locationY = rect.y;
 		locationX = rect.x;
 	});
+
+	function onTouchStart(e: TouchEvent) {
+		handleClick(e.touches[0], 'touch');
+	}
+
+	function onMouseDown(e: MouseEvent) {
+		handleClick(e, 'click');
+	}
 </script>
 
 <button
@@ -103,14 +120,14 @@
 		shadow
 	]};--shadow-h: {shadows[shadowHover]};--shadow-a: {shadows[shadowActive]}"
 	bind:this={rippleBtn}
-	on:touchstart={(e) => handleClick(e.touches[0], 'touch')}
-	on:mousedown={(e) => handleClick(e, 'click')}
+	on:touchstart={onTouchStart}
+	on:mousedown={onMouseDown}
 >
 	<span>
 		<slot />
 	</span>
 	<svg>
-		{#each $ripples as ripple, index}
+		{#each $ripples as ripple}
 			<Ripple x={ripple.x} y={ripple.y} size={ripple.size} {speed} {sizeIn} {opacityIn} {rippleBlur} />
 		{/each}
 	</svg>
