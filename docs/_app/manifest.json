@@ -1,6 +1,6 @@
 {
   ".svelte-kit/runtime/client/start.js": {
-    "file": "start-86818ed4.js",
+    "file": "start-9d1e1d44.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -35,26 +35,26 @@
     ]
   },
   "src/routes/index.svelte": {
-    "file": "pages/index.svelte-ab0b58f0.js",
+    "file": "pages/index.svelte-5bb2d4b1.js",
     "src": "src/routes/index.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_vendor-a5413b4a.js",
-      "_Pane-dfd5fd89.js"
+      "_Pane-30a31e35.js"
     ],
     "css": [
       "assets/pages/index.svelte-07dd33cb.css"
     ]
   },
   "src/routes/test.svelte": {
-    "file": "pages/test.svelte-c6507d3a.js",
+    "file": "pages/test.svelte-550abb0a.js",
     "src": "src/routes/test.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_vendor-a5413b4a.js",
-      "_Pane-dfd5fd89.js"
+      "_Pane-30a31e35.js"
     ]
   },
   "_vendor-a5413b4a.js": {
@@ -63,8 +63,8 @@
       "assets/vendor-f4e6b62f.css"
     ]
   },
-  "_Pane-dfd5fd89.js": {
-    "file": "chunks/Pane-dfd5fd89.js",
+  "_Pane-30a31e35.js": {
+    "file": "chunks/Pane-30a31e35.js",
     "imports": [
       "_vendor-a5413b4a.js"
     ],
