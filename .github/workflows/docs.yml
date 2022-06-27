@@ -1,0 +1,41 @@
+name: Generating Docs
+
+permissions:
+  contents: write
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    
+    steps:
+      # Checkout
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Setup Node.js
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+      
+      # Caching Dependecies
+      - name: Caching dependecies
+        uses: bahmutov/npm-install@v1.4.5
+      
+      # Build Frontend
+      - name: Build Frontend
+        run: npm run build
+      
+      # Deploy Docs
+      - name: Deploy Docs 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: docs
+          target-folder: docs
