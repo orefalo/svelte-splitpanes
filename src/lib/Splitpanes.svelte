@@ -243,13 +243,11 @@
 	}
 
 	function unbindEvents() {
-		//@ts-ignore
-		document.removeEventListener('mousemove', onMouseMove, { passive: false });
+		document.removeEventListener('mousemove', onMouseMove);
 		document.removeEventListener('mouseup', onMouseUp);
 
 		if ('ontouchstart' in window) {
-			//@ts-ignore
-			document.removeEventListener('touchmove', onMouseMove, { passive: false });
+			document.removeEventListener('touchmove', onMouseMove);
 			document.removeEventListener('touchend', onMouseUp);
 		}
 	}
