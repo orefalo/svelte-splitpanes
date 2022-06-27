@@ -43,6 +43,6 @@ module.exports = {
 	allowCustomScopes: true,
 	allowBreakingChanges: ['feat', 'fix'],
 	// skip any questions you want
-	skipQuestions: ['scope','footer', 'breaking'],
+	skipQuestions: ['scope', 'footer', 'breaking'],
 	subjectLimit: 100
 }
