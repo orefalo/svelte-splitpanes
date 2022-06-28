@@ -22,9 +22,11 @@ const config = {
 			base: dev ? '' : '/svelte-splitpanes'
 		},
 		vite: {
-			optimizeDeps: {
+			// Was commented out for fixing issue on latest sveltekit build with PNPM
+			// Can we make it work? Do we really need to? (svelte-highlight suggest to do this)
+			/*optimizeDeps: {
 				include: ['highlight.js', 'highlight.js/lib/core']
-			},
+			},*/
 			resolve: {
 				alias: {
 					$comp: path.resolve('./src/comp')
