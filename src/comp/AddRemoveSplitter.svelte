@@ -7,7 +7,7 @@
 
 	let code = `
 <script>
-    let panesNumber = 3;
+	let panesNumber = 3;
 <${'/'}script>
 <Button
 	on:click={() => {
