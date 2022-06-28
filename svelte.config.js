@@ -27,8 +27,7 @@ const config = {
 			},
 			resolve: {
 				alias: {
-					$comp: path.resolve('./src/comp'),
-					$lib: path.resolve('./src/lib')
+					$comp: path.resolve('./src/comp')
 				}
 			}
 		}
