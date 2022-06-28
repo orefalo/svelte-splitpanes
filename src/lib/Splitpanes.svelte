@@ -417,12 +417,18 @@
 			sums.prevPanesSize + paneBefore.max() - maxSnap
 		);
 
-		const dragPercentage = mouseDragPercentage <= paneBeforeSnap ?
-			Math.max(paneBefore.min() + sums.prevPanesSize, 100 - (paneAfter.max() + sums.nextPanesSize)):
-			(mouseDragPercentage >= paneAfterSnap ?
-				Math.min(100 - (paneAfter.min() + sums.nextPanesSize), paneBefore.max() + sums.prevPanesSize) :
-				mouseDragPercentage
-			);
+		let dragPercentage = mouseDragPercentage;
+
+		if (mouseDragPercentage <= paneBeforeSnap) {
+			if (mouseDragPercentage > sums.prevPanesSize) {
+				dragPercentage = Math.max(paneBefore.min() + sums.prevPanesSize, 100 - (paneAfter.max() + sums.nextPanesSize));
+			}
+		} else if (mouseDragPercentage >= paneAfterSnap) {
+			if (mouseDragPercentage < 100 - sums.nextPanesSize) {
+				dragPercentage = Math.min(100 - (paneAfter.min() + sums.nextPanesSize), paneBefore.max() + sums.prevPanesSize);
+			}
+		}
+
 
 		const paneBeforeMaxReached = paneBefore.max() < 100 && dragPercentage >= paneBefore.max() + sums.prevPanesSize;
 		const paneAfterMaxReached =
