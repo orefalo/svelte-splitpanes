@@ -68,7 +68,7 @@
 	},
 	"type": "module",
 	"optionalDependencies": {
-		"@playwright/test": "1.23.0"
+		"@playwright/test": "1.22.2"
 	},
 	"config": {
 		"cz-customizable": {

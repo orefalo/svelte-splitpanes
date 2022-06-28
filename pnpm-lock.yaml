@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@playwright/test': 1.23.0
+  '@playwright/test': 1.22.2
   '@sveltejs/adapter-static': next
   '@sveltejs/kit': next
   '@typescript-eslint/eslint-plugin': 5.30.0
@@ -29,7 +29,7 @@ specifiers:
   typescript: 4.7.4
 
 optionalDependencies:
-  '@playwright/test': 1.23.0
+  '@playwright/test': 1.22.2
 
 devDependencies:
   '@sveltejs/adapter-static': 1.0.0-next.34
@@ -300,14 +300,14 @@ packages:
       fastq: 1.13.0
     dev: true
 
-  /@playwright/test/1.23.0:
-    resolution: {integrity: sha512-RPWI8AHBVBiDyfTuxi1BhOaY3yaVy3S5ZsGKkSGGeWpZtSgN4SerInCYvgh9+EunIAK4RJQo+bzupbAn5pVqHQ==}
+  /@playwright/test/1.22.2:
+    resolution: {integrity: sha512-cCl96BEBGPtptFz7C2FOSN3PrTnJ3rPpENe+gYCMx4GNNDlN4tmo2D89y13feGKTMMAIVrXfSQ/UmaQKLy1XLA==}
     engines: {node: '>=14'}
     hasBin: true
     requiresBuild: true
     dependencies:
       '@types/node': 18.0.0
-      playwright-core: 1.23.0
+      playwright-core: 1.22.2
     dev: false
     optional: true
 
@@ -2666,8 +2666,8 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /playwright-core/1.23.0:
-    resolution: {integrity: sha512-Zzhyr5RZGoJ1ek2sgfJCt2076kdOg8hnNwFBqAYeLySiutXyxSQk93vZ5gbnFiWV1sHvueCcwla9n35acUTxtA==}
+  /playwright-core/1.22.2:
+    resolution: {integrity: sha512-w/hc/Ld0RM4pmsNeE6aL/fPNWw8BWit2tg+TfqJ3+p59c6s3B6C8mXvXrIPmfQEobkcFDc+4KirNzOQ+uBSP1Q==}
     engines: {node: '>=14'}
     hasBin: true
     dev: false
