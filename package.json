@@ -1,6 +1,6 @@
 {
 	"name": "svelte-splitpanes",
-	"version": "0.6.11",
+	"version": "0.6.12",
 	"description": "A full featured resizable pane layout splitter, ported from vue-splitpanes",
 	"author": {
 		"name": "Olivier Refalo",
@@ -37,7 +37,7 @@
 		"lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. src/ && eslint --ignore-path .gitignore src/",
 		"format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. src/",
 		"commit": "node ./node_modules/cz-customizable/standalone.js",
-        "release": "standard-version --no-verify"
+		"release": "standard-version --no-verify"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-static": "next",
@@ -59,10 +59,10 @@
 		"tslib": "2.4.0",
 		"typescript": "4.7.4",
 		"commitlint": "11.0.0",
-        "commitlint-config-gitmoji": "2.2.5",
-        "cz-customizable": "6.3.0",
+		"commitlint-config-gitmoji": "2.2.5",
+		"cz-customizable": "6.3.0",
 		"husky": "8.0.1",
-        "lint-staged": "13.0.3",
+		"lint-staged": "13.0.3",
 		"standard-version": "9.5.0"
 	},
 	"type": "module",
@@ -70,8 +70,8 @@
 		"@playwright/test": "1.23.0"
 	},
 	"config": {
-        "cz-customizable": {
-            "config": ".cz-config.cjs"
-        }
-    }
+		"cz-customizable": {
+			"config": ".cz-config.cjs"
+		}
+	}
 }
