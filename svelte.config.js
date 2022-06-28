@@ -23,6 +23,9 @@ const config = {
 		},
 		vite: {
 			resolve: {
+				optimizeDeps: {
+					include: ['highlight.js', 'highlight.js/lib/core']
+				},
 				alias: {
 					$comp: path.resolve('./src/comp')
 				}

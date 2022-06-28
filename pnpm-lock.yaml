@@ -12,6 +12,7 @@ specifiers:
   eslint: 8.18.0
   eslint-config-prettier: 8.5.0
   eslint-plugin-svelte3: 4.0.0
+  highlight.js: 11.5.1
   husky: 8.0.1
   lint-staged: 13.0.3
   prettier: 2.7.1
@@ -41,6 +42,7 @@ devDependencies:
   eslint: 8.18.0
   eslint-config-prettier: 8.5.0_eslint@8.18.0
   eslint-plugin-svelte3: 4.0.0_wy4erphnvhealet26qderqv6bu
+  highlight.js: 11.5.1
   husky: 8.0.1
   lint-staged: 13.0.3
   prettier: 2.7.1
@@ -1899,6 +1901,11 @@ packages:
 
   /highlight.js/11.5.0:
     resolution: {integrity: sha512-SM6WDj5/C+VfIY8pZ6yW6Xa0Fm1tniYVYWYW1Q/DcMnISZFrC3aQAZZZFAAZtybKNrGId3p/DNbFTtcTXXgYBw==}
+    engines: {node: '>=12.0.0'}
+    dev: true
+
+  /highlight.js/11.5.1:
+    resolution: {integrity: sha512-LKzHqnxr4CrD2YsNoIf/o5nJ09j4yi/GcH5BnYz9UnVpZdS4ucMgvP61TDty5xJcFGRjnH4DpujkS9bHT3hq0Q==}
     engines: {node: '>=12.0.0'}
     dev: true
 
