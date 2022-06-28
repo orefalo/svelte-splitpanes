@@ -16,11 +16,11 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-          cache: 'npm'
+          cache: 'pnpm'
       
-      # Caching Dependecies
-      - name: Caching dependecies
-        uses: bahmutov/npm-install@v1.4.5
+      # Install Dependecies
+      - name: Install Dependecies
+        run: pnpm install --frozen-lockfile
       
       # Cache Playwright
       - name: Cache Playwright
