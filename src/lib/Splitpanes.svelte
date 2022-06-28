@@ -391,12 +391,12 @@
 
 		const minDrag = 0 + (pushOtherPanes ? 0 : sums.prevPanesSize);
 		const maxDrag = 100 - (pushOtherPanes ? 0 : sums.nextPanesSize);
-		
+
 		// If not pushing other panes, panes to resize are right before and right after splitter.
 		let panesToResize = [splitterIndex, splitterIndex + 1];
 		let paneBefore = panes[panesToResize[0]] || null;
 		let paneAfter = panes[panesToResize[1]] || null;
-		
+
 		// Calculate drag percentage
 		const mouseDragPercentage = Math.max(Math.min(getCurrentDragPercentage(drag), maxDrag), minDrag);
 
@@ -429,10 +429,8 @@
 			}
 		}
 
-
 		const paneBeforeMaxReached = paneBefore.max() < 100 && dragPercentage >= paneBefore.max() + sums.prevPanesSize;
-		const paneAfterMaxReached =
-			paneAfter.max() < 100 && dragPercentage <= 100 - (paneAfter.max() + sums.nextPanesSize);
+		const paneAfterMaxReached = paneAfter.max() < 100 && dragPercentage <= 100 - (paneAfter.max() + sums.nextPanesSize);
 		// Prevent dragging beyond pane max.
 		if (paneBeforeMaxReached || paneAfterMaxReached) {
 			console.log(100 - (paneAfter.max() + sums.nextPanesSize));
