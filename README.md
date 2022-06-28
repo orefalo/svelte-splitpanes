@@ -179,8 +179,6 @@ Events are easy to trap
 
 If you have a great feature, feel free to open a discussion on GitHub to discuss the ideae, you may also fork Splitpanes and submit your changes back as a PR.
 
-
-
 ### Building
 
 We recommend to use `pnpm` package manager as it is tightly integrated with our CICD pipeline.
@@ -194,14 +192,13 @@ from there you may run `pnpm dev` to start the project in development mode.
 
 ### Commiting changes
 
-We have very precise rules over how our git commit messages can be formatted. This leads to **more readable messages** that are easy to follow when looking through the **project history**. But also, we use the git commit messages to **auto-generate the change log**.
+We have very precise rules over how our git commit messages are formatted. This leads to **more readable messages** that are easy to follow when looking through the **project history**. We use the git messages to **auto-generate the change log**.
 
-The enforcement is made possible by the enablement of several tools which, when put together, enable strick commit goverance.
+The enforcement is made possible by the enablement of several tools which, when put together, enable strict goverance.
 
-Commits as accepted, as long as they comply to the _commit message format_ described below.
+Commits are accepted, as long as they comply to the _commit message format_ described below.
 
-The format is trivial to learn, yet to ease the process, we enabled a script `npm run commit` which will guide you though the commit steps-by-step.
-
+The format is trivial to learn, yet to ease the process, we enabled a helper script `npm run commit` which will guide you though the commit steps-by-step.
 
 
 #### Commit Message Format
@@ -214,7 +211,7 @@ body?
 footer? 
 ```
 
-Any line of the commit message cannot be longer than 100 characters. This allows the message to be easier to read on GitHub as well as in various git tools.
+Any line of the commit message cannot be longer than 100 characters. This allows the message to be easy to read on GitHub and various other git tools.
 
 ###### Type
 
