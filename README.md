@@ -29,6 +29,7 @@ So we decided to port it and enhance it. :smile:
 - Support RTL rendering with auto-detection
 - Support first splitter on/off
 - Support pane toggle
+- Support snap
 - Support programmatic resizing
 - Support programmatic splitter add/remove
 - Support for legacy browser such as IE 11
@@ -94,7 +95,7 @@ Properties that apply to <Pane>
 | minSize        | 0         | minimum pane size in % |
 | maxSize        | 100       | maximum pane size in % |
 | size           | undefined | pane size in %         |
-| snapSize       | 0         | snap size in %         |
+| snapSize       | 0(disabled)| snap size in %         |
 | class          | undefined | Any additional css classes to be added to the component |
 
 ### Styling

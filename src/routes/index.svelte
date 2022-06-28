@@ -10,6 +10,9 @@
 	import ListenToEvents from '$comp/ListenToEvents.svelte';
 	import StyleSplitters from '$comp/StyleSplitters.svelte';
 	import StyleSplittersModern from '$comp/StyleSplittersModern.svelte';
+	import SimpleSnap from '$comp/SimpleSnap.svelte';
+	import MiddleSnap from '$comp/MiddleSnap.svelte';
+	import MinMaxSnap from '$comp/MinMaxSnap.svelte';
 </script>
 
 <h1>Svelte-Splitpane demo</h1>
@@ -54,6 +57,13 @@
 <hr />
 <ListenToEvents />
 <hr />
+<SimpleSnap />
+<hr />
+<MiddleSnap />
+<hr />
+<MinMaxSnap />
+<hr />
 <StyleSplitters />
 <hr />
 <StyleSplittersModern />
+
