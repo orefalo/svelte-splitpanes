@@ -44,7 +44,7 @@
 		}
 
 		const snapSizeF = parseFloat(snapSize);
-		if (!isNaN(snapSizeF) && snapSizeF) {
+		if (!isNaN(snapSizeF)) {
 			snap = snapSizeF;
 		}
 	}

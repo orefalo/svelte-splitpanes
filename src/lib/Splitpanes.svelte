@@ -400,16 +400,21 @@
 		// Calculate drag percentage
 		const mouseDragPercentage = Math.max(Math.min(getCurrentDragPercentage(drag), maxDrag), minDrag);
 
+		const maxSnap = Math.max(paneBefore.snap(), paneAfter.snap());
+
 		// Handle snap
 		const paneBeforeSnap = Math.max(
 			// Snap due to the previous pane reaching minimum size
-			sums.prevPanesSize + paneBefore.min() + paneBefore.snap(),
+			sums.prevPanesSize + paneBefore.min() + maxSnap,
 			// and to the next one reaching maximum size
-			100 - (sums.nextPanesSize + paneAfter.max()) + paneBefore.snap()
+			100 - (sums.nextPanesSize + paneAfter.max()) + maxSnap
 		);
+
 		const paneAfterSnap = Math.min(
-			100 - (sums.nextPanesSize + paneAfter.min() + paneAfter.snap()),
-			sums.prevPanesSize + paneBefore.max() - paneAfter.snap()
+			// Snap due to the next pane reaching minimum size
+			100 - (sums.nextPanesSize + paneAfter.min() + maxSnap),
+			// and to the previous one reaching maximum size
+			sums.prevPanesSize + paneBefore.max() - maxSnap
 		);
 
 		const dragPercentage = mouseDragPercentage <= paneBeforeSnap ?
@@ -419,17 +424,17 @@
 				mouseDragPercentage
 			);
 
-
 		const paneBeforeMaxReached = paneBefore.max() < 100 && dragPercentage >= paneBefore.max() + sums.prevPanesSize;
 		const paneAfterMaxReached =
-			paneAfter.max() < 100 && dragPercentage <= 100 - (paneAfter.max() + sumNextPanesSize(splitterIndex + 1));
+			paneAfter.max() < 100 && dragPercentage <= 100 - (paneAfter.max() + sums.nextPanesSize);
 		// Prevent dragging beyond pane max.
 		if (paneBeforeMaxReached || paneAfterMaxReached) {
+			console.log(100 - (paneAfter.max() + sums.nextPanesSize));
 			if (paneBeforeMaxReached) {
 				paneBefore.setSz(paneBefore.max());
 				paneAfter.setSz(Math.max(100 - paneBefore.max() - sums.prevPanesSize - sums.nextPanesSize, 0));
 			} else {
-				paneBefore.setSz(Math.max(100 - paneAfter.max() - sums.prevPanesSize - sumNextPanesSize(splitterIndex + 1), 0));
+				paneBefore.setSz(Math.max(100 - paneAfter.max() - sums.prevPanesSize - sums.nextPanesSize, 0));
 				paneAfter.setSz(paneAfter.max());
 			}
 		} else {
