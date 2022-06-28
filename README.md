@@ -221,12 +221,6 @@ Must be one of the following:
 
 adding a tailing **'!'** marks the commit as a **BREAKING CHANGE** - and will affect version numbering.
 
-###### Scope
-
-The scope should be the component affected (as perceived by the person reading the changelog generated from commit messages). Example scopes include: api, authentication, landing_page…etc
-
-As of now this element is optional.
-
 ###### Subject
 
 The subject contains a succinct description of the change:
