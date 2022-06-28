@@ -15,18 +15,13 @@ const config = {
 		adapter: adapter({
 			pages: 'docs',
 			assets: 'docs',
-			fallback: null
+			fallback: undefined
 		}),
 		paths: {
 			// change below to your repo name
 			base: dev ? '' : '/svelte-splitpanes'
 		},
 		vite: {
-			// Was commented out for fixing issue on latest sveltekit build with PNPM
-			// Can we make it work? Do we really need to? (svelte-highlight suggest to do this)
-			/*optimizeDeps: {
-				include: ['highlight.js', 'highlight.js/lib/core']
-			},*/
 			resolve: {
 				alias: {
 					$comp: path.resolve('./src/comp')
