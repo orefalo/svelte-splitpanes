@@ -575,7 +575,7 @@
 		if ((!addedPane && !removedPane) || panes.length === 1) {
 			// on initialization or if we have only one pane now
 			initialPanesSizing();
-		} else if (panes.some((pane) => pane.givenSize !== null || pane.min() || pane.max() < 100))
+		} else if (panes.some((pane) => pane.givenSize != null || pane.min() || pane.max() < 100))
 			equalizeAfterAddOrRemove(addedPane);
 		else equalize();
 
@@ -616,7 +616,7 @@
 			const pane = panes[i];
 			const sz = pane.sz();
 			leftToAllocate -= sz;
-			if (pane.givenSize !== null) definedSizes++;
+			if (pane.givenSize != null) definedSizes++;
 			if (sz >= pane.max()) ungrowable.push(pane.key);
 			if (sz <= pane.min()) unshrinkable.push(pane.key);
 		}
@@ -626,7 +626,7 @@
 		if (leftToAllocate > 0.1) {
 			for (let i = 0; i < panes.length; i++) {
 				const pane = panes[i];
-				if (pane.givenSize === null) {
+				if (pane.givenSize == null) {
 					const panesCount = panes.length;
 					const sz = Math.max(Math.min(leftToAllocate / (panesCount - definedSizes), pane.max()), pane.min());
 					pane.setSz(sz);
@@ -645,8 +645,8 @@
 		let ungrowable = new Array<string>();
 		let unshrinkable = new Array<string>();
 
-		if (addedPane && addedPane.givenSize !== null) {
-			equalSpace = (100 - parseFloat(addedPane.givenSize)) / (panesCount - 1);
+		if (addedPane && addedPane.givenSize != null) {
+			equalSpace = (100 - addedPane.givenSize) / (panesCount - 1);
 		}
 
 		for (let i = 0; i < panes.length; i++) {
@@ -663,7 +663,7 @@
 			const pane = panes[i];
 			const max = pane.max();
 			const min = pane.min();
-			if (addedPane && addedPane.givenSize !== null && addedPane.key === pane.key) {
+			if (addedPane && addedPane.givenSize != null && addedPane.key === pane.key) {
 				// TODO: Check why is it empty here?
 			} else pane.setSz(Math.max(Math.min(equalSpace, max), min));
 

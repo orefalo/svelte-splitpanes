@@ -4,7 +4,7 @@
 
 	let code = `
 <Splitpanes class="default-theme" horizontal={true} style="height: 400px">
-	<Pane minSize="20" maxSize="70">
+	<Pane minSize={20} maxSize={70}>
 		<span
 			>1
 			<br />
@@ -14,7 +14,7 @@
 	<Pane>
 		<span>2</span>
 	</Pane>
-	<Pane maxSize="70">
+	<Pane maxSize={70}>
 		<span
 			>3
 
@@ -32,7 +32,7 @@
 </p>
 
 <Splitpanes class="default-theme" horizontal={true} style="height: 400px">
-	<Pane minSize="20" maxSize="70">
+	<Pane minSize={20} maxSize={70}>
 		<span
 			>1
 			<br />
@@ -42,7 +42,7 @@
 	<Pane>
 		<span>2</span>
 	</Pane>
-	<Pane maxSize="70">
+	<Pane maxSize={70}>
 		<span
 			>3
 

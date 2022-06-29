@@ -9,10 +9,10 @@
 
 	// PROPS
 
-	export let size: string | null = null;
-	export let minSize = '0';
-	export let maxSize = '100';
-	export let snapSize = '0';
+	export let size: number | null = null;
+	export let minSize = 0;
+	export let maxSize = 100;
+	export let snapSize = 0;
 	// css class
 	let clazz = '';
 	export { clazz as class };
@@ -22,40 +22,20 @@
 	const key = {};
 	let element: HTMLElement;
 	let sz: number;
-	let min: number;
-	let max: number;
-	let snap: number;
 
 	const isBrowser = typeof window !== 'undefined';
 
 	// REACTIVE
 
-	$: {
-		sz = size === null ? 0 : parseFloat(size);
-
-		const minSizeF = parseFloat(minSize);
-		if (!isNaN(minSizeF)) {
-			min = minSizeF;
-		}
-
-		const maxSizeF = parseFloat(maxSize);
-		if (!isNaN(maxSizeF)) {
-			max = maxSizeF;
-		}
-
-		const snapSizeF = parseFloat(snapSize);
-		if (!isNaN(snapSizeF)) {
-			snap = snapSizeF;
-		}
-	}
+	$: sz = size == null ? 0 : size;
 
 	$: dimension = $isHorizontal ? 'height' : 'width';
 
 	$: style =
 		[
-			!isBrowser && min > 0 ? `min-${dimension}: ${min}%;` : undefined,
-			!isBrowser && max < 100 ? `max-${dimension}: ${max}%;` : undefined,
-			isBrowser || size !== null ? `${dimension}: ${sz}%;` : undefined
+			!isBrowser && minSize > 0 ? `min-${dimension}: ${minSize}%;` : undefined,
+			!isBrowser && maxSize < 100 ? `max-${dimension}: ${maxSize}%;` : undefined,
+			isBrowser || size != null ? `${dimension}: ${sz}%;` : undefined
 		]
 			.filter((value) => value !== undefined)
 			.join(' ') || undefined;
@@ -95,10 +75,13 @@
 			sz: () => sz,
 			setSz: (v) => {
 				sz = v;
+				if (size != null) {
+					size = sz;
+				}
 			},
-			min: () => min,
-			max: () => max,
-			snap: () => snap
+			min: () => minSize,
+			max: () => maxSize,
+			snap: () => snapSize
 		};
 		onPaneAdd(inst);
 	});

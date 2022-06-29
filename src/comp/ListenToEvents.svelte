@@ -32,7 +32,7 @@
 	on:splitter-click={handleMessage}
 >
 	{#each { length: 3 } as _, i}
-		<Pane minSize="10">
+		<Pane minSize={10}>
 			<span>{i + 1}</span>
 		</Pane>
 	{/each}
@@ -82,7 +82,7 @@
 	on:splitter-click={handleMessage}
 >
 	{#each { length: 3 } as _, i}
-		<Pane minSize="10">
+		<Pane minSize={10}>
 			<span>{i + 1}</span>
 		</Pane>
 	{/each}

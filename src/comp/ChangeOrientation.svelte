@@ -23,7 +23,7 @@
 >
 <Splitpanes class="default-theme" style="height: 400px" {firstSplitter} {horizontal}>
 	{#each { length: 3 } as _, i}
-		<Pane minSize="5">
+		<Pane minSize={5}>
 			<span>{i + 1}</span>
 		</Pane>
 	{/each}
@@ -50,7 +50,7 @@
 >
 <Splitpanes class="default-theme" style="height: 400px" {firstSplitter} {horizontal}>
 	{#each { length: 3 } as _, i}
-		<Pane minSize="5">
+		<Pane minSize={5}>
 			<span>{i + 1}</span>
 		</Pane>
 	{/each}

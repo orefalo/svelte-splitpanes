@@ -4,10 +4,10 @@
 
 	let code = `
 <Splitpanes theme="no-splitter" horizontal style="height: 400px" dblClickSplitter={false}>
-	<Pane size="6" minSize="6" maxSize="6">
+	<Pane size={6} minSize={6} maxSize={6}>
 		<p>MenuBar</p>
 	</Pane>
-	<Pane size="6" minSize="6" maxSize="6">
+	<Pane size={6} minSize={6} maxSize={6}>
 		<p>ToolBar</p>
 	</Pane>
 	<Pane>
@@ -26,10 +26,12 @@
 			</Pane>
 		</Splitpanes>
 	</Pane>
-	<Pane size="6" minSize="6" maxSize="6">
+	<Pane size={6} minSize={6} maxSize={6}>
 		<p>statusbar</p>
 	</Pane>
 </Splitpanes>
+
+<HighlightSvelte {code} />
 
 <style global lang="scss">
 	.splitpanes.modern-theme {
@@ -39,7 +41,7 @@
 		.splitpanes__splitter {
 			background-color: #ccc;
 			position: relative;
-       
+
 			&:before {
 				content: '';
 				position: absolute;
@@ -60,13 +62,13 @@
 			left: -3px;
 			right: -3px;
 			height: 100%;
-            cursor: col-resize;
+			cursor: col-resize;
 		}
-        &.splitpanes--horizontal > .splitpanes__splitter:before {
+		&.splitpanes--horizontal > .splitpanes__splitter:before {
 			top: -3px;
 			bottom: -3px;
 			width: 100%;
-            cursor: row-resize;
+			cursor: row-resize;
 		}
 	}
 
@@ -83,12 +85,12 @@
 		&.splitpanes--horizontal > .splitpanes__splitter:before {
 			width: 0.125rem;
 			pointer-events: none;
-            cursor: none;
+			cursor: none;
 		}
 		&.splitpanes--vertical > .splitpanes__splitter:before {
 			height: 0.125rem;
 			pointer-events: none;
-            cursor: none;
+			cursor: none;
 		}
 	}
 </style>
@@ -103,10 +105,10 @@
 </p>
 
 <Splitpanes theme="no-splitter" horizontal style="height: 400px" dblClickSplitter={false}>
-	<Pane size="6" minSize="6" maxSize="6">
+	<Pane size={6} minSize={6} maxSize={6}>
 		<p>MenuBar</p>
 	</Pane>
-	<Pane size="6" minSize="6" maxSize="6">
+	<Pane size={6} minSize={6} maxSize={6}>
 		<p>ToolBar</p>
 	</Pane>
 	<Pane>
@@ -125,7 +127,7 @@
 			</Pane>
 		</Splitpanes>
 	</Pane>
-	<Pane size="6" minSize="6" maxSize="6">
+	<Pane size={6} minSize={6} maxSize={6}>
 		<p>statusbar</p>
 	</Pane>
 </Splitpanes>

@@ -44,5 +44,5 @@ export interface IPane {
 	snap: () => number;
 	sz: () => number;
 	setSz: (number: number) => void;
-	givenSize: string | null;
+	givenSize: number | null;
 }
