@@ -401,29 +401,22 @@
 		const mouseDragPercentage = Math.max(Math.min(getCurrentDragPercentage(drag), maxDrag), minDrag);
 
 		// Handle snap
-		const paneBeforeSnap = Math.max(
-			// Snap due to the previous pane reaching minimum size
-			sums.prevPanesSize + paneBefore.min() + paneBefore.snap(),
-			// and to the next one reaching maximum size
-			100 - (sums.nextPanesSize + paneAfter.max()) + paneAfter.snap()
-		);
+		const paneBeforeSnap = sums.prevPanesSize + paneBefore.min() + paneBefore.snap();
 
-		const paneAfterSnap = Math.min(
-			// Snap due to the next pane reaching minimum size
-			100 - (sums.nextPanesSize + paneAfter.min() + paneAfter.snap()),
-			// and to the previous one reaching maximum size
-			sums.prevPanesSize + paneBefore.max() - paneBefore.snap()
-		);
+		const paneAfterSnap = 100 - (sums.nextPanesSize + paneAfter.min() + paneAfter.snap());
 
 		let dragPercentage = mouseDragPercentage;
+		let snapped = false;
 
 		if (mouseDragPercentage <= paneBeforeSnap) {
 			if (mouseDragPercentage > sums.prevPanesSize + paneBefore.min()) {
 				dragPercentage = Math.max(paneBefore.min() + sums.prevPanesSize, 100 - (paneAfter.max() + sums.nextPanesSize));
+				snapped = true;
 			}
 		} else if (mouseDragPercentage >= paneAfterSnap) {
 			if (mouseDragPercentage < 100 - sums.nextPanesSize - paneAfter.min()) {
 				dragPercentage = Math.min(100 - (paneAfter.min() + sums.nextPanesSize), paneBefore.max() + sums.prevPanesSize);
+				snapped = true;
 			}
 		}
 
@@ -441,7 +434,10 @@
 			}
 		} else {
 			// When pushOtherPanes = true, find the closest expanded pane on each side of the splitter.
-			if (pushOtherPanes) {
+			// TODO: Bug: This should work also when removing `!snapped` condition, but it's not!
+			//   To reproduce, reload the example page and see the example "Min & max with snap".
+			//   It gets wrongly pushed when try to snap on the initial dragging of the first splitter to the right.
+			if (pushOtherPanes && !snapped) {
 				const vars = doPushOtherPanes(sums, dragPercentage);
 				if (!vars) {
 					//		setAllPaneDimensions();
