@@ -144,8 +144,7 @@
 
 		// reindex panes
 		for (let i = 0; i < panes.length; i++) {
-			const p = panes[i];
-			p.index = i;
+			panes[i].index = i;
 		}
 
 		if (isReady) {
@@ -166,28 +165,32 @@
 		// 1. Remove the pane from array and redo indexes.
 		const index = panes.findIndex((p) => p.key === key);
 
-		const removed = panes.splice(index, 1)[0];
+		// race condition - typically happens when the dev server restarts
+		if (index >= 0) {
+			const removed = panes.splice(index, 1)[0];
 
-		// reindex panes
-		for (let i = 0; i < panes.length; i++) {
-			const p = panes[i];
-			p.index = i;
+			// reindex panes
+			for (let i = 0; i < panes.length; i++) {
+				panes[i].index = i;
+			}
+
+			if (index === 0) {
+				$veryFirstPaneKey = panes.length > 0 ? panes[0].key : undefined;
+			}
+
+			if (isReady) {
+				await tick();
+
+				// 3. Resize the panes.
+				resetPaneSizes(undefined, { ...removed, index });
+
+				// 4. Fire `pane-remove` event.
+				dispatch('pane-remove', {
+					removed,
+					panes: prepareSizeEvent()
+				});
+			}
 		}
-
-		if (index === 0) {
-			$veryFirstPaneKey = panes.length > 0 ? panes[0].key : undefined;
-		}
-
-		await tick();
-
-		// 3. Resize the panes.
-		resetPaneSizes(undefined, { ...removed, index });
-
-		// 4. Fire `pane-remove` event.
-		dispatch('pane-remove', {
-			removed,
-			panes: prepareSizeEvent()
-		});
 	}
 
 	// called by sub-panes
@@ -346,11 +349,6 @@
 			};
 		}
 		return arr;
-	}
-
-	// function to ensure proper typing
-	function dispatchSizeEvent(name) {
-		dispatch(name, prepareSizeEvent());
 	}
 
 	// Get the cursor position relative to the splitpane container.
@@ -683,23 +681,27 @@
 		if (leftToAllocate > 0) equalSpaceToAllocate = leftToAllocate / (panesCount - ungrowable.length);
 		else equalSpaceToAllocate = leftToAllocate / (panesCount - unshrinkable.length);
 
-		for (let i = 0; i < panes.length; i++) {
-			const pane = panes[i];
-			const sz = pane.sz();
-			if (leftToAllocate > 0 && !ungrowable.includes(pane.key)) {
-				// Need to diff the size before and after to get the exact allocated space.
-				const newPaneSize = Math.max(Math.min(sz + equalSpaceToAllocate, pane.max()), pane.min());
-				const allocated = newPaneSize - sz;
-				leftToAllocate -= allocated;
-				pane.setSz(newPaneSize);
-			} else if (!unshrinkable.includes(pane.key)) {
-				// Need to diff the size before and after to get the exact allocated space.
-				const newPaneSize = Math.max(Math.min(sz + equalSpaceToAllocate, pane.max()), pane.min());
-				const allocated = newPaneSize - sz;
-				leftToAllocate -= allocated;
-				pane.setSz(newPaneSize);
+		if (panes.length === 1) {
+			panes[0].setSz(100);
+			leftToAllocate = 0;
+		} else
+			for (let i = 0; i < panes.length; i++) {
+				const pane = panes[i];
+				const sz = pane.sz();
+				if (leftToAllocate > 0 && !ungrowable.includes(pane.key)) {
+					// Need to diff the size before and after to get the exact allocated space.
+					const newPaneSize = Math.max(Math.min(sz + equalSpaceToAllocate, pane.max()), pane.min());
+					const allocated = newPaneSize - sz;
+					leftToAllocate -= allocated;
+					pane.setSz(newPaneSize);
+				} else if (!unshrinkable.includes(pane.key)) {
+					// Need to diff the size before and after to get the exact allocated space.
+					const newPaneSize = Math.max(Math.min(sz + equalSpaceToAllocate, pane.max()), pane.min());
+					const allocated = newPaneSize - sz;
+					leftToAllocate -= allocated;
+					pane.setSz(newPaneSize);
+				}
 			}
-		}
 
 		if (Math.abs(leftToAllocate) > 0.1) {
 			// > 0.1: Prevent maths rounding issues due to bytes.
