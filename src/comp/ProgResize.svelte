@@ -4,7 +4,7 @@
 
 	import RangeSlider from 'svelte-range-slider-pips';
 
-	let value = [50, 100];
+	let value = [50];
 
 	let code = `
 <script>
