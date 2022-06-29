@@ -32,6 +32,7 @@
 	<li>Support RTL rendering with auto-detection</li>
 	<li>Support first splitter on/off</li>
 	<li>Support pane toggle</li>
+	<li>Support edge snapping</li>
 	<li>Support programmatic resizing</li>
 	<li>Support programmatic splitter add/remove</li>
 	<li>Support for legacy browser such as IE 11</li>

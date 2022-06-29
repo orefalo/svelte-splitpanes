@@ -29,7 +29,7 @@ So we decided to port it and enhance it. :smile:
 - Support RTL rendering with auto-detection
 - Support first splitter on/off
 - Support pane toggle
-- Support snap
+- Support edge snapping
 - Support programmatic resizing
 - Support programmatic splitter add/remove
 - Support for legacy browser such as IE 11
@@ -210,7 +210,7 @@ To ease the development and to enforce the process of formatting the code, perfo
 0. Make sure your environment is up to date, by running periodically `pnpm install`.
 1. Run `pnpm format`.
 2. Make sure that all the relevant changes are stages (notice `pnpm format` also make changes in the files).
-3. (Optional) Run `pnpm test` to execute Playwright tests.
+3. (Optional) Run `pnpm build && pnpm test` to execute Playwright tests.
 4. Run `pnpm commit`.
    - If linting or svelte checks are failed, the commit process will abort and you'll have to fix them, and return again to step 1.
    - Otherwise, you will procceed to the commitment interactive terminal, and just follow the instructions to commit your changes.
