@@ -29,7 +29,7 @@ So we decided to port it and enhance it. :smile:
 - Support RTL rendering with auto-detection
 - Support first splitter on/off
 - Support pane toggle
-- Support snap
+- Support edge snapping
 - Support programmatic resizing
 - Support programmatic splitter add/remove
 - Support for legacy browser such as IE 11
