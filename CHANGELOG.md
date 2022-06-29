@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.7.0](https://github.com/orefalo/svelte-splitpanes/compare/v0.6.12...v0.7.0) (2022-06-29)
+
+
+### Features
+
+* add snap ([b6cb06d](https://github.com/orefalo/svelte-splitpanes/commit/b6cb06d94cec4027971322c92a151aee0130d601))
+
+
+### Bug Fixes
+
+* improved snap, fixed bug ([903ad71](https://github.com/orefalo/svelte-splitpanes/commit/903ad71b8d64a30b8333661fbb1833cc34e4d526))
+* readd panes push ([a61f101](https://github.com/orefalo/svelte-splitpanes/commit/a61f101dff9a1cdf216744139ff789ba9a3e75dd))
+* snap with multiple panes ([01f93a7](https://github.com/orefalo/svelte-splitpanes/commit/01f93a7a45188f3e0d2d2257d3570db12327c899))
+
 ## 1.0.0 (2022-06-28)
 
 
