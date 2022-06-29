@@ -391,48 +391,37 @@
 
 		const minDrag = 0 + (pushOtherPanes ? 0 : sums.prevPanesSize);
 		const maxDrag = 100 - (pushOtherPanes ? 0 : sums.nextPanesSize);
-		
+
 		// If not pushing other panes, panes to resize are right before and right after splitter.
 		let panesToResize = [splitterIndex, splitterIndex + 1];
 		let paneBefore = panes[panesToResize[0]] || null;
 		let paneAfter = panes[panesToResize[1]] || null;
-		
+
 		// Calculate drag percentage
 		const mouseDragPercentage = Math.max(Math.min(getCurrentDragPercentage(drag), maxDrag), minDrag);
 
-		const maxSnap = Math.max(paneBefore.snap(), paneAfter.snap());
-
 		// Handle snap
-		const paneBeforeSnap = Math.max(
-			// Snap due to the previous pane reaching minimum size
-			sums.prevPanesSize + paneBefore.min() + maxSnap,
-			// and to the next one reaching maximum size
-			100 - (sums.nextPanesSize + paneAfter.max()) + maxSnap
-		);
+		const paneBeforeSnap = sums.prevPanesSize + paneBefore.min() + paneBefore.snap();
 
-		const paneAfterSnap = Math.min(
-			// Snap due to the next pane reaching minimum size
-			100 - (sums.nextPanesSize + paneAfter.min() + maxSnap),
-			// and to the previous one reaching maximum size
-			sums.prevPanesSize + paneBefore.max() - maxSnap
-		);
+		const paneAfterSnap = 100 - (sums.nextPanesSize + paneAfter.min() + paneAfter.snap());
 
 		let dragPercentage = mouseDragPercentage;
+		let snapped = false;
 
 		if (mouseDragPercentage <= paneBeforeSnap) {
 			if (mouseDragPercentage > sums.prevPanesSize + paneBefore.min()) {
 				dragPercentage = Math.max(paneBefore.min() + sums.prevPanesSize, 100 - (paneAfter.max() + sums.nextPanesSize));
+				snapped = true;
 			}
 		} else if (mouseDragPercentage >= paneAfterSnap) {
 			if (mouseDragPercentage < 100 - sums.nextPanesSize - paneAfter.min()) {
 				dragPercentage = Math.min(100 - (paneAfter.min() + sums.nextPanesSize), paneBefore.max() + sums.prevPanesSize);
+				snapped = true;
 			}
 		}
 
-
 		const paneBeforeMaxReached = paneBefore.max() < 100 && dragPercentage >= paneBefore.max() + sums.prevPanesSize;
-		const paneAfterMaxReached =
-			paneAfter.max() < 100 && dragPercentage <= 100 - (paneAfter.max() + sums.nextPanesSize);
+		const paneAfterMaxReached = paneAfter.max() < 100 && dragPercentage <= 100 - (paneAfter.max() + sums.nextPanesSize);
 		// Prevent dragging beyond pane max.
 		if (paneBeforeMaxReached || paneAfterMaxReached) {
 			console.log(100 - (paneAfter.max() + sums.nextPanesSize));
@@ -445,7 +434,10 @@
 			}
 		} else {
 			// When pushOtherPanes = true, find the closest expanded pane on each side of the splitter.
-			if (pushOtherPanes) {
+			// TODO: Bug: This should work also when removing `!snapped` condition, but it's not!
+			//   To reproduce, reload the example page and see the example "Min & max with snap".
+			//   It gets wrongly pushed when try to snap on the initial dragging of the first splitter to the right.
+			if (pushOtherPanes && !snapped) {
 				const vars = doPushOtherPanes(sums, dragPercentage);
 				if (!vars) {
 					//		setAllPaneDimensions();

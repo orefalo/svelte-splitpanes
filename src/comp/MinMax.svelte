@@ -4,23 +4,24 @@
 
 	let code = `
 <Splitpanes class="default-theme" horizontal={true} style="height: 400px">
-    <Pane minSize="20" maxSize="70">
-        <span>1
-            <br />
-            <em class="specs">I have a min height of 20% &amp; max height of 70%</em>
-        </span>
-    </Pane>
-    <Pane>
-        <span>2</span>
-    </Pane>
-    <Pane maxSize="70">
-        <span
-            >3
+	<Pane minSize="20" maxSize="70">
+		<span
+			>1
+			<br />
+			<em class="specs">I have a min height of 20% &amp; max height of 70%</em>
+		</span>
+	</Pane>
+	<Pane>
+		<span>2</span>
+	</Pane>
+	<Pane maxSize="70">
+		<span
+			>3
 
-            <br />
-            <em class="specs">I have a max height of 70%</em>
-        </span>
-    </Pane>
+			<br />
+			<em class="specs">I have a max height of 70%</em>
+		</span>
+	</Pane>
 </Splitpanes>`;
 </script>
 
@@ -32,21 +33,22 @@
 
 <Splitpanes class="default-theme" horizontal={true} style="height: 400px">
 	<Pane minSize="20" maxSize="70">
-			<span>1
-					<br />
-					<em class="specs">I have a min height of 20% &amp; max height of 70%</em>
-			</span>
+		<span
+			>1
+			<br />
+			<em class="specs">I have a min height of 20% &amp; max height of 70%</em>
+		</span>
 	</Pane>
 	<Pane>
-			<span>2</span>
+		<span>2</span>
 	</Pane>
 	<Pane maxSize="70">
-			<span
-					>3
+		<span
+			>3
 
-					<br />
-					<em class="specs">I have a max height of 70%</em>
-			</span>
+			<br />
+			<em class="specs">I have a max height of 70%</em>
+		</span>
 	</Pane>
 </Splitpanes>
 

@@ -11,9 +11,9 @@ Use dynamic and predictable view panels to layout an application.
 ## Why?
 
 To be sucessful, a good framework must come with good components.  
-Unfortunatly, we couldn't find any decent split pane layout in the Svelte eco-system.  
+Unfortunatly, we couldn't find any decent split pane layout in the Svelte eco-system.
 
-But we did find one written in vue.js.  
+But we did find one written in vue.js.
 
 So we decided to port it and enhance it. :smile:
 
@@ -45,8 +45,8 @@ So we decided to port it and enhance it. :smile:
 
 ## Demo & Documentation
 
-* [REPL Demo](https://svelte.dev/repl/1e96cbd4bcd148e3b85a4c8ca76d7309?version=3.48.0)
-* [More complex demos and examples](https://orefalo.github.io/svelte-splitpanes/)
+- [REPL Demo](https://svelte.dev/repl/1e96cbd4bcd148e3b85a4c8ca76d7309?version=3.48.0)
+- [More complex demos and examples](https://orefalo.github.io/svelte-splitpanes/)
 
 ## Installation
 
@@ -56,9 +56,9 @@ $ npm i svelte-splitpanes
 
 ## Usage
 
-```html
+```svelte
 <script>
-import { Pane, Splitpanes } from 'svelte-splitpanes';
+	import { Pane, Splitpanes } from 'svelte-splitpanes';
 </script>
 <Splitpanes class="default-theme" style="height: 400px">
 	<Pane minSize="20">1<br /><em class="specs">I have a min width of 20%</em></Pane>
@@ -77,26 +77,26 @@ import { Pane, Splitpanes } from 'svelte-splitpanes';
 
 Here is the list of properties that apply to <Splitpanes>
 
-| Parameter name   | Default                     | Comments                                                     |
-| ---------------- | --------------------------- | ------------------------------------------------------------ |
-| horizontal       | false (Vertical by default) | The orientation of the split panes.                          |
-| pushOtherPanes   | true                        | Whether a splitter should push the next splitter when dragging. |
-| dblClickSplitter | true                        | Double click on splitter to maximize the next pane           |
-| rtl              | "auto"                      | Supports Right to left, by default will auto detect          |
+| Parameter name   | Default                     | Comments                                                                                                     |
+| ---------------- | --------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| horizontal       | false (Vertical by default) | The orientation of the split panes.                                                                          |
+| pushOtherPanes   | true                        | Whether a splitter should push the next splitter when dragging.                                              |
+| dblClickSplitter | true                        | Double click on splitter to maximize the next pane                                                           |
+| rtl              | "auto"                      | Supports Right to left, by default will auto detect                                                          |
 | firstSplitter    | false                       | Displays the first splitter when set to true. This allows maximizing the first pane on splitter double click |
-| id               | undefined                   | Provide an optional id attribute to the component for styling/other reasons |
-| theme            | 'default-theme'             | Used to styles the splitters using a different css class     |
-| class            | undefined                   | Any additional css classes to be added to the component      |
+| id               | undefined                   | Provide an optional id attribute to the component for styling/other reasons                                  |
+| theme            | 'default-theme'             | Used to styles the splitters using a different css class                                                     |
+| class            | undefined                   | Any additional css classes to be added to the component                                                      |
 
 Properties that apply to <Pane>
 
-| Parameter name | Default   | Comments               |
-| -------------- | --------- | ---------------------- |
-| minSize        | 0         | minimum pane size in % |
-| maxSize        | 100       | maximum pane size in % |
-| size           | undefined | pane size in %         |
-| snapSize       | 0(disabled)| snap size in %         |
-| class          | undefined | Any additional css classes to be added to the component |
+| Parameter name | Default     | Comments                                                |
+| -------------- | ----------- | ------------------------------------------------------- |
+| minSize        | 0           | minimum pane size in %                                  |
+| maxSize        | 100         | maximum pane size in %                                  |
+| size           | undefined   | pane size in %                                          |
+| snapSize       | 0(disabled) | snap size in %                                          |
+| class          | undefined   | Any additional css classes to be added to the component |
 
 ### Styling
 
@@ -142,40 +142,36 @@ The component can be further styled after the props have been defined by overrid
 
 The component raises the following events:
 
-| name             | description                                                  | data                                                         |
-| ---------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `ready`          | fires when splitpanes is ready                               | none                                                         |
-| `resize`         | fires while resizing (on mousemove/touchmove)                | returns an array of all the panes objects with their dimensions |
-| `resized`        | fires once when the resizing stops after user drag (on mouseup/touchend) or when adding or removing a pane. | returns an array of all the panes objects with their dimensions |
-| `pane-click`     | when clicking (or touching) a pane                           | returns the clicked pane object with its dimensions          |
-| `pane-maximize`  | fires when the pane is maximized (ie. typically by double clicking the splitter) | returns the maximized pane object with its dimensions        |
-| `pane-add`       | fires when a pane is added                                   | returns an object containing the index of the added pane and the new array of panes after resize |
-| `pane-remove`    | fires when a pane is removed                                 | returns an object containing the removed pane and an array of all the remaining pane objects with their dimensions (after resize) |
-| `splitter-click` | fires when you click a splitter                              | returns the next pane object (with its dimensions) directly after the clicked splitter. This event is only emitted if dragging did not occur between mousedown and mouseup |
-
-
+| name             | description                                                                                                 | data                                                                                                                                                                       |
+| ---------------- | ----------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ready`          | fires when splitpanes is ready                                                                              | none                                                                                                                                                                       |
+| `resize`         | fires while resizing (on mousemove/touchmove)                                                               | returns an array of all the panes objects with their dimensions                                                                                                            |
+| `resized`        | fires once when the resizing stops after user drag (on mouseup/touchend) or when adding or removing a pane. | returns an array of all the panes objects with their dimensions                                                                                                            |
+| `pane-click`     | when clicking (or touching) a pane                                                                          | returns the clicked pane object with its dimensions                                                                                                                        |
+| `pane-maximize`  | fires when the pane is maximized (ie. typically by double clicking the splitter)                            | returns the maximized pane object with its dimensions                                                                                                                      |
+| `pane-add`       | fires when a pane is added                                                                                  | returns an object containing the index of the added pane and the new array of panes after resize                                                                           |
+| `pane-remove`    | fires when a pane is removed                                                                                | returns an object containing the removed pane and an array of all the remaining pane objects with their dimensions (after resize)                                          |
+| `splitter-click` | fires when you click a splitter                                                                             | returns the next pane object (with its dimensions) directly after the clicked splitter. This event is only emitted if dragging did not occur between mousedown and mouseup |
 
 Events are easy to trap
 
-```html
+```svelte
 <script>
 	function handleMessage(event) {
-		console.log(JSON.stringify(event))
+		console.log(JSON.stringify(event));
 	}
 </script>
 <Splitpanes
-	on:ready={handleMessage}
-	on:resize={handleMessage}
-	on:resized={handleMessage}
-	on:pane-click={handleMessage}
-	on:pane-maximize={handleMessage}
-	on:pane-add={handleMessage}
-	on:pane-remove={handleMessage}
-	on:splitter-click={handleMessage}
->
+	on:ready="{handleMessage}"
+	on:resize="{handleMessage}"
+	on:resized="{handleMessage}"
+	on:pane-click="{handleMessage}"
+	on:pane-maximize="{handleMessage}"
+	on:pane-add="{handleMessage}"
+	on:pane-remove="{handleMessage}"
+	on:splitter-click="{handleMessage}"
+></Splitpanes>
 ```
-
-
 
 ## Contributing
 
@@ -185,12 +181,19 @@ If you have a great feature, feel free to open a discussion on GitHub to discuss
 
 We recommend to use `pnpm` package manager as it is tightly integrated with our CICD pipeline.
 
-To update the project, process as such:
+To setup (or update) the project, process as such:
 
 1. Install PNPM (if not already installed), for example via `npm install -g pnpm`
 2. Run `pnpm install`
 
-from there you may run `pnpm dev` to start the project in development mode.
+To build the exported library, run `pnpm package`.
+
+To build the docs for production-ready version, you need to run `pnpm build`, and you may display the result by `pnpm preview`.
+
+### Developing
+
+After setting (or update) the environment (discussed in the previous section), you may also excecute SvelteKit in development mode by running `pnpm dev`.
+This will open a Vite server that automatically change the result in the browser when the code get changed (hot reload).
 
 ### Commiting changes
 
@@ -200,17 +203,26 @@ The enforcement is made possible by the enablement of several tools which, when 
 
 Commits are accepted, as long as they comply to the _commit message format_ described below.
 
-The format is trivial to learn, yet to ease the process, we enabled a helper script `npm run commit` which will guide you though the commit steps-by-step.
+We also require the code to pass linting and svelte checks.
 
+To ease the development and to enforce the process of formatting the code, perform checks and formatting the commit message, you're advised and must commit using this steps:
+
+0. Make sure your environment is up to date, by running periodically `pnpm install`.
+1. Run `pnpm format`.
+2. Make sure that all the relevant changes are stages (notice `pnpm format` also make changes in the files).
+3. (Optional) Run `pnpm test` to execute Playwright tests.
+4. Run `pnpm commit`.
+   - If linting or svelte checks are failed, the commit process will abort and you'll have to fix them, and return again from step 1.
+   - Otherwise, you will procceed to the commitment interactive terminal, and just follow the instructions to commit your changes.
 
 #### Commit Message Format
 
-Each commit message consists of a **header**, a **body** and a **footer**. The header is *mandatory* and has a special format that includes a **type**, a **subject** and an optional **scope** :
+Each commit message consists of a **header**, a **body** and a **footer**. The header is _mandatory_ and has a special format that includes a **type**, a **subject** and an optional **scope** :
 
 ```
 type(scope?)!?: subject
 body?
-footer? 
+footer?
 ```
 
 Any line of the commit message cannot be longer than 100 characters. This allows the message to be easy to read on GitHub and various other git tools.
@@ -245,14 +257,6 @@ The subject contains a succinct description of the change:
 
 GH Pages hold the demo site. The pages are automatically generated by every push to `master`.
 
-#### Manual Build (outdated)
-
-the following command generates the demo site locally in the /docs folder
-
-```shell
-$ npm run build-ghpages
-```
-
 ### Publishing to npm
 
 Follow these steps to publish the package to npm. Obviously special privileges are required to perform this action.
@@ -268,4 +272,3 @@ $ npm run package
 $ cd package
 $ npm publish --access public
 ```
-
