@@ -210,7 +210,7 @@ To ease the development and to enforce the process of formatting the code, perfo
 2. Make sure that all the relevant changes are stages (notice `pnpm format` also make changes in the files).
 3. (Optional) Run `pnpm test` to execute Playwright tests.
 4. Run `pnpm commit`.
-   - If linting or svelte checks are failed, the commit process will abort and you'll have to fix them, and return again from step 1.
+   - If linting or svelte checks are failed, the commit process will abort and you'll have to fix them, and return again to step 1.
    - Otherwise, you will procceed to the commitment interactive terminal, and just follow the instructions to commit your changes.
 
 #### Commit Message Format
