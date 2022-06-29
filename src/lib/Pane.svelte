@@ -12,6 +12,7 @@
 	export let size: string | null = null;
 	export let minSize = '0';
 	export let maxSize = '100';
+	export let snapSize = '0';
 	// css class
 	let clazz = '';
 	export { clazz as class };
@@ -23,6 +24,7 @@
 	let sz: number;
 	let min: number;
 	let max: number;
+	let snap: number;
 
 	const isBrowser = typeof window !== 'undefined';
 
@@ -39,6 +41,11 @@
 		const maxSizeF = parseFloat(maxSize);
 		if (!isNaN(maxSizeF)) {
 			max = maxSizeF;
+		}
+
+		const snapSizeF = parseFloat(snapSize);
+		if (!isNaN(snapSizeF)) {
+			snap = snapSizeF;
 		}
 	}
 
@@ -90,7 +97,8 @@
 				sz = v;
 			},
 			min: () => min,
-			max: () => max
+			max: () => max,
+			snap: () => snap
 		};
 		onPaneAdd(inst);
 	});

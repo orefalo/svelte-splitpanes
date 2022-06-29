@@ -29,6 +29,7 @@ So we decided to port it and enhance it. :smile:
 - Support RTL rendering with auto-detection
 - Support first splitter on/off
 - Support pane toggle
+- Support snap
 - Support programmatic resizing
 - Support programmatic splitter add/remove
 - Support for legacy browser such as IE 11
@@ -57,7 +58,7 @@ $ npm i svelte-splitpanes
 
 ```svelte
 <script>
-import { Pane, Splitpanes } from 'svelte-splitpanes';
+	import { Pane, Splitpanes } from 'svelte-splitpanes';
 </script>
 <Splitpanes class="default-theme" style="height: 400px">
 	<Pane minSize="20">1<br /><em class="specs">I have a min width of 20%</em></Pane>
@@ -89,12 +90,13 @@ Here is the list of properties that apply to <Splitpanes>
 
 Properties that apply to <Pane>
 
-| Parameter name | Default   | Comments                                                |
-| -------------- | --------- | ------------------------------------------------------- |
-| minSize        | 0         | minimum pane size in %                                  |
-| maxSize        | 100       | maximum pane size in %                                  |
-| size           | undefined | pane size in %                                          |
-| class          | undefined | Any additional css classes to be added to the component |
+| Parameter name | Default     | Comments                                                |
+| -------------- | ----------- | ------------------------------------------------------- |
+| minSize        | 0           | minimum pane size in %                                  |
+| maxSize        | 100         | maximum pane size in %                                  |
+| size           | undefined   | pane size in %                                          |
+| snapSize       | 0(disabled) | snap size in %                                          |
+| class          | undefined   | Any additional css classes to be added to the component |
 
 ### Styling
 
@@ -156,19 +158,19 @@ Events are easy to trap
 ```svelte
 <script>
 	function handleMessage(event) {
-		console.log(JSON.stringify(event))
+		console.log(JSON.stringify(event));
 	}
 </script>
 <Splitpanes
-	on:ready={handleMessage}
-	on:resize={handleMessage}
-	on:resized={handleMessage}
-	on:pane-click={handleMessage}
-	on:pane-maximize={handleMessage}
-	on:pane-add={handleMessage}
-	on:pane-remove={handleMessage}
-	on:splitter-click={handleMessage}
->
+	on:ready="{handleMessage}"
+	on:resize="{handleMessage}"
+	on:resized="{handleMessage}"
+	on:pane-click="{handleMessage}"
+	on:pane-maximize="{handleMessage}"
+	on:pane-add="{handleMessage}"
+	on:pane-remove="{handleMessage}"
+	on:splitter-click="{handleMessage}"
+></Splitpanes>
 ```
 
 ## Contributing
@@ -210,7 +212,7 @@ To ease the development and to enforce the process of formatting the code, perfo
 2. Make sure that all the relevant changes are stages (notice `pnpm format` also make changes in the files).
 3. (Optional) Run `pnpm test` to execute Playwright tests.
 4. Run `pnpm commit`.
-   - If linting or svelte checks are failed, the commit process will abort and you'll have to fix them, and return again from step 1.
+   - If linting or svelte checks are failed, the commit process will abort and you'll have to fix them, and return again to step 1.
    - Otherwise, you will procceed to the commitment interactive terminal, and just follow the instructions to commit your changes.
 
 #### Commit Message Format
