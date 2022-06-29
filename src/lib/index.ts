@@ -28,6 +28,8 @@ export interface IPaneSizingEvent {
 	max: number;
 	// pane size in %
 	size: number;
+	// snap size in %
+	snap: number;
 }
 
 // the definition of a pane
@@ -39,6 +41,7 @@ export interface IPane {
 	index?: number;
 	min: () => number;
 	max: () => number;
+	snap: () => number;
 	sz: () => number;
 	setSz: (number: number) => void;
 	givenSize: string | null;
