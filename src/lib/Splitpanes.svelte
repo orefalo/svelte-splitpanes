@@ -400,21 +400,19 @@
 		// Calculate drag percentage
 		const mouseDragPercentage = Math.max(Math.min(getCurrentDragPercentage(drag), maxDrag), minDrag);
 
-		const maxSnap = Math.max(paneBefore.snap(), paneAfter.snap());
-
 		// Handle snap
 		const paneBeforeSnap = Math.max(
 			// Snap due to the previous pane reaching minimum size
-			sums.prevPanesSize + paneBefore.min() + maxSnap,
+			sums.prevPanesSize + paneBefore.min() + paneBefore.snap(),
 			// and to the next one reaching maximum size
-			100 - (sums.nextPanesSize + paneAfter.max()) + maxSnap
+			100 - (sums.nextPanesSize + paneAfter.max()) + paneAfter.snap()
 		);
 
 		const paneAfterSnap = Math.min(
 			// Snap due to the next pane reaching minimum size
-			100 - (sums.nextPanesSize + paneAfter.min() + maxSnap),
+			100 - (sums.nextPanesSize + paneAfter.min() + paneAfter.snap()),
 			// and to the previous one reaching maximum size
-			sums.prevPanesSize + paneBefore.max() - maxSnap
+			sums.prevPanesSize + paneBefore.max() - paneBefore.snap()
 		);
 
 		let dragPercentage = mouseDragPercentage;
