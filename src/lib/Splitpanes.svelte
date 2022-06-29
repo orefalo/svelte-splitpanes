@@ -234,7 +234,8 @@
 	}
 
 	function bindEvents() {
-		document.body.style.cursor = isHorizontal ? 'row-resize' : 'col-resize';
+		document.body.style.cursor = isHorizontal ? 'col-resize' : 'row-resize';
+
 		document.addEventListener('mousemove', onMouseMove, { passive: false });
 		document.addEventListener('mouseup', onMouseUp);
 
@@ -246,7 +247,7 @@
 	}
 
 	function unbindEvents() {
-		document.body.style.cursor = 'auto';
+		document.body.style.cursor = '';
 
 		document.removeEventListener('mousemove', onMouseMove);
 		document.removeEventListener('mouseup', onMouseUp);
