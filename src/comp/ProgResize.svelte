@@ -8,7 +8,7 @@
 
 	let code = `
 <script>
-    let value = [50, 100];
+    let value = [50];
 <${'/'}script>
 <RangeSlider float bind:values={value} min={0} max={100} />
 <Splitpanes class="default-theme" style="height: 400px">
