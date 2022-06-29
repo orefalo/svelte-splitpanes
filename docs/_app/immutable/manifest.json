@@ -1,6 +1,6 @@
 {
   ".svelte-kit/runtime/client/start.js": {
-    "file": "start-e5e827b1.js",
+    "file": "start-b5f1525d.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -36,13 +36,13 @@
     ]
   },
   "src/routes/index.svelte": {
-    "file": "pages/index.svelte-a3e0c7e9.js",
+    "file": "pages/index.svelte-c91b67bf.js",
     "src": "src/routes/index.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_index-6274fd6d.js",
-      "_Pane-deb98085.js",
+      "_Pane-d1d697c6.js",
       "_index-f048e47e.js"
     ],
     "css": [
@@ -50,13 +50,13 @@
     ]
   },
   "src/routes/test.svelte": {
-    "file": "pages/test.svelte-5b8ada6f.js",
+    "file": "pages/test.svelte-43f09806.js",
     "src": "src/routes/test.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_index-6274fd6d.js",
-      "_Pane-deb98085.js",
+      "_Pane-d1d697c6.js",
       "_index-f048e47e.js"
     ]
   },
@@ -69,8 +69,8 @@
       "_index-6274fd6d.js"
     ]
   },
-  "_Pane-deb98085.js": {
-    "file": "chunks/Pane-deb98085.js",
+  "_Pane-d1d697c6.js": {
+    "file": "chunks/Pane-d1d697c6.js",
     "imports": [
       "_index-6274fd6d.js",
       "_index-f048e47e.js"
