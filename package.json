@@ -31,6 +31,7 @@
 		"package": "svelte-kit package",
 		"preview": "svelte-kit preview",
 		"prepare": "husky install && svelte-kit sync",
+		"static-serv": "serve -l 3000 --no-clipboard",
 		"test": "playwright test",
 		"check": "svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
@@ -68,7 +69,8 @@
 	},
 	"type": "module",
 	"optionalDependencies": {
-		"@playwright/test": "1.22.2"
+		"@playwright/test": "1.22.2",
+		"serve": "13.0.2"
 	},
 	"config": {
 		"cz-customizable": {

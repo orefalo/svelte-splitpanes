@@ -1,0 +1,12 @@
+{
+	"public": "docs",
+	"rewrites": [
+		{ "source": "/svelte-splitpanes", "destination": "/index.html" },
+		{ "source": "/svelte-splitpanes/:p1", "destination": "/:p1" },
+		{ "source": "/svelte-splitpanes/:p1/:p2", "destination": "/:p1/:p2" },
+		{ "source": "/svelte-splitpanes/:p1/:p2/:p3", "destination": "/:p1/:p2/:p3" },
+		{ "source": "/svelte-splitpanes/:p1/:p2/:p3/:p4", "destination": "/:p1/:p2/:p3/:p4" },
+		{ "source": "/svelte-splitpanes/:p1/:p2/:p3/:p4/:p5", "destination": "/:p1/:p2/:p3/:p4/:p5" },
+		{ "source": "/svelte-splitpanes/:p1/:p2/:p3/:p4/:p5/:p6", "destination": "/:p1/:p2/:p3/:p4/:p5/:p6" }
+	]
+}
