@@ -1,6 +1,6 @@
 <script>
 	import { Pane, Splitpanes } from '$lib/.';
-	import { HighlightSvelte } from 'svelte-highlight';
+	import CodeArea from '$comp/extras/CodeArea.svelte';
 
 	let code = `
 <Splitpanes theme="my-theme" horizontal style="height: 400px">
@@ -146,7 +146,7 @@
 	The default style is called `default-theme`, its SCSS definition can be found below:
 </p>
 
-<HighlightSvelte code={theme} />
+<CodeArea id="styling_splitters" code={theme} />
 
 <p>
 	By altering the above styles, it is possible to achieve neat visual adjustments. Please note how each Splitpanes
@@ -174,7 +174,7 @@
 	</Pane>
 </Splitpanes>
 
-<HighlightSvelte {code} />
+<CodeArea id="styling_splitters_alternative" {code} />
 
 <style global lang="scss">
 	.splitpanes.my-theme {

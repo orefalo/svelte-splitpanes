@@ -1,6 +1,6 @@
 <script>
 	import { Pane, Splitpanes } from '$lib/.';
-	import { HighlightSvelte } from 'svelte-highlight';
+	import CodeArea from '$comp/extras/CodeArea.svelte';
 	import Button from '$comp/extras/Button.svelte';
 
 	function onClick() {
@@ -50,4 +50,4 @@ function onClick() {
 	</Pane>
 </Splitpanes>
 
-<HighlightSvelte {code} />
+<CodeArea id="toggle_panes" {code} />

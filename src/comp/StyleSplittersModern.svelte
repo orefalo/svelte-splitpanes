@@ -1,6 +1,6 @@
 <script>
 	import { Pane, Splitpanes } from '$lib/.';
-	import { HighlightSvelte } from 'svelte-highlight';
+	import CodeArea from '$comp/extras/CodeArea.svelte';
 
 	let code = `
 <Splitpanes theme="no-splitter" horizontal style="height: 400px" dblClickSplitter={false}>
@@ -132,7 +132,7 @@
 	</Pane>
 </Splitpanes>
 
-<HighlightSvelte {code} />
+<CodeArea id="style_splitters_modern" {code} />
 
 <style global lang="scss">
 	.splitpanes.modern-theme {

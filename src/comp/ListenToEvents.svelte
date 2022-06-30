@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Pane, Splitpanes } from '$lib/.';
-	import { HighlightSvelte } from 'svelte-highlight';
+	import CodeArea from '$comp/extras/CodeArea.svelte';
 	import TextArea from '$comp/extras/TextAreaAutosize.svelte';
 
 	let val = '// Event name: Event params   (Last event at the top)';
@@ -90,4 +90,4 @@
 <p>Try resizing panes and check the logs bellow.</p>
 <TextArea bind:value={val} minRows={4} maxRows={40} />
 
-<HighlightSvelte {code} />
+<CodeArea id="listen_to_events" {code} />

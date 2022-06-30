@@ -1,6 +1,6 @@
 <script>
 	import { Pane, Splitpanes } from '$lib/.';
-	import { HighlightSvelte } from 'svelte-highlight';
+	import CodeArea from '$comp/extras/CodeArea.svelte';
 	import Button from '$comp/extras/Button.svelte';
 
 	let panesNumber = 3;
@@ -51,4 +51,4 @@
 		</Pane>
 	{/each}
 </Splitpanes>
-<HighlightSvelte {code} />
+<CodeArea id="add_remove_splitter" {code} />

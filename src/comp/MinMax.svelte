@@ -1,6 +1,6 @@
 <script>
 	import { Pane, Splitpanes } from '$lib/.';
-	import { HighlightSvelte } from 'svelte-highlight';
+	import CodeArea from '$comp/extras/CodeArea.svelte';
 
 	let code = `
 <Splitpanes class="default-theme" horizontal={true} style="height: 400px">
@@ -52,4 +52,4 @@
 	</Pane>
 </Splitpanes>
 
-<HighlightSvelte {code} />
+<CodeArea id="min_max" {code} />

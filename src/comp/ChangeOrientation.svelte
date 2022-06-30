@@ -1,6 +1,6 @@
 <script>
 	import { Pane, Splitpanes } from '$lib/.';
-	import { HighlightSvelte } from 'svelte-highlight';
+	import CodeArea from '$comp/extras/CodeArea.svelte';
 	import Button from '$comp/extras/Button.svelte';
 
 	let horizontal = false;
@@ -56,4 +56,4 @@
 	{/each}
 </Splitpanes>
 
-<HighlightSvelte {code} />
+<CodeArea id="change_orientation" {code} />
