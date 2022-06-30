@@ -9,12 +9,12 @@
 	<link rel="stylesheet" href="/svelte-splitpanes/_app/immutable/assets/pages/__layout.svelte-2d50f436.css">
 	<link rel="stylesheet" href="/svelte-splitpanes/_app/immutable/assets/pages/index.svelte-0b167244.css">
 	<link rel="stylesheet" href="/svelte-splitpanes/_app/immutable/assets/Pane-2369fef4.css">
-	<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/start-6ccee8d1.js">
-	<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/chunks/index-6274fd6d.js">
-	<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/chunks/index-f048e47e.js">
-	<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/pages/__layout.svelte-09d7cbe6.js">
-	<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/pages/index.svelte-d6569804.js">
-	<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/chunks/Pane-97d5e7d8.js">
+	<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/start-0050cb8e.js">
+	<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/chunks/index-6b9ed66e.js">
+	<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/chunks/index-98fb7fd7.js">
+	<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/pages/__layout.svelte-090b4114.js">
+	<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/pages/index.svelte-533e2b3b.js">
+	<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/chunks/Pane-25e798bd.js">
 	</head>
 	<body>
 		<div>
@@ -74,7 +74,7 @@
 			<em class="specs">I have a max height of 70%</em></span></div>
 </div>
 
-
+<div role="presentation" id="prerendered_area_min_max">
   
   <pre data-language="svelte" class=" svelte-4cqgwq"><code class="hljs"><!-- HTML_TAG_START -->
 <span class="hljs-tag">&lt;<span class="hljs-name">Splitpanes</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;default-theme&quot;</span> <span class="hljs-attr">horizontal</span>=<span class="hljs-string">{true}</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;height: 400px&quot;</span>&gt;</span>
@@ -97,7 +97,7 @@
 		<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
 	<span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">Splitpanes</span>&gt;</span><!-- HTML_TAG_END --></code></pre>
-
+</div>
 <hr>
 <h2>Default pane size</h2>
 <p>Provide dimension of your panes when they first load (will be used for the width or height respectively for the
@@ -126,7 +126,7 @@
 <div class="splitpanes__pane " style="height: 25%;"><span>3</span></div>
 </div>
 
-
+<div role="presentation" id="prerendered_area_default_size">
   
   <pre data-language="svelte" class=" svelte-4cqgwq"><code class="hljs"><!-- HTML_TAG_START -->
 <span class="hljs-tag">&lt;<span class="hljs-name">Splitpanes</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;default-theme&quot;</span> <span class="hljs-attr">horizontal</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;height: 400px&quot;</span>&gt;</span>
@@ -140,7 +140,7 @@
         <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>3<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">Splitpanes</span>&gt;</span><!-- HTML_TAG_END --></code></pre>
-
+</div>
 <hr>
 <h2>Locking layout by prevent pushing other panes</h2>
 
@@ -182,7 +182,7 @@
 <div class="splitpanes__pane "><span>5</span></div>
 </div>
 
-
+<div role="presentation" id="prerendered_area_lock_layout">
   
   <pre data-language="svelte" class=" svelte-4cqgwq"><code class="hljs"><!-- HTML_TAG_START -->
 <span class="hljs-tag">&lt;<span class="hljs-name">Splitpanes</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;default-theme&quot;</span> <span class="hljs-attr">horizontal</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;height: 400px&quot;</span> <span class="hljs-attr">pushOtherPanes</span>=<span class="hljs-string">{false}</span>&gt;</span>
@@ -206,7 +206,7 @@
         <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>5<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">Splitpanes</span>&gt;</span><!-- HTML_TAG_END --></code></pre>
-
+</div>
 <hr>
 <h2>Lots of splitters &amp; push other panes - all panes have a min width of 5%</h2>
 
@@ -261,7 +261,7 @@
 		</div>
 </div>
 
-
+<div role="presentation" id="prerendered_area_push_other_panes">
   
   <pre data-language="svelte" class=" svelte-4cqgwq"><code class="hljs"><!-- HTML_TAG_START -->
 <span class="hljs-tag">&lt;<span class="hljs-name">Splitpanes</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;default-theme&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;height: 400px&quot;</span>&gt;</span>
@@ -271,7 +271,7 @@
         <span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
     {/each}
 <span class="hljs-tag">&lt;/<span class="hljs-name">Splitpanes</span>&gt;</span><!-- HTML_TAG_END --></code></pre>
-
+</div>
 <hr>
 <h2>Adding splitters programmatically</h2>
 
@@ -302,7 +302,7 @@
 <div class="splitpanes__pane " style="min-width: 10%;"><span>3</span>
 		</div>
 </div>
-
+<div role="presentation" id="prerendered_area_add_remove_splitter">
   
   <pre data-language="svelte" class=" svelte-4cqgwq"><code class="hljs"><!-- HTML_TAG_START -->
 &lt;script&gt;
@@ -327,7 +327,7 @@
 		&lt;/Pane&gt;
 	{/each}
 &lt;/Splitpanes&gt;<!-- HTML_TAG_END --></code></pre>
-
+</div>
 <hr>
 <h2>Change orientation &amp; first splitter</h2>
 <p>When changing direction, all the panes current width or height will flip to adapt to the new layout.</p>
@@ -362,7 +362,7 @@
 		</div>
 </div>
 
-
+<div role="presentation" id="prerendered_area_change_orientation">
   
   <pre data-language="svelte" class=" svelte-4cqgwq"><code class="hljs"><!-- HTML_TAG_START -->
 <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
@@ -386,7 +386,7 @@
 		<span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
 	{/each}
 <span class="hljs-tag">&lt;/<span class="hljs-name">Splitpanes</span>&gt;</span><!-- HTML_TAG_END --></code></pre>
-
+</div>
 <hr>
 <h2>Programmatic resizing</h2>
 <p>This example shows the programmatic way of resizing panes with data biding. And how it works both ways.</p>
@@ -414,7 +414,7 @@
 <div class="splitpanes__pane " style="width: 50%;"><span>50%</span></div>
 </div>
 
-
+<div role="presentation" id="prerendered_area_prog_resize">
   
   <pre data-language="svelte" class=" svelte-4cqgwq"><code class="hljs"><!-- HTML_TAG_START -->
 <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
@@ -429,7 +429,7 @@
 		<span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{100 - value[0]}%<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
 	<span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">Splitpanes</span>&gt;</span><!-- HTML_TAG_END --></code></pre>
-
+</div>
 <hr>
 <h2>Toggle a pane on/off</h2>
 
@@ -456,7 +456,7 @@
 <div class="splitpanes__pane "><span>3</span></div>
 </div>
 
-
+<div role="presentation" id="prerendered_area_toggle_panes">
   
   <pre data-language="svelte" class=" svelte-4cqgwq"><code class="hljs"><!-- HTML_TAG_START -->
 <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
@@ -480,7 +480,7 @@
         <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>3<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">Splitpanes</span>&gt;</span><!-- HTML_TAG_END --></code></pre>
-
+</div>
 <hr>
 <h2>Listening to emitted events</h2>
 
@@ -529,7 +529,7 @@
 	<textarea readonly style="outline: none;" class="svelte-1gm0t61">// Event name: Event params   (Last event at the top)</textarea>
 </div>
 
-
+<div role="presentation" id="prerendered_area_listen_to_events">
   
   <pre data-language="svelte" class=" svelte-4cqgwq"><code class="hljs"><!-- HTML_TAG_START -->
 <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
@@ -563,7 +563,7 @@
 <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Try resizing panes and check the logs bellow.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">TextArea</span> <span class="hljs-attr">bind:value</span>=<span class="hljs-string">{val}</span> <span class="hljs-attr">minRows</span>=<span class="hljs-string">{4}</span> <span class="hljs-attr">maxRows</span>=<span class="hljs-string">{40}</span> /&gt;</span>    
 <!-- HTML_TAG_END --></code></pre>
-
+</div>
 <hr>
 <h2>Simple snap</h2>
 <p>Using snapSize on a pane makes it snap to his adjacent splitters and borders.</p>
@@ -590,7 +590,7 @@
 <div class="splitpanes__pane "></div>
 </div>
 
-
+<div role="presentation" id="prerendered_area_simple_snap">
   
   <pre data-language="svelte" class=" svelte-4cqgwq"><code class="hljs"><!-- HTML_TAG_START -->
 <span class="hljs-tag">&lt;<span class="hljs-name">Splitpanes</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;height: 400px&quot;</span>&gt;</span>
@@ -602,7 +602,7 @@
 
 	<span class="hljs-tag">&lt;<span class="hljs-name">Pane</span> /&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">Splitpanes</span>&gt;</span><!-- HTML_TAG_END --></code></pre>
-
+</div>
 <hr>
 <h2>Middle snap</h2>
 
@@ -628,7 +628,7 @@
 <div class="splitpanes__pane "></div>
 </div>
 
-
+<div role="presentation" id="prerendered_area_middle_snap">
   
   <pre data-language="svelte" class=" svelte-4cqgwq"><code class="hljs"><!-- HTML_TAG_START -->
 <span class="hljs-tag">&lt;<span class="hljs-name">Splitpanes</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;height: 400px&quot;</span>&gt;</span>
@@ -640,7 +640,7 @@
 
 	<span class="hljs-tag">&lt;<span class="hljs-name">Pane</span> /&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">Splitpanes</span>&gt;</span><!-- HTML_TAG_END --></code></pre>
-
+</div>
 <hr>
 <h2>Min &amp; max with snap</h2>
 <p>You can also snap to the panel maximum and minimum size.</p>
@@ -670,7 +670,7 @@
 <div class="splitpanes__pane "></div>
 </div>
 
-
+<div role="presentation" id="prerendered_area_min_max_snap">
   
   <pre data-language="svelte" class=" svelte-4cqgwq"><code class="hljs"><!-- HTML_TAG_START -->
 <span class="hljs-tag">&lt;<span class="hljs-name">Splitpanes</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;height: 400px&quot;</span>&gt;</span>
@@ -686,7 +686,7 @@
 
 	<span class="hljs-tag">&lt;<span class="hljs-name">Pane</span> /&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">Splitpanes</span>&gt;</span><!-- HTML_TAG_END --></code></pre>
-
+</div>
 <hr>
 <h2>Styling Splitters</h2>
 
@@ -695,7 +695,7 @@
 	The default style is called `default-theme`, its SCSS definition can be found below:
 </p>
 
-
+<div role="presentation" id="prerendered_area_styling_splitters">
   
   <pre data-language="svelte" class=" svelte-4cqgwq"><code class="hljs"><!-- HTML_TAG_START -->
 <span class="hljs-selector-class">.splitpanes</span><span class="hljs-selector-class">.default-theme</span> {
@@ -769,7 +769,7 @@
     }
 }
 <!-- HTML_TAG_END --></code></pre>
-
+</div>
 
 <p>By altering the above styles, it is possible to achieve neat visual adjustments. Please note how each Splitpanes
 	references our new `theme=&quot;my-theme&quot;`
@@ -807,7 +807,7 @@
 <div class="splitpanes__pane "><em class="specs"><p>In this example the splitters are thin lines but the reactive touch zone is spread to 30 pixels all around!</p></em></div>
 </div>
 
-
+<div role="presentation" id="prerendered_area_styling_splitters_alternative">
   
   <pre data-language="svelte" class=" svelte-4cqgwq"><code class="hljs"><!-- HTML_TAG_START -->
 <span class="hljs-tag">&lt;<span class="hljs-name">Splitpanes</span> <span class="hljs-attr">theme</span>=<span class="hljs-string">&quot;my-theme&quot;</span> <span class="hljs-attr">horizontal</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;height: 400px&quot;</span>&gt;</span>
@@ -865,7 +865,7 @@
   <span class="hljs-attribute">cursor</span>: row-resize;
 }</span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
 <!-- HTML_TAG_END --></code></pre>
-
+</div>
 <hr>
 <h2>Styling Splitters - Modern</h2>
 
@@ -919,7 +919,7 @@
 <div class="splitpanes__pane " style="min-height: 6%; max-height: 6%; height: 6%;"><p>statusbar</p></div>
 </div>
 
-
+<div role="presentation" id="prerendered_area_style_splitters_modern">
   
   <pre data-language="svelte" class=" svelte-4cqgwq"><code class="hljs"><!-- HTML_TAG_START -->
 <span class="hljs-tag">&lt;<span class="hljs-name">Splitpanes</span> <span class="hljs-attr">theme</span>=<span class="hljs-string">&quot;no-splitter&quot;</span> <span class="hljs-attr">horizontal</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;height: 400px&quot;</span> <span class="hljs-attr">dblClickSplitter</span>=<span class="hljs-string">{false}</span>&gt;</span>
@@ -1005,14 +1005,14 @@
   <span class="hljs-attribute">cursor</span>: none;
 }</span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
 <!-- HTML_TAG_END --></code></pre>
-
+</div>
 </div>
 
 
-		<script type="module" data-sveltekit-hydrate="1qj4l9">
-		import { start } from "/svelte-splitpanes/_app/immutable/start-6ccee8d1.js";
+		<script type="module" data-sveltekit-hydrate="1ai1qbb">
+		import { start } from "/svelte-splitpanes/_app/immutable/start-0050cb8e.js";
 		start({
-			target: document.querySelector('[data-sveltekit-hydrate="1qj4l9"]').parentNode,
+			target: document.querySelector('[data-sveltekit-hydrate="1ai1qbb"]').parentNode,
 			paths: {"base":"/svelte-splitpanes","assets":"/svelte-splitpanes"},
 			session: {},
 			route: true,
