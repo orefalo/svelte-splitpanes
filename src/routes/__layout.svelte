@@ -50,6 +50,11 @@
 		font-size: 0.5em;
 	}
 
+	/* additional styling to the code area */
+	:global(code.hljs) {
+		tab-size: 4;
+	}
+
 	.page-container {
 		-webkit-box-flex: 1;
 		-ms-flex-positive: 1;
