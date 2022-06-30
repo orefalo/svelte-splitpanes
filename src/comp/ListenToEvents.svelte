@@ -15,8 +15,8 @@
 	let val = '// Event name: Event params   (Last event at the top)';
 
 	function handleMessage(event) {
-		if (event.detail) val = event.type + ' ' + JSON.stringify(event.detail) + '\n' + val;
-		else val = event.type + '\n' + val;
+		if (event.detail) val = event.type + ' ' + JSON.stringify(event.detail) + '\\n' + val;
+		else val = event.type + '\\n' + val;
 	}
 <${'/'}script>
 <Splitpanes
