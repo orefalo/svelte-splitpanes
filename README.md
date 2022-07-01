@@ -19,7 +19,7 @@ So we decided to port it and enhance it. :smile:
 
 ## Features
 
-- Size is less than 4 kb
+- Size is less than 6 kb
 - Support both dynamic horizontal and vertical splits
 - Support defaults, min and max sizes
 - Support multiple splits
@@ -61,10 +61,10 @@ $ npm i svelte-splitpanes
 	import { Pane, Splitpanes } from 'svelte-splitpanes';
 </script>
 <Splitpanes class="default-theme" style="height: 400px">
-	<Pane minSize="20">1<br /><em class="specs">I have a min width of 20%</em></Pane>
+	<Pane minSize={20}>1<br /><em class="specs">I have a min width of 20%</em></Pane>
 	<Pane>
 		<Splitpanes class="default-theme" horizontal="{true}">
-			<Pane minSize="15">2<br /><em class="specs">I have a min height of 15%</em></Pane>
+			<Pane minSize={15}>2<br /><em class="specs">I have a min height of 15%</em></Pane>
 			<Pane>3</Pane>
 			<Pane>4</Pane>
 		</Splitpanes>
@@ -77,26 +77,26 @@ $ npm i svelte-splitpanes
 
 Here is the list of properties that apply to <Splitpanes>
 
-| Parameter name   | Default                     | Comments                                                                                                     |
-| ---------------- | --------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| horizontal       | false (Vertical by default) | The orientation of the split panes.                                                                          |
-| pushOtherPanes   | true                        | Whether a splitter should push the next splitter when dragging.                                              |
-| dblClickSplitter | true                        | Double click on splitter to maximize the next pane                                                           |
-| rtl              | "auto"                      | Supports Right to left, by default will auto detect                                                          |
-| firstSplitter    | false                       | Displays the first splitter when set to true. This allows maximizing the first pane on splitter double click |
-| id               | undefined                   | Provide an optional id attribute to the component for styling/other reasons                                  |
-| theme            | 'default-theme'             | Used to styles the splitters using a different css class                                                     |
-| class            | undefined                   | Any additional css classes to be added to the component                                                      |
+| Parameter name   | Type            | Default                     | Comments                                                     |
+| ---------------- | --------------- | --------------------------- | ------------------------------------------------------------ |
+| horizontal       | boolean         | false (Vertical by default) | The orientation of the split panes.                          |
+| pushOtherPanes   | boolean         | true                        | Whether a splitter should push the next splitter when dragging. |
+| dblClickSplitter | boolean         | true                        | Double click on splitter to maximize the next pane           |
+| rtl              | boolean\|"auto" | "auto"                      | Supports Right to left, by default will auto detect          |
+| firstSplitter    | boolean         | false                       | Displays the first splitter when set to true. This allows maximizing the first pane on splitter double click |
+| id               | string          | undefined                   | Provide an optional id attribute to the component for styling/other reasons |
+| theme            | string          | 'default-theme'             | Used to styles the splitters using a different css class     |
+| class            | string          | undefined                   | Any additional css classes to be added to the component      |
 
 Properties that apply to <Pane>
 
-| Parameter name | Default     | Comments                                                |
-| -------------- | ----------- | ------------------------------------------------------- |
-| minSize        | 0           | minimum pane size in %                                  |
-| maxSize        | 100         | maximum pane size in %                                  |
-| size           | undefined   | pane size in %                                          |
-| snapSize       | 0(disabled) | snap size in %                                          |
-| class          | undefined   | Any additional css classes to be added to the component |
+| Parameter name | Type         | Default     | Comments                                                |
+| -------------- | ------------ | ----------- | ------------------------------------------------------- |
+| minSize        | number       | 0           | minimum pane size constraint in %                       |
+| maxSize        | number       | 100         | maximum pane size constraint in %                       |
+| size           | number\|null | null        | pane size in %, will autosize if not defined            |
+| snapSize       | number       | 0(disabled) | edge snap size constraint in %                          |
+| class          | string       | undefined   | any additional css classes to be added to the component |
 
 ### Styling
 
@@ -192,8 +192,7 @@ To build the docs for production-ready version, you need to run `pnpm build`, an
 
 ### Developing
 
-After setting (or update) the environment (discussed in the previous section), you may also excecute SvelteKit in development mode by running `pnpm dev`.
-This will open a Vite server that automatically change the result in the browser when the code get changed (hot reload).
+After setting (or update) the environment (discussed in the previous section), you may also excecute SvelteKit in development mode by running `pnpm dev`. This will open a Vite server that automatically changes the result in the browser when the code is updated (hot reload).
 
 ### Commiting changes
 
