@@ -783,6 +783,18 @@
 			.splitpanes--horizontal & {
 				transition: height 0.2s ease-out;
 			}
+
+			/** Add also a direct child selector, for dealing with specifity of nested splitpanes transition.
+			    This issue was happening in the examples on nested splitpanes, vertical inside horizontal.
+			    I think it's better to keep also the previous CSS selector for (potential) old browser compatibility.
+			  */
+			.splitpanes--vertical > & {
+				transition: width 0.2s ease-out;
+			}
+			.splitpanes--horizontal > & {
+				transition: height 0.2s ease-out;
+			}
+
 			.splitpanes--dragging & {
 				transition: none;
 				pointer-events: none;
