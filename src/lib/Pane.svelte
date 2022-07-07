@@ -21,13 +21,15 @@
 
 	const key = {};
 	let element: HTMLElement;
-	let sz: number;
+	let sz: number = size == null ? 0 : size;
 
 	const isBrowser = typeof window !== 'undefined';
 
 	// REACTIVE
 
-	$: sz = size == null ? 0 : size;
+	$: if (size != null) {
+		sz = size;
+	}
 
 	$: dimension = $isHorizontal ? 'height' : 'width';
 
