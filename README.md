@@ -1,6 +1,6 @@
 # Svelte-Splitpanes
 
-Use dynamic and predictable view panels to layout an application.
+A predictable responsive component to layout resizable view panels supporting an multitude of advenced features (min, max, snap, expand on double click, fixed size.
 
 ![screenshot](./static/screenshot.jpg)
 
