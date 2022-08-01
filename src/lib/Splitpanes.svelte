@@ -223,11 +223,11 @@
 	});
 
 	// Tells in the current DOM state if we are in RTL direction or not.
-	function isRTL() {
+	function isRTL(containerComputedStyle: CSSStyleDeclaration) {
 		if (rtl === 'auto') {
 			// the try catch is to support old browser, flag is preset to false
 			try {
-				return window.getComputedStyle(container).direction === 'rtl';
+				return containerComputedStyle.direction === 'rtl';
 			} catch (err) {
 				// We want application to not crush, but don't care about the message
 			}
@@ -272,7 +272,11 @@
 			// Prevent scrolling while touch dragging (only works with an active event, eg. passive: false).
 			event.preventDefault();
 			isDragging = true;
-			calculatePanesSize(getCurrentMouseDrag(event));
+
+			const containerComputedStyle: CSSStyleDeclaration = window.getComputedStyle(container);
+			const currentMouseDrag = getCurrentMouseDrag(event, containerComputedStyle);
+			calculatePanesSize(currentMouseDrag, containerComputedStyle);
+
 			dispatch('resize', prepareSizeEvent());
 		}
 	}
@@ -361,22 +365,21 @@
 		return isNaN(num) ? undefined : num;
 	}
 
-	function getBordersSizeOffsets() {
-		const computedStyle = getComputedStyle(container);
-		if (computedStyle.getPropertyValue('box-sizing') === 'border-box') {
+	function getBordersSizeOffsets(containerComputedStyle: CSSStyleDeclaration) {
+		if (containerComputedStyle.getPropertyValue('box-sizing') === 'border-box') {
 			// In this case, no offset is needed since the box model of this element doesn't include the border.
 			return undefined;
 		}
 		// otherwise
 
-		const left = pxToNumber(computedStyle.getPropertyValue('border-left-width'));
+		const left = pxToNumber(containerComputedStyle.getPropertyValue('border-left-width'));
 		if (left === undefined) {
 			console.error('Splitpanes Error: Fail to parse container `border-left-width`.');
 			return undefined;
 		}
 		// otherwise
 
-		const top = pxToNumber(computedStyle.getPropertyValue('border-top-width'));
+		const top = pxToNumber(containerComputedStyle.getPropertyValue('border-top-width'));
 		if (top === undefined) {
 			console.error('Splitpanes Error: Fail to parse container `border-top-width`.');
 			return undefined;
@@ -387,9 +390,12 @@
 	}
 
 	// Get the cursor position relative to the splitpane container.
-	function getCurrentMouseDrag(event: MouseEvent | TouchEvent): MousePosition {
+	function getCurrentMouseDrag(
+		event: MouseEvent | TouchEvent,
+		containerComputedStyle: CSSStyleDeclaration
+	): MousePosition {
 		const rect = container.getBoundingClientRect();
-		const borderOffsets = getBordersSizeOffsets() || { left: 0, top: 0 };
+		const borderOffsets = getBordersSizeOffsets(containerComputedStyle) || { left: 0, top: 0 };
 
 		const eventMouse = event as MouseEvent;
 		const eventTouch = event as TouchEvent;
@@ -403,11 +409,11 @@
 
 	// Returns the drag percentage of the splitter relative to the 2 panes it's inbetween.
 	// if the sum of size of the 2 cells is 60%, the dragPercentage range will be 0 to 100% of this 60%.
-	function getCurrentDragPercentage(drag: MousePosition): number {
+	function getCurrentDragPercentage(drag: MousePosition, containerComputedStyle: CSSStyleDeclaration): number {
 		let tdrag = drag[horizontal ? 'y' : 'x'];
 		// In the code bellow 'size' refers to 'width' for vertical and 'height' for horizontal layout.
 		const containerSize = container[horizontal ? 'clientHeight' : 'clientWidth'];
-		if (isRTL() && !horizontal) tdrag = containerSize - tdrag;
+		if (isRTL(containerComputedStyle) && !horizontal) tdrag = containerSize - tdrag;
 
 		return (tdrag * 100) / containerSize;
 	}
@@ -415,7 +421,7 @@
 	/**
 	 * Called when slitters are moving to adjust pane sizes
 	 */
-	function calculatePanesSize(drag: MousePosition) {
+	function calculatePanesSize(drag: MousePosition, containerComputedStyle: CSSStyleDeclaration) {
 		const splitterIndex = activeSplitter;
 		let sums: Sums = {
 			prevPanesSize: sumPrevPanesSize(splitterIndex),
@@ -433,7 +439,10 @@
 		let paneAfter = panes[panesToResize[1]] || null;
 
 		// Calculate drag percentage
-		const mouseDragPercentage = Math.max(Math.min(getCurrentDragPercentage(drag), maxDrag), minDrag);
+		const mouseDragPercentage = Math.max(
+			Math.min(getCurrentDragPercentage(drag, containerComputedStyle), maxDrag),
+			minDrag
+		);
 
 		// Handle snap
 		const paneBeforeSnap = sums.prevPanesSize + paneBefore.min() + paneBefore.snap();
