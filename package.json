@@ -25,11 +25,11 @@
 	},
 	"license": "MIT",
 	"scripts": {
-		"dev": "svelte-kit dev",
-		"build": "svelte-kit build",
+		"dev": "cross-env DEV=1 vite dev --port 3000",
+		"build": "vite build",
 		"build-ghpages": "rm -rf docs && svelte-kit build",
 		"package": "svelte-kit package",
-		"preview": "svelte-kit preview",
+		"preview": "vite preview --port 3000",
 		"prepare": "husky install && svelte-kit sync",
 		"static-serv": "serve -l 3000 --no-clipboard",
 		"test": "playwright test",
@@ -47,6 +47,7 @@
 		"@typescript-eslint/parser": "5.30.0",
 		"commitlint": "11.0.0",
 		"commitlint-config-gitmoji": "2.2.5",
+		"cross-env": "7.0.3",
 		"cz-customizable": "6.3.0",
 		"eslint": "8.18.0",
 		"eslint-config-prettier": "8.5.0",
@@ -65,7 +66,8 @@
 		"svelte-range-slider-pips": "2.0.3",
 		"svelte2tsx": "0.5.11",
 		"tslib": "2.4.0",
-		"typescript": "4.7.4"
+		"typescript": "4.7.4",
+		"vite": "3.0.4"
 	},
 	"type": "module",
 	"optionalDependencies": {

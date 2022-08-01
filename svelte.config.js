@@ -1,8 +1,8 @@
 import adapter from '@sveltejs/adapter-static';
 import preprocess from 'svelte-preprocess';
-import path from 'path';
 
-const dev = process.env.NODE_ENV === 'development';
+// Althought it's not the vite way, we do so since there is no way to know if on dev for SvelteKit right now.
+const dev = !!process.env.DEV;
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -20,16 +20,6 @@ const config = {
 		paths: {
 			// change below to your repo name
 			base: dev ? '' : '/svelte-splitpanes'
-		},
-		vite: {
-			resolve: {
-				optimizeDeps: {
-					include: ['highlight.js', 'highlight.js/lib/core']
-				},
-				alias: {
-					$comp: path.resolve('./src/comp')
-				}
-			}
 		}
 	}
 };
