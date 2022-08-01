@@ -423,7 +423,6 @@
 		const paneAfterMaxReached = paneAfter.max() < 100 && dragPercentage <= 100 - (paneAfter.max() + sums.nextPanesSize);
 		// Prevent dragging beyond pane max.
 		if (paneBeforeMaxReached || paneAfterMaxReached) {
-			console.log(100 - (paneAfter.max() + sums.nextPanesSize));
 			if (paneBeforeMaxReached) {
 				paneBefore.setSz(paneBefore.max());
 				paneAfter.setSz(Math.max(100 - paneBefore.max() - sums.prevPanesSize - sums.nextPanesSize, 0));
