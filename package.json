@@ -27,7 +27,6 @@
 	"scripts": {
 		"dev": "cross-env DEV=1 vite dev --port 3000",
 		"build": "vite build",
-		"build-ghpages": "rm -rf docs && svelte-kit build",
 		"package": "svelte-kit package",
 		"preview": "vite preview --port 3000",
 		"prepare": "husky install && svelte-kit sync",
