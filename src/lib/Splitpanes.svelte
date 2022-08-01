@@ -513,7 +513,7 @@
 				for (let i = 0; i < panes.length; i++) {
 					const pane = panes[i];
 					if (i > splitterIndex && i < panesToResize[1]) {
-						pane.sz = pane.min;
+						pane.setSz(pane.min());
 						sums.nextReachedMinPanes += pane.min();
 					}
 				}
@@ -524,12 +524,12 @@
 			const panesCount = panes.length;
 			if (panesToResize[1] === undefined) {
 				sums.nextReachedMinPanes = 0;
-				panes[panesCount - 1].sz = panes[panesCount - 1].min;
+				panes[panesCount - 1].setSz(panes[panesCount - 1].min());
 
 				for (let i = 0; i < panes.length; i++) {
 					const pane = panes[i];
 					if (i < panesCount - 1 && i >= splitterIndex + 1) {
-						pane.sz = pane.min;
+						pane.setSz(pane.min());
 						sums.nextReachedMinPanes += pane.min();
 					}
 				}
