@@ -43,18 +43,21 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      
+      - name: SvelteKit Sync
+        run: pnpm exec svelte-kit sync
 
       - name: Lint
         run: npm run lint
+
+      - name: Svelte Check
+        if: success() || failure() # Run even if previous failed
+        run: npm run check
       
       # Build Frontend
       - name: Build Frontend
         if: success() || failure() # Run even if previous failed
         run: npm run build
-
-      # Need to check only after build, so SvelteKit would generate files.
-      - name: Svelte Check
-        run: npm run check
 
       # Cache Playwright
       - name: Cache Playwright
