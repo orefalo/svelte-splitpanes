@@ -29,7 +29,7 @@
 		"build": "vite build",
 		"package": "svelte-kit package",
 		"preview": "vite preview --port 3000",
-		"prepare": "husky install && svelte-kit sync",
+		"prepare": "husky install",
 		"static-serv": "serve -l 3000 --no-clipboard",
 		"test": "playwright test",
 		"check": "svelte-check --tsconfig ./tsconfig.json",
