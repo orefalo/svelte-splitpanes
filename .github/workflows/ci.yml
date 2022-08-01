@@ -44,6 +44,16 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       
+      # Build Frontend
+      - name: Build Frontend
+        run: npm run build
+
+      # Need to check only after build, so SvelteKit would generate files.
+      - name: Svelte Check
+        run: npm run check
+
+      - name: Lint
+        run: npm run lint
 
       # Cache Playwright
       - name: Cache Playwright
@@ -57,10 +67,6 @@ jobs:
       - name: Install Playwright
         # if: steps.cache.outputs.cache-hit != 'true'
         run: npx playwright install --with-deps
-      
-      # Build Frontend
-      - name: Build Frontend
-        run: npm run build
       
       # Run Tests
       - name: Test
