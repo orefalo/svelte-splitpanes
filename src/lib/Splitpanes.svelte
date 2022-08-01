@@ -351,17 +351,53 @@
 		return arr;
 	}
 
+	function pxToNumber(pxString: string | undefined) {
+		if (!pxString.endsWith('px')) {
+			return undefined;
+		}
+		// otherwise
+
+		const num = parseInt(pxString.slice(0, pxString.length - 2));
+		return isNaN(num) ? undefined : num;
+	}
+
+	function getBordersSizeOffsets() {
+		const computedStyle = getComputedStyle(container);
+		if (computedStyle.getPropertyValue('box-sizing') === 'border-box') {
+			// In this case, no offset is needed since the box model of this element doesn't include the border.
+			return undefined;
+		}
+		// otherwise
+
+		const left = pxToNumber(computedStyle.getPropertyValue('border-left-width'));
+		if (left === undefined) {
+			console.error('Splitpanes Error: Fail to parse container `border-left-width`.');
+			return undefined;
+		}
+		// otherwise
+
+		const top = pxToNumber(computedStyle.getPropertyValue('border-top-width'));
+		if (top === undefined) {
+			console.error('Splitpanes Error: Fail to parse container `border-top-width`.');
+			return undefined;
+		}
+		// otherwise
+
+		return { left, top };
+	}
+
 	// Get the cursor position relative to the splitpane container.
 	function getCurrentMouseDrag(event: MouseEvent | TouchEvent): MousePosition {
 		const rect = container.getBoundingClientRect();
+		const borderOffsets = getBordersSizeOffsets() || { left: 0, top: 0 };
 
 		const eventMouse = event as MouseEvent;
 		const eventTouch = event as TouchEvent;
 
 		const { clientX, clientY } = 'ontouchstart' in window && eventTouch.touches ? eventTouch.touches[0] : eventMouse;
 		return {
-			x: clientX - rect.left,
-			y: clientY - rect.top
+			x: clientX - (rect.left + borderOffsets.left),
+			y: clientY - (rect.top + borderOffsets.top)
 		};
 	}
 
