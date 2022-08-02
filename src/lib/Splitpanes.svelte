@@ -23,6 +23,28 @@
 		y: number;
 	}
 
+	/** This is a minimal version of DOMRect for our use.
+	 * We don't use DOMRect constructor because the lack of legacy browsers support (e.g. IE11).
+	 */
+	interface Rect {
+		width: number;
+		height: number;
+		x: number;
+		y: number;
+	}
+
+	interface SidesStart {
+		left: number;
+		top: number;
+	}
+
+	interface SidesEnd {
+		right: number;
+		bottom: number;
+	}
+
+	type Sides = SidesStart & SidesEnd;
+
 	// PROPS ----------------
 
 	export let id: string = undefined;
@@ -78,6 +100,9 @@
 	const showFirstSplitter = writable<boolean>(firstSplitter);
 	// tells the key of the very first pane, or undefined if not recieved yet
 	const veryFirstPaneKey = writable<any>(undefined);
+	let activeSplitterElement: HTMLElement | null = null;
+	let activeSplitterDrag: number | null = null;
+	let startingTDrag: number | null = null;
 
 	// REACTIVE ----------------
 
@@ -261,10 +286,48 @@
 		}
 	}
 
-	function onMouseDown(_event: TouchEvent | MouseEvent, splitterIndex: number) {
-		bindEvents();
+	const isSplitterElement = (node: Node) =>
+		node.nodeType === Node.ELEMENT_NODE && (node as HTMLElement).classList.contains('splitpanes__splitter');
+
+	function getCurrentTotalDrag(drag: MousePosition, containerSize: number, isRTL: boolean): number {
+		let tdrag = drag[horizontal ? 'y' : 'x'];
+		if (isRTL && !horizontal) tdrag = containerSize - tdrag;
+
+		return tdrag;
+	}
+
+	function onMouseDown(event: TouchEvent | MouseEvent, splitterIndex: number) {
 		isMouseDown = true;
 		activeSplitter = splitterIndex;
+
+		const paneIndex = activeSplitter + 1;
+		const paneElement = panes[paneIndex].element;
+
+		let activeSplitterNode: Node = paneElement;
+		while (activeSplitterNode != null) {
+			activeSplitterNode = activeSplitterNode.previousSibling;
+			if (isSplitterElement(activeSplitterNode)) {
+				break;
+			}
+		}
+		if (activeSplitterNode == null) {
+			console.error("Splitpane Error: Active splitter wasn't found!");
+		}
+
+		activeSplitterElement = activeSplitterNode as HTMLElement;
+
+		const containerComputedStyle = window.getComputedStyle(container);
+		const globalMousePosition = getGlobalMousePosition(event);
+		activeSplitterDrag = getRelativeDrag(globalMousePosition, activeSplitterElement as HTMLElement)[
+			horizontal ? 'y' : 'x'
+		];
+
+		const _isRTL = isRTL(containerComputedStyle);
+		const containerSize = elementRectWithoutBorder(container, containerComputedStyle)[horizontal ? 'height' : 'width'];
+		const relativeMousePosition = getRelativeDrag(globalMousePosition, container);
+		startingTDrag = getCurrentTotalDrag(relativeMousePosition, containerSize, _isRTL);
+
+		bindEvents();
 	}
 
 	function onMouseMove(event: MouseEvent | TouchEvent) {
@@ -273,8 +336,10 @@
 			event.preventDefault();
 			isDragging = true;
 
-			const containerComputedStyle: CSSStyleDeclaration = window.getComputedStyle(container);
-			const currentMouseDrag = getCurrentMouseDrag(event, containerComputedStyle);
+			const containerComputedStyle = window.getComputedStyle(container);
+			const globalMousePosition = getGlobalMousePosition(event);
+
+			const currentMouseDrag = getRelativeDrag(globalMousePosition, container, containerComputedStyle);
 			calculatePanesSize(currentMouseDrag, containerComputedStyle);
 
 			dispatch('resize', prepareSizeEvent());
@@ -361,61 +426,174 @@
 		}
 		// otherwise
 
-		const num = parseInt(pxString.slice(0, pxString.length - 2));
+		const num = parseFloat(pxString.slice(0, pxString.length - 2));
 		return isNaN(num) ? undefined : num;
 	}
 
-	function getBordersSizeOffsets(containerComputedStyle: CSSStyleDeclaration) {
-		if (containerComputedStyle.getPropertyValue('box-sizing') === 'border-box') {
+	const getBordersSizeOffsets: {
+		(computedStyle: CSSStyleDeclaration, calcEnds?: true): Sides;
+		(computedStyle: CSSStyleDeclaration, calcEnds: false): SidesStart;
+	} = (computedStyle: CSSStyleDeclaration, calcEnds = true) => {
+		if (computedStyle.getPropertyValue('box-sizing') === 'border-box') {
 			// In this case, no offset is needed since the box model of this element doesn't include the border.
 			return undefined;
 		}
 		// otherwise
 
-		const left = pxToNumber(containerComputedStyle.getPropertyValue('border-left-width'));
+		const left = pxToNumber(computedStyle.getPropertyValue('border-left-width'));
 		if (left === undefined) {
 			console.error('Splitpanes Error: Fail to parse container `border-left-width`.');
 			return undefined;
 		}
 		// otherwise
 
-		const top = pxToNumber(containerComputedStyle.getPropertyValue('border-top-width'));
+		const top = pxToNumber(computedStyle.getPropertyValue('border-top-width'));
 		if (top === undefined) {
 			console.error('Splitpanes Error: Fail to parse container `border-top-width`.');
 			return undefined;
 		}
 		// otherwise
 
-		return { left, top };
+		const result: SidesStart | Sides = { left, top };
+
+		if (calcEnds) {
+			const right = pxToNumber(computedStyle.getPropertyValue('border-right-width'));
+			if (right === undefined) {
+				console.error('Splitpanes Error: Fail to parse container `border-right-width`.');
+				return undefined;
+			}
+			// otherwise
+
+			const bottom = pxToNumber(computedStyle.getPropertyValue('border-bottom-width'));
+			if (bottom === undefined) {
+				console.error('Splitpanes Error: Fail to parse container `border-bottom-width`.');
+				return undefined;
+			}
+			// otherwise
+
+			const resultExtended = result as Sides;
+
+			resultExtended.right = right;
+			resultExtended.bottom = bottom;
+		}
+
+		return result as any;
+	};
+
+	function elementPositionWithoutBorder(element: Element, computedStyle?: CSSStyleDeclaration) {
+		if (!computedStyle) {
+			computedStyle = window.getComputedStyle(element);
+		}
+
+		const rect = element.getBoundingClientRect();
+		const borderOffsets = getBordersSizeOffsets(computedStyle, false) || { left: 0, top: 0 };
+
+		return {
+			x: rect.left + borderOffsets.left,
+			y: rect.top + borderOffsets.top
+		};
 	}
 
-	// Get the cursor position relative to the splitpane container.
-	function getCurrentMouseDrag(
-		event: MouseEvent | TouchEvent,
-		containerComputedStyle: CSSStyleDeclaration
-	): MousePosition {
-		const rect = container.getBoundingClientRect();
-		const borderOffsets = getBordersSizeOffsets(containerComputedStyle) || { left: 0, top: 0 };
+	/**
+	 * This function is similar to elementPositionWithoutBorder(), but also gives the width and height of the element.
+	 *
+	 * Notice that for calculating the width and the height without the border, we must use this function instead of using
+	 *  `Element.clientWidth` and `Element.clientHeight`, beacuse they round the sizes of the pixels to be integer.
+	 */
+	function elementRectWithoutBorder(element: Element, computedStyle?: CSSStyleDeclaration): Rect {
+		if (!computedStyle) {
+			computedStyle = window.getComputedStyle(element);
+		}
 
+		const rect = element.getBoundingClientRect();
+		const borderOffsets = getBordersSizeOffsets(computedStyle, true) || { left: 0, top: 0, right: 0, bottom: 0 };
+
+		return {
+			width: rect.width - borderOffsets.left - borderOffsets.right,
+			height: rect.height - borderOffsets.top - borderOffsets.bottom,
+			x: rect.left + borderOffsets.left,
+			y: rect.top + borderOffsets.top
+		};
+	}
+
+	// Get the cursor position relative to some element.
+	function getRelativeDrag(
+		globalMousePosition: MousePosition,
+		element: HTMLElement,
+		computedStyle?: CSSStyleDeclaration
+	): MousePosition {
+		const elementPosition = elementPositionWithoutBorder(element, computedStyle);
+
+		return {
+			x: globalMousePosition.x - elementPosition.x,
+			y: globalMousePosition.y - elementPosition.y
+		};
+	}
+
+	function getGlobalMousePosition(event: MouseEvent | TouchEvent): MousePosition {
 		const eventMouse = event as MouseEvent;
 		const eventTouch = event as TouchEvent;
 
 		const { clientX, clientY } = 'ontouchstart' in window && eventTouch.touches ? eventTouch.touches[0] : eventMouse;
-		return {
-			x: clientX - (rect.left + borderOffsets.left),
-			y: clientY - (rect.top + borderOffsets.top)
-		};
+
+		return { x: clientX, y: clientY };
+	}
+
+	// Calculate the ratio by taking into account that the splitters also takes up space
+	function calcDragRatioWithSplitters(tdrag: number, containerSize: number, isRTL: boolean) {
+		// Here we want the splitter size **including the borders**.
+		// We need to use `Element.getBoundingClientRect()` and not `Element.clientWidth` and `Element.clientHeight`,
+		//  bacause the latter round the number of pixels to integer, and additionally, they don't include the borders.
+		const splitterSize = (node: Node) => (node as HTMLElement).getBoundingClientRect()[horizontal ? 'height' : 'width'];
+
+		if (activeSplitterElement == null) {
+			return tdrag;
+		}
+		// otherwise
+
+		const activeSplitterSize = splitterSize(activeSplitterElement);
+		const activeSplitterRest = activeSplitterSize - activeSplitterDrag;
+
+		let splittersTotalSizeBefore = 0;
+		let currentBeforeNode = activeSplitterElement.previousSibling;
+		while (currentBeforeNode != null) {
+			if (isSplitterElement(currentBeforeNode)) {
+				splittersTotalSizeBefore += splitterSize(currentBeforeNode);
+			}
+			currentBeforeNode = currentBeforeNode.previousSibling;
+		}
+
+		let splittersTotalSizeAfter = 0;
+		let currentAfterNode = activeSplitterElement.nextSibling;
+		while (currentAfterNode != null) {
+			if (isSplitterElement(currentAfterNode)) {
+				splittersTotalSizeAfter += splitterSize(currentAfterNode);
+			}
+			currentAfterNode = currentAfterNode.nextSibling;
+		}
+
+		const totalSplitterBefore =
+			splittersTotalSizeBefore +
+			(isRTL && !horizontal ? activeSplitterRest : activeSplitterDrag) +
+			((tdrag - startingTDrag) * activeSplitterSize) / containerSize;
+		const totalSplitter = splittersTotalSizeBefore + activeSplitterSize + splittersTotalSizeAfter;
+
+		return (tdrag - totalSplitterBefore) / (containerSize - totalSplitter);
 	}
 
 	// Returns the drag percentage of the splitter relative to the 2 panes it's inbetween.
 	// if the sum of size of the 2 cells is 60%, the dragPercentage range will be 0 to 100% of this 60%.
 	function getCurrentDragPercentage(drag: MousePosition, containerComputedStyle: CSSStyleDeclaration): number {
-		let tdrag = drag[horizontal ? 'y' : 'x'];
-		// In the code bellow 'size' refers to 'width' for vertical and 'height' for horizontal layout.
-		const containerSize = container[horizontal ? 'clientHeight' : 'clientWidth'];
-		if (isRTL(containerComputedStyle) && !horizontal) tdrag = containerSize - tdrag;
+		const _isRTL = isRTL(containerComputedStyle);
 
-		return (tdrag * 100) / containerSize;
+		// In the code bellow 'size' refers to 'width' for vertical and 'height' for horizontal layout.
+		const containerSize = elementRectWithoutBorder(container, containerComputedStyle)[horizontal ? 'height' : 'width'];
+
+		const tdrag = getCurrentTotalDrag(drag, containerSize, _isRTL);
+
+		const ratio = calcDragRatioWithSplitters(tdrag, containerSize, _isRTL);
+
+		return ratio * 100;
 	}
 
 	/**
