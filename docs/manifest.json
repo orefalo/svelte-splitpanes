@@ -1,6 +1,6 @@
 {
   ".svelte-kit/runtime/client/start.js": {
-    "file": "_app/immutable/start-1db2fb35.js",
+    "file": "_app/immutable/start-8e7b428e.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -36,7 +36,7 @@
     ]
   },
   "src/routes/index.svelte": {
-    "file": "_app/immutable/pages/index.svelte-0643c1a8.js",
+    "file": "_app/immutable/pages/index.svelte-3e05b470.js",
     "src": "src/routes/index.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -46,7 +46,7 @@
       "_index-32dbe4dd.js"
     ],
     "css": [
-      "_app/immutable/assets/index-e70802cb.css"
+      "_app/immutable/assets/index-4edbfbb5.css"
     ]
   },
   "src/routes/test.svelte": {
@@ -79,6 +79,10 @@
       "_app/immutable/assets/Pane-1d9c95ea.css"
     ]
   },
+  "src/routes/index.css": {
+    "file": "_app/immutable/assets/index-4edbfbb5.css",
+    "src": "src/routes/index.css"
+  },
   "src/routes/__layout.css": {
     "file": "_app/immutable/assets/__layout-22bee33f.css",
     "src": "src/routes/__layout.css"
@@ -86,9 +90,5 @@
   "Pane.css": {
     "file": "_app/immutable/assets/Pane-1d9c95ea.css",
     "src": "Pane.css"
-  },
-  "src/routes/index.css": {
-    "file": "_app/immutable/assets/index-e70802cb.css",
-    "src": "src/routes/index.css"
   }
 }
