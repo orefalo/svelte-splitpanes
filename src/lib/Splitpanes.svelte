@@ -4,8 +4,9 @@
 
 <script lang="ts">
 	import { onMount, onDestroy, setContext, createEventDispatcher, tick } from 'svelte';
-	import { writable } from 'svelte/store';
-	import type { IPane, IPaneSizingEvent, SplitContext, PaneInitFunction } from '.';
+	import { writable, type Readable } from 'svelte/store';
+	import type { SizeDetails, IPane, IPaneSizingEvent, SplitContext, PaneInitFunction } from '.';
+	import { switchableStore } from './internal/store';
 
 	// TYPE DECLARATIONS ----------------
 
@@ -99,7 +100,11 @@
 	let isHorizontal = writable<boolean>(horizontal);
 	const showFirstSplitter = writable<boolean>(firstSplitter);
 	// tells the key of the very first pane, or undefined if not recieved yet
-	const veryFirstPaneKey = writable<any>(undefined);
+	let lastPreviousPanesSizeStoreOnInit: Readable<SizeDetails> | undefined = undefined;
+	const previousPanesSizeStoresData = new Map<
+		any,
+		{ receivedStore: Readable<SizeDetails>; update: (store: Readable<SizeDetails> | undefined) => void }
+	>();
 	let activeSplitterElement: HTMLElement | null = null;
 	let activeSplitterDrag: number | null = null;
 	let startingTDrag: number | null = null;
@@ -115,10 +120,11 @@
 		});
 	}
 
-	const onPaneInit: PaneInitFunction = (key: any) => {
-		if ($veryFirstPaneKey === undefined) {
-			$veryFirstPaneKey = key;
-		}
+	const onPaneInit: PaneInitFunction = (key: any, sizeStore: Readable<SizeDetails>) => {
+		const { store, update } = switchableStore(lastPreviousPanesSizeStoreOnInit, undefined);
+		lastPreviousPanesSizeStoreOnInit = sizeStore;
+
+		previousPanesSizeStoresData.set(key, { receivedStore: sizeStore, update });
 
 		return {
 			onSplitterDown: (e) => {
@@ -137,13 +143,13 @@
 				if (dblClickSplitter) {
 					onSplitterDblClick(e, indexOfPane(key));
 				}
-			}
+			},
+			previousPaneSizeStore: store
 		};
 	};
 
 	setContext<SplitContext>(KEY, {
 		showFirstSplitter,
-		veryFirstPaneKey,
 		isHorizontal,
 		onPaneInit,
 		onPaneAdd,
@@ -159,17 +165,26 @@
 			return el === pane.element;
 		});
 
-		if (index === 0) {
-			// Need to update the first pane key, because the first pane can be changed in runtime.
-			$veryFirstPaneKey = pane.key;
-		}
-
 		//inserts pane at proper array index
 		panes.splice(index, 0, pane);
 
 		// reindex panes
 		for (let i = 0; i < panes.length; i++) {
 			panes[i].index = i;
+		}
+
+		// Update previous size stores both both this pane and for the next one
+		const currentData = previousPanesSizeStoresData.get(pane.key);
+		const previousSizeStoreNow =
+			index === 0 ? undefined : previousPanesSizeStoresData.get(panes[index - 1].key).receivedStore;
+		currentData.update(previousSizeStoreNow);
+
+		if (index < panes.length - 1) {
+			// If isn't not the last one
+			const currentSizeStore = currentData.receivedStore;
+
+			const nextKey = panes[index + 1].key;
+			previousPanesSizeStoresData.get(nextKey).update(currentSizeStore);
 		}
 
 		if (isReady) {
@@ -189,6 +204,7 @@
 	async function onPaneRemove(key: any) {
 		// 1. Remove the pane from array and redo indexes.
 		const index = panes.findIndex((p) => p.key === key);
+		const isNotLast = index < panes.length - 1;
 
 		// race condition - typically happens when the dev server restarts
 		if (index >= 0) {
@@ -199,8 +215,17 @@
 				panes[i].index = i;
 			}
 
-			if (index === 0) {
-				$veryFirstPaneKey = panes.length > 0 ? panes[0].key : undefined;
+			// Update previous size stores both both this pane and for the next one
+			previousPanesSizeStoresData.get(key).update(undefined);
+
+			if (isNotLast) {
+				// If not the last one
+				const prevIndex = index - 1;
+				const prevSizeStoreNow =
+					prevIndex === 0 ? undefined : previousPanesSizeStoresData.get(panes[prevIndex].key).receivedStore;
+
+				const nextKey = panes[index].key;
+				previousPanesSizeStoresData.get(nextKey).update(prevSizeStoreNow);
 			}
 
 			if (isReady) {

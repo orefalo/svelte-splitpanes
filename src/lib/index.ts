@@ -3,16 +3,34 @@ import type { Readable } from 'svelte/store';
 export { default as Splitpanes } from './Splitpanes.svelte';
 export { default as Pane } from './Pane.svelte';
 
-export type PaneInitFunction = (key: any) => {
+export interface SizeDetails {
+	/** The current size of a pane.
+	 *
+	 * If number, it's the real pane size value.
+	 * If null, it means that the pane size is unknown yet.
+	 */
+	size: number | null;
+	minSize: number;
+	maxSize: number;
+}
+
+export type PaneInitFunction = (
+	key: any,
+	sizeStore: Readable<SizeDetails>
+) => {
 	onSplitterDown: (_event: TouchEvent | MouseEvent) => void;
 	onSplitterClick: (event: MouseEvent) => void;
 	onSplitterDblClick: (_event: MouseEvent) => void;
+	/** A store that tells what is the previous pane size.
+	 *
+	 * If undefined, it means that you are the first pane.
+	 * Otherwise, it contains the details about the previous panel size details.
+	 */
+	previousPaneSizeStore: Readable<SizeDetails | undefined>;
 };
 
 // methods passed from splitpane to children panes
 export interface SplitContext {
-	/** Tells the key of the very first pane, or undefined if not recieved yet. */
-	veryFirstPaneKey: Readable<any>;
 	isHorizontal: Readable<boolean>;
 	showFirstSplitter: Readable<boolean>;
 	onPaneInit: PaneInitFunction;

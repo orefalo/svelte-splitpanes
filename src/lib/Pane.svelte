@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { getContext, onMount, onDestroy } from 'svelte';
+	import { writable } from 'svelte/store';
 	import type { Action } from 'svelte/action';
 	import { KEY } from './Splitpanes.svelte';
 	import type { IPane, SplitContext } from '.';
 
-	const { onPaneInit, onPaneAdd, onPaneRemove, onPaneClick, isHorizontal, showFirstSplitter, veryFirstPaneKey } =
+	const { onPaneInit, onPaneAdd, onPaneRemove, onPaneClick, isHorizontal, showFirstSplitter } =
 		getContext<SplitContext>(KEY);
 
 	// PROPS
@@ -22,6 +23,11 @@
 	const key = {};
 	let element: HTMLElement;
 	let sz: number = size == null ? 0 : size;
+	const sizeStore = writable({
+		size,
+		minSize,
+		maxSize
+	});
 
 	const isBrowser = typeof window !== 'undefined';
 
@@ -29,6 +35,14 @@
 
 	$: if (size != null) {
 		sz = size;
+	}
+
+	$: {
+		sizeStore.update((details) => {
+			details.minSize = minSize;
+			details.maxSize = maxSize;
+			return details;
+		});
 	}
 
 	$: dimension = $isHorizontal ? 'height' : 'width';
@@ -42,7 +56,8 @@
 			.filter((value) => value !== undefined)
 			.join(' ') || undefined;
 
-	const { onSplitterDown, onSplitterClick, onSplitterDblClick } = onPaneInit(key);
+	const result = onPaneInit(key, sizeStore);
+	const { onSplitterDown, onSplitterClick, onSplitterDblClick, previousPaneSizeStore } = result;
 
 	function handleMouseClick(event: MouseEvent) {
 		onPaneClick(event, key);
@@ -80,6 +95,10 @@
 				if (size != null) {
 					size = sz;
 				}
+				sizeStore.update((details) => {
+					details.size = v;
+					return details;
+				});
 			},
 			min: () => minSize,
 			max: () => maxSize,
@@ -94,12 +113,29 @@
 </script>
 
 <!-- Splitter -->
-<!-- TODO: Support aria role="separator" and make this a focusable separtor. Sources:
+<!-- TODO: Make this a focusable separtor, and check if it is non-focusable (when minSize=maxSize).
+	Need also:
+	* Let the user control about aria values (such as aria-valuetext), and if it is focusable.default.render
+	* Let the user decide which pane he wish to leave without any seperator description, and describe the rest of them.
+	* Verify it's working in SSR.
+	* Keybinding
+	Sources:
 	* https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/roles/separator_role
 	* https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/
 -->
-{#if $veryFirstPaneKey !== key || $showFirstSplitter}
-	<div use:splitterAction class="splitpanes__splitter" />
+{#if $previousPaneSizeStore || $showFirstSplitter}
+	<div
+		use:splitterAction
+		class="splitpanes__splitter"
+		role={$previousPaneSizeStore ? 'separator' : undefined}
+		aria-valuenow={$previousPaneSizeStore?.size ?? undefined}
+		aria-valuemin={$previousPaneSizeStore && $previousPaneSizeStore.minSize > 0
+			? $previousPaneSizeStore.minSize
+			: undefined}
+		aria-valuemax={$previousPaneSizeStore && $previousPaneSizeStore.maxSize < 100
+			? $previousPaneSizeStore.maxSize
+			: undefined}
+	/>
 {/if}
 
 <!-- Pane -->
