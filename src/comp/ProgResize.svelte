@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { Pane, Splitpanes } from '$lib/.';
 	import CodeArea from '$comp/extras/CodeArea.svelte';
 
