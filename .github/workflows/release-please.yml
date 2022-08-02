@@ -6,7 +6,7 @@ name: release-please
 jobs:
   release-please:
     runs-on: ubuntu-latest
-    if: ${{ github.repository_owner == 'orefalo' }} # Prevent running on forks
+    if: github.repository == 'orefalo/svelte-splitpanes' # Prevent running on forks
     steps:
       - uses: google-github-actions/release-please-action@v3
         with:
