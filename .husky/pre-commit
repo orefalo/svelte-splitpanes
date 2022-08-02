@@ -3,6 +3,6 @@
 
 # Fail if the env variable $ALLOW_TO_COMMIT isn't set.
 if [ "$ALLOW_TO_COMMIT" != "1" ]; then
-	echo "Error: You may commit only by runing 'pnpm commit' (or 'npm commit').";
+	echo "Error: You may commit only by runing 'pnpm commit' (or 'npm run commit').";
 	exit 1
 fi
