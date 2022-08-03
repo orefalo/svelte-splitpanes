@@ -2,7 +2,8 @@
 	import { Pane, Splitpanes } from '$lib/.';
 	import CodeArea from '$comp/extras/CodeArea.svelte';
 
-	let code = `
+	let code =
+		`
 <Splitpanes theme="my-theme" horizontal style="height: 400px">
 	<Pane>
 		<Splitpanes theme="my-theme">
@@ -24,7 +25,8 @@
 	</Pane>
 </Splitpanes>
 
-<style global lang="scss">
+<style` + // this is needed for fixing a wierd bug in svelte-preproccess
+		` global lang="scss">
 .splitpanes.my-theme {
     .splitpanes__pane {
         background-color: #f8f8f8;

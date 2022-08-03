@@ -2,7 +2,8 @@
 	import { Pane, Splitpanes } from '$lib/.';
 	import CodeArea from '$comp/extras/CodeArea.svelte';
 
-	let code = `
+	let code =
+		`
 <Splitpanes theme="no-splitter" horizontal style="height: 400px" dblClickSplitter={false}>
 	<Pane size={6} minSize={6} maxSize={6}>
 		<p>MenuBar</p>
@@ -33,7 +34,8 @@
 
 <HighlightSvelte {code} />
 
-<style global lang="scss">
+<style` + // this is needed for fixing a wierd bug in svelte-preproccess
+		` global lang="scss">
 	.splitpanes.modern-theme {
 		.splitpanes__pane {
 			background-color: #f8f8f8;
