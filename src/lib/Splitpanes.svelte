@@ -301,7 +301,9 @@
 		activeSplitter = splitterIndex;
 
 		const paneIndex = activeSplitter + 1;
-		const paneElement = panes[paneIndex].element;
+		const pane = panes[paneIndex];
+		pane.setSplitterActive(true);
+		const paneElement = pane.element;
 
 		let activeSplitterNode: Node = paneElement;
 		while (activeSplitterNode != null) {
@@ -351,6 +353,11 @@
 			dispatch('resized', prepareSizeEvent());
 		}
 		isMouseDown = false;
+
+		const paneIndex = activeSplitter + 1;
+		const pane = panes[paneIndex];
+		pane.setSplitterActive(false);
+
 		// Keep dragging flag until click event is finished (click happens immediately after mouseup)
 		// in order to prevent emitting `splitter-click` event if splitter was dragged.
 		setTimeout(() => {

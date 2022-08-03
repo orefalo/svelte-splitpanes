@@ -22,6 +22,7 @@
 	const key = {};
 	let element: HTMLElement;
 	let sz: number = size == null ? 0 : size;
+	let isSplitterActive = false;
 
 	const isBrowser = typeof window !== 'undefined';
 
@@ -83,7 +84,10 @@
 			},
 			min: () => minSize,
 			max: () => maxSize,
-			snap: () => snapSize
+			snap: () => snapSize,
+			setSplitterActive: (isActive: boolean) => {
+				isSplitterActive = isActive;
+			}
 		};
 		onPaneAdd(inst);
 	});
@@ -99,7 +103,7 @@
 	* https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/
 -->
 {#if $veryFirstPaneKey !== key || $showFirstSplitter}
-	<div use:splitterAction class="splitpanes__splitter" />
+	<div use:splitterAction class="splitpanes__splitter {isSplitterActive ? 'splitpanes__splitter__active' : ''}" />
 {/if}
 
 <!-- Pane -->

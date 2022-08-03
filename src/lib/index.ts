@@ -44,5 +44,6 @@ export interface IPane {
 	snap: () => number;
 	sz: () => number;
 	setSz: (number: number) => void;
+	setSplitterActive: (isActive: boolean) => void;
 	givenSize: number | null;
 }
