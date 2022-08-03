@@ -47,6 +47,9 @@
         &:hover:before {
             opacity: 1;
         }
+        &.splitpanes__splitter__active {
+            z-index: 2; /* Fix an issue of overlap fighting with a near hovered splitter */
+        }
     }
 }
 .my-theme {
@@ -198,6 +201,9 @@
 			}
 			&:hover:before {
 				opacity: 1;
+			}
+			&.splitpanes__splitter__active {
+				z-index: 2; /* Fix an issue of overlap fighting with a near hovered splitter */
 			}
 		}
 	}
