@@ -75,7 +75,7 @@ $ npm i svelte-splitpanes
 
 ### API
 
-Here is the list of properties that apply to <Splitpanes>
+Here is the list of properties that apply to `<Splitpanes>`
 
 | Parameter name   | Type            | Default                     | Comments                                                     |
 | ---------------- | --------------- | --------------------------- | ------------------------------------------------------------ |
@@ -88,7 +88,7 @@ Here is the list of properties that apply to <Splitpanes>
 | theme            | string          | 'default-theme'             | Used to styles the splitters using a different css class     |
 | class            | string          | undefined                   | Any additional css classes to be added to the component      |
 
-Properties that apply to <Pane>
+Properties that apply to `<Pane>`
 
 | Parameter name | Type         | Default     | Comments                                                |
 | -------------- | ------------ | ----------- | ------------------------------------------------------- |
