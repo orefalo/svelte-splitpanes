@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { browser, dev } from '$app/env';
+	import { browser, dev } from '$app/environment';
 
 	import type { Action } from 'svelte/action';
 
