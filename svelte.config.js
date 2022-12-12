@@ -9,9 +9,6 @@ const config = {
 	preprocess: preprocess(),
 
 	kit: {
-		prerender: {
-			default: true
-		},
 		adapter: adapter({
 			pages: 'docs',
 			assets: 'docs',
@@ -21,9 +18,10 @@ const config = {
 			// change below to your repo name
 			base: dev ? '' : '/svelte-splitpanes'
 		},
-		package: {
-			exports: (filename) => filename === 'index.ts'
-		}
+	},
+
+	package: {
+		exports: (filename) => filename === 'index.ts'
 	}
 };
 
