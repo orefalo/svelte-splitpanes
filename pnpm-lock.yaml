@@ -14,7 +14,7 @@ specifiers:
   eslint: 8.21.0
   eslint-config-prettier: 8.5.0
   eslint-plugin-svelte3: 4.0.0
-  esm-env: ^1.0.0
+  esm-env-robust: ^0.0.2
   highlight.js: 11.6.0
   husky: 8.0.1
   lint-staged: 13.0.3
@@ -34,7 +34,7 @@ specifiers:
   vite: 4.0.0
 
 dependencies:
-  esm-env: 1.0.0
+  esm-env-robust: 0.0.2
 
 optionalDependencies:
   '@playwright/test': 1.24.2
@@ -1765,6 +1765,12 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /esm-env-robust/0.0.2:
+    resolution: {integrity: sha512-kSZXNt3xxf5vwvwNfZZSpoPH45AxhK4M1qTAXR0pWiXO2IEMLuvztnIuS0Ui/sAOi0mS5HWubhCd0uVGz5OKcw==}
+    dependencies:
+      esm-env: 1.0.0
+    dev: false
 
   /esm-env/1.0.0:
     resolution: {integrity: sha512-Cf6VksWPsTuW01vU9Mk/3vRue91Zevka5SjyNf3nEpokFRuqt/KjUQoGAwq9qMmhpLTHmXzSIrFRw8zxWzmFBA==}

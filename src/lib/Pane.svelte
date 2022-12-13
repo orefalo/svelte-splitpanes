@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { BROWSER } from 'esm-env';
+	import { BROWSER } from 'esm-env-robust';
 	import { getContext, onMount, onDestroy } from 'svelte';
 	import type { Action } from 'svelte/action';
 	import { KEY } from './Splitpanes.svelte';

@@ -80,6 +80,6 @@
 		}
 	},
 	"dependencies": {
-		"esm-env": "^1.0.0"
+		"esm-env-robust": "^0.0.2"
 	}
 }
