@@ -66,7 +66,6 @@
 			<Contents contents={sections} />
 		</div>
 
-		<!-- TODO: Make it always float and be seen by the user in 'toc-container' -->
 		<RTLToggle bind:isRTL />
 	</div>
 </div>
