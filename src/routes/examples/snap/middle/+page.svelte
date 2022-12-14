@@ -1,30 +1,29 @@
 <script>
-	import { Pane, Splitpanes } from '$lib/.';
-	import CodeArea from '$comp/extras/CodeArea.svelte';
+	import { Pane, Splitpanes } from '$lib';
+	import CodeArea from '$comp/CodeArea.svelte';
 
 	let code = `
 <Splitpanes style="height: 400px">
+	<Pane />
+
 	<Pane snapSize={10}>
 		<span style="font-size: 20px;"> I have a snap size of 10% </span>
 	</Pane>
-
-	<Pane />
 
 	<Pane />
 </Splitpanes>`;
 </script>
 
-<h2>Simple snap</h2>
-<p>Using snapSize on a pane makes it snap to his adjacent splitters and borders.</p>
+<h2>Middle snap</h2>
 
 <Splitpanes style="height: 400px">
+	<Pane />
+
 	<Pane snapSize={10}>
 		<span style="font-size: 20px;"> I have a snap size of 10% </span>
 	</Pane>
 
 	<Pane />
-
-	<Pane />
 </Splitpanes>
 
-<CodeArea id="simple_snap" {code} />
+<CodeArea id="middle_snap" {code} />

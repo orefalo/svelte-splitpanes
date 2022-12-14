@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { Pane, Splitpanes } from '$lib/.';
-	import CodeArea from '$comp/extras/CodeArea.svelte';
-	import TextArea from '$comp/extras/TextAreaAutosize.svelte';
+	import { Pane, Splitpanes } from '$lib';
+	import CodeArea from '$comp/CodeArea.svelte';
+	import TextArea from '$comp/TextAreaAutosize.svelte';
 
 	let val = '// Event name: Event params   (Last event at the top)';
 

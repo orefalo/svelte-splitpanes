@@ -1,6 +1,6 @@
 <script>
-	import { Pane, Splitpanes } from '$lib/.';
-	import CodeArea from '$comp/extras/CodeArea.svelte';
+	import { Pane, Splitpanes } from '$lib';
+	import CodeArea from '$comp/CodeArea.svelte';
 
 	let code = `
 <Splitpanes class="default-theme" horizontal style="height: 400px" pushOtherPanes={false}>
