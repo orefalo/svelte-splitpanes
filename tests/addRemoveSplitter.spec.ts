@@ -1,9 +1,9 @@
 import { expect, test } from '@playwright/test';
 
 test('add, remove all and add again works', async ({ page }) => {
-	await page.goto('/svelte-splitpanes/examples/add-remove-splitter');
+	await page.goto('/svelte-splitpanes');
 
-    const areaLocator = page.locator('text=Adding splitters programmatically');
+    const areaLocator = page.locator('text=Add Remove Splitter');
     await areaLocator.click();
 
     const addPaneLocator = page.locator(':has-text("Adding splitters programmatically")~button:has-text("Add pane")');
