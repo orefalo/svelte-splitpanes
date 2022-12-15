@@ -62,7 +62,7 @@
 
 	<div class="toc-container">
 		<div role="presentation" class="toc-contents-wrap">
-			<h1>Svelte-Splitpane</h1>
+			<h1 class="toc-head"><img src="/favicon.png" alt="Icon" width="30" height="30" /> Svelte-Splitpane</h1>
 			<Contents contents={sections} />
 		</div>
 
@@ -145,6 +145,13 @@
 		flex-flow: column-reverse nowrap;
 		background: rgb(247, 250, 253);
 		color: rgb(65, 65, 72);
+	}
+
+	.toc-head {
+		display: flex;
+		flex-flow: row nowrap;
+		gap: 8px;
+		padding-left: 10px;
 	}
 
 	@media (min-width: 832px) {
