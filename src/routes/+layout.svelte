@@ -150,6 +150,7 @@
 		margin-left: auto;
 		margin-right: auto;
 		padding: 10px;
+		overflow-x: auto;
 	}
 
 	.controls {
@@ -219,7 +220,8 @@
 		}
 
 		.toc-container-space {
-			display: visible;
+			display: block;
+			min-width: 300px;
 			width: 300px;
 			height: 100vh;
 		}
