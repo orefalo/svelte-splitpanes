@@ -24,7 +24,7 @@
 				{ title: 'ChangeOrientation', path: '/examples/change-orientation' },
 				{ title: 'Prog Resize', path: '/examples/prog-resize' },
 				{ title: 'Toggle Panes', path: '/examples/toggle-panes' },
-				{ title: 'Listen To Events', path: '/examples/min-max' }
+				{ title: 'Listen To Events', path: '/examples/listen-to-events' }
 			]
 		},
 		{
