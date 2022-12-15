@@ -10,21 +10,6 @@
 		title: string;
 		pages: Page[];
 	}
-
-	export function getTitle(contents: Section[], url: URL): string | undefined {
-		const { pathname } = url;
-
-		for (const section of contents) {
-			for (const currentPage of section.pages) {
-				if (base + currentPage.path === pathname) {
-					return currentPage.title;
-				}
-			}
-		}
-		// otherwise
-
-		return undefined;
-	}
 </script>
 
 <script lang="ts">

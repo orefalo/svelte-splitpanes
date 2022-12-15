@@ -3,7 +3,7 @@
 	import { page } from '$app/stores';
 
 	import theme from 'svelte-highlight/styles/night-owl';
-	import Contents, { getTitle, type Section } from './Contents.svelte';
+	import Contents, { type Section } from './Contents.svelte';
 
 	import RTLToggle from './RTLToggle.svelte';
 
@@ -45,11 +45,15 @@
 		}
 	];
 
-	$: currentPageTitle = getTitle(sections, $page.url);
+	$: pages = sections.map((section) => section.pages).flat();
+	$: pageIdx = pages.findIndex(({ path }) => base + path === $page.url.pathname);
+	$: curPage = pageIdx >= 0 ? pages[pageIdx] : undefined;
+	$: prevPage = pageIdx >= 1 ? pages[pageIdx - 1] : undefined;
+	$: nextPage = pageIdx >= 0 && pageIdx < pages.length - 1 ? pages[pageIdx + 1] : undefined;
 </script>
 
 <svelte:head>
-	<title>Svelte-Splitpanes{currentPageTitle ? ` - ${currentPageTitle}` : ''}</title>
+	<title>Svelte-Splitpanes{curPage ? ` - ${curPage.title}` : ''}</title>
 	<meta name="description" content="A Fantastic pane splitter for Svelte" />
 	{@html theme}
 </svelte:head>
@@ -59,6 +63,22 @@
 
 	<main class:rtl-containers={isRTL}>
 		<slot />
+
+		<div class="controls">
+			<div>
+				<span class:faded={!prevPage}>previous</span>
+				{#if prevPage}
+					<a data-sveltekit-preload-data href={prevPage.path}>{prevPage.title}</a>
+				{/if}
+			</div>
+
+			<div>
+				<span class:faded={!nextPage}>next</span>
+				{#if nextPage}
+					<a data-sveltekit-preload-data href={nextPage.path}>{nextPage.title}</a>
+				{/if}
+			</div>
+		</div>
 	</main>
 
 	<div class="toc-container">
@@ -120,7 +140,6 @@
 		display: flex;
 		flex-flow: column nowrap;
 		font-size: 14px;
-		height: 100vh;
 	}
 
 	main {
@@ -131,6 +150,45 @@
 		margin-left: auto;
 		margin-right: auto;
 		padding: 10px;
+	}
+
+	.controls {
+		border-top: 1.6px solid rgb(232, 228, 253);
+		padding: 12px 0 0 0;
+		display: flex;
+		justify-content: space-between;
+		margin: 40px 0;
+	}
+
+	.controls > :first-child {
+		text-align: left;
+	}
+
+	.controls > :last-child {
+		text-align: right;
+	}
+
+	.controls span {
+		display: block;
+		font-size: 14px;
+		text-transform: uppercase;
+		font-weight: 600;
+		color: rgb(103, 103, 121);
+		margin-bottom: 4px;
+	}
+
+	.controls span.faded {
+		opacity: 0.4;
+	}
+
+	.controls a {
+		text-decoration: none;
+		font-size: 16px;
+		color: rgb(255, 64, 0);
+	}
+
+	.controls a:not(:hover) {
+		text-decoration: none;
 	}
 
 	.rtl-containers :global(.splitpanes) {
@@ -163,6 +221,7 @@
 		.toc-container-space {
 			display: visible;
 			width: 300px;
+			height: 100vh;
 		}
 
 		.toc-container {
