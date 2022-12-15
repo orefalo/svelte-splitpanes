@@ -68,14 +68,14 @@
 			<div>
 				<span class:faded={!prevPage}>previous</span>
 				{#if prevPage}
-					<a data-sveltekit-preload-data href={prevPage.path}>{prevPage.title}</a>
+					<a data-sveltekit-preload-data href={base + prevPage.path}>{prevPage.title}</a>
 				{/if}
 			</div>
 
 			<div>
 				<span class:faded={!nextPage}>next</span>
 				{#if nextPage}
-					<a data-sveltekit-preload-data href={nextPage.path}>{nextPage.title}</a>
+					<a data-sveltekit-preload-data href={base + nextPage.path}>{nextPage.title}</a>
 				{/if}
 			</div>
 		</div>
