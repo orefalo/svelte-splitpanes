@@ -18,7 +18,8 @@
 		user-select: none;
 		align-items: center;
 		width: 100%;
-		height: 4.2rem;
+		height: 20px;
 		margin: 0 auto;
+		padding: 10px;
 	}
 </style>

@@ -145,7 +145,6 @@
 		flex-flow: column-reverse nowrap;
 		background: rgb(247, 250, 253);
 		color: rgb(65, 65, 72);
-		padding: 10px;
 	}
 
 	@media (min-width: 832px) {
@@ -168,6 +167,9 @@
 		.toc-contents-wrap {
 			overflow-x: hidden;
 			overflow-y: auto;
+			scrollbar-width: thin;
+			scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+			padding: 10px;
 		}
 	}
 </style>

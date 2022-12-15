@@ -118,7 +118,7 @@
 
 	[aria-current='page'] {
 		font-weight: 700;
-		color: rgb(161, 161, 161);
+		color: rgb(75, 75, 75);
 	}
 
 	ul ul,
