@@ -83,7 +83,7 @@
 
 	<div class="toc-container">
 		<div role="presentation" class="toc-contents-wrap">
-			<h1 class="toc-head"><img src="{base}/favicon.png" alt="Icon" width="30" height="30" /> Svelte-Splitpane</h1>
+			<h1 class="toc-head"><img src="{base}/favicon.svg" alt="Icon" width="30" height="30" /> Svelte-Splitpane</h1>
 			<Contents contents={sections} />
 		</div>
 
