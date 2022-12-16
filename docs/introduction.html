@@ -7,7 +7,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta http-equiv="content-security-policy" content="">
 		<link href="/svelte-splitpanes/_app/immutable/assets/_layout-fc7bab85.css" rel="stylesheet">
-		<link href="/svelte-splitpanes/_app/immutable/assets/Pane-1d9c95ea.css" rel="stylesheet">
 		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/start-983669a4.js">
 		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/chunks/index-15259a8c.js">
 		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/chunks/singletons-5b10adf0.js">
@@ -16,10 +15,7 @@
 		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/chunks/stores-13d8aba3.js">
 		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/modules/pages/_layout.ts-9cbb603b.js">
 		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/chunks/_layout-da46b06b.js">
-		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/components/pages/test/_page.svelte-aea09371.js">
-		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/chunks/Pane-669f295b.js">
-		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/modules/pages/test/_page.ts-94291217.js">
-		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/chunks/_page-8f3d95e9.js"><title>Svelte-Splitpanes</title><!-- HEAD_svelte-1cl4sjo_START --><meta name="description" content="A Fantastic pane splitter for Svelte"><!-- HTML_TAG_START --><style>pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}.hljs{background:#011627;color:#d6deeb}.hljs-keyword{color:#c792ea;font-style:italic}.hljs-built_in{color:#addb67;font-style:italic}.hljs-type{color:#82aaff}.hljs-literal{color:#ff5874}.hljs-number{color:#f78c6c}.hljs-regexp{color:#5ca7e4}.hljs-string{color:#ecc48d}.hljs-subst{color:#d3423e}.hljs-symbol{color:#82aaff}.hljs-class{color:#ffcb8b}.hljs-function{color:#82aaff}.hljs-title{color:#dcdcaa;font-style:italic}.hljs-params{color:#7fdbca}.hljs-comment{color:#637777;font-style:italic}.hljs-doctag{color:#7fdbca}.hljs-meta,.hljs-meta .hljs-keyword{color:#82aaff}.hljs-meta .hljs-string{color:#ecc48d}.hljs-section{color:#82b1ff}.hljs-attr,.hljs-name,.hljs-tag{color:#7fdbca}.hljs-attribute{color:#80cbc4}.hljs-variable{color:#addb67}.hljs-bullet{color:#d9f5dd}.hljs-code{color:#80cbc4}.hljs-emphasis{color:#c792ea;font-style:italic}.hljs-strong{color:#addb67;font-weight:700}.hljs-formula{color:#c792ea}.hljs-link{color:#ff869a}.hljs-quote{color:#697098;font-style:italic}.hljs-selector-tag{color:#ff6363}.hljs-selector-id{color:#fad430}.hljs-selector-class{color:#addb67;font-style:italic}.hljs-selector-attr,.hljs-selector-pseudo{color:#c792ea;font-style:italic}.hljs-template-tag{color:#c792ea}.hljs-template-variable{color:#addb67}.hljs-addition{color:#addb67ff;font-style:italic}.hljs-deletion{color:#ef535090;font-style:italic}</style><!-- HTML_TAG_END --><!-- HEAD_svelte-1cl4sjo_END -->
+		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/components/pages/introduction/_page.svelte-c5aab096.js"><title>Svelte-Splitpanes</title><!-- HEAD_svelte-1cl4sjo_START --><meta name="description" content="A Fantastic pane splitter for Svelte"><!-- HTML_TAG_START --><style>pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}.hljs{background:#011627;color:#d6deeb}.hljs-keyword{color:#c792ea;font-style:italic}.hljs-built_in{color:#addb67;font-style:italic}.hljs-type{color:#82aaff}.hljs-literal{color:#ff5874}.hljs-number{color:#f78c6c}.hljs-regexp{color:#5ca7e4}.hljs-string{color:#ecc48d}.hljs-subst{color:#d3423e}.hljs-symbol{color:#82aaff}.hljs-class{color:#ffcb8b}.hljs-function{color:#82aaff}.hljs-title{color:#dcdcaa;font-style:italic}.hljs-params{color:#7fdbca}.hljs-comment{color:#637777;font-style:italic}.hljs-doctag{color:#7fdbca}.hljs-meta,.hljs-meta .hljs-keyword{color:#82aaff}.hljs-meta .hljs-string{color:#ecc48d}.hljs-section{color:#82b1ff}.hljs-attr,.hljs-name,.hljs-tag{color:#7fdbca}.hljs-attribute{color:#80cbc4}.hljs-variable{color:#addb67}.hljs-bullet{color:#d9f5dd}.hljs-code{color:#80cbc4}.hljs-emphasis{color:#c792ea;font-style:italic}.hljs-strong{color:#addb67;font-weight:700}.hljs-formula{color:#c792ea}.hljs-link{color:#ff869a}.hljs-quote{color:#697098;font-style:italic}.hljs-selector-tag{color:#ff6363}.hljs-selector-id{color:#fad430}.hljs-selector-class{color:#addb67;font-style:italic}.hljs-selector-attr,.hljs-selector-pseudo{color:#c792ea;font-style:italic}.hljs-template-tag{color:#c792ea}.hljs-template-variable{color:#addb67}.hljs-addition{color:#addb67ff;font-style:italic}.hljs-deletion{color:#ef535090;font-style:italic}</style><!-- HTML_TAG_END --><!-- HEAD_svelte-1cl4sjo_END -->
 	</head>
 	<body>
 		<div>
@@ -29,31 +25,28 @@
 
 <div class="page-container svelte-1nr9xld"><div role="presentation" class="toc-container-space svelte-1nr9xld"></div>
 
-	<main class="svelte-1nr9xld"><div class="splitpanes default-theme default-theme splitpanes--horizontal" style="height: 400px">
+	<main class="svelte-1nr9xld"><h1>Welcome to Svelte-Splitpane demo!</h1>
 
+<a href="https://github.com/orefalo/svelte-splitpanes">https://github.com/orefalo/svelte-splitpanes</a>
 
+<h2>Features</h2>
 
-
-<div class="splitpanes__pane " style="height: 65%;"><span>1</span></div>
-	
-
-<div class="splitpanes__splitter "></div>
-
-
-<div class="splitpanes__pane " style="height: 10%;"><span>2</span></div>
-	
-
-<div class="splitpanes__splitter "></div>
-
-
-<div class="splitpanes__pane "><span>3</span></div>
-	
-
-<div class="splitpanes__splitter "></div>
-
-
-<div class="splitpanes__pane "><span>4</span></div>
-</div>
+<ul><li>Size is less than 4 kb</li>
+	<li>Support both dynamic horizontal and vertical splits</li>
+	<li>Support defaults, min and max sizes</li>
+	<li>Support multiple splits</li>
+	<li>Support lifecyle events</li>
+	<li>Support custom divider size or overlay</li>
+	<li>Support splitter pane pushing</li>
+	<li>Support RTL rendering with auto-detection</li>
+	<li>Support first splitter on/off</li>
+	<li>Support pane toggle</li>
+	<li>Support edge snapping</li>
+	<li>Support programmatic resizing</li>
+	<li>Support programmatic splitter add/remove</li>
+	<li>Support for legacy browser such as IE 11</li>
+	<li>Support for touch devices</li>
+	<li>Sveltekit &amp; Typescript friendly</li></ul>
 
 		<div class="controls svelte-1nr9xld"><div class="svelte-1nr9xld"><span class="svelte-1nr9xld faded">previous</span>
 				</div>
@@ -115,16 +108,16 @@
 </div>
 
 
-		<script type="module" data-sveltekit-hydrate="1s38jx3">
+		<script type="module" data-sveltekit-hydrate="qs0mr9">
 			import { start } from "/svelte-splitpanes/_app/immutable/start-983669a4.js";
 
 			start({
 				env: {},
 				paths: {"base":"/svelte-splitpanes","assets":"/svelte-splitpanes"},
-				target: document.querySelector('[data-sveltekit-hydrate="1s38jx3"]').parentNode,
+				target: document.querySelector('[data-sveltekit-hydrate="qs0mr9"]').parentNode,
 				version: "1671172917255",
 				hydrate: {
-					node_ids: [0, 18],
+					node_ids: [0, 17],
 					data: [null,null],
 					form: null
 				}
