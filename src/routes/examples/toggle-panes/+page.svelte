@@ -1,7 +1,7 @@
 <script>
-	import { Pane, Splitpanes } from '$lib/.';
-	import CodeArea from '$comp/extras/CodeArea.svelte';
-	import Button from '$comp/extras/Button.svelte';
+	import { Pane, Splitpanes } from '$lib';
+	import CodeArea from '$comp/CodeArea.svelte';
+	import Button from '$comp/Button.svelte';
 
 	function onClick() {
 		visible = !visible;

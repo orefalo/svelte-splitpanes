@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Pane, Splitpanes } from '$lib/.';
-	import CodeArea from '$comp/extras/CodeArea.svelte';
+	import { Pane, Splitpanes } from '$lib';
+	import CodeArea from '$comp/CodeArea.svelte';
 
 	import RangeSlider from 'svelte-range-slider-pips';
 
