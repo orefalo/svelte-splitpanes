@@ -3,9 +3,10 @@
 	import { page } from '$app/stores';
 
 	import theme from 'svelte-highlight/styles/night-owl';
-	import Contents, { type Section } from './Contents.svelte';
 
+	import Contents, { type Section } from './Contents.svelte';
 	import RTLToggle from './RTLToggle.svelte';
+	import { pathIsCurrent } from './pathUtils';
 
 	let isRTL = false;
 
@@ -46,7 +47,7 @@
 	];
 
 	$: pages = sections.map((section) => section.pages).flat();
-	$: pageIdx = pages.findIndex(({ path }) => base + path === $page.url.pathname);
+	$: pageIdx = pages.findIndex(({ path }) => pathIsCurrent(path, $page));
 	$: curPage = pageIdx >= 0 ? pages[pageIdx] : undefined;
 	$: prevPage = pageIdx >= 1 ? pages[pageIdx - 1] : undefined;
 	$: nextPage = pageIdx >= 0 && pageIdx < pages.length - 1 ? pages[pageIdx + 1] : undefined;

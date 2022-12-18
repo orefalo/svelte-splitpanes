@@ -1,6 +1,4 @@
 <script context="module" lang="ts">
-	import { base } from '$app/paths';
-
 	export interface Page {
 		title: string;
 		path: `/${string}`;
@@ -13,7 +11,10 @@
 </script>
 
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { page } from '$app/stores';
+
+	import { pathIsCurrent } from './pathUtils';
 
 	export let contents: Section[] = [];
 </script>
@@ -28,13 +29,12 @@
 
 				<ul>
 					{#each section.pages as { title, path }}
-						{@const correctPath = base + path}
 						<li>
 							<a
 								data-sveltekit-preload-data
 								class="page"
-								aria-current={correctPath === $page.url.pathname ? 'page' : undefined}
-								href={correctPath}
+								aria-current={pathIsCurrent(path, $page) ? 'page' : undefined}
+								href={base + path}
 							>
 								{title}
 							</a>
