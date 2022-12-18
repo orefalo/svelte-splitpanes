@@ -97,6 +97,8 @@
 		font-family: Helvetica, Arial, sans-serif;
 		color: rgba(116, 103, 103);
 		margin: 0;
+		scrollbar-width: thin;
+		scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
 	}
 
 	:global(h1 h2) {
@@ -140,6 +142,7 @@
 	.page-container {
 		display: flex;
 		flex-flow: column nowrap;
+		align-items: stretch;
 		font-size: 14px;
 	}
 
@@ -198,7 +201,7 @@
 	}
 
 	.toc-container-space {
-		display: hidden;
+		display: none;
 	}
 
 	.toc-container {
@@ -225,11 +228,14 @@
 			min-width: 300px;
 			width: 300px;
 			height: 100vh;
+			margin: auto 0;
 		}
 
 		.toc-container {
 			flex-direction: column;
 			position: fixed;
+			left: 0;
+			top: 0;
 			width: 300px;
 			height: 100vh;
 		}
