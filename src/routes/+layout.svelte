@@ -140,16 +140,12 @@
 	}
 
 	.page-container {
-		display: flex;
-		flex-flow: column nowrap;
-		align-items: stretch;
+		display: table;
 		font-size: 14px;
+		width: 100%;
 	}
 
 	main {
-		-webkit-box-flex: 1;
-		-ms-flex-positive: 1;
-		flex-grow: 1;
 		max-width: 1150px;
 		margin-left: auto;
 		margin-right: auto;
@@ -220,7 +216,8 @@
 
 	@media (min-width: 832px) {
 		.page-container {
-			flex-direction: row;
+			display: flex;
+			flex-flow: row nowrap;
 		}
 
 		.toc-container-space {
@@ -229,6 +226,10 @@
 			width: 300px;
 			height: 100vh;
 			margin: auto 0;
+		}
+
+		main {
+			flex-grow: 1;
 		}
 
 		.toc-container {
