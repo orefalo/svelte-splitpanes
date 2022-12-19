@@ -14,7 +14,6 @@ specifiers:
   eslint: 8.29.0
   eslint-config-prettier: 8.5.0
   eslint-plugin-svelte3: 4.0.0
-  esm-env: ^1.0.0
   highlight.js: 11.7.0
   husky: 8.0.2
   lint-staged: 13.1.0
@@ -33,16 +32,13 @@ specifiers:
   typescript: 4.9.4
   vite: 4.0.0
 
-dependencies:
-  esm-env: 1.0.0
-
 optionalDependencies:
   '@playwright/test': 1.28.1
   serve: 14.1.2
 
 devDependencies:
-  '@sveltejs/adapter-static': 1.0.0-next.49
-  '@sveltejs/kit': 1.0.0-next.584_svelte@3.54.0+vite@4.0.0
+  '@sveltejs/adapter-static': 1.0.0-next.50_l5ueyfihz3gpzzvvyo2ean5u3e
+  '@sveltejs/kit': 1.0.0-next.589_svelte@3.54.0+vite@4.0.0
   '@sveltejs/package': 1.0.0-next.1_vjccw6zkwqrmxudvmy4reaayx4
   '@typescript-eslint/eslint-plugin': 5.46.1_imrg37k3svwu377c6q7gkarwmi
   '@typescript-eslint/parser': 5.46.1_ha6vam6werchizxrnqvarmz2zu
@@ -530,12 +526,16 @@ packages:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
     dev: true
 
-  /@sveltejs/adapter-static/1.0.0-next.49:
-    resolution: {integrity: sha512-tPMnqzFpFDWbeRsSkTUUIvjSHv66uEilQvk9shupsVRDycBb7ZACEnfA/T1HyEZKaMZYfFafyKb2dCTDGks0nA==}
+  /@sveltejs/adapter-static/1.0.0-next.50_l5ueyfihz3gpzzvvyo2ean5u3e:
+    resolution: {integrity: sha512-xZKBmiwFGW8nrH8+eysUAAo9XrtApI81q0m67y1bexVw8IY7/x741b6VEklNM7BZ7js0Mi2x+yCkHpOee8UZKQ==}
+    peerDependencies:
+      '@sveltejs/kit': ^1.0.0-next.587
+    dependencies:
+      '@sveltejs/kit': 1.0.0-next.589_svelte@3.54.0+vite@4.0.0
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.584_svelte@3.54.0+vite@4.0.0:
-    resolution: {integrity: sha512-iBfrrwkza1szR1GVMorTjj1Yw3SXhDVB5MMdDzCMKqKcCwxCehQ3K6QnlmyXHtHg2qX5rfvz0cpkp0uGGmcxQw==}
+  /@sveltejs/kit/1.0.0-next.589_svelte@3.54.0+vite@4.0.0:
+    resolution: {integrity: sha512-5ABRw46z9B+cCe/YWhcx+I/azNZg1NCDEkVJifZn8ToFoJ3a1eP0OexNIrvMEWpllMbNMPcJm2TC9tnz9oPfWQ==}
     engines: {node: '>=16.14'}
     hasBin: true
     requiresBuild: true
@@ -1762,6 +1762,7 @@ packages:
 
   /esm-env/1.0.0:
     resolution: {integrity: sha512-Cf6VksWPsTuW01vU9Mk/3vRue91Zevka5SjyNf3nEpokFRuqt/KjUQoGAwq9qMmhpLTHmXzSIrFRw8zxWzmFBA==}
+    dev: true
 
   /espree/9.4.1:
     resolution: {integrity: sha512-XwctdmTO6SIvCzd9810yyNzIrOrqNYV9Koizx4C/mRhf9uq0o4yHoCEU/670pOxOL/MSraektvSAji79kX90Vg==}

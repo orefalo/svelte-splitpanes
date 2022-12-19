@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { BROWSER } from 'esm-env';
 	import { getContext, onMount, onDestroy } from 'svelte';
 	import type { Action } from 'svelte/action';
 	import { KEY } from './Splitpanes.svelte';
@@ -20,6 +19,8 @@
 
 	// VARIABLES
 
+	const browser = typeof window !== 'undefined';
+
 	const key = {};
 	let element: HTMLElement;
 	let sz: number = size == null ? 0 : size;
@@ -35,9 +36,9 @@
 
 	$: style =
 		[
-			!BROWSER && minSize > 0 ? `min-${dimension}: ${minSize}%;` : undefined,
-			!BROWSER && maxSize < 100 ? `max-${dimension}: ${maxSize}%;` : undefined,
-			BROWSER || size != null ? `${dimension}: ${sz}%;` : undefined
+			!browser && minSize > 0 ? `min-${dimension}: ${minSize}%;` : undefined,
+			!browser && maxSize < 100 ? `max-${dimension}: ${maxSize}%;` : undefined,
+			browser || size != null ? `${dimension}: ${sz}%;` : undefined
 		]
 			.filter((value) => value !== undefined)
 			.join(' ') || undefined;
