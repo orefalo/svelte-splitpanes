@@ -83,6 +83,8 @@
 	let container: HTMLElement;
 	// true when component is ready, prevents emitting console warnings on hot reloading.
 	let isReady = false;
+	// true after the initial timeout 0 waiting, prevents CSS transitions until then.
+	let isAfterInitialTimeoutZero = false;
 	// true when mouse is down
 	let isMouseDown = false;
 	// true when a splitter is being dragged
@@ -234,6 +236,10 @@
 
 		isReady = true;
 		dispatch('ready');
+
+		setTimeout(() => {
+			isAfterInitialTimeoutZero = true;
+		}, 0);
 	});
 
 	onDestroy(() => {
@@ -976,6 +982,7 @@
 	class:splitpanes--horizontal={horizontal}
 	class:splitpanes--vertical={!horizontal}
 	class:splitpanes--dragging={isMouseDown || isDragging}
+	class:splitpanes--freeze={!isAfterInitialTimeoutZero}
 	{style}
 >
 	<slot />
@@ -1027,6 +1034,10 @@
 			.splitpanes--dragging & {
 				transition: none;
 				pointer-events: none;
+			}
+
+			.splitpanes--freeze & {
+				transition: none;
 			}
 		}
 		// Disable default zoom behavior on touch device when double tapping splitter.
