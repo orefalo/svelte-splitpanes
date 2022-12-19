@@ -822,8 +822,8 @@
 		const panesCount = panes.length;
 		const equalSpace = 100 / panesCount;
 		let leftToAllocate = 0;
-		let ungrowable = Array<string>();
-		let unshrinkable = Array<string>();
+		let ungrowable = Array<IPane>();
+		let unshrinkable = Array<IPane>();
 
 		for (let i = 0; i < panes.length; i++) {
 			const pane = panes[i];
@@ -832,8 +832,8 @@
 			const sz = Math.max(Math.min(equalSpace, max), min);
 			pane.setSz(sz);
 			leftToAllocate -= sz;
-			if (sz >= max) ungrowable.push(pane.key);
-			if (sz <= min) unshrinkable.push(pane.key);
+			if (sz >= max) ungrowable.push(pane);
+			if (sz <= min) unshrinkable.push(pane);
 		}
 
 		if (leftToAllocate > 0.1) readjustSizes(leftToAllocate, ungrowable, unshrinkable);
@@ -841,8 +841,8 @@
 
 	function initialPanesSizing() {
 		let leftToAllocate = 100;
-		let ungrowable = Array<string>();
-		let unshrinkable = Array<string>();
+		let ungrowable = Array<IPane>();
+		let unshrinkable = Array<IPane>();
 		let definedSizes = 0;
 
 		for (let i = 0; i < panes.length; i++) {
@@ -850,8 +850,8 @@
 			const sz = pane.sz();
 			leftToAllocate -= sz;
 			if (pane.givenSize != null) definedSizes++;
-			if (sz >= pane.max()) ungrowable.push(pane.key);
-			if (sz <= pane.min()) unshrinkable.push(pane.key);
+			if (sz >= pane.max()) ungrowable.push(pane);
+			if (sz <= pane.min()) unshrinkable.push(pane);
 		}
 
 		// set pane sizes if not set.
@@ -875,8 +875,8 @@
 		const panesCount = panes.length;
 		let equalSpace = 100 / panesCount;
 		let leftToAllocate = 0;
-		let ungrowable = new Array<string>();
-		let unshrinkable = new Array<string>();
+		let ungrowable = new Array<IPane>();
+		let unshrinkable = new Array<IPane>();
 
 		if (addedPane && addedPane.givenSize != null) {
 			equalSpace = (100 - addedPane.givenSize) / (panesCount - 1);
@@ -886,8 +886,8 @@
 			const pane = panes[i];
 			const sz = pane.sz();
 			leftToAllocate -= sz;
-			if (sz >= pane.max()) ungrowable.push(pane.key);
-			if (sz <= pane.min()) unshrinkable.push(pane.key);
+			if (sz >= pane.max()) ungrowable.push(pane);
+			if (sz <= pane.min()) unshrinkable.push(pane);
 		}
 
 		if (Math.abs(leftToAllocate) < 0.1) return; // Ok.
@@ -902,15 +902,15 @@
 
 			const sz = pane.sz();
 			leftToAllocate -= sz;
-			if (sz >= max) ungrowable.push(pane.key);
-			if (sz <= min) unshrinkable.push(pane.key);
+			if (sz >= max) ungrowable.push(pane);
+			if (sz <= min) unshrinkable.push(pane);
 		}
 
 		if (leftToAllocate > 0.1) readjustSizes(leftToAllocate, ungrowable, unshrinkable);
 	}
 
 	// Second loop to adjust sizes now that we know more about the panes constraints.
-	async function readjustSizes(leftToAllocate: number, ungrowable: Array<string>, unshrinkable: Array<string>) {
+	async function readjustSizes(leftToAllocate: number, ungrowable: Array<IPane>, unshrinkable: Array<IPane>) {
 		const panesCount = panes.length;
 		let equalSpaceToAllocate: number;
 		if (leftToAllocate > 0) equalSpaceToAllocate = leftToAllocate / (panesCount - ungrowable.length);
@@ -923,13 +923,13 @@
 			for (let i = 0; i < panes.length; i++) {
 				const pane = panes[i];
 				const sz = pane.sz();
-				if (leftToAllocate > 0 && !ungrowable.includes(pane.key)) {
+				if (leftToAllocate > 0 && !ungrowable.includes(pane)) {
 					// Need to diff the size before and after to get the exact allocated space.
 					const newPaneSize = Math.max(Math.min(sz + equalSpaceToAllocate, pane.max()), pane.min());
 					const allocated = newPaneSize - sz;
 					leftToAllocate -= allocated;
 					pane.setSz(newPaneSize);
-				} else if (!unshrinkable.includes(pane.key)) {
+				} else if (!unshrinkable.includes(pane)) {
 					// Need to diff the size before and after to get the exact allocated space.
 					const newPaneSize = Math.max(Math.min(sz + equalSpaceToAllocate, pane.max()), pane.min());
 					const allocated = newPaneSize - sz;
