@@ -48,9 +48,8 @@
 
 <style>
 	nav {
-		top: 0;
-		left: 0;
 		color: rgb(103, 103, 121);
+		padding: 0 10px;
 	}
 
 	.sidebar {
@@ -115,8 +114,6 @@
 	@media (min-width: 600px) {
 		.sidebar {
 			columns: 2;
-			padding-left: 1.2rem;
-			padding-right: 1.2rem;
 		}
 	}
 
@@ -129,8 +126,6 @@
 	@media (min-width: 832px) {
 		.sidebar {
 			columns: 1;
-			padding-left: 2rem;
-			padding-right: 0;
 			width: 28rem;
 			margin: 0 0 0 auto;
 		}

@@ -159,6 +159,7 @@
 		display: flex;
 		justify-content: space-between;
 		margin: 40px 0;
+		gap: 15px;
 	}
 
 	.controls > :first-child {
@@ -211,7 +212,7 @@
 		display: flex;
 		flex-flow: row nowrap;
 		gap: 8px;
-		padding-left: 10px;
+		padding: 0 10px;
 	}
 
 	@media (min-width: 832px) {
