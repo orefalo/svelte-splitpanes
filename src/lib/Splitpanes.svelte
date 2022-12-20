@@ -402,14 +402,12 @@
 
 	// On splitter dbl click or dbl tap maximize this pane.
 	function onSplitterDblClick(_event: MouseEvent, splitterIndex: number) {
-		const splitterPaneIndex = splitterIndex;
-
-		const splitterPane = panes[splitterPaneIndex];
+		const splitterPane = panes[splitterIndex];
 
 		let totalMinSizes = 0;
 		for (let i = 0; i < panes.length; i++) {
 			const pane = panes[i];
-			if (i !== splitterPaneIndex) {
+			if (i !== splitterIndex) {
 				totalMinSizes += pane.min();
 			}
 		}
@@ -421,7 +419,7 @@
 			// put everything to the minimum, and in the splitterPane put the rest of the size
 			for (let i = 0; i < panes.length; i++) {
 				const pane = panes[i];
-				if (i !== splitterPaneIndex) {
+				if (i !== splitterIndex) {
 					pane.setSz(pane.min());
 				} else {
 					pane.setSz(100 - totalMinSizes);
@@ -448,10 +446,10 @@
 			};
 
 			// go backward and give the most size as we can
-			for (let i = splitterPaneIndex - 1; i >= 0; i--) giveBest(panes[i]);
+			for (let i = splitterIndex - 1; i >= 0; i--) giveBest(panes[i]);
 
 			// go forward and give the most size as we can
-			for (let i = splitterPaneIndex + 1; i < panes.length; i++) giveBest(panes[i]);
+			for (let i = splitterIndex + 1; i < panes.length; i++) giveBest(panes[i]);
 
 			// at the end of the process, we must have that `leftSpare` is 0
 			if (leftSpare != 0) {
