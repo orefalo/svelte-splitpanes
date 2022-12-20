@@ -40,16 +40,16 @@
 		"release": "standard-version --no-verify"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-static": "next",
-		"@sveltejs/kit": "next",
-		"@sveltejs/package": "next",
-		"@typescript-eslint/eslint-plugin": "5.46.1",
-		"@typescript-eslint/parser": "5.46.1",
+		"@sveltejs/adapter-static": "1.0.0",
+		"@sveltejs/kit": "1.0.1",
+		"@sveltejs/package": "1.0.1",
+		"@typescript-eslint/eslint-plugin": "5.47.0",
+		"@typescript-eslint/parser": "5.47.0",
 		"commitlint": "11.0.0",
 		"commitlint-config-gitmoji": "2.2.6",
 		"cross-env": "7.0.3",
 		"cz-customizable": "7.0.0",
-		"eslint": "8.29.0",
+		"eslint": "8.30.0",
 		"eslint-config-prettier": "8.5.0",
 		"eslint-plugin-svelte3": "4.0.0",
 		"highlight.js": "11.7.0",
@@ -57,9 +57,9 @@
 		"lint-staged": "13.1.0",
 		"prettier": "2.8.1",
 		"prettier-plugin-svelte": "2.9.0",
-		"sass": "1.56.2",
+		"sass": "1.57.1",
 		"standard-version": "9.5.0",
-		"svelte": "3.54.0",
+		"svelte": "3.55.0",
 		"svelte-check": "2.10.2",
 		"svelte-highlight": "6.2.1",
 		"svelte-preprocess": "5.0.0",
@@ -67,11 +67,11 @@
 		"svelte2tsx": "0.5.22",
 		"tslib": "2.4.1",
 		"typescript": "4.9.4",
-		"vite": "4.0.0"
+		"vite": "4.0.2"
 	},
 	"type": "module",
 	"optionalDependencies": {
-		"@playwright/test": "1.28.1",
+		"@playwright/test": "1.29.0",
 		"serve": "14.1.2"
 	},
 	"config": {
