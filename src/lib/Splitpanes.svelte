@@ -177,14 +177,8 @@
 		}
 
 		if (isReady) {
-			isAwaitingPaneReset = true;
-			await tick();
-
-			// 2. Resize the panes.
-			if (isAwaitingPaneReset) {
-				resetPaneSizes();
-				isAwaitingPaneReset = false;
-			}
+			// 2. tick and resize the panes.
+			await tickAndResetPaneSizes();
 
 			// 3. Set the pane as ready
 			pane.isReady = true;
@@ -215,14 +209,8 @@
 			}
 
 			if (isReady) {
-				isAwaitingPaneReset = true;
-				await tick();
-
-				// 3. Resize the panes.
-				if (isAwaitingPaneReset) {
-					resetPaneSizes();
-					isAwaitingPaneReset = false;
-				}
+				// 3. tick and resize the panes.
+				await tickAndResetPaneSizes();
 
 				// 4. Fire `pane-remove` event.
 				dispatch('pane-remove', {
@@ -859,6 +847,16 @@
 	function findNextExpandedPane(splitterIndex: number): IPane | null {
 		const pane = panes.find((p) => p.index > splitterIndex + 1 && p.sz() > p.min());
 		return pane || null;
+	}
+
+	async function tickAndResetPaneSizes() {
+		isAwaitingPaneReset = true;
+		await tick();
+
+		if (isAwaitingPaneReset) {
+			resetPaneSizes();
+			isAwaitingPaneReset = false;
+		}
 	}
 
 	/**
