@@ -212,7 +212,7 @@
 		display: flex;
 		flex-flow: row nowrap;
 		gap: 8px;
-		padding: 0 10px;
+		padding-left: 10px;
 	}
 
 	@media (min-width: 832px) {
