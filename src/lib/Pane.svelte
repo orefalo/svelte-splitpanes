@@ -87,7 +87,8 @@
 			snap: () => snapSize,
 			setSplitterActive: (isActive: boolean) => {
 				isSplitterActive = isActive;
-			}
+			},
+			isReady: false
 		};
 		onPaneAdd(inst);
 	});
