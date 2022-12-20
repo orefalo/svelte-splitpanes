@@ -414,18 +414,64 @@
 
 	// On splitter dbl click or dbl tap maximize this pane.
 	function onSplitterDblClick(_event: MouseEvent, splitterIndex: number) {
-		let totalMinSizes = 0;
+		const splitterPaneIndex = splitterIndex;
 
+		const splitterPane = panes[splitterPaneIndex];
+
+		let totalMinSizes = 0;
 		for (let i = 0; i < panes.length; i++) {
 			const pane = panes[i];
-			const sz = i === splitterIndex ? pane.max() : pane.min();
-			pane.setSz(sz);
-			if (i !== splitterIndex) totalMinSizes += pane.min();
+			if (i !== splitterPaneIndex) {
+				totalMinSizes += pane.min();
+			}
 		}
 
-		const splitterPane = panes[splitterIndex];
-		const sz = splitterPane.sz() - totalMinSizes;
-		splitterPane.setSz(sz);
+		const maxExtendedSize = Math.min(Math.max(0, 100 - totalMinSizes), splitterPane.max());
+
+		const totalMaxExtendedPlusMinSizes = totalMinSizes + maxExtendedSize;
+		if (totalMaxExtendedPlusMinSizes >= 100) {
+			// put everything to the minimum, and in the splitterPane put the rest of the size
+			for (let i = 0; i < panes.length; i++) {
+				const pane = panes[i];
+				if (i !== splitterPaneIndex) {
+					pane.setSz(pane.min());
+				} else {
+					pane.setSz(100 - totalMinSizes);
+				}
+			}
+		} else {
+			// notice that in this case, we can conclude that `panes.length >= 2`
+
+			// put splitterPane to the maximum (the actual one), and the normal panes to the minimum,
+			//  and give the spare to left pane (or to the right pane, if the splitterPane is the first pane)
+			// if this spare size is beyond the pane maximum, need to pass it along to the other panes
+
+			let leftSpare = 100 - totalMaxExtendedPlusMinSizes;
+
+			splitterPane.setSz(maxExtendedSize);
+
+			const giveBest = (pane: IPane) => {
+				const min = pane.min();
+				const max = pane.max();
+
+				const szExtra = Math.min(Math.max(0, leftSpare), max - min);
+				pane.setSz(min + szExtra);
+				leftSpare -= szExtra;
+			};
+
+			// go backward and give the most size as we can
+			for (let i = splitterPaneIndex - 1; i >= 0; i--) giveBest(panes[i]);
+
+			// go forward and give the most size as we can
+			for (let i = splitterPaneIndex + 1; i < panes.length; i++) giveBest(panes[i]);
+
+			// at the end of the process, we must have that `leftSpare` is 0
+			if (leftSpare != 0) {
+				console.warn(
+					'Splitpanes: there is a left spare size after computation of splitter double click, which means there are issues on the size constains of the panes.'
+				);
+			}
+		}
 
 		dispatch('pane-maximize', splitterPane);
 		dispatch('resized', prepareSizeEvent());
