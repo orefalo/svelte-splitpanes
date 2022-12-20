@@ -83,6 +83,8 @@
 	let container: HTMLElement;
 	// true when component is ready, prevents emitting console warnings on hot reloading.
 	let isReady = false;
+	// true when pane reset is awaiting for the next tick, to avoid double call to pane reset.
+	let isAwaitingPaneReset = false;
 	// true after the initial timeout 0 waiting, prevents CSS transitions until then.
 	let isAfterInitialTimeoutZero = false;
 	// true when mouse is down
@@ -175,12 +177,19 @@
 		}
 
 		if (isReady) {
+			isAwaitingPaneReset = true;
 			await tick();
 
 			// 2. Resize the panes.
-			resetPaneSizes(panes[index], undefined);
+			if (isAwaitingPaneReset) {
+				resetPaneSizes();
+				isAwaitingPaneReset = false;
+			}
 
-			// 3. Fire `pane-add` event.
+			// 3. Set the pane as ready
+			pane.isReady = true;
+
+			// 4. Fire `pane-add` event.
 			dispatch('pane-add', {
 				index,
 				panes: prepareSizeEvent()
@@ -206,10 +215,14 @@
 			}
 
 			if (isReady) {
+				isAwaitingPaneReset = true;
 				await tick();
 
 				// 3. Resize the panes.
-				resetPaneSizes(undefined, { ...removed, index });
+				if (isAwaitingPaneReset) {
+					resetPaneSizes();
+					isAwaitingPaneReset = false;
+				}
 
 				// 4. Fire `pane-remove` event.
 				dispatch('pane-remove', {
@@ -234,6 +247,9 @@
 		checkSplitpanesNodes();
 		resetPaneSizes();
 
+		for (let i = 0; i < panes.length; i++) {
+			panes[i].isReady = true;
+		}
 		isReady = true;
 		dispatch('ready');
 
@@ -804,117 +820,90 @@
 	 * @param addedPane
 	 * @param removedPane
 	 */
-	function resetPaneSizes(addedPane?: IPane, removedPane?: { [key: string]: any }) {
-		if ((!addedPane && !removedPane) || panes.length === 1) {
-			// on initialization or if we have only one pane now
-			initialPanesSizing();
-		} else if (panes.some((pane) => pane.givenSize != null || pane.min() || pane.max() < 100))
-			equalizeAfterAddOrRemove(addedPane);
-		else equalize();
+	function resetPaneSizes() {
+		equalize();
 
 		if (isReady) dispatch('resized', prepareSizeEvent());
 	}
 
-	/**
-	 * Ensures all panes have the same size
-	 */
 	function equalize() {
 		const panesCount = panes.length;
-		const equalSpace = 100 / panesCount;
-		let leftToAllocate = 0;
-		let ungrowable = Array<IPane>();
-		let unshrinkable = Array<IPane>();
-
-		for (let i = 0; i < panes.length; i++) {
-			const pane = panes[i];
-			const min = pane.min();
-			const max = pane.max();
-			const sz = Math.max(Math.min(equalSpace, max), min);
-			pane.setSz(sz);
-			leftToAllocate -= sz;
-			if (sz >= max) ungrowable.push(pane);
-			if (sz <= min) unshrinkable.push(pane);
-		}
-
-		if (leftToAllocate > 0.1) readjustSizes(leftToAllocate, ungrowable, unshrinkable);
-	}
-
-	function initialPanesSizing() {
 		let leftToAllocate = 100;
-		let ungrowable = Array<IPane>();
-		let unshrinkable = Array<IPane>();
-		let definedSizes = 0;
+		let definedSizesCount = 0;
+		let undefinedSizesNotReadyCount = 0;
+		let undefinedSizesSum = 0;
+		let ungrowable: IPane[] = [];
+		let unshrinkable: IPane[] = [];
 
-		for (let i = 0; i < panes.length; i++) {
+		for (let i = 0; i < panesCount; i++) {
 			const pane = panes[i];
 			const sz = pane.sz();
-			leftToAllocate -= sz;
-			if (pane.givenSize != null) definedSizes++;
-			if (sz >= pane.max()) ungrowable.push(pane);
-			if (sz <= pane.min()) unshrinkable.push(pane);
+			if (pane.givenSize == null) {
+				if (pane.isReady) {
+					undefinedSizesSum += sz;
+					if (sz >= pane.max()) ungrowable.push(pane);
+					if (sz <= pane.min()) unshrinkable.push(pane);
+				} else {
+					undefinedSizesNotReadyCount += 1;
+				}
+			} else {
+				// if the size is defined, we don't modify its size at all
+				leftToAllocate -= sz;
+				definedSizesCount++;
+				ungrowable.push(pane);
+				unshrinkable.push(pane);
+			}
 		}
 
-		// set pane sizes if not set.
-		let leftToAllocate2 = 100;
+		const undefinedSizesCount = panesCount - definedSizesCount;
+		const undefinedSizesReadyCount = undefinedSizesCount - undefinedSizesNotReadyCount;
+
+		// the proportion of the newly added panes
+		let undefinedSizesNotReadySz: number;
+		let undefinedScaleFactor: number;
+		if (undefinedSizesReadyCount > 0) {
+			// if has undefined sizes panes that are ready:
+			undefinedSizesNotReadySz = undefinedSizesSum / undefinedSizesReadyCount;
+			undefinedSizesSum += undefinedSizesNotReadyCount * undefinedSizesNotReadySz;
+			undefinedScaleFactor = leftToAllocate / undefinedSizesSum;
+		} else {
+			// otherwise, divide the space of the undefined sizes panes equally:
+			undefinedSizesNotReadySz = leftToAllocate / undefinedSizesCount;
+			undefinedScaleFactor = 1;
+		}
+
 		if (leftToAllocate > 0.1) {
-			for (let i = 0; i < panes.length; i++) {
+			leftToAllocate = 100; // reset the space calculation
+
+			for (let i = 0; i < panesCount; i++) {
 				const pane = panes[i];
 				if (pane.givenSize == null) {
-					const panesCount = panes.length;
-					const sz = Math.max(Math.min(leftToAllocate / (panesCount - definedSizes), pane.max()), pane.min());
+					// add the proportion of the newly added pane if has undefined size
+					const currentSz = pane.isReady ? pane.sz() : undefinedSizesNotReadySz;
+
+					const sz = Math.max(Math.min(currentSz * undefinedScaleFactor, pane.max()), pane.min());
 					pane.setSz(sz);
 				}
-				leftToAllocate2 -= pane.sz();
+				leftToAllocate -= pane.sz();
 			}
 
-			if (leftToAllocate2 > 0.1) readjustSizes(leftToAllocate, ungrowable, unshrinkable);
-		}
-	}
-
-	function equalizeAfterAddOrRemove(addedPane?: IPane) {
-		const panesCount = panes.length;
-		let equalSpace = 100 / panesCount;
-		let leftToAllocate = 0;
-		let ungrowable = new Array<IPane>();
-		let unshrinkable = new Array<IPane>();
-
-		if (addedPane && addedPane.givenSize != null) {
-			equalSpace = (100 - addedPane.givenSize) / (panesCount - 1);
+			// since we multiply by scaling, there might be left space that is needed to be saturated
+			if (Math.abs(leftToAllocate) > 0.1) {
+				leftToAllocate = readjustSizes(leftToAllocate, ungrowable, unshrinkable);
+			}
 		}
 
-		for (let i = 0; i < panes.length; i++) {
-			const pane = panes[i];
-			const sz = pane.sz();
-			leftToAllocate -= sz;
-			if (sz >= pane.max()) ungrowable.push(pane);
-			if (sz <= pane.min()) unshrinkable.push(pane);
+		if (Math.abs(leftToAllocate) > 0.1) {
+			// eslint-disable-next-line no-console
+			console.warn('Splitpanes: Could not resize panes correctly due to their constraints.');
 		}
-
-		if (Math.abs(leftToAllocate) < 0.1) return; // Ok.
-
-		for (let i = 0; i < panes.length; i++) {
-			const pane = panes[i];
-			const max = pane.max();
-			const min = pane.min();
-			if (addedPane && addedPane.givenSize != null && addedPane.key === pane.key) {
-				// TODO: Check why is it empty here?
-			} else pane.setSz(Math.max(Math.min(equalSpace, max), min));
-
-			const sz = pane.sz();
-			leftToAllocate -= sz;
-			if (sz >= max) ungrowable.push(pane);
-			if (sz <= min) unshrinkable.push(pane);
-		}
-
-		if (leftToAllocate > 0.1) readjustSizes(leftToAllocate, ungrowable, unshrinkable);
 	}
 
 	// Second loop to adjust sizes now that we know more about the panes constraints.
-	async function readjustSizes(leftToAllocate: number, ungrowable: Array<IPane>, unshrinkable: Array<IPane>) {
+	function readjustSizes(leftToAllocate: number, ungrowable: Array<IPane>, unshrinkable: Array<IPane>): number {
 		const panesCount = panes.length;
-		let equalSpaceToAllocate: number;
-		if (leftToAllocate > 0) equalSpaceToAllocate = leftToAllocate / (panesCount - ungrowable.length);
-		else equalSpaceToAllocate = leftToAllocate / (panesCount - unshrinkable.length);
+		let equalSpaceToAllocate =
+			leftToAllocate / (panesCount - (leftToAllocate > 0 ? ungrowable.length : unshrinkable.length));
 
 		if (panes.length === 1) {
 			panes[0].setSz(100);
@@ -938,17 +927,9 @@
 				}
 			}
 
-		if (Math.abs(leftToAllocate) > 0.1) {
-			// > 0.1: Prevent maths rounding issues due to bytes.
-			// Don't emit on hot reload when Vue destroys panes.
-			await tick();
-
-			if (isReady) {
-				// eslint-disable-next-line no-console
-				console.warn('Splitpanes: Could not resize panes correctly due to their constraints.');
-			}
-		}
+		return leftToAllocate;
 	}
+
 	/**
 	 * Checks that <Splitpanes> is composed of <Pane>
 	 */
