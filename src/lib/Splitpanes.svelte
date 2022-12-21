@@ -3,7 +3,7 @@
 </script>
 
 <script lang="ts">
-	import { onMount, onDestroy, setContext, createEventDispatcher, tick } from 'svelte';
+	import { onMount, onDestroy, setContext, createEventDispatcher, tick, afterUpdate } from 'svelte';
 	import { writable } from 'svelte/store';
 	import type { IPane, IPaneSizingEvent, SplitContext, PaneInitFunction } from '.';
 
@@ -248,7 +248,7 @@
 	}
 
 	onMount(() => {
-		checkSplitpanesNodes();
+		verifyAndUpdatePanesOrder();
 		resetPaneSizes();
 
 		for (let i = 0; i < panes.length; i++) {
@@ -271,6 +271,10 @@
 
 		// Prevent emitting console warnings on hot reloading.
 		isReady = false;
+	});
+
+	afterUpdate(() => {
+		verifyAndUpdatePanesOrder();
 	});
 
 	// Tells in the current DOM state if we are in RTL direction or not.
@@ -1003,27 +1007,55 @@
 	}
 
 	/**
-	 * Checks that <Splitpanes> is composed of <Pane>
+	 * Checks that <Splitpanes> is composed of <Pane>, and verify that the panes are still in the right order,
+		and if not update the internal order.
 	 */
-	function checkSplitpanesNodes() {
-		if (container) {
-			const children = Array.from(container.children) as Array<HTMLElement>;
+	function verifyAndUpdatePanesOrder() {
+		const { children } = container;
+		let currentPaneIndex = 0;
+		let needReorder = false;
+
+		for (let i = 0; i < children.length; i++) {
+			const child = children.item(i);
+			const isPane = child.classList.contains('splitpanes__pane');
+			const isSplitter = child.classList.contains('splitpanes__splitter');
+
+			// Node is not a Pane or a splitter: remove it.
+			if (!isPane && !isSplitter) {
+				child.parentNode?.removeChild(child); // el.remove() doesn't work on IE11.
+				// eslint-disable-next-line no-console
+				console.warn(
+					'Splitpanes: Only <Pane> elements are allowed at the root of <Splitpanes>. One of your DOM nodes was removed.'
+				);
+				return;
+			} else if (isPane) {
+				if (!needReorder && panes[currentPaneIndex].element !== child) {
+					needReorder = true;
+				}
+
+				currentPaneIndex++;
+			}
+		}
+
+		if (needReorder) {
+			const newPanes = [];
 
 			for (let i = 0; i < children.length; i++) {
-				const child = children[i];
+				const child = children.item(i);
 				const isPane = child.classList.contains('splitpanes__pane');
-				const isSplitter = child.classList.contains('splitpanes__splitter');
-
-				// Node is not a Pane or a splitter: remove it.
-				if (!isPane && !isSplitter) {
-					child.parentNode?.removeChild(child); // el.remove() doesn't work on IE11.
-					// eslint-disable-next-line no-console
-					console.warn(
-						'Splitpanes: Only <Pane> elements are allowed at the root of <Splitpanes>. One of your DOM nodes was removed.'
-					);
-					return;
+				if (isPane) {
+					const pane = panes.find((pane) => pane.element === child);
+					if (pane != null) {
+						pane.index = newPanes.length;
+						newPanes.push(pane);
+					} else {
+						console.warn("Splitpanes: Internal error - found a <Pane> elements which isn't tracked.");
+					}
 				}
 			}
+
+			panes = newPanes;
+			$veryFirstPaneKey = panes.length > 0 ? panes[0].key : undefined;
 		}
 	}
 </script>

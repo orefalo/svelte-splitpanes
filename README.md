@@ -32,6 +32,7 @@ So we decided to port it and enhance it. :smile:
 - Support edge snapping
 - Support programmatic resizing and two-way size binding
 - Support programmatic splitter add/remove
+- Support programmatic splitter reordering by Svelte keyed each blocks
 - Support for legacy browser such as IE 11
 - Support for touch devices
 - Support for fixed splitters

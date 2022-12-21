@@ -23,6 +23,7 @@
 				{ title: 'Lock Layout', path: '/examples/lock-layout' },
 				{ title: 'Push Other Panes', path: '/examples/push-other-panes' },
 				{ title: 'Add Remove Splitter', path: '/examples/add-remove-splitter' },
+				{ title: 'Reordering Splitters', path: '/examples/reordering-splitters' },
 				{ title: 'ChangeOrientation', path: '/examples/change-orientation' },
 				{ title: 'Prog Resize', path: '/examples/prog-resize' },
 				{ title: 'Toggle Panes', path: '/examples/toggle-panes' },
