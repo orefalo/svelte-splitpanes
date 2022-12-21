@@ -10,7 +10,7 @@
 		<link href="/svelte-splitpanes/_app/immutable/assets/_page-131ac458.css" rel="stylesheet">
 		<link href="/svelte-splitpanes/_app/immutable/assets/Pane-ddd88e41.css" rel="stylesheet">
 		<link href="/svelte-splitpanes/_app/immutable/assets/CodeArea-548b5b0d.css" rel="stylesheet">
-		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/start-06995b66.js">
+		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/start-2815c597.js">
 		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/chunks/index-15259a8c.js">
 		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/chunks/singletons-5b10adf0.js">
 		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/chunks/index-99a31a4d.js">
@@ -18,8 +18,8 @@
 		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/chunks/stores-a1f3eb77.js">
 		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/modules/pages/_layout.ts-9cbb603b.js">
 		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/chunks/_layout-da46b06b.js">
-		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/components/pages/examples/prog-resize/_page.svelte-3e2adffd.js">
-		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/chunks/Pane-64d1bc68.js">
+		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/components/pages/examples/prog-resize/_page.svelte-2e6a0393.js">
+		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/chunks/Pane-9c5fabac.js">
 		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/chunks/CodeArea-0c99e4dd.js">
 		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/chunks/index-9ecc83ef.js">
 		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/modules/pages/examples/prog-resize/_page.ts-1f4d7490.js">
@@ -34,9 +34,10 @@
 <div class="page-container svelte-1xp6paq"><div role="presentation" class="toc-container-space svelte-1xp6paq"></div>
 
 	<main class="svelte-1xp6paq"><h2>Programmatic resizing</h2>
-<p>This example shows the programmatic way of resizing panes with data biding. And how it works both ways.</p>
 
-<div class="rangeSlider   hoverable"><span role="slider" class="rangeHandle" data-handle="0" style="left: 50%; z-index: 3;" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="50" aria-orientation="horizontal" aria-disabled="false"  tabindex="0"><span class="rangeNub"></span>
+<section><p>This example shows the programmatic way of resizing panes with two-way data biding. And how it works both ways.</p>
+
+	<div class="rangeSlider   hoverable"><span role="slider" class="rangeHandle" data-handle="0" style="left: 50%; z-index: 3;" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="50" aria-orientation="horizontal" aria-disabled="false"  tabindex="0"><span class="rangeNub"></span>
       <span class="rangeFloat">50
         </span>
     </span>
@@ -44,14 +45,13 @@
   </div>
 
 
-<div class="splitpanes default-theme default-theme  splitpanes--vertical  splitpanes--freeze" style="height: 400px">
+	<div class="splitpanes default-theme default-theme  splitpanes--vertical  splitpanes--freeze" style="height: 400px">
 
 
 
 
 <div class="splitpanes__pane " style="width: 50%;"><span>50%</span></div>
-	
-	
+		
 
 <div class="splitpanes__splitter "></div>
 
@@ -59,22 +59,67 @@
 <div class="splitpanes__pane " style="width: 50%;"><span>50%</span></div>
 </div>
 
-<div role="presentation" id="prerendered_area_prog_resize">
+	<div role="presentation" id="prerendered_area_prog_resize_1">
   
   <pre data-language="svelte" class=" svelte-4cqgwq"><code class="hljs"><!-- HTML_TAG_START -->
 <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
-    <span class="hljs-keyword">let</span> value = [<span class="hljs-number">50</span>];
+    <span class="hljs-keyword">let</span> value1 = [<span class="hljs-number">50</span>];
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">RangeSlider</span> <span class="hljs-attr">float</span> <span class="hljs-attr">bind:values</span>=<span class="hljs-string">{value}</span> <span class="hljs-attr">min</span>=<span class="hljs-string">{0}</span> <span class="hljs-attr">max</span>=<span class="hljs-string">{100}</span> /&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">RangeSlider</span> <span class="hljs-attr">float</span> <span class="hljs-attr">bind:values</span>=<span class="hljs-string">{value1}</span> <span class="hljs-attr">min</span>=<span class="hljs-string">{0}</span> <span class="hljs-attr">step</span>=<span class="hljs-string">{0.01}</span> <span class="hljs-attr">max</span>=<span class="hljs-string">{100}</span> /&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">Splitpanes</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;default-theme&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;height: 400px&quot;</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">Pane</span> <span class="hljs-attr">bind:size</span>=<span class="hljs-string">{value[0]}</span>&gt;</span>
-		<span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{Math.round(value[0])}%<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">Pane</span> <span class="hljs-attr">bind:size</span>=<span class="hljs-string">{value1[0]}</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{Math.round(value1[0])}%<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
 	<span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">Pane</span> <span class="hljs-attr">size</span>=<span class="hljs-string">{100</span> <span class="hljs-attr">-</span> <span class="hljs-attr">value</span>[<span class="hljs-attr">0</span>]}&gt;</span>
-		<span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{Math.round(100 - value[0])}%<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">Pane</span> <span class="hljs-attr">size</span>=<span class="hljs-string">{100</span> <span class="hljs-attr">-</span> <span class="hljs-attr">value1</span>[<span class="hljs-attr">0</span>]}&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{Math.round(100 - value1[0])}%<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
 	<span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">Splitpanes</span>&gt;</span><!-- HTML_TAG_END --></code></pre>
+</div></section>
+
+<section><p>Changing programmatically the size one pane, will shrink/expand the other panes that have no specified size, as you
+		can see in the example.
+		<br>
+		However, not specifiying a size will cause issue on SSR that we can&#39;t solve, because of how Svelte SSR works today.
+	</p>
+
+	<div class="rangeSlider   hoverable"><span role="slider" class="rangeHandle" data-handle="0" style="left: 50%; z-index: 3;" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="50" aria-orientation="horizontal" aria-disabled="false"  tabindex="0"><span class="rangeNub"></span>
+      <span class="rangeFloat">50
+        </span>
+    </span>
+  
+  </div>
+
+
+	<div class="splitpanes default-theme default-theme  splitpanes--vertical  splitpanes--freeze" style="height: 400px">
+
+
+
+
+<div class="splitpanes__pane " style="width: 50%;"><span>50%</span></div>
+		
+
+<div class="splitpanes__splitter "></div>
+
+
+<div class="splitpanes__pane "><span>Auto-Calculated</span></div>
 </div>
+
+	<div role="presentation" id="prerendered_area_prog_resize_2">
+  
+  <pre data-language="svelte" class=" svelte-4cqgwq"><code class="hljs"><!-- HTML_TAG_START -->
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
+    <span class="hljs-keyword">let</span> value2 = [<span class="hljs-number">50</span>];
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">RangeSlider</span> <span class="hljs-attr">float</span> <span class="hljs-attr">bind:values</span>=<span class="hljs-string">{value2}</span> <span class="hljs-attr">min</span>=<span class="hljs-string">{0}</span> <span class="hljs-attr">step</span>=<span class="hljs-string">{0.01}</span> <span class="hljs-attr">max</span>=<span class="hljs-string">{100}</span> /&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">Splitpanes</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;default-theme&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;height: 400px&quot;</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">Pane</span> <span class="hljs-attr">bind:size</span>=<span class="hljs-string">{value2[0]}</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{Math.round(value2[0])}%<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">Pane</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Auto-Calculated<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Splitpanes</span>&gt;</span><!-- HTML_TAG_END --></code></pre>
+</div></section>
 
 		<div class="controls svelte-1xp6paq"><div class="svelte-1xp6paq"><span class="svelte-1xp6paq">previous</span>
 				<a data-sveltekit-preload-data href="/svelte-splitpanes/examples/change-orientation" class="svelte-1xp6paq">ChangeOrientation</a></div>
@@ -121,14 +166,14 @@
 </div>
 
 
-		<script type="module" data-sveltekit-hydrate="yx95b0">
-			import { start } from "/svelte-splitpanes/_app/immutable/start-06995b66.js";
+		<script type="module" data-sveltekit-hydrate="y538pm">
+			import { start } from "/svelte-splitpanes/_app/immutable/start-2815c597.js";
 
 			start({
 				env: {},
 				paths: {"base":"/svelte-splitpanes","assets":"/svelte-splitpanes"},
-				target: document.querySelector('[data-sveltekit-hydrate="yx95b0"]').parentNode,
-				version: "1671544293532",
+				target: document.querySelector('[data-sveltekit-hydrate="y538pm"]').parentNode,
+				version: "1671629731559",
 				hydrate: {
 					node_ids: [0, 9],
 					data: [null,null],
