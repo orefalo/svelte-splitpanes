@@ -4,8 +4,16 @@
 	import { KEY } from './Splitpanes.svelte';
 	import type { IPane, SplitContext } from '.';
 
-	const { onPaneInit, onPaneAdd, onPaneRemove, onPaneClick, isHorizontal, showFirstSplitter, veryFirstPaneKey } =
-		getContext<SplitContext>(KEY);
+	const {
+		onPaneInit,
+		onPaneAdd,
+		onPaneRemove,
+		onPaneClick,
+		reportGivenSizeChange,
+		isHorizontal,
+		showFirstSplitter,
+		veryFirstPaneKey
+	} = getContext<SplitContext>(KEY);
 
 	// PROPS
 
@@ -25,11 +33,17 @@
 	let element: HTMLElement;
 	let sz: number = size == null ? 0 : size;
 	let isSplitterActive = false;
+	let paneAdded = false;
 
 	// REACTIVE
 
-	$: if (size != null) {
-		sz = size;
+	const reportGivenSizeChangeIfPaneAdded = (size: number) => {
+		if (paneAdded && size != null && size != sz) {
+			reportGivenSizeChange(key, size);
+		}
+	};
+	$: {
+		reportGivenSizeChangeIfPaneAdded(size);
 	}
 
 	$: dimension = $isHorizontal ? 'height' : 'width';
@@ -78,7 +92,7 @@
 			sz: () => sz,
 			setSz: (v) => {
 				sz = v;
-				if (size != null) {
+				if (size != null && size != sz) {
 					size = sz;
 				}
 			},
@@ -91,6 +105,7 @@
 			isReady: false
 		};
 		onPaneAdd(inst);
+		paneAdded = true;
 	});
 
 	onDestroy(() => {

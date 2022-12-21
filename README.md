@@ -30,7 +30,7 @@ So we decided to port it and enhance it. :smile:
 - Support first splitter on/off
 - Support pane toggle
 - Support edge snapping
-- Support programmatic resizing
+- Support programmatic resizing and two-way size binding
 - Support programmatic splitter add/remove
 - Support for legacy browser such as IE 11
 - Support for touch devices
@@ -41,7 +41,7 @@ So we decided to port it and enhance it. :smile:
 
 | ![Chrome](https://raw.github.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png) | ![Firefox](https://raw.github.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png) | ![Safari](https://raw.github.com/alrra/browser-logos/master/src/safari/safari_48x48.png) | ![Opera](https://raw.github.com/alrra/browser-logos/master/src/opera/opera_48x48.png) | ![Edge](https://raw.github.com/alrra/browser-logos/master/src/edge/edge_48x48.png) | ![IE](https://raw.github.com/alrra/browser-logos/master/src/archive/internet-explorer_9-11/internet-explorer_9-11_48x48.png) |
 | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| Latest ✔                                                                                 | Latest ✔                                                                                    | Latest ✔                                                                                 | Latest ✔                                                                              | Latest ✔                                                                           | 11 ✔                                                                                                                        |
+| Latest ✔                                                                                 | Latest ✔                                                                                    | Latest ✔                                                                                 | Latest ✔                                                                              | Latest ✔                                                                           | 11 ✔                                                                                                                         |
 
 ## Demo & Documentation
 
@@ -77,16 +77,16 @@ $ npm i svelte-splitpanes
 
 Here is the list of properties that apply to `<Splitpanes>`
 
-| Parameter name   | Type            | Default                     | Comments                                                     |
-| ---------------- | --------------- | --------------------------- | ------------------------------------------------------------ |
-| horizontal       | boolean         | false (Vertical by default) | The orientation of the split panes.                          |
-| pushOtherPanes   | boolean         | true                        | Whether a splitter should push the next splitter when dragging. |
-| dblClickSplitter | boolean         | true                        | Double click on splitter to maximize the next pane           |
-| rtl              | boolean\|"auto" | "auto"                      | Supports Right to left, by default will auto detect          |
+| Parameter name   | Type            | Default                     | Comments                                                                                                     |
+| ---------------- | --------------- | --------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| horizontal       | boolean         | false (Vertical by default) | The orientation of the split panes.                                                                          |
+| pushOtherPanes   | boolean         | true                        | Whether a splitter should push the next splitter when dragging.                                              |
+| dblClickSplitter | boolean         | true                        | Double click on splitter to maximize the next pane                                                           |
+| rtl              | boolean\|"auto" | "auto"                      | Supports Right to left, by default will auto detect                                                          |
 | firstSplitter    | boolean         | false                       | Displays the first splitter when set to true. This allows maximizing the first pane on splitter double click |
-| id               | string          | undefined                   | Provide an optional id attribute to the component for styling/other reasons |
-| theme            | string          | 'default-theme'             | Used to styles the splitters using a different css class     |
-| class            | string          | undefined                   | Any additional css classes to be added to the component      |
+| id               | string          | undefined                   | Provide an optional id attribute to the component for styling/other reasons                                  |
+| theme            | string          | 'default-theme'             | Used to styles the splitters using a different css class                                                     |
+| class            | string          | undefined                   | Any additional css classes to be added to the component                                                      |
 
 Properties that apply to `<Pane>`
 

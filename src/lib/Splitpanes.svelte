@@ -152,7 +152,8 @@
 		onPaneInit,
 		onPaneAdd,
 		onPaneClick,
-		onPaneRemove
+		onPaneRemove,
+		reportGivenSizeChange
 	});
 
 	async function onPaneAdd(pane: IPane) {
@@ -229,6 +230,21 @@
 				pane.key == key;
 			})
 		);
+	}
+
+	function reportGivenSizeChange(paneKey: unknown, newGivenSize: number | null) {
+		let paneIndex: number;
+		for (let i = 0; i < panes.length; i++) {
+			if (panes[i].key === paneKey) {
+				paneIndex = i;
+				break;
+			}
+		}
+
+		const pane = panes[paneIndex];
+		pane.setSz(newGivenSize);
+
+		tickAndResetPaneSizes();
 	}
 
 	onMount(() => {
@@ -906,15 +922,23 @@
 		if (undefinedSizesReadyCount > 0) {
 			// if has undefined sizes panes that are ready:
 			undefinedSizesNotReadySz = undefinedSizesSum / undefinedSizesReadyCount;
-			undefinedSizesSum += undefinedSizesNotReadyCount * undefinedSizesNotReadySz;
-			undefinedScaleFactor = leftToAllocate / undefinedSizesSum;
+			if (undefinedSizesNotReadySz > 0.1 && leftToAllocate > 0.1) {
+				undefinedSizesSum += undefinedSizesNotReadyCount * undefinedSizesNotReadySz;
+				undefinedScaleFactor = leftToAllocate / undefinedSizesSum;
+			} else {
+				// when the size of the ready undefined panes shares are negligible, need to set the not ready
+				//  undefined one to size 0, for being "proportional" to negligible sizes
+				undefinedSizesNotReadySz = 0;
+				undefinedScaleFactor = 1;
+			}
 		} else {
 			// otherwise, divide the space of the undefined sizes panes equally:
 			undefinedSizesNotReadySz = leftToAllocate / undefinedSizesCount;
 			undefinedScaleFactor = 1;
 		}
 
-		if (leftToAllocate > 0.1) {
+		// whenever `leftToAllocate` or `undefinedSizesSum` aren't negligible, need to adjact the sizes
+		if (leftToAllocate + undefinedSizesSum > 0.1) {
 			leftToAllocate = 100; // reset the space calculation
 
 			for (let i = 0; i < panesCount; i++) {
@@ -922,7 +946,6 @@
 				if (pane.givenSize == null) {
 					// add the proportion of the newly added pane if has undefined size
 					const currentSz = pane.isReady ? pane.sz() : undefinedSizesNotReadySz;
-
 					const sz = Math.max(Math.min(currentSz * undefinedScaleFactor, pane.max()), pane.min());
 					pane.setSz(sz);
 				}
@@ -935,7 +958,10 @@
 			}
 		}
 
-		if (Math.abs(leftToAllocate) > 0.1) {
+		if (!isFinite(leftToAllocate)) {
+			// eslint-disable-next-line no-console
+			console.warn('Splitpanes: Internal error, sizes might be NaN as a result.');
+		} else if (Math.abs(leftToAllocate) > 0.1) {
 			// eslint-disable-next-line no-console
 			console.warn('Splitpanes: Could not resize panes correctly due to their constraints.');
 		}
@@ -944,8 +970,12 @@
 	// Second loop to adjust sizes now that we know more about the panes constraints.
 	function readjustSizes(leftToAllocate: number, ungrowable: Array<IPane>, unshrinkable: Array<IPane>): number {
 		const panesCount = panes.length;
-		let equalSpaceToAllocate =
-			leftToAllocate / (panesCount - (leftToAllocate > 0 ? ungrowable.length : unshrinkable.length));
+		const panesSizableCount = panesCount - (leftToAllocate > 0 ? ungrowable.length : unshrinkable.length);
+		if (panesSizableCount <= 0) {
+			return leftToAllocate;
+		}
+
+		const equalSpaceToAllocate = leftToAllocate / panesSizableCount;
 
 		if (panes.length === 1) {
 			panes[0].setSz(100);

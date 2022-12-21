@@ -19,6 +19,8 @@ export interface SplitContext {
 	onPaneAdd: (pane: IPane) => Promise<void>;
 	onPaneRemove: (key: any) => Promise<void>;
 	onPaneClick: (_event: MouseEvent, key: any) => void;
+	/** Report the manual given size was changed. */
+	reportGivenSizeChange: (paneKey: unknown, newGivenSize: number | null) => void;
 }
 
 export interface IPaneSizingEvent {
