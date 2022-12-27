@@ -226,9 +226,7 @@
 	function onPaneClick(_event: MouseEvent, key: any) {
 		dispatch(
 			'pane-click',
-			panes.find((pane) => {
-				pane.key == key;
-			})
+			panes.find((pane) => pane.key === key)
 		);
 	}
 
