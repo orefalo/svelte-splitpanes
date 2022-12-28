@@ -10,7 +10,6 @@ specifiers:
   '@typescript-eslint/eslint-plugin': 5.47.1
   '@typescript-eslint/parser': 5.47.1
   commitizen: ^4.2.6
-  commitlint: 17.3.0
   cross-env: 7.0.3
   cz-customizable: 7.0.0
   eslint: 8.30.0
@@ -47,7 +46,6 @@ devDependencies:
   '@typescript-eslint/eslint-plugin': 5.47.1_txmweb6yn7coi7nfrp22gpyqmy
   '@typescript-eslint/parser': 5.47.1_lzzuuodtsqwxnvqeq4g4likcqa
   commitizen: 4.2.6
-  commitlint: 17.3.0
   cross-env: 7.0.3
   cz-customizable: 7.0.0
   eslint: 8.30.0
@@ -1287,18 +1285,6 @@ packages:
       minimist: 1.2.6
       strip-bom: 4.0.0
       strip-json-comments: 3.1.1
-    transitivePeerDependencies:
-      - '@swc/core'
-      - '@swc/wasm'
-    dev: true
-
-  /commitlint/17.3.0:
-    resolution: {integrity: sha512-jKytr2eesn2HpRZrr/37O1AQkDsR4VTIVRoAe4oJF3Eg22jp8gaIMvC0/YDoLzNPQEH5VXNhP/uvco70ritGEA==}
-    engines: {node: '>=v14'}
-    hasBin: true
-    dependencies:
-      '@commitlint/cli': 17.3.0
-      '@commitlint/types': 17.0.0
     transitivePeerDependencies:
       - '@swc/core'
       - '@swc/wasm'
