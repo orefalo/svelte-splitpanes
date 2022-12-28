@@ -4,18 +4,34 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [0.7.8](https://github.com/orefalo/svelte-splitpanes/compare/v0.7.7...v0.7.8) (2022-12-28)
 
+- npm re-releasing only
+
 ### [0.7.7](https://github.com/orefalo/svelte-splitpanes/compare/v0.7.4...v0.7.7) (2022-12-28)
 
+### Features
+
+- finally allow a correct two-way binding to the pane sizes
+- reimplement splitter double click expansion
+- support panes reordering by keyed each blocks, closes #35
 
 ### Bug Fixes
 
-* pane object not being returned ([#45](https://github.com/orefalo/svelte-splitpanes/issues/45)) ([118a1ad](https://github.com/orefalo/svelte-splitpanes/commit/118a1ad1a19682feaf7175136bdc6c796fb6a542))
+- fix pane object not being returned ([#45](https://github.com/orefalo/svelte-splitpanes/issues/45)) ([118a1ad](https://github.com/orefalo/svelte-splitpanes/commit/118a1ad1a19682feaf7175136bdc6c796fb6a542))
 
 ### [0.7.6](https://github.com/orefalo/svelte-splitpanes/compare/v0.7.5...v0.7.6) (2022-12-20)
 
+- simpler and more intuitive sizing after panes adding/removing
+- code optimizations
+
 ### [0.7.5](https://github.com/orefalo/svelte-splitpanes/compare/v0.7.4...v0.7.5) (2022-12-20)
 
+- demo site now has a cleaner layout
+- implemented proper browser detection client side
+- code optimizations
+
 ### [0.7.4](https://github.com/orefalo/svelte-splitpanes/compare/v0.7.3...v0.7.4) (2022-12-12)
+
+- attempt to fix browser detection in library mode, seems to be an issue with sveltekit
 
 ### [0.7.3](https://github.com/orefalo/svelte-splitpanes/compare/v0.7.2...v0.7.3) (2022-08-04)
 
