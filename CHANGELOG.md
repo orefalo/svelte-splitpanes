@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.7](https://github.com/orefalo/svelte-splitpanes/compare/v0.7.4...v0.7.7) (2022-12-28)
+
+
+### Bug Fixes
+
+* pane object not being returned ([#45](https://github.com/orefalo/svelte-splitpanes/issues/45)) ([118a1ad](https://github.com/orefalo/svelte-splitpanes/commit/118a1ad1a19682feaf7175136bdc6c796fb6a542))
+
 ### [0.7.6](https://github.com/orefalo/svelte-splitpanes/compare/v0.7.5...v0.7.6) (2022-12-20)
 
 ### [0.7.5](https://github.com/orefalo/svelte-splitpanes/compare/v0.7.4...v0.7.5) (2022-12-20)
