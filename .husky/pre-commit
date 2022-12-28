@@ -2,7 +2,6 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 # Fail if the env variable $ALLOW_TO_COMMIT isn't set.
-if [ "$ALLOW_TO_COMMIT" != "1" ]; then
-	echo "Error: You may commit only by runing 'pnpm commit' (or 'npm run commit').";
-	exit 1
+if [ "$NO_VERIFY" != "1" ]; then
+	npm run commit-preverify
 fi

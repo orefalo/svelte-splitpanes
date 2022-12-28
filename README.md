@@ -205,7 +205,7 @@ Commits are accepted, as long as they comply to the _commit message format_ desc
 
 We also require the code to pass linting and svelte checks.
 
-To ease the development and to enforce the process of formatting the code, perform checks and formatting the commit message, you're advised and must commit using this steps:
+To ease the development and to enforce the process of formatting the code, perform checks and formatting the commit message, you're advised to commit using the following steps:
 
 0. Make sure your environment is up to date, by running periodically `pnpm install`.
 1. Run `pnpm format`.
