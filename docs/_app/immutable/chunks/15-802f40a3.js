@@ -1,1 +1,1 @@
-import{_ as r}from"./_page-2a9d3cfa.js";import{default as t}from"../components/pages/examples/styling/splitters/_page.svelte-2c6cf9ee.js";export{t as component,r as universal};
+import{_ as r}from"./_page-56160fd5.js";import{default as t}from"../components/pages/examples/styling/splitters/_page.svelte-2c6cf9ee.js";export{t as component,r as universal};
