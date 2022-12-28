@@ -1,6 +1,8 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@commitlint/cli': ^17.3.0
+  '@commitlint/config-conventional': ^17.3.0
   '@playwright/test': 1.29.1
   '@sveltejs/adapter-static': 1.0.0
   '@sveltejs/kit': 1.0.1
@@ -37,6 +39,8 @@ optionalDependencies:
   serve: 14.1.2
 
 devDependencies:
+  '@commitlint/cli': 17.3.0
+  '@commitlint/config-conventional': 17.3.0
   '@sveltejs/adapter-static': 1.0.0_@sveltejs+kit@1.0.1
   '@sveltejs/kit': 1.0.1_svelte@3.55.0+vite@4.0.3
   '@sveltejs/package': 1.0.1_niwyv7xychq2ag6arq5eqxbomm
@@ -107,6 +111,13 @@ packages:
     transitivePeerDependencies:
       - '@swc/core'
       - '@swc/wasm'
+    dev: true
+
+  /@commitlint/config-conventional/17.3.0:
+    resolution: {integrity: sha512-hgI+fN5xF8nhS9uG/V06xyT0nlcyvHHMkq0kwRSr96vl5BFlRGaL2C0/YY4kQagfU087tmj01bJkG9Ek98Wllw==}
+    engines: {node: '>=v14'}
+    dependencies:
+      conventional-changelog-conventionalcommits: 5.0.0
     dev: true
 
   /@commitlint/config-validator/17.1.0:
@@ -1371,6 +1382,15 @@ packages:
 
   /conventional-changelog-conventionalcommits/4.6.3:
     resolution: {integrity: sha512-LTTQV4fwOM4oLPad317V/QNQ1FY4Hju5qeBIM1uTHbrnCE+Eg4CdRZ3gO2pUeR+tzWdp80M2j3qFFEDWVqOV4g==}
+    engines: {node: '>=10'}
+    dependencies:
+      compare-func: 2.0.0
+      lodash: 4.17.21
+      q: 1.5.1
+    dev: true
+
+  /conventional-changelog-conventionalcommits/5.0.0:
+    resolution: {integrity: sha512-lCDbA+ZqVFQGUj7h9QBKoIpLhl8iihkO0nCTyRNzuXtcd7ubODpYB04IFy31JloiJgG0Uovu8ot8oxRzn7Nwtw==}
     engines: {node: '>=10'}
     dependencies:
       compare-func: 2.0.0
