@@ -1,6 +1,6 @@
 {
 	"name": "svelte-splitpanes",
-	"version": "0.7.7",
+	"version": "0.7.8",
 	"description": "A full featured resizable pane layout splitter, ported from vue-splitpanes",
 	"author": {
 		"name": "Olivier Refalo",
@@ -43,8 +43,8 @@
 		"@sveltejs/adapter-static": "1.0.0",
 		"@sveltejs/kit": "1.0.1",
 		"@sveltejs/package": "1.0.1",
-		"@typescript-eslint/eslint-plugin": "5.47.0",
-		"@typescript-eslint/parser": "5.47.0",
+		"@typescript-eslint/eslint-plugin": "5.47.1",
+		"@typescript-eslint/parser": "5.47.1",
 		"commitlint": "11.0.0",
 		"commitlint-config-gitmoji": "2.2.6",
 		"cross-env": "7.0.3",
@@ -60,18 +60,18 @@
 		"sass": "1.57.1",
 		"standard-version": "9.5.0",
 		"svelte": "3.55.0",
-		"svelte-check": "2.10.2",
+		"svelte-check": "3.0.1",
 		"svelte-highlight": "6.2.1",
 		"svelte-preprocess": "5.0.0",
 		"svelte-range-slider-pips": "2.1.1",
-		"svelte2tsx": "0.5.22",
+		"svelte2tsx": "0.6.0",
 		"tslib": "2.4.1",
 		"typescript": "4.9.4",
-		"vite": "4.0.2"
+		"vite": "4.0.3"
 	},
 	"type": "module",
 	"optionalDependencies": {
-		"@playwright/test": "1.29.0",
+		"@playwright/test": "1.29.1",
 		"serve": "14.1.2"
 	},
 	"config": {
