@@ -6,6 +6,8 @@ on:
     # Below is the list of supported pull request sub-events
     # types: [opened, reopened, ready_for_review, unlocked, synchronize]
 
+name: Conventional PR
+
 jobs:
   cpr:
     runs-on: ubuntu-latest
