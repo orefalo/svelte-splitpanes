@@ -264,7 +264,7 @@ Every time a new important commit is merged to master, this bot will create/upda
 
 When a maintainer wish to publish a new release, he should do the follwing, **in this specific order**:
 
-0. Merge all the relevant changes to master, and make sure that all Github actions checks are passed, and the auto-generated docs are fine.
+0. Merge all the relevant changes to master, and make sure that all Github actions checks passed and the auto-generated docs are fine.
 1. Create a source code release, simply by merging the PR created by the Release Please bot.
 2. Build and push the package to NPM in the maintainer local machine, by pulling the updated master branch to the local machine, and excecute the following:
 
