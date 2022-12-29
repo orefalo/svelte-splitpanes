@@ -16,4 +16,5 @@ jobs:
         uses: Namchee/conventional-pr@v0.12.1
         with:
           access_token: ${{ secrets.GITHUB_TOKEN }}
+          draft: false
           issue: false
