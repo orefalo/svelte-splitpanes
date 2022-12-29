@@ -1,12 +1,12 @@
+name: Conventional PR
+
 on:
   pull_request:
-    # You can add specific pull request types too.
-    # If this is omitted, the workflow will only executed on opened, synchronize, and reopened
-    # which is enough for generic use cases.
-    # Below is the list of supported pull request sub-events
-    # types: [opened, reopened, ready_for_review, unlocked, synchronize]
-
-name: Conventional PR
+    types:
+      - opened
+      - reopened
+      - edited
+      - synchronize
 
 jobs:
   cpr:
