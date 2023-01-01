@@ -6,6 +6,8 @@ import{S as He,i as Fe,s as ye,k as z,a as T,l as N,m as V,c as q,h as d,n as c,
 		`),j=N(W,"BR",{}),ie=y(W,`
 		However, not specifiying a size will cause issue on SSR that we can't solve, because of how Svelte SSR works today.`),W.forEach(d),D=q(U),x(B.$$.fragment,U),ae=q(U),x(X.$$.fragment,U),se=q(U),x(G.$$.fragment,U),U.forEach(d)},m(S,O){E(S,e,O),A(e,a),E(S,i,O),E(S,n,O),A(n,s),A(s,f),A(n,r),ee(u,n,null),A(n,v),ee(o,n,null),A(n,g),ee(p,n,null),E(S,h,O),E(S,w,O),A(w,R),A(R,P),A(R,j),A(R,ie),A(w,D),ee(B,w,null),A(w,ae),ee(X,w,null),A(w,se),ee(G,w,null),ne=!0},p(S,[O]){const K={};!_&&O&1&&(_=!0,K.values=S[0],Ee(()=>_=!1)),u.$set(K);const fe={};O&257&&(fe.$$scope={dirty:O,ctx:S}),o.$set(fe);const U={};!I&&O&2&&(I=!0,U.values=S[1],Ee(()=>I=!1)),B.$set(U);const W={};O&258&&(W.$$scope={dirty:O,ctx:S}),X.$set(W)},i(S){ne||(Y(u.$$.fragment,S),Y(o.$$.fragment,S),Y(p.$$.fragment,S),Y(B.$$.fragment,S),Y(X.$$.fragment,S),Y(G.$$.fragment,S),ne=!0)},o(S){J(u.$$.fragment,S),J(o.$$.fragment,S),J(p.$$.fragment,S),J(B.$$.fragment,S),J(X.$$.fragment,S),J(G.$$.fragment,S),ne=!1},d(S){S&&d(e),S&&d(i),S&&d(n),le(u),le(o),le(p),S&&d(h),S&&d(w),le(B),le(X),le(G)}}}function jl(l,e,a){let i=[50],n=[50];const s=`
 <script>
+	import { Pane, Splitpanes } from 'svelte-splitpanes'
+	
     let value1 = [50];
 </script>
 <RangeSlider float bind:values={value1} min={0} step={0.01} max={100} />
