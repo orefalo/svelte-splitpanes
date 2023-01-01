@@ -37,7 +37,8 @@
 		"lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. src/ && eslint --ignore-path .gitignore src/",
 		"format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. src/",
 		"commit-preverify": "npx lint-staged && npm run check",
-		"commit": "npm run commit-preverify && cross-env NO_VERIFY=1 npx cz"
+		"commit": "npm run commit-preverify && cross-env NO_VERIFY=1 npx cz",
+		"fetch-and-publish": "node scripts/fetch-and-publish.js"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^17.3.0",

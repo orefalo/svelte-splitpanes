@@ -266,19 +266,15 @@ When a maintainer wish to publish a new release, he should do the follwing, **in
 
 0. Merge all the relevant changes to master, and make sure that all Github actions checks passed and the auto-generated docs are fine.
 1. Create a source code release, simply by merging the PR created by the Release Please bot.
-2. Build and push the package to NPM in the maintainer local machine, by pulling the updated master branch to the local machine, and excecute the following:
+2. After the merging, wait untill the Github Actions job named `release-please` is done. You should see now an auto-generated Github release on the main Github page, containing the compiled package with the source code (no need to download it manually).
+3. Fetch and publish to NPM the newly auto-generated release, by executing the following: (replace `VERSION` by the latest version generated, in the format of `X.Y.Z`):
 
 ```shell
 $ npm login https://registry.npmjs.org/
 ...
-# generate the package in /package
-$ pnpm package
-# publish it (requires to be logged into npm from the cli)
-$ cd package
-$ pnpm publish --access public
+$ pnpm fetch-and-publish -- VERSION
 ```
 
-After this process every user can:
+The purpose of this process is both to generate a well formatted changelog, and to make the release process clean as possible, free from human mistakes as much as possible.
 
-- By stage 1: View the release of the source code in the Github release list (in the Github main page), and also look for the tag of a specific release in the git history.
-- By stage 2: Download and use the compiled library via NPM.
+We run stage 3 manually, and not automated on Github Actions, because we don't want to share the NPM tokens with the Github project.
