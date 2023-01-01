@@ -12,13 +12,15 @@
 
 	let code = `
 <script>
+	import { Pane, Splitpanes } from 'svelte-splitpanes'
+
 	let val = '// Event name: Event params   (Last event at the top)';
 
 	function handleMessage(event) {
 		if (event.detail) val = event.type + ' ' + JSON.stringify(event.detail) + '\\n' + val;
 		else val = event.type + '\\n' + val;
 	}
-<${'/'}script>
+<\/script>
 <Splitpanes
 	class="default-theme"
 	style="height: 400px"

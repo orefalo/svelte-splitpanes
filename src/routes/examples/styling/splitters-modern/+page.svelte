@@ -4,6 +4,9 @@
 
 	let code =
 		`
+<script>
+	import { Pane, Splitpanes } from 'svelte-splitpanes'
+<\/script>
 <Splitpanes theme="no-splitter" horizontal style="height: 400px" dblClickSplitter={false}>
 	<Pane size={6} minSize={6} maxSize={6}>
 		<p>MenuBar</p>

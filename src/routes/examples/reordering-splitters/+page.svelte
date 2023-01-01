@@ -7,8 +7,10 @@
 
 	let code = `
 <script>
+	import { Pane, Splitpanes } from 'svelte-splitpanes'
+
 	let ordered = 3;
-<${'/'}script>
+<\/script>
 <Button
 	on:click={() => {
 		const temp = ordered[0];

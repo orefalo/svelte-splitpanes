@@ -8,9 +8,11 @@
 
 	let code = `
 <script>
+	import { Pane, Splitpanes } from 'svelte-splitpanes'
+
 	let horizontal = false;
 	let firstSplitter = false;
-<${'/'}script>
+<\/script>
 <Button
 	on:click={() => {
 		horizontal = !horizontal;

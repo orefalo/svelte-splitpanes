@@ -4,6 +4,9 @@
 
 	let code =
 		`
+<script>
+	import { Pane, Splitpanes } from 'svelte-splitpanes'
+<\/script>        
 <Splitpanes theme="my-theme" horizontal style="height: 400px">
 	<Pane>
 		<Splitpanes theme="my-theme">

@@ -9,8 +9,10 @@
 
 	const code1 = `
 <script>
+	import { Pane, Splitpanes } from 'svelte-splitpanes'
+	
     let value1 = [50];
-<${'/'}script>
+<\/script>
 <RangeSlider float bind:values={value1} min={0} step={0.01} max={100} />
 <Splitpanes class="default-theme" style="height: 400px">
 	<Pane bind:size={value1[0]}>
@@ -24,7 +26,7 @@
 	const code2 = `
 <script>
     let value2 = [50];
-<${'/'}script>
+<\/script>
 <RangeSlider float bind:values={value2} min={0} step={0.01} max={100} />
 <Splitpanes class="default-theme" style="height: 400px">
 	<Pane bind:size={value2[0]}>

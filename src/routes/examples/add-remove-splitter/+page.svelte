@@ -7,8 +7,9 @@
 
 	let code = `
 <script>
+	import { Pane, Splitpanes } from 'svelte-splitpanes'
 	let panesNumber = 3;
-<${'/'}script>
+<\/script>
 <Button
 	on:click={() => {
 		if (panesNumber >= 0) panesNumber++;
