@@ -278,3 +278,49 @@ $ pnpm fetch-and-publish -- VERSION
 The purpose of this process is both to generate a well formatted changelog, and to make the release process clean as possible, free from human mistakes as much as possible.
 
 We run stage 3 manually, and not automated on Github Actions, because we don't want to share the NPM tokens with the Github project.
+
+### More control about Release Please
+
+#### Controling the version number and force a release PR
+
+Release Please follows semantic versioning to generate the version number. If you want to change the version number of the new release, or that Release Please bot didn't generate a PR (because there is no "important" change) and you want to force a new version, you may bump(or downgrade) the version by adding a new commit (replacing `VERSION` to a version number in the format of `X.Y.Z`):
+
+```shell
+git commit --allow-empty -m "chore: release VERSION (you may change the title)" -m "Release-As: VERSION"
+```
+
+Source: https://github.com/googleapis/release-please#how-do-i-change-the-version-number
+
+#### Controling contribution PR
+
+You can specify additional messages in the PR body that will be included in the changelog (if relevant). An example to a body of PR containing additional messages:
+
+```
+feat: adds v4 UUID to crypto
+
+This adds support for v4 UUIDs to the library.
+
+fix(utils): unicode no longer throws exception
+  PiperOrigin-RevId: 345559154
+  BREAKING-CHANGE: encode method no longer throws.
+  Source-Link: googleapis/googleapis@5e0dcb2
+
+feat(utils): update encode to support unicode
+  PiperOrigin-RevId: 345559182
+  Source-Link: googleapis/googleapis@e5eef86
+```
+
+Source: https://github.com/googleapis/release-please#what-if-my-pr-contains-multiple-fixes-or-features
+
+In the case that a contribution PR was already merged and you want to change the messages for release please, you can edit the body of the merged pull requests and add a section like:
+
+```
+BEGIN_COMMIT_OVERRIDE
+feat: add ability to override merged commit message
+
+fix: another message
+chore: a third message
+END_COMMIT_OVERRIDE
+```
+
+Source: https://github.com/googleapis/release-please#how-can-i-fix-release-notes
