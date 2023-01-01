@@ -35,8 +35,6 @@
 	</Pane>
 </Splitpanes>
 
-<HighlightSvelte {code} />
-
 <style` + // this is needed for fixing a wierd bug in svelte-preproccess
 		` global lang="scss">
 	.splitpanes.modern-theme {
