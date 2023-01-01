@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Pane, Splitpanes } from '$lib';
+	import { Pane, Splitpanes } from 'svelte-splitpanes';
 	import CodeArea from '$comp/CodeArea.svelte';
 	import TextArea from '$comp/TextAreaAutosize.svelte';
 
