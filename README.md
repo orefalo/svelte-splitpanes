@@ -266,7 +266,7 @@ When a maintainer wish to publish a new release, he should do the follwing, **in
 
 0. Merge all the relevant changes to master, and make sure that all Github actions checks passed and the auto-generated docs are fine.
 1. Create a source code release, simply by merging the PR created by the Release Please bot. You have a chance right before the merging to modify the changelog: Modifying the PR body will change what will be displayed on the Github release page, and modifying the file changes to the `CHANGELOG.md` file of the PR let you change the automated changes to this file. **Important**: If you don't merge this release PR immediately after your manual modifications, your modifications will be lost by the next invocation of the Release Please action, which executes whenever committing to the master branch.
-2. After the merging, wait untill the Github Actions job named `release-please` is done. You should see now an auto-generated Github release on the main Github page, containing the compiled package with the source code (no need to download it manually).
+2. After the merging, wait until the Github Actions job named `release-please` is done. You should see now an auto-generated Github release on the main Github page, containing the compiled package with the source code (no need to download it manually).
 3. Fetch and publish to NPM the newly auto-generated release, by executing the following: (replace `VERSION` by the latest version generated, in the format of `X.Y.Z`):
 
 ```shell
