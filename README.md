@@ -277,7 +277,7 @@ $ pnpm fetch-and-publish -- VERSION
 
 The purpose of this process is both to generate a well formatted changelog, and to make the release process clean as possible, free from human mistakes as much as possible.
 
-We run stage 3 manually, and not automated on Github Actions, because we don't want to share the NPM tokens with the Github project.
+We run step 3 manually, and not automated on Github Actions, because we don't want to share the NPM tokens with the Github project.
 
 ### More control about Release Please
 
