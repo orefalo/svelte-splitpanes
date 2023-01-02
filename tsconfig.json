@@ -5,7 +5,9 @@
 			"svelte-splitpanes": ["src/lib"],
 			"svelte-splitpanes/*": ["src/lib/*"],
 			"$comp": ["src/comp"],
-			"$comp/*": ["src/comp/*"]
+			"$comp/*": ["src/comp/*"],
+			"$lib": ["src/lib"],
+			"$lib/*": ["src/lib/*"]
 		}
 	}
 }

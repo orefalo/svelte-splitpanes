@@ -266,23 +266,23 @@ When a maintainer wish to publish a new release, he must perform the following t
 0. Merge all the relevant changes to master, and make sure that all Github actions checks passed and the auto-generated docs are fine.
 1. Create a source code release, simply by merging the PR created by the Release Please bot. You have a chance right before the merging to modify the changelog: Modifying the PR body will change what will be displayed on the Github release page, and modifying the file changes to the `CHANGELOG.md` file of the PR let you change the automated changes to this file. **Important**: If you don't merge this release PR immediately after your manual modifications, your modifications will be lost by the next invocation of the Release Please action, which executes whenever committing to the master branch.
 2. After the merging, wait until the Github Actions job named `release-please` is done. You should see now an auto-generated Github release on the main Github page, containing the compiled package with the source code (no need to download it manually).
-3. Fetch and publish to NPM the newly auto-generated release, by executing the following: (replace `VERSION` by the latest version generated, in the format of `X.Y.Z`):
+3. Fetch and publish to NPM the newly auto-generated release, by executing the following: (get the `NPM_OTP` from Google authenticator ):
 
 ```shell
 $ npm login https://registry.npmjs.org/
 ...
-$ pnpm fetch-and-publish
+$ pnpm fetch-and-publish <NPM_OTP>
 ```
 
-The purpose of this process is both to generate a well formatted changelog, and to make the release process clean as possible, free from human mistakes as much as possible.
+The purpose of this process is to streamline the release process, free from any human mistakes.
 
-We run step 3 manually, and not automated on Github Actions, because we don't want to share the NPM tokens within the Github project.
+We run step 3 manually, and not automated on Github Actions, because we don't want to share NPM credentials as part of the Github project.
 
 ### More control about Release Please
 
-#### Controling the version number and force a release PR
+#### Controling the version number and forcing a release PR
 
-Release Please follows semantic versioning to generate the version number. If you want to change the version number of the new release, or that Release Please bot didn't generate a PR (because there is no "important" change) and you want to force a new version, you may bump(or downgrade) the version by adding a new commit (replacing `VERSION` to a version number in the format of `X.Y.Z`):
+Please follows semantic versioning to generate the version number. If you want to change the version number of the new release, or that Release Please bot didn't generate a PR (because there is no "important" change) and you want to force a new version, you may bump(or downgrade) the version by adding a new commit (replacing `VERSION` to a version number in the format of `X.Y.Z`):
 
 ```shell
 git commit --allow-empty -m "chore: release VERSION (you may change the title)" -m "Release-As: VERSION"
