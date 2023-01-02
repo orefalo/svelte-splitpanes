@@ -205,7 +205,7 @@ The enforcement is made possible by the enablement of several tools which, when 
 
 Commits are accepted, as long as they comply to the _commit message format_ described below.
 
-We also require the code to be well-formatted and to pass linting(i.e. normal ts&svelte checks, plus additional code styling rules). Don't worry, the code is automatically being formatted and verified every time you commit your changes. In addition, when you push your commits to Github(by a PR or directly to the repo), your code will be verfied again by Github Actions with even more checks.
+We also require the code to be well-formatted and to pass linting(i.e. minimal ts&svelte checks, plus additional code styling rules). Don't worry, the code is automatically being formatted and verified every time you commit your changes. In addition, when you push your commits to Github(by a PR or directly to the repo), your code will be verfied again by Github Actions with even more checks.
 
 To ease the development and to enforce the process of formatting the code, perform checks and formatting the commit message, you're advised to commit using the following steps:
 
