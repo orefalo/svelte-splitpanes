@@ -28,7 +28,7 @@
 	"scripts": {
 		"dev": "cross-env DEV=1 vite dev --port 3000",
 		"build": "vite build",
-		"package": "svelte-package",
+		"package": "svelte-package && node scripts/clean-package-json.js",
 		"preview": "vite preview --port 3000",
 		"prepare": "husky install",
 		"static-serv": "serve -l 3000 --no-clipboard",
