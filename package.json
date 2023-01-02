@@ -36,8 +36,7 @@
 		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --ignore-path .gitignore --check --cache --plugin-search-dir=. src/ && eslint --cache --ignore-path .gitignore src/",
 		"format": "prettier --ignore-path .gitignore --write --cache --plugin-search-dir=. src/",
-		"commit-preverify": "npx lint-staged && npm run check",
-		"commit": "npm run commit-preverify && cross-env NO_VERIFY=1 node ./node_modules/cz-customizable/standalone.js",
+		"commit": "npx lint-staged && cross-env NO_VERIFY=1 node ./node_modules/cz-customizable/standalone.js",
 		"fetch-and-publish": "node scripts/fetch-and-publish.js"
 	},
 	"devDependencies": {

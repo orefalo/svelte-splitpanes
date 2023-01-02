@@ -1,7 +1,6 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-# Fail if the env variable $ALLOW_TO_COMMIT isn't set.
 if [ "$NO_VERIFY" != "1" ]; then
-	npm run commit-preverify
+	npx lint-staged
 fi
