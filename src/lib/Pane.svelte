@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" strictEvents>
 	import { getContext, onMount, onDestroy } from 'svelte';
 	import type { Action } from 'svelte/action';
 	import { KEY } from './Splitpanes.svelte';

@@ -2,7 +2,7 @@
 	export const KEY = {};
 </script>
 
-<script lang="ts">
+<script lang="ts" strictEvents>
 	import { onMount, onDestroy, setContext, createEventDispatcher, tick, afterUpdate } from 'svelte';
 	import { writable } from 'svelte/store';
 	import type { IPane, IPaneSizingEvent, SplitContext, PaneInitFunction } from '.';
