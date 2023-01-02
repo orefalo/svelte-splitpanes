@@ -157,6 +157,7 @@ Events are easy to trap
 
 ```svelte
 <script>
+	import { Splitpanes } from 'svelte-splitpanes';
 	function handleMessage(event) {
 		console.log(JSON.stringify(event));
 	}

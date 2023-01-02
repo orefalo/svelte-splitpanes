@@ -1,0 +1,5 @@
+.gitignore
+pnpm-lock.yaml
+.svelte-kit
+package/
+docs/

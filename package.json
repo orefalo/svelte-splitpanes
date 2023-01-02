@@ -34,8 +34,8 @@
 		"test": "playwright test",
 		"check": "svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
-		"lint": "prettier --ignore-path .gitignore --check --cache --plugin-search-dir=. . && eslint --cache --ignore-path .gitignore .",
-		"format": "prettier --ignore-path .gitignore --write --cache --plugin-search-dir=. .",
+		"lint": "prettier --check --cache --plugin-search-dir=. . && eslint --cache  .",
+		"format": "prettier --write --cache --plugin-search-dir=. .",
 		"commit": "npx lint-staged && cross-env NO_VERIFY=1 node ./node_modules/cz-customizable/standalone.js",
 		"fetch-and-publish": "node scripts/fetch-and-publish.js"
 	},
