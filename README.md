@@ -59,10 +59,11 @@ $ npm i svelte-splitpanes
 <script>
 	import { Pane, Splitpanes } from 'svelte-splitpanes';
 </script>
+
 <Splitpanes class="default-theme" style="height: 400px">
 	<Pane minSize={20}>1<br /><em class="specs">I have a min width of 20%</em></Pane>
 	<Pane>
-		<Splitpanes class="default-theme" horizontal="{true}">
+		<Splitpanes class="default-theme" horizontal={true}>
 			<Pane minSize={15}>2<br /><em class="specs">I have a min height of 15%</em></Pane>
 			<Pane>3</Pane>
 			<Pane>4</Pane>
@@ -160,16 +161,17 @@ Events are easy to trap
 		console.log(JSON.stringify(event));
 	}
 </script>
+
 <Splitpanes
-	on:ready="{handleMessage}"
-	on:resize="{handleMessage}"
-	on:resized="{handleMessage}"
-	on:pane-click="{handleMessage}"
-	on:pane-maximize="{handleMessage}"
-	on:pane-add="{handleMessage}"
-	on:pane-remove="{handleMessage}"
-	on:splitter-click="{handleMessage}"
-></Splitpanes>
+	on:ready={handleMessage}
+	on:resize={handleMessage}
+	on:resized={handleMessage}
+	on:pane-click={handleMessage}
+	on:pane-maximize={handleMessage}
+	on:pane-add={handleMessage}
+	on:pane-remove={handleMessage}
+	on:splitter-click={handleMessage}
+/>
 ```
 
 ## Contributing

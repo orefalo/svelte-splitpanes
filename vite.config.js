@@ -4,7 +4,7 @@ import path from 'path';
 
 /** @type {import('vite').UserConfig} */
 const config = {
-	plugins: [ sveltekit() ],
+	plugins: [sveltekit()],
 	resolve: {
 		optimizeDeps: {
 			include: ['highlight.js', 'highlight.js/lib/core']

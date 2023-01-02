@@ -45,4 +45,4 @@ module.exports = {
 	// skip any questions you want
 	skipQuestions: ['scope', 'footer', 'breaking'],
 	subjectLimit: 100
-}
+};

@@ -1,6 +1,7 @@
 {
-    "*.{js,ts,svelte,css,scss,postcss,md,json}": [
-        "prettier --ignore-path .gitignore --write --cache --plugin-search-dir=.",
-        "eslint --cache --ignore-path .gitignore"
-    ]
+	"*.{js,ts,svelte,css,scss,postcss,json}": [
+		"prettier --ignore-path .gitignore --write --cache --plugin-search-dir=.",
+		"eslint --cache --ignore-path .gitignore"
+	],
+	"*.{md,cjs,yml,lintstagedrc}": "prettier --ignore-path .gitignore --write --cache --plugin-search-dir=."
 }

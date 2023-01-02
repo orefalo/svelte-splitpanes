@@ -9,23 +9,23 @@ const config: PlaywrightTestConfig = {
 		port: 3000
 	},
 	use: {
-	  trace: 'on',
-	  video: 'on',
+		trace: 'on',
+		video: 'on'
 	},
 	projects: [
-	  {
-		name: 'chromium',
-		use: { ...devices['Desktop Chrome'] },
-	  },
-	  {
-		name: 'firefox',
-		use: { ...devices['Desktop Firefox'] },
-	  },
-	  {
-		name: 'webkit',
-		use: { ...devices['Desktop Safari'] },
-	  },
-	],
+		{
+			name: 'chromium',
+			use: { ...devices['Desktop Chrome'] }
+		},
+		{
+			name: 'firefox',
+			use: { ...devices['Desktop Firefox'] }
+		},
+		{
+			name: 'webkit',
+			use: { ...devices['Desktop Safari'] }
+		}
+	]
 };
 
 export default config;
