@@ -13,16 +13,15 @@ jobs:
     concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    
+
     steps:
       # Checkout
       - name: Checkout
         uses: actions/checkout@v3
 
-
       # The whole Node.js and pnpm installation and caching
       # Based on https://github.com/pnpm/action-setup/tree/6e1964dde3397a825e79e4607ad57f3f7ca2c7cb#use-cache-to-reduce-installation-time
-      
+
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
@@ -50,12 +49,11 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      
 
       # Build Frontend
       - name: Build Frontend
         run: npm run build
-      
+
       # Deploy Docs
       - name: Deploy Docs 🚀
         uses: JamesIves/github-pages-deploy-action@v4

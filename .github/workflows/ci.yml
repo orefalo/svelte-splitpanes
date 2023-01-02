@@ -6,12 +6,11 @@ jobs:
   tests:
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    
+
     steps:
       # Checkout
       - name: Checkout
         uses: actions/checkout@v3
-
 
       # The whole Node.js and pnpm installation and caching
       # Based on https://github.com/pnpm/action-setup/tree/6e1964dde3397a825e79e4607ad57f3f7ca2c7cb#use-cache-to-reduce-installation-time
@@ -43,7 +42,7 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      
+
       - name: SvelteKit Sync
         run: pnpm exec svelte-kit sync
 
@@ -53,7 +52,7 @@ jobs:
       - name: Svelte Check
         if: success() || failure() # Run even if previous failed
         run: npm run check
-      
+
       # Build Frontend
       - name: Build Frontend
         if: success() || failure() # Run even if previous failed
@@ -67,18 +66,18 @@ jobs:
         with:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }} # (not a good key)
-      
+
       # Install Playwright
       - name: Install Playwright
         # if: steps.cache.outputs.cache-hit != 'true'
         run: npx playwright install --with-deps
-      
+
       # Run Tests
       - name: Test
         run: npm run test
         env:
           DEBUG: pw:webserver
-      
+
       # Upload test results
       - name: Upload test results
         uses: actions/upload-artifact@v3

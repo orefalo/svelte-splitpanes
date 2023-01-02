@@ -40,10 +40,10 @@ jobs:
             ${{ runner.os }}-pnpm-store-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      
+
       - name: SvelteKit Sync
         run: pnpm exec svelte-kit sync
-      
+
       - name: Svelte Package
         run: pnpm package
 
@@ -52,11 +52,11 @@ jobs:
         id: release
         with:
           release-type: node
-      
+
       - name: ZIP&TGZ the package
         if: ${{ steps.release.outputs.release_created }}
         run: mv package svelte-splitpanes && zip package svelte-splitpanes/* -r && tar -czvf package.tgz svelte-splitpanes/*
-      
+
       - name: Upload ZIP
         uses: actions/upload-release-asset@v1
         if: ${{ steps.release.outputs.release_created }}
@@ -67,7 +67,7 @@ jobs:
           asset_path: package.zip
           asset_name: svelte-splitpanes-${{ steps.release.outputs.version }}.zip
           asset_content_type: application/zip
-      
+
       - name: Upload TGZ
         uses: actions/upload-release-asset@v1
         if: ${{ steps.release.outputs.release_created }}

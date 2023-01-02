@@ -4,22 +4,19 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [0.7.10](https://github.com/orefalo/svelte-splitpanes/compare/v0.7.9...v0.7.10) (2023-01-02)
 
-
 ### Miscellaneous Chores
 
-* release 0.7.10 (you may change the title) ([c23db34](https://github.com/orefalo/svelte-splitpanes/commit/c23db34b446e361bd89a8db694b5682c1303b964))
+- release 0.7.10 (you may change the title) ([c23db34](https://github.com/orefalo/svelte-splitpanes/commit/c23db34b446e361bd89a8db694b5682c1303b964))
 
 ## [0.7.9](https://github.com/orefalo/svelte-splitpanes/compare/v0.7.3...v0.7.9) (2022-12-28)
 
-
 ### Bug Fixes
 
-* pane object not being returned ([#45](https://github.com/orefalo/svelte-splitpanes/issues/45)) ([118a1ad](https://github.com/orefalo/svelte-splitpanes/commit/118a1ad1a19682feaf7175136bdc6c796fb6a542))
-
+- pane object not being returned ([#45](https://github.com/orefalo/svelte-splitpanes/issues/45)) ([118a1ad](https://github.com/orefalo/svelte-splitpanes/commit/118a1ad1a19682feaf7175136bdc6c796fb6a542))
 
 ### Miscellaneous Chores
 
-* bump version to 0.7.9 ([16b7fab](https://github.com/orefalo/svelte-splitpanes/commit/16b7fab73cd011b5dba1dcfdd0b00a1f2c8d486d))
+- bump version to 0.7.9 ([16b7fab](https://github.com/orefalo/svelte-splitpanes/commit/16b7fab73cd011b5dba1dcfdd0b00a1f2c8d486d))
 
 ### [0.7.8](https://github.com/orefalo/svelte-splitpanes/compare/v0.7.7...v0.7.8) (2022-12-28)
 
