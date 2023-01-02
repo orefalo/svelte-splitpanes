@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.7.10](https://github.com/orefalo/svelte-splitpanes/compare/v0.7.9...v0.7.10) (2023-01-02)
+
+
+### Miscellaneous Chores
+
+* release 0.7.10 (you may change the title) ([c23db34](https://github.com/orefalo/svelte-splitpanes/commit/c23db34b446e361bd89a8db694b5682c1303b964))
+
 ## [0.7.9](https://github.com/orefalo/svelte-splitpanes/compare/v0.7.3...v0.7.9) (2022-12-28)
 
 
