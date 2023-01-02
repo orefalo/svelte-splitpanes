@@ -44,7 +44,7 @@ So we decided to port it and enhance it. :smile:
 
 ## Demo & Documentation
 
-- [REPL Demo](https://svelte.dev/repl/1e96cbd4bcd148e3b85a4c8ca76d7309?version=3.48.0)
+- [REPL Demo](https://svelte.dev/repl/1e96cbd4bcd148e3b85a4c8ca76d7309)
 - [More complex demos and examples](https://orefalo.github.io/svelte-splitpanes/)
 
 ## Installation
