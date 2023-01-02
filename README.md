@@ -267,11 +267,12 @@ When a maintainer wish to publish a new release, he must perform the following t
 0. Merge all the relevant changes to master, and make sure that all Github actions checks passed and the auto-generated docs are fine.
 1. Create a source code release, simply by merging the PR created by the Release Please bot. You have a chance right before the merging to modify the changelog: Modifying the PR body will change what will be displayed on the Github release page, and modifying the file changes to the `CHANGELOG.md` file of the PR let you change the automated changes to this file. **Important**: If you don't merge this release PR immediately after your manual modifications, your modifications will be lost by the next invocation of the Release Please action, which executes whenever committing to the master branch.
 2. After the merging, wait until the Github Actions job named `release-please` is done. You should see now an auto-generated Github release on the main Github page, containing the compiled package with the source code (no need to download it manually).
-3. Fetch and publish to NPM the newly auto-generated release, by executing the following: (get the `NPM_OTP` from Google authenticator ):
+3. Fetch the changes from **master** and publish to NPM the newly auto-generated release, by executing the following: (get the `NPM_OTP` from Google authenticator ):
 
 ```shell
-$ npm login https://registry.npmjs.org/
-...
+$ pnpm login https://registry.npmjs.org/
+$ git checkout master
+$ git fetch
 $ pnpm fetch-and-publish <NPM_OTP>
 ```
 
@@ -283,7 +284,7 @@ We run step 3 manually, and not automated on Github Actions, because we don't wa
 
 #### Controling the version number and forcing a release PR
 
-Please follows semantic versioning to generate the version number. If you want to change the version number of the new release, or that Release Please bot didn't generate a PR (because there is no "important" change) and you want to force a new version, you may bump(or downgrade) the version by adding a new commit (replacing `VERSION` to a version number in the format of `X.Y.Z`):
+**Release Please** actions follows semantic versioning to generate the version number. If you want to change the version number of the new release, or that Release Please bot didn't generate a PR (because there is no _important_ change) and you want to force a new version, you may bump(or downgrade) the version by adding a new commit (replacing `VERSION` to a version number in the format of `X.Y.Z`):
 
 ```shell
 git commit --allow-empty -m "chore: release VERSION (you may change the title)" -m "Release-As: VERSION"
