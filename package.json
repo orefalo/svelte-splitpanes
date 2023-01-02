@@ -1,6 +1,6 @@
 {
 	"name": "svelte-splitpanes",
-	"version": "0.7.10",
+	"version": "0.7.9",
 	"description": "A full featured resizable pane layout splitter, ported from vue-splitpanes",
 	"author": {
 		"name": "Olivier Refalo",
@@ -37,7 +37,7 @@
 		"lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. src/ && eslint --ignore-path .gitignore src/",
 		"format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. src/",
 		"commit-preverify": "npx lint-staged && npm run check",
-		"commit": "npm run commit-preverify && node ./node_modules/cz-customizable/standalone.js",
+		"commit": "npm run commit-preverify && cross-env NO_VERIFY=1 node ./node_modules/cz-customizable/standalone.js",
 		"fetch-and-publish": "node scripts/fetch-and-publish.js"
 	},
 	"devDependencies": {

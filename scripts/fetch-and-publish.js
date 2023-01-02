@@ -1,18 +1,18 @@
 import { exit } from 'node:process';
 import child_process from 'node:child_process';
 import os from 'node:os';
+import { version } from '../package.json';
 
-if (process.argv.length < 3) {
-	console.error("Error: This script must be called with a parameter VERSION");
-	exit(1);
-}
-
-const version = process.argv[process.argv.length - 1];
+// if (process.argv.length < 3) {
+// 	console.error('Error: This script must be called with a parameter VERSION');
+// 	exit(1);
+// }
+//const version = process.argv[process.argv.length - 1];
 
 /**
- * 
- * @param {string} name 
- * @returns 
+ *
+ * @param {string} name
+ * @returns
  */
 const npmPostfixCommand = (name) => (os.platform() === 'win32' ? `${name}.cmd` : name);
 
