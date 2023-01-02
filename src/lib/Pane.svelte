@@ -50,8 +50,13 @@
 
 	$: style =
 		[
-			!browser && minSize > 0 ? `min-${dimension}: ${minSize}%;` : undefined,
-			!browser && maxSize < 100 ? `max-${dimension}: ${maxSize}%;` : undefined,
+			// SSR
+			// Notice: If the size is defined by the user, use it as min and max for CSS,
+			//  so their sizes won't be shrinked in the SSR view.
+			!browser && (size != null || minSize > 0) ? `min-${dimension}: ${size ?? minSize}%;` : undefined,
+			!browser && (size != null || maxSize < 100) ? `max-${dimension}: ${size ?? maxSize}%;` : undefined,
+
+			// Client
 			browser || size != null ? `${dimension}: ${sz}%;` : undefined
 		]
 			.filter((value) => value !== undefined)
