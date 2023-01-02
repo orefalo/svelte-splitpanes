@@ -201,16 +201,15 @@ The enforcement is made possible by the enablement of several tools which, when 
 
 Commits are accepted, as long as they comply to the _commit message format_ described below.
 
-We also require the code to pass linting and svelte checks.
+We also require the code to be well-formatted and to pass linting(i.e. normal ts&svelte checks, plus additional code styling rules). Don't worry, the code is automatically being formatted and verified every time you commit your changes. In addition, when you push your commits to Github(by a PR or directly to the repo), your code will be verfied again by Github Actions with even more checks.
 
 To ease the development and to enforce the process of formatting the code, perform checks and formatting the commit message, you're advised to commit using the following steps:
 
 0. Make sure your environment is up to date, by running periodically `pnpm install`.
-1. Run `pnpm format`.
-2. Make sure that all the relevant changes are stages (notice `pnpm format` also make changes in the files).
-3. (Optional) Run `pnpm build && pnpm test` to execute Playwright tests.
-4. Run `pnpm commit`.
-   - If linting or svelte checks are failed, the commit process will abort and you'll have to fix them, and return again to step 1.
+1. Make sure that all the relevant changes are staged.
+2. (Optional) Run `pnpm build && pnpm test` to execute Playwright tests.
+3. Run `pnpm commit`.
+   - If linting or svelte checks are failed, the commit process will abort and you'll have to fix them.
    - Otherwise, you will procceed to the commitment interactive terminal, and just follow the instructions to commit your changes.
 
 #### Commit Message Format
