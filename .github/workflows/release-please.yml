@@ -5,9 +5,76 @@ on:
 name: release-please
 jobs:
   release-please:
-    runs-on: ubuntu-latest
     if: github.repository == 'orefalo/svelte-splitpanes' # Prevent running on forks
+    runs-on: ubuntu-latest
     steps:
-      - uses: google-github-actions/release-please-action@v3
+      # Checkout
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # The whole Node.js and pnpm installation and caching
+      # Based on https://github.com/pnpm/action-setup/tree/6e1964dde3397a825e79e4607ad57f3f7ca2c7cb#use-cache-to-reduce-installation-time
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - uses: pnpm/action-setup@v2.0.1
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 7
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        run: |
+          echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      
+      - name: SvelteKit Sync
+        run: pnpm exec svelte-kit sync
+      
+      - name: Svelte Package
+        run: pnpm package
+
+      - name: Release Please
+        uses: google-github-actions/release-please-action@v3
+        id: release
         with:
           release-type: node
+      
+      - name: ZIP&TGZ the package
+        if: ${{ steps.release.outputs.release_created }}
+        run: mv package svelte-splitpanes && zip package svelte-splitpanes/* -r && tar -czvf package.tgz svelte-splitpanes/*
+      
+      - name: Upload ZIP
+        uses: actions/upload-release-asset@v1
+        if: ${{ steps.release.outputs.release_created }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.release.outputs.upload_url }}
+          asset_path: package.zip
+          asset_name: svelte-splitpanes-${{ steps.release.outputs.version }}.zip
+          asset_content_type: application/zip
+      
+      - name: Upload TGZ
+        uses: actions/upload-release-asset@v1
+        if: ${{ steps.release.outputs.release_created }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.release.outputs.upload_url }}
+          asset_path: package.tgz
+          asset_name: svelte-splitpanes-${{ steps.release.outputs.version }}.tgz
+          asset_content_type: application/gzip

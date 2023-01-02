@@ -1,5 +1,5 @@
 <script>
-	import { Pane, Splitpanes } from '$lib';
+	import { Pane, Splitpanes } from 'svelte-splitpanes';
 	import CodeArea from '$comp/CodeArea.svelte';
 
 	let code = `

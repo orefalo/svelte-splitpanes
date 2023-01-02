@@ -1,5 +1,5 @@
 <script>
-	import { Pane, Splitpanes } from '$lib';
+	import { Pane, Splitpanes } from 'svelte-splitpanes';
 	import CodeArea from '$comp/CodeArea.svelte';
 
 	let code =
@@ -34,8 +34,6 @@
 		<p>statusbar</p>
 	</Pane>
 </Splitpanes>
-
-<HighlightSvelte {code} />
 
 <style` + // this is needed for fixing a wierd bug in svelte-preproccess
 		` global lang="scss">

@@ -1,6 +1,5 @@
 <script>
-	import Pane from '$lib/Pane.svelte';
-	import Splitpanes from '$lib/Splitpanes.svelte';
+	import { Pane, Splitpanes } from 'svelte-splitpanes';
 </script>
 
 <Splitpanes class="default-theme" horizontal style="height: 400px">
