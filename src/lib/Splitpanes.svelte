@@ -5,7 +5,9 @@
 <script lang="ts" strictEvents>
 	import { onMount, onDestroy, setContext, createEventDispatcher, tick, afterUpdate } from 'svelte';
 	import { writable } from 'svelte/store';
-	import type { IPane, IPaneSizingEvent, SplitContext, PaneInitFunction } from '.';
+	import type { IPane, IPaneSizingEvent, SplitContext, PaneInitFunction } from './index.js';
+	import GatheringRound from './internal/GatheringRound.svelte';
+	import { browser } from './internal/env.js';
 
 	// TYPE DECLARATIONS ----------------
 
@@ -107,6 +109,8 @@
 	let activeSplitterElement: HTMLElement | null = null;
 	let activeSplitterDrag: number | null = null;
 	let startingTDrag: number | null = null;
+	let ssrPaneDefinedSizeSum = 0;
+	let ssrPaneUndefinedSizeCount = 0;
 
 	// REACTIVE ----------------
 
@@ -117,6 +121,14 @@
 		return panes.findIndex((pane: IPane) => {
 			return pane.key === key;
 		});
+	}
+
+	function ssrRegisterPaneSize(size: number | null) {
+		if (size == null) {
+			++ssrPaneUndefinedSizeCount;
+		} else {
+			ssrPaneDefinedSizeSum += size;
+		}
 	}
 
 	const onPaneInit: PaneInitFunction = (key: any) => {
@@ -141,7 +153,8 @@
 				if (dblClickSplitter) {
 					onSplitterDblClick(e, indexOfPane(key));
 				}
-			}
+			},
+			undefinedPaneInitSize: browser ? 0 : (100 - ssrPaneDefinedSizeSum) / ssrPaneUndefinedSizeCount
 		};
 	};
 
@@ -149,6 +162,7 @@
 		showFirstSplitter,
 		veryFirstPaneKey,
 		isHorizontal,
+		ssrRegisterPaneSize: browser ? undefined : ssrRegisterPaneSize,
 		onPaneInit,
 		onPaneAdd,
 		onPaneClick,
@@ -1068,6 +1082,9 @@
 	class:splitpanes--freeze={!isAfterInitialTimeoutZero}
 	{style}
 >
+	{#if !browser}
+		<GatheringRound><slot /></GatheringRound>
+	{/if}
 	<slot />
 </div>
 

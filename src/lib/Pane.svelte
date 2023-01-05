@@ -1,10 +1,13 @@
 <script lang="ts" strictEvents>
-	import { getContext, onMount, onDestroy } from 'svelte';
+	import { getContext, onMount, onDestroy, hasContext } from 'svelte';
 	import type { Action } from 'svelte/action';
 	import { KEY } from './Splitpanes.svelte';
-	import type { IPane, SplitContext } from '.';
+	import type { IPane, PaneInitFunction, SplitContext } from './index.js';
+	import { browser } from './internal/env.js';
+	import { gatheringKey } from './internal/GatheringRound.svelte';
 
 	const {
+		ssrRegisterPaneSize,
 		onPaneInit,
 		onPaneAdd,
 		onPaneRemove,
@@ -27,11 +30,15 @@
 
 	// VARIABLES
 
-	const browser = typeof window !== 'undefined';
-
 	const key = {};
+
+	const gathering = !browser && hasContext(gatheringKey);
+	const { onSplitterDown, onSplitterClick, onSplitterDblClick, undefinedPaneInitSize } = (
+		!gathering ? onPaneInit(key) : {}
+	) as ReturnType<PaneInitFunction>;
+
 	let element: HTMLElement;
-	let sz: number = size == null ? 0 : size;
+	let sz: number = size ?? undefinedPaneInitSize;
 	let isSplitterActive = false;
 	let paneAdded = false;
 
@@ -48,21 +55,7 @@
 
 	$: dimension = $isHorizontal ? 'height' : 'width';
 
-	$: style =
-		[
-			// SSR
-			// Notice: If the size is defined by the user, use it as min and max for CSS,
-			//  so their sizes won't be shrinked in the SSR view.
-			!browser && (size != null || minSize > 0) ? `min-${dimension}: ${size ?? minSize}%;` : undefined,
-			!browser && (size != null || maxSize < 100) ? `max-${dimension}: ${size ?? maxSize}%;` : undefined,
-
-			// Client
-			browser || size != null ? `${dimension}: ${sz}%;` : undefined
-		]
-			.filter((value) => value !== undefined)
-			.join(' ') || undefined;
-
-	const { onSplitterDown, onSplitterClick, onSplitterDblClick } = onPaneInit(key);
+	$: style = `${dimension}: ${sz}%;`;
 
 	function handleMouseClick(event: MouseEvent) {
 		onPaneClick(event, key);
@@ -89,45 +82,51 @@
 		// };
 	};
 
-	onMount(() => {
-		const inst: IPane = {
-			key,
-			element: element,
-			givenSize: size,
-			sz: () => sz,
-			setSz: (v) => {
-				sz = v;
-				if (size != null && size != sz) {
-					size = sz;
-				}
-			},
-			min: () => minSize,
-			max: () => maxSize,
-			snap: () => snapSize,
-			setSplitterActive: (isActive: boolean) => {
-				isSplitterActive = isActive;
-			},
-			isReady: false
-		};
-		onPaneAdd(inst);
-		paneAdded = true;
-	});
+	if (gathering) {
+		ssrRegisterPaneSize(size);
+	} else {
+		onMount(() => {
+			const inst: IPane = {
+				key,
+				element: element,
+				givenSize: size,
+				sz: () => sz,
+				setSz: (v) => {
+					sz = v;
+					if (size != null && size != sz) {
+						size = sz;
+					}
+				},
+				min: () => minSize,
+				max: () => maxSize,
+				snap: () => snapSize,
+				setSplitterActive: (isActive: boolean) => {
+					isSplitterActive = isActive;
+				},
+				isReady: false
+			};
+			onPaneAdd(inst);
+			paneAdded = true;
+		});
 
-	onDestroy(() => {
-		onPaneRemove(key);
-	});
+		onDestroy(() => {
+			onPaneRemove(key);
+		});
+	}
 </script>
 
-<!-- Splitter -->
-<!-- TODO: Support aria role="separator" and make this a focusable separtor. Sources:
+{#if !gathering}
+	<!-- Splitter -->
+	<!-- TODO: Support aria role="separator" and make this a focusable separtor. Sources:
 	* https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/roles/separator_role
 	* https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/
 -->
-{#if $veryFirstPaneKey !== key || $showFirstSplitter}
-	<div use:splitterAction class="splitpanes__splitter {isSplitterActive ? 'splitpanes__splitter__active' : ''}" />
-{/if}
+	{#if $veryFirstPaneKey !== key || $showFirstSplitter}
+		<div use:splitterAction class="splitpanes__splitter {isSplitterActive ? 'splitpanes__splitter__active' : ''}" />
+	{/if}
 
-<!-- Pane -->
-<div class={`splitpanes__pane ${clazz || ''}`} bind:this={element} on:click={handleMouseClick} {style}>
-	<slot />
-</div>
+	<!-- Pane -->
+	<div class={`splitpanes__pane ${clazz || ''}`} bind:this={element} on:click={handleMouseClick} {style}>
+		<slot />
+	</div>
+{/if}
