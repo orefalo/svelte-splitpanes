@@ -7,6 +7,7 @@ export type PaneInitFunction = (key: any) => {
 	onSplitterDown: (_event: TouchEvent | MouseEvent) => void;
 	onSplitterClick: (event: MouseEvent) => void;
 	onSplitterDblClick: (_event: MouseEvent) => void;
+	undefinedPaneInitSize: number;
 };
 
 // methods passed from splitpane to children panes
@@ -15,6 +16,7 @@ export interface SplitContext {
 	veryFirstPaneKey: Readable<any>;
 	isHorizontal: Readable<boolean>;
 	showFirstSplitter: Readable<boolean>;
+	ssrRegisterPaneSize: (size: number | null) => void;
 	onPaneInit: PaneInitFunction;
 	onPaneAdd: (pane: IPane) => Promise<void>;
 	onPaneRemove: (key: any) => Promise<void>;
