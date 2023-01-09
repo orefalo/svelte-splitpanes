@@ -3,22 +3,22 @@
 ![](https://badgen.net/npm/v/svelte-splitpanes)
 ![minsize](https://badgen.net/bundlephobia/min/svelte-splitpanes)
 ![deps](https://badgen.net/bundlephobia/dependency-count/svelte-splitpanes)
-![treeshaking](https://badgen.net/bundlephobia/tree-shaking/svelte-splitpanes)
+![contributors](https://badgen.net/github/contributors/orefalo/svelte-splitpanes)
 
-A predictable responsive component to layout resizable view panels supporting an multitude of advenced features (min, max, snap, expand on double click, fixed size.
+A _predictable_ responsive component to layout resizable view panels supporting an multitude of advanced features (min/max bounderies, snap, expand on double click, fixed size, rtl).
 
 ![screenshot](./static/screenshot.jpg)
 
-> This library started as a port from the excellent [vue-splitpanes](https://antoniandre.github.io/splitpanes/), and through features and enhancements became one of the best splitpane implementations.
-
 ## Why?
 
-To be sucessful, a good framework must come with good components.  
-Unfortunatly, we couldn't find any decent split pane layout in the Svelte eco-system.
+_"To be sucessful, a good framework must come with good components."_
 
-But we did find one written in vue.js.
+Unfortunatly, we couldn't find any decent splitpane widget in the Svelte eco-system.
+But we did find one written for vue.js...
 
-So we decided to port it and enhance it. :smile:
+> This library started as a port of [vue-splitpanes](https://antoniandre.github.io/splitpanes/) and through feature enhancements, became one of the best splitpane implementation.
+
+Special thanks to all contributors and in particular [Tal500](https://github.com/Tal500)
 
 ## Features
 
