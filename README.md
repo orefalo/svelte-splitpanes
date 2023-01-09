@@ -1,5 +1,10 @@
 # Svelte-Splitpanes
 
+![](https://badgen.net/npm/v/svelte-splitpanes)
+![minsize](https://badgen.net/bundlephobia/min/svelte-splitpanes)
+![deps](https://badgen.net/bundlephobia/dependency-count/svelte-splitpanes)
+![treeshaking](https://badgen.net/bundlephobia/tree-shaking/svelte-splitpanes)
+
 A predictable responsive component to layout resizable view panels supporting an multitude of advenced features (min, max, snap, expand on double click, fixed size.
 
 ![screenshot](./static/screenshot.jpg)
@@ -17,7 +22,7 @@ So we decided to port it and enhance it. :smile:
 
 ## Features
 
-- Size is <4kb minified, <1kb minified+gzip [Link](https://bundlephobia.com/package/svelte-splitpanes@0.7.11)
+- Size is <4kb minified, <1kb minified+gzip
 - Support both dynamic horizontal and vertical splits
 - Support defaults, min and max sizes
 - Support multiple splits
