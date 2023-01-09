@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.7.11](https://github.com/orefalo/svelte-splitpanes/compare/v0.7.10...v0.7.11) (2023-01-09)
+
+
+### Features
+
+* add the \`strictEvents\` attribute to components, so the user will know that no other events happen ([db15de3](https://github.com/orefalo/svelte-splitpanes/commit/db15de3f79994690e5a259ca78e7b603c0012e2c))
+
+
+### Bug Fixes
+
+* require svelte to be installed as a peer dependency ([ec13655](https://github.com/orefalo/svelte-splitpanes/commit/ec136552979b37f28f25edb16c62fa19f2928a9c))
+* ssr issue on partially defined sizes ([5fb6661](https://github.com/orefalo/svelte-splitpanes/commit/5fb6661b7bd5d1b388a9e4ecd390a528eccce281))
+
+
+### Miscellaneous Chores
+
+* release 0.7.11 ([1df8854](https://github.com/orefalo/svelte-splitpanes/commit/1df8854bcf66365c39cd04ece32d6a5ce5a92287))
+
 ## [0.7.10](https://github.com/orefalo/svelte-splitpanes/compare/v0.7.9...v0.7.10) (2023-01-02)
 
 ### Miscellaneous Chores
