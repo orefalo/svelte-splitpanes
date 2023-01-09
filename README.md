@@ -17,7 +17,7 @@ So we decided to port it and enhance it. :smile:
 
 ## Features
 
-- Size is less than 6 kb
+- Size is <4kb minified, <1kb minified+gzip [Link](https://bundlephobia.com/package/svelte-splitpanes@0.7.11)
 - Support both dynamic horizontal and vertical splits
 - Support defaults, min and max sizes
 - Support multiple splits
