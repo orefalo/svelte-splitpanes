@@ -27,7 +27,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "cross-env DEV=1 vite dev --port 3000",
-		"build": "vite build",
+		"build": "vite build && node ./scripts/create-minified-size-badges.js",
 		"package": "svelte-package && node scripts/clean-package-json.js",
 		"preview": "vite preview --port 3000",
 		"prepare": "husky install",
@@ -52,8 +52,8 @@
 		"cz-customizable": "7.0.0",
 		"eslint": "8.31.0",
 		"eslint-config-prettier": "8.5.0",
-		"eslint-plugin-svelte3": "4.0.0",
 		"eslint-plugin-markdown": "3.0.0",
+		"eslint-plugin-svelte3": "4.0.0",
 		"highlight.js": "11.7.0",
 		"husky": "8.0.2",
 		"lint-staged": "13.1.0",
@@ -72,6 +72,7 @@
 	},
 	"optionalDependencies": {
 		"@playwright/test": "1.29.1",
+		"badge-maker": "^3.3.1",
 		"serve": "14.1.2"
 	},
 	"peerDependencies": {

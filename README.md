@@ -1,7 +1,7 @@
 # Svelte-Splitpanes
 
 ![](https://badgen.net/npm/v/svelte-splitpanes)
-![minsize](https://badgen.net/bundlephobia/min/svelte-splitpanes)
+[![minsize](https://orefalo.github.io/svelte-splitpanes/minified-size-badge.svg)](https://orefalo.github.io/svelte-splitpanes/minified-size)
 ![deps](https://badgen.net/bundlephobia/dependency-count/svelte-splitpanes)
 ![contributors](https://badgen.net/github/contributors/orefalo/svelte-splitpanes)
 
