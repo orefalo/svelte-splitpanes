@@ -1,7 +1,7 @@
 {
 	"*.{js,ts,svelte,css,scss,postcss,json,md}": [
-		"prettier --ignore-path .gitignore --write --cache --plugin-search-dir=. !./pnpm-lock.yaml",
+		"prettier --ignore-path .gitignore --write --cache --plugin-search-dir=. !./pnpm-lock.yaml !./CHANGELOG.md",
 		"eslint --cache --ignore-path .gitignore"
 	],
-	"*.{cjs,yml,yaml,lintstagedrc}": "prettier --ignore-path .gitignore --write --cache --plugin-search-dir=. !./pnpm-lock.yaml"
+	"*.{cjs,yml,yaml,lintstagedrc}": "prettier --ignore-path .gitignore --write --cache --plugin-search-dir=. !./pnpm-lock.yaml !./CHANGELOG.md"
 }
