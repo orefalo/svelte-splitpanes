@@ -1,7 +1,8 @@
 # Svelte-Splitpanes
 
-![](https://badgen.net/npm/v/svelte-splitpanes)
-[![minsize](https://orefalo.github.io/svelte-splitpanes/minified-size-badge.svg)](https://orefalo.github.io/svelte-splitpanes/minified-size)
+[![npm](https://badgen.net/npm/v/svelte-splitpanes)](https://www.npmjs.com/package/svelte-splitpanes)
+![publish size](https://badgen.net/packagephobia/publish/svelte-splitpanes)
+[![minified size](https://orefalo.github.io/svelte-splitpanes/minified-size-badge.svg)](https://orefalo.github.io/svelte-splitpanes/minified-size)
 ![deps](https://badgen.net/bundlephobia/dependency-count/svelte-splitpanes)
 ![contributors](https://badgen.net/github/contributors/orefalo/svelte-splitpanes)
 
