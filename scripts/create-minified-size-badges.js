@@ -7,9 +7,9 @@ import { makeBadge } from 'badge-maker';
  * @param {string} name
  */
 const formatSize = (name) =>
-	`${name}: ${
+	`${name}: ${(
 		parseInt(fs.readFileSync(`./.svelte-kit/output/minified-size-${name}.txt`, { encoding: 'utf-8' })) / 1024
-	} KB`;
+	).toFixed(1)} KB`;
 
 const format = {
 	label: 'minified size',
