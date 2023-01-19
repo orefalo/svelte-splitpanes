@@ -28,12 +28,8 @@ const config = {
 								continue; // Not a chunk
 							}
 
-							const minimizedLengths = Object.keys(chunk.modules)
-								.filter((fileSource) => path.resolve(fileSource).startsWith(libPath))
-								.map((fileSource) => chunk.modules[fileSource].renderedLength);
-
-							if (minimizedLengths.length > 0) {
-								const size = minimizedLengths.reduce((x, y) => x + y);
+							if (Object.keys(chunk.modules).find((fileSource) => path.resolve(fileSource).startsWith(libPath))) {
+								const size = chunk.code.length;
 
 								if (path.resolve(options.dir) === path.resolve('.', '.svelte-kit/output/client')) {
 									fs.writeFileSync('./.svelte-kit/output/minified-size-client.txt', size.toString());
