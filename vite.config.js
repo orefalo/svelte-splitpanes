@@ -13,14 +13,26 @@ const config = {
 			include: ['highlight.js', 'highlight.js/lib/core']
 		},
 		alias: {
-			'svelte-splitpanes': path.resolve('./src/lib'),
+			'svelte-splitpanes': libPath,
 			$comp: path.resolve('./src/comp')
 		}
 	},
 	build: {
+		minify: 'esbuild', // We specify this explicitly, since we need the server code to be minimized for computation.
 		rollupOptions: {
 			output: {
-				manualChunks: (id) => (path.resolve(id).startsWith(libPath) ? 'svelte-splitpanes' : undefined)
+				manualChunks: (id) => {
+					const resolvedPath = path.resolve(id);
+
+					if (resolvedPath.search('node_modules') > 0) {
+						// We need to separate the external deps so they won't be in the `svelte-splitpanes` chunk.
+						return 'external';
+					} else if (resolvedPath.startsWith(libPath)) {
+						return 'svelte-splitpanes';
+					} else {
+						return undefined;
+					}
+				}
 			},
 			plugins: [
 				{
