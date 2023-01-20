@@ -19,9 +19,14 @@ const config = {
 	},
 	build: {
 		rollupOptions: {
+			output: {
+				manualChunks: (id) => (path.resolve(id).startsWith(libPath) ? 'svelte-splitpanes' : undefined)
+			},
 			plugins: [
 				{
 					generateBundle(options, bundle) {
+						let found = false;
+
 						for (const chunkName in bundle) {
 							const chunk = bundle[chunkName];
 							if (chunk.type !== 'chunk') {
@@ -29,6 +34,11 @@ const config = {
 							}
 
 							if (Object.keys(chunk.modules).find((fileSource) => path.resolve(fileSource).startsWith(libPath))) {
+								if (found) {
+									throw 'Error: the library dependency was already found for minified size computation, so it is separated!';
+								}
+								found = true;
+
 								const size = chunk.code.length;
 
 								if (path.resolve(options.dir) === path.resolve('.', '.svelte-kit/output/client')) {
@@ -37,6 +47,10 @@ const config = {
 									fs.writeFileSync('./.svelte-kit/output/minified-size-server.txt', size.toString());
 								}
 							}
+						}
+
+						if (!found) {
+							throw "Error: the library dependency wasn't found for minified size computation!";
 						}
 					}
 				}
