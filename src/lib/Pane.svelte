@@ -9,10 +9,7 @@
 	const {
 		ssrRegisterPaneSize,
 		onPaneInit,
-		onPaneAdd,
-		onPaneRemove,
-		onPaneClick,
-		reportGivenSizeChange,
+		clientOnly: clientOnlyContext,
 		isHorizontal,
 		showFirstSplitter,
 		veryFirstPaneKey
@@ -33,7 +30,7 @@
 	const key = {};
 
 	const gathering = !browser && hasContext(gatheringKey);
-	const { onSplitterDown, onSplitterClick, onSplitterDblClick, undefinedPaneInitSize } = (
+	const { clientOnly: clientOnlyInitResult, undefinedPaneInitSize } = (
 		!gathering ? onPaneInit(key) : {}
 	) as ReturnType<PaneInitFunction>;
 
@@ -45,8 +42,8 @@
 	// REACTIVE
 
 	const reportGivenSizeChangeIfPaneAdded = (size: number) => {
-		if (paneAdded && size != null && size != sz) {
-			reportGivenSizeChange(key, size);
+		if (browser && paneAdded && size != null && size != sz) {
+			clientOnlyContext.reportGivenSizeChange(key, size);
 		}
 	};
 	$: {
@@ -58,16 +55,16 @@
 	$: style = `${dimension}: ${sz}%;`;
 
 	function handleMouseClick(event: MouseEvent) {
-		onPaneClick(event, key);
+		clientOnlyContext.onPaneClick(event, key);
 	}
 
 	const splitterAction: Action = (splitter: HTMLElement) => {
-		splitter.onmousedown = onSplitterDown;
+		splitter.onmousedown = clientOnlyInitResult.onSplitterDown;
 		if ('ontouchstart' in window) {
-			splitter.ontouchstart = onSplitterDown;
+			splitter.ontouchstart = clientOnlyInitResult.onSplitterDown;
 		}
-		splitter.onclick = onSplitterClick;
-		splitter.ondblclick = onSplitterDblClick;
+		splitter.onclick = clientOnlyInitResult.onSplitterClick;
+		splitter.ondblclick = clientOnlyInitResult.onSplitterDblClick;
 
 		// This what should be done on destruction, but commented out since the DOM element gets destroyed anyway
 		// return {
@@ -84,7 +81,7 @@
 
 	if (gathering) {
 		ssrRegisterPaneSize(size);
-	} else {
+	} else if (browser) {
 		onMount(() => {
 			const inst: IPane = {
 				key,
@@ -105,12 +102,12 @@
 				},
 				isReady: false
 			};
-			onPaneAdd(inst);
+			clientOnlyContext.onPaneAdd(inst);
 			paneAdded = true;
 		});
 
 		onDestroy(() => {
-			onPaneRemove(key);
+			clientOnlyContext.onPaneRemove(key);
 		});
 	}
 </script>

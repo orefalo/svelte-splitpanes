@@ -137,23 +137,27 @@
 		}
 
 		return {
-			onSplitterDown: (e) => {
-				const index = indexOfPane(key);
-				if (index > 0) {
-					onMouseDown(e, index - 1);
-				}
-			},
-			onSplitterClick: (e) => {
-				const index = indexOfPane(key);
-				if (index > 0) {
-					onSplitterClick(e, index);
-				}
-			},
-			onSplitterDblClick: (e) => {
-				if (dblClickSplitter) {
-					onSplitterDblClick(e, indexOfPane(key));
-				}
-			},
+			clientOnly: browser
+				? {
+						onSplitterDown: (e) => {
+							const index = indexOfPane(key);
+							if (index > 0) {
+								onMouseDown(e, index - 1);
+							}
+						},
+						onSplitterClick: (e) => {
+							const index = indexOfPane(key);
+							if (index > 0) {
+								onSplitterClick(e, index);
+							}
+						},
+						onSplitterDblClick: (e) => {
+							if (dblClickSplitter) {
+								onSplitterDblClick(e, indexOfPane(key));
+							}
+						}
+				  }
+				: undefined,
 			undefinedPaneInitSize: browser ? 0 : (100 - ssrPaneDefinedSizeSum) / ssrPaneUndefinedSizeCount
 		};
 	};
@@ -164,10 +168,14 @@
 		isHorizontal,
 		ssrRegisterPaneSize: browser ? undefined : ssrRegisterPaneSize,
 		onPaneInit,
-		onPaneAdd,
-		onPaneClick,
-		onPaneRemove,
-		reportGivenSizeChange
+		clientOnly: browser
+			? {
+					onPaneAdd,
+					onPaneClick,
+					onPaneRemove,
+					reportGivenSizeChange
+			  }
+			: undefined
 	});
 
 	async function onPaneAdd(pane: IPane) {
@@ -274,16 +282,18 @@
 		}, 0);
 	});
 
-	onDestroy(() => {
-		if (isReady) {
-			// this is to solve an edge case:
-			// when the user starts dragging and the component is destroyed, leaving behind hanging events
-			unbindEvents();
-		}
+	if (browser) {
+		onDestroy(() => {
+			if (isReady) {
+				// this is to solve an edge case:
+				// when the user starts dragging and the component is destroyed, leaving behind hanging events
+				unbindEvents();
+			}
 
-		// Prevent emitting console warnings on hot reloading.
-		isReady = false;
-	});
+			// Prevent emitting console warnings on hot reloading.
+			isReady = false;
+		});
+	}
 
 	afterUpdate(() => {
 		verifyAndUpdatePanesOrder();
