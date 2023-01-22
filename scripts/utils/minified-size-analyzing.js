@@ -65,10 +65,10 @@ export const minifiedSizeAnalyzingPlugin = () => ({
 
 				const size = chunk.code.length;
 
-				if (path.resolve(options.dir) === path.resolve('.', '.svelte-kit/output/client')) {
+				if (!ssr) {
 					console.log('\nClient minified library size (bytes): ' + size);
 					fs.writeFileSync('./.svelte-kit/output/minified-size-client.txt', size.toString());
-				} else if (path.resolve(options.dir) === path.resolve('.', '.svelte-kit/output/server')) {
+				} else {
 					console.log('\nServer minified library size (bytes): ' + size);
 					fs.writeFileSync('./.svelte-kit/output/minified-size-server.txt', size.toString());
 				}
