@@ -17,6 +17,7 @@ export interface SplitContext {
 	/** Tells the key of the very first pane, or undefined if not recieved yet. */
 	veryFirstPaneKey: Readable<any>;
 	isHorizontal: Readable<boolean>;
+	splitterDefaultSize: Readable<number>;
 	showFirstSplitter: Readable<boolean>;
 	ssrRegisterPaneSize?: (size: number | null) => void;
 	onPaneInit: PaneInitFunction;

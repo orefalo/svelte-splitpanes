@@ -11,6 +11,7 @@
 		onPaneInit,
 		clientOnly: clientOnlyContext,
 		isHorizontal,
+		splitterDefaultSize,
 		showFirstSplitter,
 		veryFirstPaneKey
 	} = getContext<SplitContext>(KEY);
@@ -24,6 +25,8 @@
 	export let maxSize = 100;
 	export let maxSizePx = 0;
 	export let snapSize = 0;
+	/** The size of the splitter in pixels. */
+	export let splitterSize: number | null = null;
 	// css class
 	let clazz = '';
 	export { clazz as class };
@@ -134,7 +137,11 @@
 	* https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/
 -->
 	{#if $veryFirstPaneKey !== key || $showFirstSplitter}
-		<div use:splitterAction class="splitpanes__splitter {isSplitterActive ? 'splitpanes__splitter__active' : ''}" />
+		<div
+			use:splitterAction
+			class="splitpanes__splitter {isSplitterActive ? 'splitpanes__splitter__active' : ''}"
+			style="{dimension}: {splitterSize ?? $splitterDefaultSize}px;"
+		/>
 	{/if}
 
 	<!-- Pane -->

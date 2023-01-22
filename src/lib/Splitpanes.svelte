@@ -32,6 +32,10 @@
 	export let dblClickSplitter = true;
 	// true if RTL
 	export let rtl: boolean | 'auto' = 'auto';
+	/** The size of the splitter in pixels.
+	 *
+	 * Can be override in the pane props by the user. */
+	export let splitterSize = 7;
 	// true to display the first splitter
 	export let firstSplitter = false;
 	// css style
@@ -77,6 +81,7 @@
 	let panes = new Array<IPane>();
 	// passed to the children via the context - writable to ensure proper reactivity
 	let isHorizontal = writable<boolean>(horizontal);
+	const splitterDefaultSize = writable<number>(splitterSize);
 	const showFirstSplitter = writable<boolean>(firstSplitter);
 	// tells the key of the very first pane, or undefined if not recieved yet
 	const veryFirstPaneKey = writable<any>(undefined);
@@ -89,6 +94,7 @@
 	// REACTIVE ----------------
 
 	$: $isHorizontal = horizontal;
+	$: $splitterDefaultSize = splitterSize;
 	$: $showFirstSplitter = firstSplitter;
 
 	function indexOfPane(key: any) {
@@ -140,6 +146,7 @@
 		showFirstSplitter,
 		veryFirstPaneKey,
 		isHorizontal,
+		splitterDefaultSize,
 		ssrRegisterPaneSize: browser ? undefined : ssrRegisterPaneSize,
 		onPaneInit,
 		clientOnly: browser
@@ -1049,7 +1056,6 @@
 		}
 		&.splitpanes--vertical > .splitpanes__splitter,
 		.splitpanes--vertical > .splitpanes__splitter {
-			width: 7px;
 			border-left: 1px solid #eee;
 			margin-left: -1px;
 			cursor: col-resize;
@@ -1068,7 +1074,6 @@
 		}
 		&.splitpanes--horizontal > .splitpanes__splitter,
 		.splitpanes--horizontal > .splitpanes__splitter {
-			height: 7px;
 			border-top: 1px solid #eee;
 			margin-top: -1px;
 			cursor: row-resize;
