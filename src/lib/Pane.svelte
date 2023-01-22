@@ -18,8 +18,11 @@
 	// PROPS
 
 	export let size: number | null = null;
+	export let sizePx = 0;
 	export let minSize = 0;
+	export let minSizePx = 0;
 	export let maxSize = 100;
+	export let maxSizePx = 0;
 	export let snapSize = 0;
 	// css class
 	let clazz = '';
@@ -36,6 +39,7 @@
 
 	let element: HTMLElement;
 	let sz: number = size ?? undefinedPaneInitSize;
+	let szPx: number = sizePx;
 	let isSplitterActive = false;
 	let paneAdded = false;
 
@@ -47,12 +51,23 @@
 		}
 	};
 	$: {
+		// TODO: When the user min/max size gets changed, need to calc the size again
 		reportGivenSizeChangeIfPaneAdded(size);
 	}
 
 	$: dimension = $isHorizontal ? 'height' : 'width';
 
-	$: style = `${dimension}: ${sz}%;`;
+	const calcSize = (sz: number, szPx: number) => {
+		if (szPx === 0) {
+			return `${sz}%`;
+		} else if (sz === 0) {
+			return `${szPx}px`;
+		} else {
+			const signPx = szPx < 0 ? '-' : '+';
+			return `calc(${sz}% ${signPx} ${Math.abs(szPx)}px)`;
+		}
+	};
+	$: style = `${dimension}: ${calcSize(sz, szPx)};`;
 
 	function handleMouseClick(event: MouseEvent) {
 		clientOnlyContext.onPaneClick(event, key);
