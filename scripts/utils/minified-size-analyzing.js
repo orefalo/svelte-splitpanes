@@ -46,7 +46,7 @@ export const minifiedSizeAnalyzingPlugin = () => ({
 		}
 	},
 
-	generateBundle(options, bundle) {
+	generateBundle(_options, bundle) {
 		// Notice that here we already know that `isBuild === true`.
 
 		let found = false;
