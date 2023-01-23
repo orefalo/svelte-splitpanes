@@ -978,6 +978,8 @@
 
 			panes = newPanes;
 			$veryFirstPaneKey = panes.length > 0 ? panes[0].key : undefined;
+
+			recalcSplitterSizeSum();
 		}
 	}
 </script>
