@@ -192,6 +192,8 @@
 		}
 
 		if (isReady) {
+			recalcSplitterSizeSum();
+
 			// 2. tick and resize the panes.
 			await tickAndResetPaneSizes();
 
@@ -224,6 +226,8 @@
 			}
 
 			if (isReady) {
+				recalcSplitterSizeSum();
+
 				// 3. tick and resize the panes.
 				await tickAndResetPaneSizes();
 
@@ -274,14 +278,14 @@
 		splitterSumSize.set(newSum);
 	}
 
+	const recalcSplitterSizeSum = () => reportSplitterSizeChange(undefined, null);
+
 	onMount(() => {
 		verifyAndUpdatePanesOrder();
 		resetPaneSizes();
 
 		// Trigger update when the default splitter size is changed, and also on the first time before the change.
-		const unsubscriber = splitterDefaultSize.subscribe(() => {
-			reportSplitterSizeChange(undefined, null);
-		});
+		const unsubscriber = splitterDefaultSize.subscribe(recalcSplitterSizeSum);
 
 		for (let i = 0; i < panes.length; i++) {
 			panes[i].isReady = true;
