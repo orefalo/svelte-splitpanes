@@ -4,7 +4,7 @@
 
 <script lang="ts" strictEvents>
 	import { onMount, onDestroy, setContext, createEventDispatcher, tick, afterUpdate } from 'svelte';
-	import { writable } from 'svelte/store';
+	import { derived, writable } from 'svelte/store';
 	import type { IPane, IPaneSizingEvent, SplitContext, PaneInitFunction } from './index.js';
 	import GatheringRound from './internal/GatheringRound.svelte';
 	import { browser } from './internal/env.js';
@@ -284,8 +284,9 @@
 		verifyAndUpdatePanesOrder();
 		resetPaneSizes();
 
-		// Trigger update when the default splitter size is changed, and also on the first time before the change.
-		const unsubscriber = splitterDefaultSize.subscribe(recalcSplitterSizeSum);
+		// Trigger update when the splitpanes properties `splitterDefaultSize` and `showFirstSplitter` are changed,
+		//   and also on the first time before the change.
+		const unsubscriber = derived([splitterDefaultSize, showFirstSplitter], () => 0).subscribe(recalcSplitterSizeSum);
 
 		for (let i = 0; i < panes.length; i++) {
 			panes[i].isReady = true;
