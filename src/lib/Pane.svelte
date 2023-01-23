@@ -12,6 +12,7 @@
 		clientOnly: clientOnlyContext,
 		isHorizontal,
 		splitterDefaultSize,
+		splitterSumSize,
 		showFirstSplitter,
 		veryFirstPaneKey
 	} = getContext<SplitContext>(KEY);
@@ -58,9 +59,18 @@
 		reportGivenSizeChangeIfPaneAdded(size);
 	}
 
+	const reportSplitterSizeChangeIfPaneAdded = (splitterSize: number) => {
+		if (browser && paneAdded) {
+			clientOnlyContext.reportSplitterSizeChange(key, splitterSize);
+		}
+	};
+	$: {
+		reportSplitterSizeChangeIfPaneAdded(splitterSize);
+	}
+
 	$: dimension = $isHorizontal ? 'height' : 'width';
 
-	const calcSize = (sz: number, szPx: number) => {
+	const renderSize = (sz: number, szPx: number) => {
 		if (szPx === 0) {
 			return `${sz}%`;
 		} else if (sz === 0) {
@@ -70,7 +80,9 @@
 			return `calc(${sz}% ${signPx} ${Math.abs(szPx)}px)`;
 		}
 	};
-	$: style = `${dimension}: ${calcSize(sz, szPx)};`;
+	/** Removes the relative total splitter size and display it */
+	const displayedSize = (sz: number, szPx: number) => renderSize(sz, szPx - (sz / 100) * $splitterSumSize);
+	$: style = `${dimension}: ${displayedSize(sz, szPx)};`;
 
 	function handleMouseClick(event: MouseEvent) {
 		clientOnlyContext.onPaneClick(event, key);
@@ -98,13 +110,14 @@
 	};
 
 	if (gathering) {
-		ssrRegisterPaneSize(size);
+		ssrRegisterPaneSize(size, splitterSize);
 	} else if (browser) {
 		onMount(() => {
 			const inst: IPane = {
 				key,
 				element: element,
 				givenSize: size,
+				givenSplitterSize: splitterSize,
 				sz: () => sz,
 				setSz: (v) => {
 					sz = v;

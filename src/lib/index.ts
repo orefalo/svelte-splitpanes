@@ -18,8 +18,9 @@ export interface SplitContext {
 	veryFirstPaneKey: Readable<any>;
 	isHorizontal: Readable<boolean>;
 	splitterDefaultSize: Readable<number>;
+	splitterSumSize: Readable<number>;
 	showFirstSplitter: Readable<boolean>;
-	ssrRegisterPaneSize?: (size: number | null) => void;
+	ssrRegisterPaneSize?: (size: number | null, splitterSize: number | null) => void;
 	onPaneInit: PaneInitFunction;
 	clientOnly?: {
 		onPaneAdd: (pane: IPane) => Promise<void>;
@@ -27,6 +28,8 @@ export interface SplitContext {
 		onPaneClick: (_event: MouseEvent, key: any) => void;
 		/** Report the manual given size was changed. */
 		reportGivenSizeChange: (paneKey: unknown, newGivenSize: number | null) => void;
+		/** Report that the pane splitter size was changed. */
+		reportSplitterSizeChange: (paneKey: unknown, newSplitterSize: number | null) => void;
 	};
 }
 
@@ -55,5 +58,7 @@ export interface IPane {
 	setSz: (number: number) => void;
 	setSplitterActive: (isActive: boolean) => void;
 	givenSize: number | null;
+	/** The user given splitter size to the specific pane */
+	givenSplitterSize: number | null;
 	isReady: boolean;
 }

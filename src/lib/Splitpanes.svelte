@@ -82,12 +82,14 @@
 	// passed to the children via the context - writable to ensure proper reactivity
 	let isHorizontal = writable<boolean>(horizontal);
 	const splitterDefaultSize = writable<number>(splitterSize);
+	const splitterSumSize = writable<number>(0);
 	const showFirstSplitter = writable<boolean>(firstSplitter);
 	// tells the key of the very first pane, or undefined if not recieved yet
 	const veryFirstPaneKey = writable<any>(undefined);
 	let activeSplitterElement: HTMLElement | null = null;
 	let activeSplitterDrag: number | null = null;
 	let startingTDrag: number | null = null;
+	let ssrRegisterPaneSizeCalled = false;
 	let ssrPaneDefinedSizeSum = 0;
 	let ssrPaneUndefinedSizeCount = 0;
 
@@ -103,12 +105,19 @@
 		});
 	}
 
-	function ssrRegisterPaneSize(size: number | null) {
+	const calcPaneSplitterSize = (afterFirst: boolean, paneSplitterSize: number | null) =>
+		afterFirst || firstSplitter ? paneSplitterSize ?? splitterSize : 0;
+
+	function ssrRegisterPaneSize(size: number | null, paneSplitterSize: number | null) {
 		if (size == null) {
 			++ssrPaneUndefinedSizeCount;
 		} else {
 			ssrPaneDefinedSizeSum += size;
 		}
+
+		splitterSumSize.update((prevSum) => prevSum + calcPaneSplitterSize(ssrRegisterPaneSizeCalled, paneSplitterSize));
+
+		ssrRegisterPaneSizeCalled = true;
 	}
 
 	const onPaneInit: PaneInitFunction = (key: any) => {
@@ -147,6 +156,7 @@
 		veryFirstPaneKey,
 		isHorizontal,
 		splitterDefaultSize,
+		splitterSumSize,
 		ssrRegisterPaneSize: browser ? undefined : ssrRegisterPaneSize,
 		onPaneInit,
 		clientOnly: browser
@@ -154,7 +164,8 @@
 					onPaneAdd,
 					onPaneClick,
 					onPaneRemove,
-					reportGivenSizeChange
+					reportGivenSizeChange,
+					reportSplitterSizeChange
 			  }
 			: undefined
 	});
@@ -175,7 +186,7 @@
 		//inserts pane at proper array index
 		panes.splice(index, 0, pane);
 
-		// reindex panes
+		// reindex panes and update splitter sum
 		for (let i = 0; i < panes.length; i++) {
 			panes[i].index = i;
 		}
@@ -248,9 +259,29 @@
 		tickAndResetPaneSizes();
 	}
 
+	function reportSplitterSizeChange(paneKey: unknown | undefined, newSplitterSize: number | null) {
+		let newSum = 0;
+
+		for (let i = 0; i < panes.length; i++) {
+			const pane = panes[i];
+			if (pane.key === paneKey) {
+				pane.givenSplitterSize = newSplitterSize;
+			}
+
+			newSum += calcPaneSplitterSize(i > 0, pane.givenSplitterSize);
+		}
+
+		splitterSumSize.set(newSum);
+	}
+
 	onMount(() => {
 		verifyAndUpdatePanesOrder();
 		resetPaneSizes();
+
+		// Trigger update when the default splitter size is changed, and also on the first time before the change.
+		const unsubscriber = splitterDefaultSize.subscribe(() => {
+			reportSplitterSizeChange(undefined, null);
+		});
 
 		for (let i = 0; i < panes.length; i++) {
 			panes[i].isReady = true;
@@ -261,6 +292,9 @@
 		setTimeout(() => {
 			isAfterInitialTimeoutZero = true;
 		}, 0);
+
+		// This will tell Svelte to unsubscribe when the component is being unmounted.
+		return unsubscriber;
 	});
 
 	if (browser) {
