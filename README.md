@@ -23,7 +23,6 @@ Special thanks to all contributors and in particular [Tal500](https://github.com
 
 ## Features
 
-- Size is <4kb minified, <1kb minified+gzip
 - Support both dynamic horizontal and vertical splits
 - Support defaults, min and max sizes
 - Support multiple splits
