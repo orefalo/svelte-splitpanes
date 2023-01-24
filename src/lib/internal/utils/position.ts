@@ -1,4 +1,6 @@
-import { pxToNumber, type MousePosition, type Rect, type Sides, type SidesStart } from './sizing.js';
+import { pxToNumber, type Position, type Rect, type Sides, type SidesStart } from './sizing.js';
+
+export { Position };
 
 export const getBordersSizeOffsets: {
 	(computedStyle: CSSStyleDeclaration, calcEnds?: true): Sides;
@@ -50,22 +52,10 @@ export const getBordersSizeOffsets: {
 	return result as any;
 };
 
-export function elementPositionWithoutBorder(element: Element, computedStyle?: CSSStyleDeclaration) {
-	if (!computedStyle) {
-		computedStyle = window.getComputedStyle(element);
-	}
-
-	const rect = element.getBoundingClientRect();
-	const borderOffsets = getBordersSizeOffsets(computedStyle, false) || { left: 0, top: 0 };
-
-	return {
-		x: rect.left + borderOffsets.left,
-		y: rect.top + borderOffsets.top
-	};
-}
-
 /**
- * This function is similar to elementPositionWithoutBorder(), but also gives the width and height of the element.
+ * Computes the position and the dimensions of the element without the border.
+ *
+ * While `element.getBoundingClientRect()` gives the correct size with the borders, this method method does include the borders.
  *
  * Notice that for calculating the width and the height without the border, we must use this function instead of using
  *  `Element.clientWidth` and `Element.clientHeight`, beacuse they round the sizes of the pixels to be integer.
@@ -86,21 +76,13 @@ export function elementRectWithoutBorder(element: Element, computedStyle?: CSSSt
 	};
 }
 
-// Get the cursor position relative to some element.
-export function getRelativeDrag(
-	globalMousePosition: MousePosition,
-	element: HTMLElement,
-	computedStyle?: CSSStyleDeclaration
-): MousePosition {
-	const elementPosition = elementPositionWithoutBorder(element, computedStyle);
+/** Get the cursor position relative to some element. */
+export const positionDiff = (to: Position, from: Position) => ({
+	x: to.x - from.x,
+	y: to.y - from.y
+});
 
-	return {
-		x: globalMousePosition.x - elementPosition.x,
-		y: globalMousePosition.y - elementPosition.y
-	};
-}
-
-export function getGlobalMousePosition(event: MouseEvent | TouchEvent): MousePosition {
+export function getGlobalMousePosition(event: MouseEvent | TouchEvent): Position {
 	const eventMouse = event as MouseEvent;
 	const eventTouch = event as TouchEvent;
 
