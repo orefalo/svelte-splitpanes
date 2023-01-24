@@ -100,8 +100,8 @@
 		w = rippleBtn.offsetWidth;
 		h = rippleBtn.offsetHeight;
 		rect = rippleBtn.getBoundingClientRect();
-		locationY = rect.y;
-		locationX = rect.x;
+		locationY = rect.top;
+		locationX = rect.left;
 	});
 
 	function onTouchStart(e: TouchEvent) {

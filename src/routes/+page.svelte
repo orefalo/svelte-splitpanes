@@ -17,8 +17,8 @@
 	<li>Support pane toggle</li>
 	<li>Support edge snapping</li>
 	<li>Support programmatic resizing and two-way size binding</li>
-	<li>Support programmatic splitter add/remove</li>
-	<li>Support programmatic splitter reordering by Svelte keyed each blocks</li>
+	<li>Support programmatic panes add/remove</li>
+	<li>Support programmatic panes reordering by Svelte keyed each blocks</li>
 	<li>Support for legacy browser such as IE 11</li>
 	<li>Support for touch devices</li>
 	<li>Sveltekit & Typescript friendly</li>

@@ -35,8 +35,8 @@ Special thanks to all contributors and in particular [Tal500](https://github.com
 - Support pane toggle
 - Support edge snapping
 - Support programmatic resizing and two-way size binding
-- Support programmatic splitter add/remove
-- Support programmatic splitter reordering by Svelte keyed each blocks
+- Support programmatic panes add/remove
+- Support programmatic panes reordering by Svelte keyed each blocks
 - Support for legacy browser such as IE 11
 - Support for touch devices
 - Support for fixed splitters

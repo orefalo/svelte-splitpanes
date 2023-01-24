@@ -5,6 +5,7 @@
 	import type { IPane, PaneInitFunction, SplitContext } from './index.js';
 	import { browser } from './internal/env.js';
 	import { gatheringKey } from './internal/GatheringRound.svelte';
+	import { getDimensionName } from './internal/utils/sizing.js';
 
 	const {
 		ssrRegisterPaneSize,
@@ -68,7 +69,7 @@
 		reportSplitterSizeChangeIfPaneAdded(splitterSize);
 	}
 
-	$: dimension = $isHorizontal ? 'height' : 'width';
+	$: dimension = getDimensionName($isHorizontal);
 
 	const renderSize = (sz: number, szPx: number) => {
 		if (szPx === 0) {

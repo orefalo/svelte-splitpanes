@@ -8,13 +8,16 @@
 	import type { IPane, IPaneSizingEvent, SplitContext, PaneInitFunction } from './index.js';
 	import GatheringRound from './internal/GatheringRound.svelte';
 	import { browser } from './internal/env.js';
+	import { getDimensionName } from './internal/utils/sizing.js';
 	import {
 		type Position,
 		elementRectWithoutBorder,
 		getGlobalMousePosition,
-		positionDiff
+		positionDiff,
+		getElementRect
 	} from './internal/utils/position.js';
 	import { sumPartial, sum3Way } from './internal/utils/array.js';
+	import { calcComputedStyle } from './internal/utils/styling.js';
 
 	// TYPE DECLARATIONS ----------------
 
@@ -92,7 +95,6 @@
 	// tells the key of the very first pane, or undefined if not recieved yet
 	const veryFirstPaneKey = writable<any>(undefined);
 	let activeSplitterDrag: number | null = null;
-	let startingTDrag: number | null = null;
 	let ssrRegisterPaneSizeCalled = false;
 	let ssrPaneDefinedSizeSum = 0;
 	let ssrPaneUndefinedSizeCount = 0;
@@ -319,15 +321,16 @@
 	});
 
 	// Tells in the current DOM state if we are in RTL direction or not.
-	function isRTL(containerComputedStyle: CSSStyleDeclaration) {
+	function isRTL(containerComputedStyle?: CSSStyleDeclaration) {
 		if (rtl === 'auto') {
 			// the try catch is to support old browser, flag is preset to false
 			try {
-				return containerComputedStyle.direction === 'rtl';
+				return (containerComputedStyle ?? calcComputedStyle(container)).direction === 'rtl';
 			} catch (err) {
 				// We want application to not crush, but don't care about the message
 			}
 		}
+		// otherwise
 
 		return rtl === true;
 	}
@@ -360,12 +363,14 @@
 	const isSplitterElement = (node: Node) =>
 		node.nodeType === Node.ELEMENT_NODE && (node as HTMLElement).classList.contains('splitpanes__splitter');
 
-	function getCurrentTotalDrag(drag: Position, containerSize: number, isRTL: boolean): number {
-		let tdrag = drag[horizontal ? 'y' : 'x'];
-		if (isRTL && !horizontal) tdrag = containerSize - tdrag;
+	function getOrientedDiff(drag: Position, elementSize: number, isRTL: boolean): number {
+		let tdrag = drag[horizontal ? 'top' : 'left'];
+		if (isRTL && !horizontal) tdrag = elementSize - tdrag;
 
 		return tdrag;
 	}
+
+	const getCurrentDimensionName = () => getDimensionName(horizontal);
 
 	function onMouseDown(event: TouchEvent | MouseEvent, splitterIndex: number) {
 		isMouseDown = true;
@@ -384,18 +389,16 @@
 		}
 		if (activeSplitterNode == null) {
 			console.error("Splitpane Error: Active splitter wasn't found!");
+			return; // Don't bind move event on error
 		}
 
-		const containerComputedStyle = window.getComputedStyle(container);
 		const globalMousePosition = getGlobalMousePosition(event);
-		activeSplitterDrag = positionDiff(globalMousePosition, (activeSplitterNode as HTMLElement).getBoundingClientRect())[
-			horizontal ? 'y' : 'x'
-		];
-
-		const _isRTL = isRTL(containerComputedStyle);
-		const containerSize = elementRectWithoutBorder(container, containerComputedStyle)[horizontal ? 'height' : 'width'];
-		const relativeMousePosition = positionDiff(globalMousePosition, elementRectWithoutBorder(container));
-		startingTDrag = getCurrentTotalDrag(relativeMousePosition, containerSize, _isRTL);
+		const splitterRect = getElementRect(activeSplitterNode as HTMLElement);
+		activeSplitterDrag = getOrientedDiff(
+			positionDiff(globalMousePosition, splitterRect),
+			splitterRect[getCurrentDimensionName()],
+			isRTL()
+		);
 
 		bindEvents();
 	}
@@ -406,11 +409,15 @@
 			event.preventDefault();
 			isDragging = true;
 
-			const containerComputedStyle = window.getComputedStyle(container);
 			const globalMousePosition = getGlobalMousePosition(event);
+			const containerComputedStyle = calcComputedStyle(container);
+			const containerRectWithoutBorder = elementRectWithoutBorder(container, containerComputedStyle);
+			const containerSizeWithoutBorder: number = containerRectWithoutBorder[getCurrentDimensionName()];
+			const _isRTL = isRTL(containerComputedStyle);
 
-			const currentMouseDrag = positionDiff(globalMousePosition, elementRectWithoutBorder(container));
-			calculatePanesSize(currentMouseDrag, containerComputedStyle);
+			const currentMouseDrag = positionDiff(globalMousePosition, containerRectWithoutBorder);
+			const tdrag = getOrientedDiff(currentMouseDrag, containerSizeWithoutBorder, _isRTL);
+			calculatePanesSize(tdrag, containerSizeWithoutBorder);
 
 			dispatch('resize', prepareSizeEvent());
 		}
@@ -539,43 +546,38 @@
 	}
 
 	// Calculate the ratio by taking into account that the splitters also takes up space
-	function calcDragRatioWithSplitters(tdrag: number, containerSize: number, isRTL: boolean) {
+	function getCurrentDragPercentage(tdrag: number, containerSizeWithoutBorder: number) {
 		const {
-			start: splitterSumStart,
+			start: splittersTotalSizeBefore,
 			middle: activeSplitterSize,
-			end: splitterSumEnd
+			end: splittersTotalSizeAfter
 		} = sum3Way(panes, activeSplitter, (pane, i) => calcPaneSplitterSize(i > 0, pane.givenSplitterSize));
 
-		const activeSplitterRest = activeSplitterSize - activeSplitterDrag;
+		const totalSplitterBefore = splittersTotalSizeBefore + activeSplitterDrag;
+		const totalSplitter = splittersTotalSizeBefore + activeSplitterSize + splittersTotalSizeAfter;
 
-		const totalSplitterBefore =
-			splitterSumStart +
-			(isRTL && !horizontal ? activeSplitterRest : activeSplitterDrag) +
-			((tdrag - startingTDrag) * activeSplitterSize) / containerSize;
-		const totalSplitter = splitterSumStart + activeSplitterSize + splitterSumEnd;
+		// An explanation to the mathematical computation:
+		//
+		// Let's start with the case of only two panes. If we mark the first pane size in prec
+		//  (thinking about it as a number between 0 to 1) as `x`, we'll get that the size of the left pane in pixels will be:
+		// `x*containerSizeWithoutBorder - x*totalSplitter = x*(containerSizeWithoutBorder - totalSplitter)`
+		// Since we want that the total size in pixels before the user mouse pointer will be `tdrag`, and we need to add the
+		//  size of the splitter itself that is before the mouse pointer, we get the equation:
+		// `x*(containerSizeWithoutBorder - totalSplitter) + activeSplitterDrag = tdrag`
+		//
+		// Now in the general case when we have many panes before the splitter, mark their precentages
+		//  (again, thinking about it as a number between 0 to 1) by x1,x2,...,xn we'll get the equation:
+		// `(x1 + ... + xn)*(containerSizeWithoutBorder - totalSplitter) + totalSplitterBefore = tdrag`
+		// And solving it yeild the answer:
+		// `x1 + ... + xn = (tdrag - totalSplitterBefore) / (containerSizeWithoutBorder - totalSplitter)`
 
-		return (tdrag - totalSplitterBefore) / (containerSize - totalSplitter);
-	}
-
-	// Returns the drag percentage of the splitter relative to the 2 panes it's inbetween.
-	// if the sum of size of the 2 cells is 60%, the dragPercentage range will be 0 to 100% of this 60%.
-	function getCurrentDragPercentage(drag: Position, containerComputedStyle: CSSStyleDeclaration): number {
-		const _isRTL = isRTL(containerComputedStyle);
-
-		// In the code bellow 'size' refers to 'width' for vertical and 'height' for horizontal layout.
-		const containerSize = elementRectWithoutBorder(container, containerComputedStyle)[horizontal ? 'height' : 'width'];
-
-		const tdrag = getCurrentTotalDrag(drag, containerSize, _isRTL);
-
-		const ratio = calcDragRatioWithSplitters(tdrag, containerSize, _isRTL);
-
-		return ratio * 100;
+		return ((tdrag - totalSplitterBefore) / (containerSizeWithoutBorder - totalSplitter)) * 100;
 	}
 
 	/**
 	 * Called when slitters are moving to adjust pane sizes
 	 */
-	function calculatePanesSize(drag: Position, containerComputedStyle: CSSStyleDeclaration) {
+	function calculatePanesSize(tdrag: number, containerSizeWithoutBorder: number) {
 		let paneBeforeIndex = activeSplitter - 1;
 		let paneBefore = panes[paneBeforeIndex];
 
@@ -595,7 +597,7 @@
 
 		// Calculate drag percentage
 		const mouseDragPercentage = Math.max(
-			Math.min(getCurrentDragPercentage(drag, containerComputedStyle), maxDrag),
+			Math.min(getCurrentDragPercentage(tdrag, containerSizeWithoutBorder), maxDrag),
 			minDrag
 		);
 
@@ -778,6 +780,12 @@
 	}
 
 	function equalize() {
+		// Escape the function on the edge case that there is not even a single pane
+		if (panes.length === 0) {
+			return;
+		}
+		// otherwise
+
 		const panesCount = panes.length;
 		let leftToAllocate = 100;
 		let definedSizesCount = 0;
@@ -1064,7 +1072,6 @@
 		&.splitpanes--vertical > .splitpanes__splitter,
 		.splitpanes--vertical > .splitpanes__splitter {
 			border-left: 1px solid #eee;
-			margin-left: -1px;
 			cursor: col-resize;
 			&:before,
 			&:after {
@@ -1082,7 +1089,6 @@
 		&.splitpanes--horizontal > .splitpanes__splitter,
 		.splitpanes--horizontal > .splitpanes__splitter {
 			border-top: 1px solid #eee;
-			margin-top: -1px;
 			cursor: row-resize;
 			&:before,
 			&:after {

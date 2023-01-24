@@ -28,7 +28,7 @@
 </Splitpanes>`;
 </script>
 
-<h2>Reordering Splitters</h2>
+<h2>Reordering Panes</h2>
 
 <Button
 	on:click={() => {
@@ -45,4 +45,4 @@
 	{/each}
 </Splitpanes>
 
-<CodeArea id="reordering_splitters" {code} />
+<CodeArea id="reordering_panes" {code} />

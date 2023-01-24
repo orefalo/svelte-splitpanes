@@ -31,7 +31,7 @@
 </Splitpanes>`;
 </script>
 
-<h2>Adding splitters programmatically</h2>
+<h2>Adding and removing panes programmatically</h2>
 
 <Button
 	on:click={() => {
@@ -52,4 +52,4 @@
 		</Pane>
 	{/each}
 </Splitpanes>
-<CodeArea id="add_remove_splitter" {code} />
+<CodeArea id="add_remove_panes" {code} />
