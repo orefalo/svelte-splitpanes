@@ -3,14 +3,18 @@ import { expect, test } from '@playwright/test';
 test('add, remove all and add again works', async ({ page }) => {
 	await page.goto('/svelte-splitpanes');
 
-	const areaLocator = page.locator('text=Add Remove Splitter');
+	const areaLocator = page.locator('text=Add Remove Panes');
 	await areaLocator.click();
 
-	const addPaneLocator = page.locator(':has-text("Adding splitters programmatically")~button:has-text("Add pane")');
-	const removePaneLocator = page.locator(
-		':has-text("Adding splitters programmatically")~button:has-text("Remove pane")'
+	const addPaneLocator = page.locator(
+		':has-text("Adding and removing panes programmatically")~button:has-text("Add pane")'
 	);
-	const splitpanesLocator = page.locator(':has-text("Adding splitters programmatically")~div.splitpanes').first();
+	const removePaneLocator = page.locator(
+		':has-text("Adding and removing panes programmatically")~button:has-text("Remove pane")'
+	);
+	const splitpanesLocator = page
+		.locator(':has-text("Adding and removing panes programmatically")~div.splitpanes')
+		.first();
 	const panesLocator = splitpanesLocator.locator('.splitpanes__pane');
 
 	expect(await removePaneLocator.isEnabled()).toBe(true);
