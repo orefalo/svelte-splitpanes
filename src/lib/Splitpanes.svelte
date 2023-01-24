@@ -14,7 +14,7 @@
 		getGlobalMousePosition,
 		positionDiff
 	} from './internal/utils/position.js';
-	import { sumPartial } from './internal/utils/array.js';
+	import { sumPartial, sum3Way } from './internal/utils/array.js';
 
 	// TYPE DECLARATIONS ----------------
 
@@ -91,7 +91,6 @@
 	const showFirstSplitter = writable<boolean>(firstSplitter);
 	// tells the key of the very first pane, or undefined if not recieved yet
 	const veryFirstPaneKey = writable<any>(undefined);
-	let activeSplitterElement: HTMLElement | null = null;
 	let activeSplitterDrag: number | null = null;
 	let startingTDrag: number | null = null;
 	let ssrRegisterPaneSizeCalled = false;
@@ -387,11 +386,9 @@
 			console.error("Splitpane Error: Active splitter wasn't found!");
 		}
 
-		activeSplitterElement = activeSplitterNode as HTMLElement;
-
 		const containerComputedStyle = window.getComputedStyle(container);
 		const globalMousePosition = getGlobalMousePosition(event);
-		activeSplitterDrag = positionDiff(globalMousePosition, activeSplitterElement.getBoundingClientRect())[
+		activeSplitterDrag = positionDiff(globalMousePosition, (activeSplitterNode as HTMLElement).getBoundingClientRect())[
 			horizontal ? 'y' : 'x'
 		];
 
@@ -543,42 +540,19 @@
 
 	// Calculate the ratio by taking into account that the splitters also takes up space
 	function calcDragRatioWithSplitters(tdrag: number, containerSize: number, isRTL: boolean) {
-		// Here we want the splitter size **including the borders**.
-		// We need to use `Element.getBoundingClientRect()` and not `Element.clientWidth` and `Element.clientHeight`,
-		//  bacause the latter round the number of pixels to integer, and additionally, they don't include the borders.
-		const splitterSize = (node: Node) => (node as HTMLElement).getBoundingClientRect()[horizontal ? 'height' : 'width'];
+		const {
+			start: splitterSumStart,
+			middle: activeSplitterSize,
+			end: splitterSumEnd
+		} = sum3Way(panes, activeSplitter, (pane, i) => calcPaneSplitterSize(i > 0, pane.givenSplitterSize));
 
-		if (activeSplitterElement == null) {
-			return tdrag;
-		}
-		// otherwise
-
-		const activeSplitterSize = splitterSize(activeSplitterElement);
 		const activeSplitterRest = activeSplitterSize - activeSplitterDrag;
 
-		let splittersTotalSizeBefore = 0;
-		let currentBeforeNode = activeSplitterElement.previousSibling;
-		while (currentBeforeNode != null) {
-			if (isSplitterElement(currentBeforeNode)) {
-				splittersTotalSizeBefore += splitterSize(currentBeforeNode);
-			}
-			currentBeforeNode = currentBeforeNode.previousSibling;
-		}
-
-		let splittersTotalSizeAfter = 0;
-		let currentAfterNode = activeSplitterElement.nextSibling;
-		while (currentAfterNode != null) {
-			if (isSplitterElement(currentAfterNode)) {
-				splittersTotalSizeAfter += splitterSize(currentAfterNode);
-			}
-			currentAfterNode = currentAfterNode.nextSibling;
-		}
-
 		const totalSplitterBefore =
-			splittersTotalSizeBefore +
+			splitterSumStart +
 			(isRTL && !horizontal ? activeSplitterRest : activeSplitterDrag) +
 			((tdrag - startingTDrag) * activeSplitterSize) / containerSize;
-		const totalSplitter = splittersTotalSizeBefore + activeSplitterSize + splittersTotalSizeAfter;
+		const totalSplitter = splitterSumStart + activeSplitterSize + splitterSumEnd;
 
 		return (tdrag - totalSplitterBefore) / (containerSize - totalSplitter);
 	}
