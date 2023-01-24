@@ -13,7 +13,8 @@
 		type Position,
 		elementRectWithoutBorder,
 		getGlobalMousePosition,
-		positionDiff
+		positionDiff,
+		getElementRect
 	} from './internal/utils/position.js';
 	import { sumPartial } from './internal/utils/array.js';
 
@@ -318,7 +319,7 @@
 		node.nodeType === Node.ELEMENT_NODE && (node as HTMLElement).classList.contains('splitpanes__splitter');
 
 	function getOrientedDiff(drag: Position, elementSize: number, isRTL: boolean): number {
-		let tdrag = drag[horizontal ? 'y' : 'x'];
+		let tdrag = drag[horizontal ? 'top' : 'left'];
 		if (isRTL && !horizontal) tdrag = elementSize - tdrag;
 
 		return tdrag;
@@ -349,7 +350,7 @@
 		activeSplitterElement = activeSplitterNode as HTMLElement;
 
 		const globalMousePosition = getGlobalMousePosition(event);
-		const splitterRect = activeSplitterElement.getBoundingClientRect();
+		const splitterRect = getElementRect(activeSplitterElement);
 		activeSplitterDrag = getOrientedDiff(
 			positionDiff(globalMousePosition, splitterRect),
 			splitterRect[getCurrentDimensionName()],
@@ -509,7 +510,7 @@
 		// Here we want the splitter size **including the borders**.
 		// We need to use `Element.getBoundingClientRect()` and not `Element.clientWidth` and `Element.clientHeight`,
 		//  bacause the latter round the number of pixels to integer, and additionally, they don't include the borders.
-		const splitterSize = (node: Node) => (node as HTMLElement).getBoundingClientRect()[getCurrentDimensionName()];
+		const splitterSize = (node: Node) => getElementRect(node as HTMLElement)[getCurrentDimensionName()];
 
 		const activeSplitterSize = splitterSize(activeSplitterElement);
 
