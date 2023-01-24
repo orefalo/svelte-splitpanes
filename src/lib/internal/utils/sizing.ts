@@ -1,5 +1,4 @@
-// used to get mouse mouvements
-export interface MousePosition {
+export interface Position {
 	x: number;
 	y: number;
 }
@@ -7,11 +6,9 @@ export interface MousePosition {
 /** This is a minimal version of DOMRect for our use.
  * We don't use DOMRect constructor because the lack of legacy browsers support (e.g. IE11).
  */
-export interface Rect {
+export interface Rect extends Position {
 	width: number;
 	height: number;
-	x: number;
-	y: number;
 }
 
 export interface SidesStart {

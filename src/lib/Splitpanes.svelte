@@ -8,8 +8,12 @@
 	import type { IPane, IPaneSizingEvent, SplitContext, PaneInitFunction } from './index.js';
 	import GatheringRound from './internal/GatheringRound.svelte';
 	import { browser } from './internal/env.js';
-	import type { MousePosition } from './internal/utils/sizing.js';
-	import { elementRectWithoutBorder, getGlobalMousePosition, getRelativeDrag } from './internal/utils/position.js';
+	import {
+		type Position,
+		elementRectWithoutBorder,
+		getGlobalMousePosition,
+		positionDiff
+	} from './internal/utils/position.js';
 
 	// TYPE DECLARATIONS ----------------
 
@@ -315,7 +319,7 @@
 	const isSplitterElement = (node: Node) =>
 		node.nodeType === Node.ELEMENT_NODE && (node as HTMLElement).classList.contains('splitpanes__splitter');
 
-	function getCurrentTotalDrag(drag: MousePosition, containerSize: number, isRTL: boolean): number {
+	function getCurrentTotalDrag(drag: Position, containerSize: number, isRTL: boolean): number {
 		let tdrag = drag[horizontal ? 'y' : 'x'];
 		if (isRTL && !horizontal) tdrag = containerSize - tdrag;
 
@@ -346,13 +350,13 @@
 
 		const containerComputedStyle = window.getComputedStyle(container);
 		const globalMousePosition = getGlobalMousePosition(event);
-		activeSplitterDrag = getRelativeDrag(globalMousePosition, activeSplitterElement as HTMLElement)[
+		activeSplitterDrag = positionDiff(globalMousePosition, activeSplitterElement.getBoundingClientRect())[
 			horizontal ? 'y' : 'x'
 		];
 
 		const _isRTL = isRTL(containerComputedStyle);
 		const containerSize = elementRectWithoutBorder(container, containerComputedStyle)[horizontal ? 'height' : 'width'];
-		const relativeMousePosition = getRelativeDrag(globalMousePosition, container);
+		const relativeMousePosition = positionDiff(globalMousePosition, elementRectWithoutBorder(container));
 		startingTDrag = getCurrentTotalDrag(relativeMousePosition, containerSize, _isRTL);
 
 		bindEvents();
@@ -367,7 +371,7 @@
 			const containerComputedStyle = window.getComputedStyle(container);
 			const globalMousePosition = getGlobalMousePosition(event);
 
-			const currentMouseDrag = getRelativeDrag(globalMousePosition, container, containerComputedStyle);
+			const currentMouseDrag = positionDiff(globalMousePosition, elementRectWithoutBorder(container));
 			calculatePanesSize(currentMouseDrag, containerComputedStyle);
 
 			dispatch('resize', prepareSizeEvent());
@@ -541,7 +545,7 @@
 
 	// Returns the drag percentage of the splitter relative to the 2 panes it's inbetween.
 	// if the sum of size of the 2 cells is 60%, the dragPercentage range will be 0 to 100% of this 60%.
-	function getCurrentDragPercentage(drag: MousePosition, containerComputedStyle: CSSStyleDeclaration): number {
+	function getCurrentDragPercentage(drag: Position, containerComputedStyle: CSSStyleDeclaration): number {
 		const _isRTL = isRTL(containerComputedStyle);
 
 		// In the code bellow 'size' refers to 'width' for vertical and 'height' for horizontal layout.
@@ -557,7 +561,7 @@
 	/**
 	 * Called when slitters are moving to adjust pane sizes
 	 */
-	function calculatePanesSize(drag: MousePosition, containerComputedStyle: CSSStyleDeclaration) {
+	function calculatePanesSize(drag: Position, containerComputedStyle: CSSStyleDeclaration) {
 		const splitterIndex = activeSplitter;
 		let sums: Sums = {
 			prevPanesSize: sumPrevPanesSize(splitterIndex),
