@@ -14,6 +14,7 @@
 		getGlobalMousePosition,
 		positionDiff
 	} from './internal/utils/position.js';
+	import { sumPartial } from './internal/utils/array.js';
 
 	// TYPE DECLARATIONS ----------------
 
@@ -728,13 +729,9 @@
 		return { sums, panesToResize };
 	}
 
-	function sumPrevPanesSize(splitterIndex: number) {
-		return panes.reduce((total, pane, i) => total + (i < splitterIndex ? pane.sz() : 0), 0);
-	}
-
-	function sumNextPanesSize(splitterIndex: number) {
-		return panes.reduce((total, pane, i) => total + (i > splitterIndex + 1 ? pane.sz() : 0), 0);
-	}
+	const getSizeOfPane = (pane: IPane) => pane.sz();
+	const sumPrevPanesSize = (splitterIndex: number) => sumPartial(panes, 0, splitterIndex, getSizeOfPane);
+	const sumNextPanesSize = (splitterIndex: number) => sumPartial(panes, splitterIndex + 2, panes.length, getSizeOfPane);
 
 	// Return the previous pane from siblings which has a size (width for vert or height for horz) of more than 0.
 	function findPrevExpandedPane(splitterIndex: number): IPane | null {
