@@ -1,4 +1,5 @@
 import { pxToNumber, type Sides, type SidesStart } from './sizing.js';
+import { calcComputedStyle } from './styling.js';
 
 export type Position = SidesStart;
 
@@ -14,7 +15,7 @@ type LegacyClientRect = Pick<Readonly<DOMRect>, 'height' | 'width' | 'left' | 'r
 
 /**
  * A legacy-typed safer version of `element.getBoundingClientRect()`,
- *  that also invites minification capabilities (muliply calls can be forward to here, and it's pure)
+ *  that also invites minification capabilities (muliply calls can be forward to here, and it's pure).
  * */
 export const getElementRect = (element: HTMLElement): LegacyClientRect => /*@__PURE__*/ element.getBoundingClientRect();
 
@@ -78,7 +79,7 @@ export const getBordersSizeOffsets: {
  */
 export function elementRectWithoutBorder(element: HTMLElement, computedStyle?: CSSStyleDeclaration): Rect {
 	if (!computedStyle) {
-		computedStyle = window.getComputedStyle(element);
+		computedStyle = calcComputedStyle(element);
 	}
 
 	const rect = getElementRect(element);

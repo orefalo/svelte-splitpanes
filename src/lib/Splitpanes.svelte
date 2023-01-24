@@ -17,6 +17,7 @@
 		getElementRect
 	} from './internal/utils/position.js';
 	import { sumPartial } from './internal/utils/array.js';
+	import { calcComputedStyle } from './internal/utils/styling.js';
 
 	// TYPE DECLARATIONS ----------------
 
@@ -279,8 +280,7 @@
 		if (rtl === 'auto') {
 			// the try catch is to support old browser, flag is preset to false
 			try {
-				// TODO: Write that the `window.getComputedStyle` is a pure function here and elsewhere
-				return (containerComputedStyle ?? window.getComputedStyle(container)).direction === 'rtl';
+				return (containerComputedStyle ?? calcComputedStyle(container)).direction === 'rtl';
 			} catch (err) {
 				// We want application to not crush, but don't care about the message
 			}
@@ -367,7 +367,7 @@
 			isDragging = true;
 
 			const globalMousePosition = getGlobalMousePosition(event);
-			const containerComputedStyle = window.getComputedStyle(container);
+			const containerComputedStyle = calcComputedStyle(container);
 			const containerRectWithoutBorder = elementRectWithoutBorder(container, containerComputedStyle);
 			const containerSizeWithoutBorder: number = containerRectWithoutBorder[getCurrentDimensionName()];
 			const _isRTL = isRTL(containerComputedStyle);
