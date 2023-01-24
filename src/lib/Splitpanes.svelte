@@ -759,6 +759,12 @@
 	}
 
 	function equalize() {
+		// Escape the function on the edge case that there is not even a single pane
+		if (panes.length === 0) {
+			return;
+		}
+		// otherwise
+
 		const panesCount = panes.length;
 		let leftToAllocate = 100;
 		let definedSizesCount = 0;
