@@ -32,3 +32,5 @@ export function pxToNumber(pxString: string | undefined) {
 	const num = parseFloat(pxString.slice(0, pxString.length - 2));
 	return isNaN(num) ? undefined : num;
 }
+
+export const getDimensionName = (horizontal: boolean) => (horizontal ? 'height' : 'width');
