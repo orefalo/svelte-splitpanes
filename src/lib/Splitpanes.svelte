@@ -115,26 +115,21 @@
 			$veryFirstPaneKey = key;
 		}
 
+		const eventForward =
+			<Event>(cb: (e: Event, index: number) => void, includingFirst = false) =>
+			(e: Event) => {
+				const index = indexOfPane(key);
+				if (includingFirst || index > 0) {
+					cb(e, index);
+				}
+			};
+
 		return {
 			clientOnly: browser
 				? {
-						onSplitterDown: (e) => {
-							const index = indexOfPane(key);
-							if (index > 0) {
-								onMouseDown(e, index - 1);
-							}
-						},
-						onSplitterClick: (e) => {
-							const index = indexOfPane(key);
-							if (index > 0) {
-								onSplitterClick(e, index);
-							}
-						},
-						onSplitterDblClick: (e) => {
-							if (dblClickSplitter) {
-								onSplitterDblClick(e, indexOfPane(key));
-							}
-						}
+						onSplitterDown: eventForward(onMouseDown),
+						onSplitterClick: eventForward(onSplitterClick),
+						onSplitterDblClick: eventForward(onSplitterDblClick, true)
 				  }
 				: undefined,
 			undefinedPaneInitSize: browser ? 0 : (100 - ssrPaneDefinedSizeSum) / ssrPaneUndefinedSizeCount
@@ -331,8 +326,7 @@
 		isMouseDown = true;
 		activeSplitter = splitterIndex;
 
-		const paneIndex = activeSplitter + 1;
-		const pane = panes[paneIndex];
+		const pane = panes[activeSplitter];
 		pane.setSplitterActive(true);
 		const paneElement = pane.element;
 
@@ -385,8 +379,7 @@
 		}
 		isMouseDown = false;
 
-		const paneIndex = activeSplitter + 1;
-		const pane = panes[paneIndex];
+		const pane = panes[activeSplitter];
 		pane.setSplitterActive(false);
 
 		// Keep dragging flag until click event is finished (click happens immediately after mouseup)
@@ -563,21 +556,22 @@
 	 * Called when slitters are moving to adjust pane sizes
 	 */
 	function calculatePanesSize(drag: Position, containerComputedStyle: CSSStyleDeclaration) {
-		const splitterIndex = activeSplitter;
+		let paneBeforeIndex = activeSplitter - 1;
+		let paneBefore = panes[paneBeforeIndex];
+
+		let paneAfterIndex = activeSplitter;
+		let paneAfter = panes[paneAfterIndex];
+
 		let sums: Sums = {
-			prevPanesSize: sumPrevPanesSize(splitterIndex),
-			nextPanesSize: sumNextPanesSize(splitterIndex),
+			prevPanesSize: sumPrevPanesSize(paneBeforeIndex),
+			nextPanesSize: sumNextPanesSize(paneAfterIndex),
 			prevReachedMinPanes: 0,
 			nextReachedMinPanes: 0
 		};
 
+		// If not pushing other panes, panes to resize are right before and right after splitter.
 		const minDrag = 0 + (pushOtherPanes ? 0 : sums.prevPanesSize);
 		const maxDrag = 100 - (pushOtherPanes ? 0 : sums.nextPanesSize);
-
-		// If not pushing other panes, panes to resize are right before and right after splitter.
-		let panesToResize = [splitterIndex, splitterIndex + 1];
-		let paneBefore = panes[panesToResize[0]] || null;
-		let paneAfter = panes[panesToResize[1]] || null;
 
 		// Calculate drag percentage
 		const mouseDragPercentage = Math.max(
@@ -627,12 +621,12 @@
 					//		setAllPaneDimensions();
 					return; // Prevent other calculation.
 				}
-				({ sums, panesToResize } = vars);
-				paneBefore = panes[panesToResize[0]] || null;
-				paneAfter = panes[panesToResize[1]] || null;
+				({ sums, paneBeforeIndex, paneAfterIndex } = vars);
+				paneBefore = panes[paneBeforeIndex];
+				paneAfter = panes[paneAfterIndex];
 			}
 
-			if (paneBefore !== null) {
+			if (paneBeforeIndex != null) {
 				paneBefore.setSz(
 					Math.min(
 						Math.max(dragPercentage - sums.prevPanesSize - sums.prevReachedMinPanes, paneBefore.min()),
@@ -640,7 +634,7 @@
 					)
 				);
 			}
-			if (paneAfter !== null) {
+			if (paneAfterIndex != null) {
 				paneAfter.setSz(
 					Math.min(
 						Math.max(100 - dragPercentage - sums.nextPanesSize - sums.nextReachedMinPanes, paneAfter.min()),
@@ -652,27 +646,28 @@
 	}
 
 	function doPushOtherPanes(sums: Sums, dragPercentage: number) {
-		const splitterIndex = activeSplitter;
-		const panesToResize: Array<number> = [splitterIndex, splitterIndex + 1];
+		const splitterIndex = activeSplitter - 1;
+		let paneBeforeIndex = splitterIndex;
+		let paneAfterIndex = splitterIndex + 1;
 		// Pushing Down.
 		// Going smaller than the current pane min size: take the previous expanded pane.
-		if (dragPercentage < sums.prevPanesSize + panes[panesToResize[0]].min()) {
-			panesToResize[0] = findPrevExpandedPane(splitterIndex)?.index;
+		if (dragPercentage < sums.prevPanesSize + panes[paneBeforeIndex].min()) {
+			paneBeforeIndex = findPrevExpandedPane(splitterIndex)?.index;
 
 			sums.prevReachedMinPanes = 0;
 			// If pushing a n-2 or less pane, from splitter, then make sure all in between is at min size.
-			if (panesToResize[0] < splitterIndex) {
+			if (paneBeforeIndex < splitterIndex) {
 				for (let i = 0; i < panes.length; i++) {
 					const pane = panes[i];
-					if (i > panesToResize[0] && i <= splitterIndex) {
+					if (i > paneBeforeIndex && i <= splitterIndex) {
 						pane.setSz(pane.min());
 						sums.prevReachedMinPanes += pane.min();
 					}
 				}
 			}
-			sums.prevPanesSize = sumPrevPanesSize(panesToResize[0]);
+			sums.prevPanesSize = sumPrevPanesSize(paneBeforeIndex);
 			// If nothing else to push down, cancel dragging.
-			if (panesToResize[0] === undefined) {
+			if (paneBeforeIndex == null) {
 				sums.prevReachedMinPanes = 0;
 				panes[0].setSz(panes[0].min());
 				for (let i = 0; i < panes.length; i++) {
@@ -683,7 +678,7 @@
 					}
 				}
 
-				panes[panesToResize[1]].setSz(
+				panes[paneAfterIndex].setSz(
 					100 - sums.prevReachedMinPanes - panes[0].min() - sums.prevPanesSize - sums.nextPanesSize
 				);
 				return null;
@@ -691,24 +686,24 @@
 		}
 		// Pushing Up.
 		// Pushing up beyond min size is reached: take the next expanded pane.
-		if (dragPercentage > 100 - sums.nextPanesSize - panes[panesToResize[1]].min()) {
-			panesToResize[1] = findNextExpandedPane(splitterIndex)?.index;
+		if (dragPercentage > 100 - sums.nextPanesSize - panes[paneAfterIndex].min()) {
+			paneAfterIndex = findNextExpandedPane(splitterIndex)?.index;
 			sums.nextReachedMinPanes = 0;
 			// If pushing a n+2 or more pane, from splitter, then make sure all in between is at min size.
-			if (panesToResize[1] > splitterIndex + 1) {
+			if (paneAfterIndex > splitterIndex + 1) {
 				for (let i = 0; i < panes.length; i++) {
 					const pane = panes[i];
-					if (i > splitterIndex && i < panesToResize[1]) {
+					if (i > splitterIndex && i < paneAfterIndex) {
 						pane.setSz(pane.min());
 						sums.nextReachedMinPanes += pane.min();
 					}
 				}
 			}
-			sums.nextPanesSize = sumNextPanesSize(panesToResize[1] - 1);
+			sums.nextPanesSize = sumNextPanesSize(paneAfterIndex);
 			// If nothing else to push up, cancel dragging.
 
 			const panesCount = panes.length;
-			if (panesToResize[1] === undefined) {
+			if (paneAfterIndex == null) {
 				sums.nextReachedMinPanes = 0;
 				panes[panesCount - 1].setSz(panes[panesCount - 1].min());
 
@@ -720,30 +715,26 @@
 					}
 				}
 
-				panes[panesToResize[0]].setSz(
+				panes[paneBeforeIndex].setSz(
 					100 - sums.prevPanesSize - sums.nextReachedMinPanes - panes[panesCount - 1].min() - sums.nextPanesSize
 				);
 				return null;
 			}
 		}
-		return { sums, panesToResize };
+		return { sums, paneBeforeIndex, paneAfterIndex };
 	}
 
 	const getSizeOfPane = (pane: IPane) => pane.sz();
 	const sumPrevPanesSize = (splitterIndex: number) => sumPartial(panes, 0, splitterIndex, getSizeOfPane);
-	const sumNextPanesSize = (splitterIndex: number) => sumPartial(panes, splitterIndex + 2, panes.length, getSizeOfPane);
+	const sumNextPanesSize = (splitterIndex: number) => sumPartial(panes, splitterIndex + 1, panes.length, getSizeOfPane);
 
 	// Return the previous pane from siblings which has a size (width for vert or height for horz) of more than 0.
-	function findPrevExpandedPane(splitterIndex: number): IPane | null {
-		const pane = [...panes].reverse().find((p) => p.index < splitterIndex && p.sz() > p.min());
-		return pane || null;
-	}
+	const findPrevExpandedPane = (splitterIndex: number): IPane | undefined =>
+		[...panes].reverse().find((p) => p.index < splitterIndex && p.sz() > p.min());
 
 	// Return the next pane from siblings which has a size (width for vert or height for horz) of more than 0.
-	function findNextExpandedPane(splitterIndex: number): IPane | null {
-		const pane = panes.find((p) => p.index > splitterIndex + 1 && p.sz() > p.min());
-		return pane || null;
-	}
+	const findNextExpandedPane = (splitterIndex: number): IPane | undefined =>
+		panes.find((p) => p.index > splitterIndex + 1 && p.sz() > p.min());
 
 	async function tickAndResetPaneSizes() {
 		isAwaitingPaneReset = true;
