@@ -82,5 +82,8 @@
 		"cz-customizable": {
 			"config": ".cz-config.cjs"
 		}
+	},
+	"dependencies": {
+		"esm-env-robust": "^0.0.3"
 	}
 }
