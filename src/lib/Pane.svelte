@@ -5,7 +5,7 @@
 	import type { IPane, PaneInitFunction, SplitContext } from './index.js';
 	import { browser } from './internal/env.js';
 	import { gatheringKey } from './internal/GatheringRound.svelte';
-	import { getDimensionName } from './internal/utils/sizing.js';
+	import { getDimensionName, type SizeUnit } from './internal/utils/sizing.js';
 
 	const {
 		ssrRegisterPaneSize,
@@ -21,12 +21,13 @@
 	// PROPS
 
 	export let size: number | null = null;
-	export let sizePx = 0;
+	export let sizeUnit: SizeUnit = '%';
 	export let minSize = 0;
-	export let minSizePx = 0;
+	export let minSizeUnit: SizeUnit = '%';
 	export let maxSize = 100;
-	export let maxSizePx = 0;
+	export let maxSizeUnit: SizeUnit = '%';
 	export let snapSize = 0;
+	export let snapSizeUnit: SizeUnit = '%';
 	/** The size of the splitter in pixels. */
 	export let splitterSize: number | null = null;
 	// css class
@@ -43,8 +44,7 @@
 	) as ReturnType<PaneInitFunction>;
 
 	let element: HTMLElement;
-	let sz: number = size ?? undefinedPaneInitSize;
-	let szPx: number = sizePx;
+	let sz: number = size ?? (sizeUnit === '%' ? undefinedPaneInitSize : 0);
 	let isSplitterActive = false;
 	let paneAdded = false;
 
@@ -81,9 +81,10 @@
 			return `calc(${sz}% ${signPx} ${Math.abs(szPx)}px)`;
 		}
 	};
-	/** Removes the relative total splitter size and display it */
-	const displayedSize = (sz: number, szPx: number) => renderSize(sz, szPx - (sz / 100) * $splitterSumSize);
-	$: style = `${dimension}: ${displayedSize(sz, szPx)};`;
+	/** Removes the relative total splitter size (only on % unit) and render it */
+	const displayedSize = (sz: number, sizeUnit: SizeUnit) =>
+		sizeUnit === '%' ? renderSize(sz, (-sz / 100) * $splitterSumSize) : renderSize(0, sz);
+	$: style = `${dimension}: ${displayedSize(sz, sizeUnit)};`;
 
 	function handleMouseClick(event: MouseEvent) {
 		clientOnlyContext.onPaneClick(event, key);
