@@ -2,10 +2,11 @@
 	import { getContext, onMount, onDestroy, hasContext } from 'svelte';
 	import type { Action } from 'svelte/action';
 	import { KEY } from './Splitpanes.svelte';
-	import type { IPane, PaneInitFunction, SplitContext } from './index.js';
+	import type { ClientCallbacks, IPane, PaneInitFunction, SplitContext } from './index.js';
 	import { browser } from './internal/env.js';
 	import { gatheringKey } from './internal/GatheringRound.svelte';
 	import { getDimensionName, type SizeUnit } from './internal/utils/sizing.js';
+	import { carefullCallbackObject } from './internal/utils/functions';
 
 	const {
 		ssrRegisterPaneSize,
@@ -39,34 +40,53 @@
 	const key = {};
 
 	const gathering = !browser && hasContext(gatheringKey);
-	const { clientOnly: clientOnlyInitResult, undefinedPaneInitSize } = (
-		!gathering ? onPaneInit(key) : {}
-	) as ReturnType<PaneInitFunction>;
+	const { undefinedPaneInitSize } = (!gathering ? onPaneInit(key) : {}) as ReturnType<PaneInitFunction>;
 
 	let element: HTMLElement;
 	let sz: number = size ?? (sizeUnit === '%' ? undefinedPaneInitSize : 0);
 	let isSplitterActive = false;
-	let paneAdded = false;
+
+	// CALLBACKS
+
+	let clientCallbacks: ClientCallbacks | undefined = undefined;
+
+	/**
+	 * This is an object of callbacks that are safe to be called on browser even when the object `clientCallbacks`
+	 *  isn't initialized yet (i.e. before `onPaneAdd()`).
+	 *
+	 * In the case of the object isn't initialized yet, calling this callbacks will do nothing.
+	 */
+	const carefullClientCallbacks = browser
+		? carefullCallbackObject(() => clientCallbacks, [
+				'onSplitterDown',
+				'onSplitterClick',
+				'onSplitterDblClick',
+				'onPaneClick',
+				'reportGivenSizeChange',
+				'reportSplitterSizeChange'
+		  ] as const)
+		: undefined;
 
 	// REACTIVE
 
-	const reportGivenSizeChangeIfPaneAdded = (size: number) => {
-		if (browser && paneAdded && size != null && size != sz) {
-			clientOnlyContext.reportGivenSizeChange(key, size);
+	const reportGivenSizeChangeSafe = (size: number) => {
+		// We put an extra check of `size != sz` here and not in the reactive statement, since we don't want a change
+		//  of `sz` to trigger report.
+		if (size != sz) {
+			carefullClientCallbacks.reportGivenSizeChange(size);
 		}
 	};
 	$: {
 		// TODO: When the user min/max size gets changed, need to calc the size again
-		reportGivenSizeChangeIfPaneAdded(size);
+		if (browser && size != null) {
+			reportGivenSizeChangeSafe(size);
+		}
 	}
 
-	const reportSplitterSizeChangeIfPaneAdded = (splitterSize: number) => {
-		if (browser && paneAdded) {
-			clientOnlyContext.reportSplitterSizeChange(key, splitterSize);
-		}
-	};
 	$: {
-		reportSplitterSizeChangeIfPaneAdded(splitterSize);
+		if (browser) {
+			carefullClientCallbacks.reportSplitterSizeChange(splitterSize);
+		}
 	}
 
 	$: dimension = getDimensionName($isHorizontal);
@@ -86,17 +106,13 @@
 		sizeUnit === '%' ? renderSize(sz, (-sz / 100) * $splitterSumSize) : renderSize(0, sz);
 	$: style = `${dimension}: ${displayedSize(sz, sizeUnit)};`;
 
-	function handleMouseClick(event: MouseEvent) {
-		clientOnlyContext.onPaneClick(event, key);
-	}
-
 	const splitterAction: Action = (splitter: HTMLElement) => {
-		splitter.onmousedown = clientOnlyInitResult.onSplitterDown;
+		splitter.onmousedown = carefullClientCallbacks.onSplitterDown;
 		if ('ontouchstart' in window) {
-			splitter.ontouchstart = clientOnlyInitResult.onSplitterDown;
+			splitter.ontouchstart = carefullClientCallbacks.onSplitterDown;
 		}
-		splitter.onclick = clientOnlyInitResult.onSplitterClick;
-		splitter.ondblclick = clientOnlyInitResult.onSplitterDblClick;
+		splitter.onclick = carefullClientCallbacks.onSplitterClick;
+		splitter.ondblclick = carefullClientCallbacks.onSplitterDblClick;
 
 		// This what should be done on destruction, but commented out since the DOM element gets destroyed anyway
 		// return {
@@ -135,8 +151,8 @@
 				},
 				isReady: false
 			};
-			clientOnlyContext.onPaneAdd(inst);
-			paneAdded = true;
+
+			clientCallbacks = clientOnlyContext.onPaneAdd(inst);
 		});
 
 		onDestroy(() => {
@@ -160,7 +176,12 @@
 	{/if}
 
 	<!-- Pane -->
-	<div class={`splitpanes__pane ${clazz || ''}`} bind:this={element} on:click={handleMouseClick} {style}>
+	<div
+		class={`splitpanes__pane ${clazz || ''}`}
+		bind:this={element}
+		on:click={carefullClientCallbacks.onPaneClick}
+		{style}
+	>
 		<slot />
 	</div>
 {/if}

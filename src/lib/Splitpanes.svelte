@@ -5,7 +5,7 @@
 <script lang="ts" strictEvents>
 	import { onMount, onDestroy, setContext, createEventDispatcher, tick, afterUpdate } from 'svelte';
 	import { derived, writable } from 'svelte/store';
-	import type { IPane, IPaneSizingEvent, SplitContext, PaneInitFunction } from './index.js';
+	import type { IPane, IPaneSizingEvent, SplitContext, PaneInitFunction, ClientCallbacks } from './index.js';
 	import GatheringRound from './internal/GatheringRound.svelte';
 	import { browser } from './internal/env.js';
 	import { getDimensionName } from './internal/utils/sizing.js';
@@ -105,12 +105,6 @@
 	$: $splitterDefaultSize = splitterSize;
 	$: $showFirstSplitter = firstSplitter;
 
-	function indexOfPane(key: any) {
-		return panes.findIndex((pane: IPane) => {
-			return pane.key === key;
-		});
-	}
-
 	const calcPaneSplitterSize = (afterFirst: boolean, paneSplitterSize: number | null) =>
 		afterFirst || firstSplitter ? paneSplitterSize ?? splitterSize : 0;
 
@@ -131,23 +125,7 @@
 			$veryFirstPaneKey = key;
 		}
 
-		const eventForward =
-			<Event>(cb: (e: Event, index: number) => void, includingFirst = false) =>
-			(e: Event) => {
-				const index = indexOfPane(key);
-				if (includingFirst || index > 0) {
-					cb(e, index);
-				}
-			};
-
 		return {
-			clientOnly: browser
-				? {
-						onSplitterDown: eventForward(onMouseDown),
-						onSplitterClick: eventForward(onSplitterClick),
-						onSplitterDblClick: eventForward(onSplitterDblClick, true)
-				  }
-				: undefined,
 			undefinedPaneInitSize: browser ? 0 : (100 - ssrPaneDefinedSizeSum) / ssrPaneUndefinedSizeCount
 		};
 	};
@@ -163,15 +141,12 @@
 		clientOnly: browser
 			? {
 					onPaneAdd,
-					onPaneClick,
-					onPaneRemove,
-					reportGivenSizeChange,
-					reportSplitterSizeChange
+					onPaneRemove
 			  }
 			: undefined
 	});
 
-	async function onPaneAdd(pane: IPane) {
+	function onPaneAdd(pane: IPane): ClientCallbacks {
 		// 1. Add pane to array at the same index it was inserted in the <splitpanes> tag.
 		let index = -1;
 		Array.from(pane.element.parentNode.children).some((el: Element) => {
@@ -196,16 +171,35 @@
 			recalcSplitterSizeSum();
 
 			// 2. tick and resize the panes.
-			await tickAndResetPaneSizes();
+			tickAndResetPaneSizes().then(() => {
+				// 3. Set the pane as ready
+				pane.isReady = true;
 
-			// 3. Set the pane as ready
-			pane.isReady = true;
-
-			// 4. Fire `pane-add` event.
-			dispatch('pane-add', {
-				index,
-				panes: prepareSizeEvent()
+				// 4. Fire `pane-add` event.
+				dispatch('pane-add', {
+					index,
+					panes: prepareSizeEvent()
+				});
 			});
+		}
+
+		if (browser) {
+			const paneForward =
+				<T>(cb: (value: T, pane: IPane) => void, includingFirst = true) =>
+				(value: T) => {
+					if (includingFirst || pane.index > 0) {
+						cb(value, pane);
+					}
+				};
+
+			return {
+				onSplitterDown: paneForward(onMouseDown, false),
+				onSplitterClick: paneForward(onSplitterClick, false),
+				onSplitterDblClick: paneForward(onSplitterDblClick),
+				onPaneClick: paneForward(onPaneClick),
+				reportGivenSizeChange: paneForward(reportGivenSizeChange),
+				reportSplitterSizeChange: paneForward(reportSplitterSizeChange)
+			};
 		}
 	}
 
@@ -242,44 +236,32 @@
 	}
 
 	// called by sub-panes
-	function onPaneClick(_event: MouseEvent, key: any) {
-		dispatch(
-			'pane-click',
-			panes.find((pane) => pane.key === key)
-		);
+	function onPaneClick(_event: MouseEvent, pane: IPane) {
+		dispatch('pane-click', pane);
 	}
 
-	function reportGivenSizeChange(paneKey: unknown, newGivenSize: number | null) {
-		let paneIndex: number;
-		for (let i = 0; i < panes.length; i++) {
-			if (panes[i].key === paneKey) {
-				paneIndex = i;
-				break;
-			}
-		}
-
-		const pane = panes[paneIndex];
+	function reportGivenSizeChange(newGivenSize: number | null, pane: IPane) {
 		pane.setSz(newGivenSize);
 
 		tickAndResetPaneSizes();
 	}
 
-	function reportSplitterSizeChange(paneKey: unknown | undefined, newSplitterSize: number | null) {
+	function reportSplitterSizeChange(newSplitterSize: number | null, pane: IPane | undefined) {
 		let newSum = 0;
 
 		for (let i = 0; i < panes.length; i++) {
-			const pane = panes[i];
-			if (pane.key === paneKey) {
-				pane.givenSplitterSize = newSplitterSize;
+			const currentPane = panes[i];
+			if (currentPane === pane) {
+				currentPane.givenSplitterSize = newSplitterSize;
 			}
 
-			newSum += calcPaneSplitterSize(i > 0, pane.givenSplitterSize);
+			newSum += calcPaneSplitterSize(i > 0, currentPane.givenSplitterSize);
 		}
 
 		splitterSumSize.set(newSum);
 	}
 
-	const recalcSplitterSizeSum = () => reportSplitterSizeChange(undefined, null);
+	const recalcSplitterSizeSum = () => reportSplitterSizeChange(null, undefined);
 
 	onMount(() => {
 		verifyAndUpdatePanesOrder();
@@ -372,13 +354,12 @@
 
 	const getCurrentDimensionName = () => getDimensionName(horizontal);
 
-	function onMouseDown(event: TouchEvent | MouseEvent, splitterIndex: number) {
+	function onMouseDown(event: TouchEvent | MouseEvent, splitterPane: IPane) {
 		isMouseDown = true;
-		activeSplitter = splitterIndex;
+		activeSplitter = splitterPane.index;
 
-		const pane = panes[activeSplitter];
-		pane.setSplitterActive(true);
-		const paneElement = pane.element;
+		splitterPane.setSplitterActive(true);
+		const paneElement = splitterPane.element;
 
 		let activeSplitterNode: Node = paneElement;
 		while (activeSplitterNode != null) {
@@ -441,16 +422,18 @@
 	}
 
 	// If touch device, detect double tap manually (2 taps separated by less than 500ms).
-	function onSplitterClick(event: MouseEvent, splitterIndex: number) {
+	function onSplitterClick(event: MouseEvent, splitterPane: IPane) {
 		if ('ontouchstart' in window) {
 			event.preventDefault();
+
+			const splitterIndex = splitterPane.index;
 
 			// Detect splitter double taps if the option is on.
 			if (dblClickSplitter) {
 				if (clickedSplitter === splitterIndex) {
 					if (timeoutId) clearTimeout(timeoutId);
 					timeoutId = null;
-					onSplitterDblClick(event, splitterIndex);
+					onSplitterDblClick(event, splitterPane);
 					clickedSplitter = -1; // Reset for the next tap check.
 				} else {
 					clickedSplitter = splitterIndex;
@@ -461,12 +444,12 @@
 			}
 		}
 
-		if (!isDragging) dispatch('splitter-click', panes[splitterIndex]);
+		if (!isDragging) dispatch('splitter-click', splitterPane);
 	}
 
 	// On splitter dbl click or dbl tap maximize this pane.
-	function onSplitterDblClick(_event: MouseEvent, splitterIndex: number) {
-		const splitterPane = panes[splitterIndex];
+	function onSplitterDblClick(_event: MouseEvent, splitterPane: IPane) {
+		const splitterIndex = splitterPane.index;
 
 		let totalMinSizes = 0;
 		for (let i = 0; i < panes.length; i++) {
@@ -483,7 +466,7 @@
 			// put everything to the minimum, and in the splitterPane put the rest of the size
 			for (let i = 0; i < panes.length; i++) {
 				const pane = panes[i];
-				if (i !== splitterIndex) {
+				if (pane !== splitterPane) {
 					pane.setSz(pane.min());
 				} else {
 					pane.setSz(100 - totalMinSizes);

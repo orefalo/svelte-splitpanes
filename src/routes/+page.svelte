@@ -1,11 +1,16 @@
+<script lang="ts">
+	import { base } from '$app/paths';
+</script>
+
 <h1>Welcome to Svelte-Splitpane demo!</h1>
 
 <a href="https://github.com/orefalo/svelte-splitpanes">https://github.com/orefalo/svelte-splitpanes</a>
 
 <h2>Features</h2>
 
+<a href="{base}/minified-size"><img alt="Minified Size" src="{base}/minified-size-badge.svg" /></a>
+
 <ul>
-	<li>Size is less than 4 kb</li>
 	<li>Support both dynamic horizontal and vertical splits</li>
 	<li>Support defaults, min and max sizes</li>
 	<li>Support multiple splits</li>
