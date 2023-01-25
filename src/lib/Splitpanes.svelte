@@ -165,23 +165,21 @@
 			});
 		}
 
-		if (browser) {
-			const paneForward =
-				<T>(cb: (value: T, pane: IPane) => void, includingFirst = true) =>
-				(value: T) => {
-					if (includingFirst || pane.index > 0) {
-						cb(value, pane);
-					}
-				};
-
-			return {
-				onSplitterDown: paneForward(onMouseDown, false),
-				onSplitterClick: paneForward(onSplitterClick, false),
-				onSplitterDblClick: paneForward(onSplitterDblClick),
-				onPaneClick: paneForward(onPaneClick),
-				reportGivenSizeChange: paneForward(reportGivenSizeChange)
+		const paneForward =
+			<T>(cb: (value: T, pane: IPane) => void, includingFirst = true) =>
+			(value: T) => {
+				if (includingFirst || pane.index > 0) {
+					cb(value, pane);
+				}
 			};
-		}
+
+		return {
+			onSplitterDown: paneForward(onMouseDown, false),
+			onSplitterClick: paneForward(onSplitterClick, false),
+			onSplitterDblClick: paneForward(onSplitterDblClick),
+			onPaneClick: paneForward(onPaneClick),
+			reportGivenSizeChange: paneForward(reportGivenSizeChange)
+		};
 	}
 
 	async function onPaneRemove(key: any) {
