@@ -1,1 +1,1 @@
-import{p}from"../../../chunks/_page-8f0fe832.js";export{p as prerender};
+import{p}from"../../../chunks/_page-a30e1545.js";export{p as prerender};
