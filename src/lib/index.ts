@@ -4,13 +4,17 @@ export { default as Splitpanes } from './Splitpanes.svelte';
 export { default as Pane } from './Pane.svelte';
 
 export type PaneInitFunction = (key: any) => {
-	clientOnly?: {
-		onSplitterDown: (_event: TouchEvent | MouseEvent) => void;
-		onSplitterClick: (event: MouseEvent) => void;
-		onSplitterDblClick: (_event: MouseEvent) => void;
-	};
 	undefinedPaneInitSize: number;
 };
+
+export interface ClientCallbacks {
+	onSplitterDown: (_event: TouchEvent | MouseEvent) => void;
+	onSplitterClick: (event: MouseEvent) => void;
+	onSplitterDblClick: (_event: MouseEvent) => void;
+	onPaneClick: (_event: MouseEvent) => void;
+	/** Report the manual given size was changed. */
+	reportGivenSizeChange: (newGivenSize: number | null) => void;
+}
 
 // methods passed from splitpane to children panes
 export interface SplitContext {
@@ -21,11 +25,8 @@ export interface SplitContext {
 	ssrRegisterPaneSize?: (size: number | null) => void;
 	onPaneInit: PaneInitFunction;
 	clientOnly?: {
-		onPaneAdd: (pane: IPane) => Promise<void>;
+		onPaneAdd: (pane: IPane) => ClientCallbacks;
 		onPaneRemove: (key: any) => Promise<void>;
-		onPaneClick: (_event: MouseEvent, key: any) => void;
-		/** Report the manual given size was changed. */
-		reportGivenSizeChange: (paneKey: unknown, newGivenSize: number | null) => void;
 	};
 }
 
