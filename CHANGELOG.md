@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.7.12](https://github.com/orefalo/svelte-splitpanes/compare/v0.7.11...v0.7.12) (2023-01-25)
+
+
+### Bug Fixes
+
+* avoid equalizing on the edge case that there is not even a single pane ([0adb387](https://github.com/orefalo/svelte-splitpanes/commit/0adb38772490d61e84af4eb893af33c1483c4319))
+* cleaner dragging calculation, and omit the buggy `margin-left: -1px;` from the splitter ([b453d74](https://github.com/orefalo/svelte-splitpanes/commit/b453d74ee7aff3c4812a3de2f2bbd2372ad597f3))
+
 ## [0.7.11](https://github.com/orefalo/svelte-splitpanes/compare/v0.7.10...v0.7.11) (2023-01-09)
 
 
