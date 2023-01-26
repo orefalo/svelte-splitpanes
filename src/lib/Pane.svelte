@@ -69,27 +69,6 @@
 
 	$: style = `${dimension}: ${sz}%;`;
 
-	const splitterAction: Action = (splitter: HTMLElement) => {
-		splitter.onmousedown = carefullClientCallbacks('onSplitterDown');
-		if ('ontouchstart' in window) {
-			splitter.ontouchstart = carefullClientCallbacks('onSplitterDown');
-		}
-		splitter.onclick = carefullClientCallbacks('onSplitterClick');
-		splitter.ondblclick = carefullClientCallbacks('onSplitterDblClick');
-
-		// This what should be done on destruction, but commented out since the DOM element gets destroyed anyway
-		// return {
-		// 	destroy: () => {
-		// 		splitter.onmousedown = null;
-		// 		if ('ontouchstart' in window) {
-		// 			splitter.ontouchstart = null;
-		// 		}
-		// 		splitter.onclick = null;
-		// 		splitter.ondblclick = null;
-		// 	},
-		// };
-	};
-
 	if (gathering) {
 		ssrRegisterPaneSize(size);
 	} else if (browser) {
@@ -130,7 +109,13 @@
 	* https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/
 -->
 	{#if $veryFirstPaneKey !== key || $showFirstSplitter}
-		<div use:splitterAction class="splitpanes__splitter {isSplitterActive ? 'splitpanes__splitter__active' : ''}" />
+		<div
+			class="splitpanes__splitter {isSplitterActive ? 'splitpanes__splitter__active' : ''}"
+			on:mousedown={carefullClientCallbacks('onSplitterDown')}
+			on:touchstart={carefullClientCallbacks('onSplitterDown')}
+			on:click={carefullClientCallbacks('onSplitterClick')}
+			on:dblclick={carefullClientCallbacks('onSplitterDblClick')}
+		/>
 	{/if}
 
 	<!-- Pane -->
