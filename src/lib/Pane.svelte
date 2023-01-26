@@ -6,7 +6,7 @@
 	import { browser } from './internal/env.js';
 	import { gatheringKey } from './internal/GatheringRound.svelte';
 	import { getDimensionName } from './internal/utils/sizing.js';
-	import { carefullCallbackObject } from './internal/utils/functions';
+	import { carefullCallbackSource } from './internal/utils/functions';
 
 	const {
 		ssrRegisterPaneSize,
@@ -48,15 +48,7 @@
 	 *
 	 * In the case of the object isn't initialized yet, calling this callbacks will do nothing.
 	 */
-	const carefullClientCallbacks = browser
-		? carefullCallbackObject(() => clientCallbacks, [
-				'onSplitterDown',
-				'onSplitterClick',
-				'onSplitterDblClick',
-				'onPaneClick',
-				'reportGivenSizeChange'
-		  ] as const)
-		: undefined;
+	const carefullClientCallbacks = browser ? carefullCallbackSource(() => clientCallbacks) : undefined;
 
 	// REACTIVE
 
@@ -64,7 +56,7 @@
 		// We put an extra check of `size != sz` here and not in the reactive statement, since we don't want a change
 		//  of `sz` to trigger report.
 		if (size != sz) {
-			carefullClientCallbacks.reportGivenSizeChange(size);
+			carefullClientCallbacks('reportGivenSizeChange')(size);
 		}
 	};
 	$: {
@@ -78,12 +70,12 @@
 	$: style = `${dimension}: ${sz}%;`;
 
 	const splitterAction: Action = (splitter: HTMLElement) => {
-		splitter.onmousedown = carefullClientCallbacks.onSplitterDown;
+		splitter.onmousedown = carefullClientCallbacks('onSplitterDown');
 		if ('ontouchstart' in window) {
-			splitter.ontouchstart = carefullClientCallbacks.onSplitterDown;
+			splitter.ontouchstart = carefullClientCallbacks('onSplitterDown');
 		}
-		splitter.onclick = carefullClientCallbacks.onSplitterClick;
-		splitter.ondblclick = carefullClientCallbacks.onSplitterDblClick;
+		splitter.onclick = carefullClientCallbacks('onSplitterClick');
+		splitter.ondblclick = carefullClientCallbacks('onSplitterDblClick');
 
 		// This what should be done on destruction, but commented out since the DOM element gets destroyed anyway
 		// return {
@@ -145,7 +137,7 @@
 	<div
 		class={`splitpanes__pane ${clazz || ''}`}
 		bind:this={element}
-		on:click={carefullClientCallbacks.onPaneClick}
+		on:click={carefullClientCallbacks('onPaneClick')}
 		{style}
 	>
 		<slot />

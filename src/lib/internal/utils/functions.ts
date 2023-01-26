@@ -19,14 +19,11 @@ const carefullCallbackGenerator =
 	};
 
 /**
- * This is an object of callbacks that are safe to be called even if `callbackObjectGetter()` is nullish on that moment.
+ * This is an source of callbacks that are safe to be called even if the object of `callbackObjectGetter()` is nullish on that moment.
  *
  * In the case of the object is nullish, invoking the callbacks will do nothing.
  */
-export const carefullCallbackObject = <CallbacksObject extends object, Callbacks extends keyof CallbacksObject>(
-	callbackObjectGetter: () => CallbacksObject | undefined,
-	callbackNames: ReadonlyArray<Callbacks>
-) =>
-	Object.fromEntries(
-		callbackNames.map((cb) => [cb, carefullCallbackGenerator(callbackObjectGetter, cb)])
-	) as unknown as Pick<CallbacksObject, Callbacks>;
+export const carefullCallbackSource = <CallbacksObject extends object>(
+	callbackObjectGetter: () => CallbacksObject | undefined
+): (<Callback extends keyof CallbacksObject>(callbackName: Callback) => CallbacksObject[Callback]) =>
+	carefullCallbackGenerator.bind(null, callbackObjectGetter);
