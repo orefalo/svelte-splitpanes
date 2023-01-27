@@ -128,7 +128,7 @@
 	};
 
 	if (gathering) {
-		ssrRegisterPaneSize(size, splitterSize);
+		ssrRegisterPaneSize(size, splitterSize, sizeUnit);
 	} else if (browser) {
 		onMount(() => {
 			const inst: IPane = {

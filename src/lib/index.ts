@@ -1,7 +1,10 @@
 import type { Readable } from 'svelte/store';
+import type { SizeUnit } from './internal/utils/sizing';
 
 export { default as Splitpanes } from './Splitpanes.svelte';
 export { default as Pane } from './Pane.svelte';
+
+export type { SizeUnit };
 
 export type PaneInitFunction = (key: any) => {
 	undefinedPaneInitSize: number;
@@ -26,7 +29,7 @@ export interface SplitContext {
 	splitterDefaultSize: Readable<number>;
 	splitterSumSize: Readable<number>;
 	showFirstSplitter: Readable<boolean>;
-	ssrRegisterPaneSize?: (size: number | null, splitterSize: number | null) => void;
+	ssrRegisterPaneSize?: (size: number | null, splitterSize: number | null, SizeUnit: SizeUnit) => void;
 	onPaneInit: PaneInitFunction;
 	clientOnly?: {
 		onPaneAdd: (pane: IPane) => ClientCallbacks;

@@ -8,7 +8,7 @@
 	import type { IPane, IPaneSizingEvent, SplitContext, PaneInitFunction, ClientCallbacks } from './index.js';
 	import GatheringRound from './internal/GatheringRound.svelte';
 	import { browser } from './internal/env.js';
-	import { getDimensionName } from './internal/utils/sizing.js';
+	import { getDimensionName, type SizeUnit } from './internal/utils/sizing.js';
 	import {
 		type Position,
 		elementRectWithoutBorder,
@@ -108,10 +108,10 @@
 	const calcPaneSplitterSize = (afterFirst: boolean, paneSplitterSize: number | null) =>
 		afterFirst || firstSplitter ? paneSplitterSize ?? splitterSize : 0;
 
-	function ssrRegisterPaneSize(size: number | null, paneSplitterSize: number | null) {
+	function ssrRegisterPaneSize(size: number | null, paneSplitterSize: number | null, unit: SizeUnit) {
 		if (size == null) {
 			++ssrPaneUndefinedSizeCount;
-		} else {
+		} else if (unit === '%') {
 			ssrPaneDefinedSizeSum += size;
 		}
 
