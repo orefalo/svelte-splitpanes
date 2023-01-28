@@ -16,7 +16,7 @@
 		positionDiff,
 		getElementRect
 	} from './internal/utils/position.js';
-	import { sumPartial } from './internal/utils/array.js';
+	import { forEachPartial, sumPartial } from './internal/utils/array.js';
 	import { calcComputedStyle } from './internal/utils/styling.js';
 
 	// TYPE DECLARATIONS ----------------
@@ -469,19 +469,13 @@
 		isMouseDown = false;
 	}
 
-	function prepareSizeEvent(): IPaneSizingEvent[] {
-		const arr: Array<IPaneSizingEvent> = new Array(panes.length);
-		for (let i = 0; i < panes.length; i++) {
-			const pane = panes[i];
-			arr[i] = {
-				min: pane.min(),
-				max: pane.max(),
-				size: pane.sz(),
-				snap: pane.snap()
-			};
-		}
-		return arr;
-	}
+	const prepareSizeEvent = (): IPaneSizingEvent[] =>
+		panes.map((pane) => ({
+			min: pane.min(),
+			max: pane.max(),
+			size: pane.sz(),
+			snap: pane.snap()
+		}));
 
 	/**
 	 * Returns the drag percentage of the splitter relative to the 2 parts it's inbetween, meaning the ratio between
@@ -639,26 +633,20 @@
 			sums.prevReachedMinPanes = 0;
 			// If pushing a n-2 or less pane, from splitter, then make sure all in between is at min size.
 			if (paneBeforeIndex < splitterIndex) {
-				for (let i = 0; i < panes.length; i++) {
-					const pane = panes[i];
-					if (i > paneBeforeIndex && i <= splitterIndex) {
-						pane.setSz(pane.min());
-						sums.prevReachedMinPanes += pane.min();
-					}
-				}
+				forEachPartial(panes, paneBeforeIndex + 1, splitterIndex + 1, (pane) => {
+					pane.setSz(pane.min());
+					sums.prevReachedMinPanes += pane.min();
+				});
 			}
 			sums.prevPanesSize = sumPrevPanesSize(paneBeforeIndex);
 			// If nothing else to push down, cancel dragging.
 			if (paneBeforeIndex == null) {
 				sums.prevReachedMinPanes = 0;
 				panes[0].setSz(panes[0].min());
-				for (let i = 0; i < panes.length; i++) {
-					const pane = panes[i];
-					if (i > 0 && i <= splitterIndex) {
-						pane.setSz(pane.min());
-						sums.prevReachedMinPanes += pane.min();
-					}
-				}
+				forEachPartial(panes, 1, splitterIndex + 1, (pane) => {
+					pane.setSz(pane.min());
+					sums.prevReachedMinPanes += pane.min();
+				});
 
 				panes[paneAfterIndex].setSz(
 					100 - sums.prevReachedMinPanes - panes[0].min() - sums.prevPanesSize - sums.nextPanesSize
@@ -673,13 +661,10 @@
 			sums.nextReachedMinPanes = 0;
 			// If pushing a n+2 or more pane, from splitter, then make sure all in between is at min size.
 			if (paneAfterIndex > splitterIndex + 1) {
-				for (let i = 0; i < panes.length; i++) {
-					const pane = panes[i];
-					if (i > splitterIndex && i < paneAfterIndex) {
-						pane.setSz(pane.min());
-						sums.nextReachedMinPanes += pane.min();
-					}
-				}
+				forEachPartial(panes, splitterIndex + 1, paneAfterIndex, (pane) => {
+					pane.setSz(pane.min());
+					sums.nextReachedMinPanes += pane.min();
+				});
 			}
 			sums.nextPanesSize = sumNextPanesSize(paneAfterIndex);
 			// If nothing else to push up, cancel dragging.
@@ -689,13 +674,10 @@
 				sums.nextReachedMinPanes = 0;
 				panes[panesCount - 1].setSz(panes[panesCount - 1].min());
 
-				for (let i = 0; i < panes.length; i++) {
-					const pane = panes[i];
-					if (i < panesCount - 1 && i >= splitterIndex + 1) {
-						pane.setSz(pane.min());
-						sums.nextReachedMinPanes += pane.min();
-					}
-				}
+				forEachPartial(panes, splitterIndex + 1, panesCount - 1, (pane) => {
+					pane.setSz(pane.min());
+					sums.nextReachedMinPanes += pane.min();
+				});
 
 				panes[paneBeforeIndex].setSz(
 					100 - sums.prevPanesSize - sums.nextReachedMinPanes - panes[panesCount - 1].min() - sums.nextPanesSize
