@@ -6,7 +6,7 @@
 	import { browser } from './internal/env.js';
 	import { gatheringKey } from './internal/GatheringRound.svelte';
 	import { getDimensionName, type SizeUnit } from './internal/utils/sizing.js';
-	import { carefullCallbackObject } from './internal/utils/functions';
+	import { carefullCallbackSource } from './internal/utils/functions';
 
 	const {
 		ssrRegisterPaneSize,
@@ -56,16 +56,7 @@
 	 *
 	 * In the case of the object isn't initialized yet, calling this callbacks will do nothing.
 	 */
-	const carefullClientCallbacks = browser
-		? carefullCallbackObject(() => clientCallbacks, [
-				'onSplitterDown',
-				'onSplitterClick',
-				'onSplitterDblClick',
-				'onPaneClick',
-				'reportGivenSizeChange',
-				'reportSplitterSizeChange'
-		  ] as const)
-		: undefined;
+	const carefullClientCallbacks = browser ? carefullCallbackSource(() => clientCallbacks) : undefined;
 
 	// REACTIVE
 
@@ -73,7 +64,7 @@
 		// We put an extra check of `size != sz` here and not in the reactive statement, since we don't want a change
 		//  of `sz` to trigger report.
 		if (size != sz) {
-			carefullClientCallbacks.reportGivenSizeChange(size);
+			carefullClientCallbacks('reportGivenSizeChange')(size);
 		}
 	};
 	$: {
@@ -85,7 +76,7 @@
 
 	$: {
 		if (browser) {
-			carefullClientCallbacks.reportSplitterSizeChange(splitterSize);
+			carefullClientCallbacks('reportSplitterSizeChange')(splitterSize);
 		}
 	}
 
@@ -105,27 +96,6 @@
 	const displayedSize = (sz: number, sizeUnit: SizeUnit) =>
 		sizeUnit === '%' ? renderSize(sz, (-sz / 100) * $splitterSumSize) : renderSize(0, sz);
 	$: style = `${dimension}: ${displayedSize(sz, sizeUnit)};`;
-
-	const splitterAction: Action = (splitter: HTMLElement) => {
-		splitter.onmousedown = carefullClientCallbacks.onSplitterDown;
-		if ('ontouchstart' in window) {
-			splitter.ontouchstart = carefullClientCallbacks.onSplitterDown;
-		}
-		splitter.onclick = carefullClientCallbacks.onSplitterClick;
-		splitter.ondblclick = carefullClientCallbacks.onSplitterDblClick;
-
-		// This what should be done on destruction, but commented out since the DOM element gets destroyed anyway
-		// return {
-		// 	destroy: () => {
-		// 		splitter.onmousedown = null;
-		// 		if ('ontouchstart' in window) {
-		// 			splitter.ontouchstart = null;
-		// 		}
-		// 		splitter.onclick = null;
-		// 		splitter.ondblclick = null;
-		// 	},
-		// };
-	};
 
 	if (gathering) {
 		ssrRegisterPaneSize(size, splitterSize, sizeUnit);
@@ -169,9 +139,12 @@
 -->
 	{#if $veryFirstPaneKey !== key || $showFirstSplitter}
 		<div
-			use:splitterAction
 			class="splitpanes__splitter {isSplitterActive ? 'splitpanes__splitter__active' : ''}"
 			style="{dimension}: {splitterSize ?? $splitterDefaultSize}px;"
+			on:mousedown={carefullClientCallbacks('onSplitterDown')}
+			on:touchstart={carefullClientCallbacks('onSplitterDown')}
+			on:click={carefullClientCallbacks('onSplitterClick')}
+			on:dblclick={carefullClientCallbacks('onSplitterDblClick')}
 		/>
 	{/if}
 
@@ -179,7 +152,7 @@
 	<div
 		class={`splitpanes__pane ${clazz || ''}`}
 		bind:this={element}
-		on:click={carefullClientCallbacks.onPaneClick}
+		on:click={carefullClientCallbacks('onPaneClick')}
 		{style}
 	>
 		<slot />
