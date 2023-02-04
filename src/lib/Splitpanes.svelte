@@ -60,7 +60,7 @@
 		/**
 		 * Fires when splitpanes is ready.
 		 */
-		ready: CustomEvent<never>;
+		ready: CustomEvent<void>;
 
 		/**
 		 * Fires while resizing (on mousemove/touchmove).
