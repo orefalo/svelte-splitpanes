@@ -21,6 +21,22 @@
 
 	// TYPE DECLARATIONS ----------------
 
+	// type events
+	interface $$Events {
+		'pane-click': CustomEvent<IPane>;
+		'splitter-click': CustomEvent<IPane>;
+		'pane-maximize': CustomEvent<IPane>;
+		ready: CustomEvent<never>;
+		resize: CustomEvent<IPaneSizingEvent[]>;
+		resized: CustomEvent<IPaneSizingEvent[]>;
+		'pane-add': CustomEvent<{ index: number; panes: IPaneSizingEvent[] }>;
+		'pane-remove': CustomEvent<{ removed: IPane; panes: IPaneSizingEvent[] }>;
+	}
+
+	type Dispatcher<TEvents extends Record<keyof TEvents, CustomEvent<any>>> = {
+		[Property in keyof TEvents]: TEvents[Property]['detail'];
+	};
+
 	// used to size panes
 	interface Sums {
 		prevPanesSize: number;
@@ -53,16 +69,8 @@
 	// VARIABLES ----------------
 
 	//used to bubble events up
-	const dispatch = createEventDispatcher<{
-		'pane-add': { index: number; panes: IPaneSizingEvent[] };
-		'pane-remove': { removed: IPane; panes: IPaneSizingEvent[] };
-		'pane-click': IPane;
-		ready: void;
-		resize: IPaneSizingEvent[];
-		resized: IPaneSizingEvent[];
-		'splitter-click': IPane;
-		'pane-maximize': IPane;
-	}>();
+	const dispatch = createEventDispatcher<Dispatcher<$$Events>>();
+
 	// the splitpane component
 	let container: HTMLElement;
 	// true when component is ready, prevents emitting console warnings on hot reloading.
