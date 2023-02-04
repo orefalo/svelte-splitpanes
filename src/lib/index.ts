@@ -30,14 +30,28 @@ export interface SplitContext {
 	};
 }
 
+/**
+ * Pane sizing details on an event.
+ */
 export interface IPaneSizingEvent {
-	// minimum size in %
+	/**
+	 * Minimum size in %.
+	 */
 	min: number;
-	// maximum size in %
+
+	/**
+	 * Maximum size in %.
+	 */
 	max: number;
-	// pane size in %
+
+	/**
+	 * Pane size in %.
+	 */
 	size: number;
-	// snap size in %
+
+	/**
+	 * Snap size in %.
+	 */
 	snap: number;
 }
 
