@@ -75,6 +75,9 @@
 		"badge-maker": "^3.3.1",
 		"serve": "14.2.0"
 	},
+	"peerDependencies": {
+		"svelte": "^3.54.0"
+	},
 	"config": {
 		"cz-customizable": {
 			"config": ".cz-config.cjs"
