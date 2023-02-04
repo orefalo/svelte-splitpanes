@@ -53,9 +53,13 @@ jobs:
         with:
           release-type: node
 
+      - name: Rename the output package dir
+        if: ${{ steps.release.outputs.release_created }}
+        run: mv package svelte-splitpanes
+
       - name: ZIP&TGZ the package
         if: ${{ steps.release.outputs.release_created }}
-        run: mv package svelte-splitpanes && zip package svelte-splitpanes/* -r && tar -czvf package.tgz svelte-splitpanes/*
+        run: zip package svelte-splitpanes/* -r && tar -czvf package.tgz svelte-splitpanes/*
 
       - name: Upload ZIP
         uses: actions/upload-release-asset@v1
@@ -78,3 +82,9 @@ jobs:
           asset_path: package.tgz
           asset_name: svelte-splitpanes-${{ steps.release.outputs.version }}.tgz
           asset_content_type: application/gzip
+
+      - name: NPM Publish
+        if: ${{ steps.release.outputs.release_created }}
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: cd svelte-splitpanes && npm config set _authToken=$NPM_TOKEN && npm publish
