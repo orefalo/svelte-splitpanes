@@ -33,10 +33,6 @@
 		'pane-remove': CustomEvent<{ removed: IPane; panes: IPaneSizingEvent[] }>;
 	}
 
-	type Dispatcher<TEvents extends Record<keyof TEvents, CustomEvent<any>>> = {
-		[Property in keyof TEvents]: TEvents[Property]['detail'];
-	};
-
 	// used to size panes
 	interface Sums {
 		prevPanesSize: number;
@@ -69,7 +65,7 @@
 	// VARIABLES ----------------
 
 	//used to bubble events up
-	const dispatch = createEventDispatcher<Dispatcher<$$Events>>();
+	const dispatch = createEventDispatcher();
 
 	// the splitpane component
 	let container: HTMLElement;
