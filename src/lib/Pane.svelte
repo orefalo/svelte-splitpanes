@@ -1,6 +1,5 @@
 <script lang="ts" strictEvents>
 	import { getContext, onMount, onDestroy, hasContext } from 'svelte';
-	import type { Action } from 'svelte/action';
 	import { KEY } from './Splitpanes.svelte';
 	import type { ClientCallbacks, IPane, PaneInitFunction, SplitContext } from './index.js';
 	import { browser } from './internal/env.js';
