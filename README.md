@@ -65,10 +65,10 @@ $ npm i svelte-splitpanes
 	import { Pane, Splitpanes } from 'svelte-splitpanes';
 </script>
 
-<Splitpanes class="default-theme" style="height: 400px">
+<Splitpanes style="height: 400px">
 	<Pane minSize={20}>1<br /><em class="specs">I have a min width of 20%</em></Pane>
 	<Pane>
-		<Splitpanes class="default-theme" horizontal={true}>
+		<Splitpanes horizontal={true}>
 			<Pane minSize={15}>2<br /><em class="specs">I have a min height of 15%</em></Pane>
 			<Pane>3</Pane>
 			<Pane>4</Pane>
@@ -82,16 +82,16 @@ $ npm i svelte-splitpanes
 
 Here is the list of properties that apply to `<Splitpanes>`
 
-| Parameter name   | Type            | Default                     | Comments                                                                                                     |
-| ---------------- | --------------- | --------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| horizontal       | boolean         | false (Vertical by default) | The orientation of the split panes.                                                                          |
-| pushOtherPanes   | boolean         | true                        | Whether a splitter should push the next splitter when dragging.                                              |
-| dblClickSplitter | boolean         | true                        | Double click on splitter to maximize the next pane                                                           |
-| rtl              | boolean\|"auto" | "auto"                      | Supports Right to left, by default will auto detect                                                          |
-| firstSplitter    | boolean         | false                       | Displays the first splitter when set to true. This allows maximizing the first pane on splitter double click |
-| id               | string          | undefined                   | Provide an optional id attribute to the component for styling/other reasons                                  |
-| theme            | string          | 'default-theme'             | Used to styles the splitters using a different css class                                                     |
-| class            | string          | undefined                   | Any additional css classes to be added to the component                                                      |
+| Parameter name   | Type            | Default                     | Comments                                                                                                                                                               |
+| ---------------- | --------------- | --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| horizontal       | boolean         | false (Vertical by default) | The orientation of the split panes.                                                                                                                                    |
+| pushOtherPanes   | boolean         | true                        | Whether a splitter should push the next splitter when dragging.                                                                                                        |
+| dblClickSplitter | boolean         | true                        | Double click on splitter to maximize the next pane                                                                                                                     |
+| rtl              | boolean\|"auto" | "auto"                      | Supports Right to left, by default will auto detect                                                                                                                    |
+| firstSplitter    | boolean         | false                       | Displays the first splitter when set to true. This allows maximizing the first pane on splitter double click                                                           |
+| id               | string          | undefined                   | Provide an optional id attribute to the component for styling/other reasons                                                                                            |
+| theme            | string          | 'default-theme'             | Used to styles the splitters using a different css class, if different then the default value 'default-theme'. see the styling examples in the demo site for more info |
+| class            | string          | undefined                   | Any additional css classes to be added to the component                                                                                                                |
 
 Properties that apply to `<Pane>`
 

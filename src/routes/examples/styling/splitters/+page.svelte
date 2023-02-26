@@ -108,7 +108,6 @@
     .splitpanes--vertical > .splitpanes__splitter {
         width: 7px;
         border-left: 1px solid #eee;
-        margin-left: -1px;
         cursor: col-resize;
         &:before,
         &:after {
@@ -127,7 +126,6 @@
     .splitpanes--horizontal > .splitpanes__splitter {
         height: 7px;
         border-top: 1px solid #eee;
-        margin-top: -1px;
         cursor: row-resize;
         &:before,
         &:after {
@@ -150,8 +148,10 @@
 
 <p>
 	Styling splitters is fully customizable using CSS (or SCSS), the `theme` property is used to select the proper styling
-	class and apply it to the SpliPanes component.<br />
-	The default style is called `default-theme`, its SCSS definition can be found below:
+	class and apply it to the Splitpanes component.<br />
+	The default style is called `default-theme`, its SCSS definition can be found below (<b>warning</b>: This is for
+	reference only! If you decide to copy this CSS code, you must rename the ".default-theme" specifier to something else,
+	so it wouldn't conflict the library theme CSS definition):
 </p>
 
 <CodeArea id="styling_splitters" code={theme} />
