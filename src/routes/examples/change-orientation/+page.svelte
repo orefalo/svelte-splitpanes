@@ -23,7 +23,7 @@
 		firstSplitter = !firstSplitter;
 	}}>{firstSplitter ? 'Hide first splitter' : 'Show first Splitter'}</Button
 >
-<Splitpanes class="default-theme" style="height: 400px" {firstSplitter} {horizontal}>
+<Splitpanes style="height: 400px" {firstSplitter} {horizontal}>
 	{#each { length: 3 } as _, i}
 		<Pane minSize={5}>
 			<span>{i + 1}</span>
@@ -50,7 +50,7 @@
 		firstSplitter = !firstSplitter;
 	}}>{firstSplitter ? 'Hide first splitter' : 'Show first Splitter'}</Button
 >
-<Splitpanes class="default-theme" style="height: 400px" {firstSplitter} {horizontal}>
+<Splitpanes style="height: 400px" {firstSplitter} {horizontal}>
 	{#each { length: 3 } as _, i}
 		<Pane minSize={5}>
 			<span>{i + 1}</span>

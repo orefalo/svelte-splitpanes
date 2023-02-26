@@ -6,7 +6,7 @@
 <script>
 	import { Pane, Splitpanes } from 'svelte-splitpanes'
 <\/script>
-<Splitpanes class="default-theme" style="height: 400px">
+<Splitpanes style="height: 400px">
     {#each { length: 8 } as _, i}
         <Pane minSize={5}>
             <span>{i + 1}</span>
@@ -17,7 +17,7 @@
 
 <h2>Lots of splitters & push other panes - all panes have a min width of 5%</h2>
 
-<Splitpanes class="default-theme" style="height: 400px">
+<Splitpanes style="height: 400px">
 	{#each { length: 8 } as _, i}
 		<Pane minSize={5}>
 			<span>{i + 1}</span>

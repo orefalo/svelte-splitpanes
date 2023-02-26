@@ -19,7 +19,7 @@
 	}}>Switch</Button
 >
 
-<Splitpanes class="default-theme" style="height: 400px">
+<Splitpanes style="height: 400px">
 	{#each ordered as val (val)}
 		<Pane minSize={10}>
 			<span style:color={val.color}>{val.color}</span>
@@ -37,7 +37,7 @@
 		ordered[1] = temp;
 	}}>Switch</Button
 >
-<Splitpanes class="default-theme" style="height: 400px">
+<Splitpanes style="height: 400px">
 	{#each ordered as val (val)}
 		<Pane minSize={10}>
 			<span style:color={val.color}>{val.color}</span>

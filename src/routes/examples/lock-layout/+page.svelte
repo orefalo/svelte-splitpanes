@@ -6,7 +6,7 @@
 <script>
 	import { Pane, Splitpanes } from 'svelte-splitpanes'
 <\/script>
-<Splitpanes class="default-theme" horizontal style="height: 400px" pushOtherPanes={false}>
+<Splitpanes horizontal style="height: 400px" pushOtherPanes={false}>
     <Pane>
         <span>1</span>
     </Pane>
@@ -31,7 +31,7 @@
 
 <h2>Locking layout by prevent pushing other panes</h2>
 
-<Splitpanes class="default-theme" horizontal style="height: 400px" pushOtherPanes={false}>
+<Splitpanes horizontal style="height: 400px" pushOtherPanes={false}>
 	<Pane>
 		<span>1</span>
 	</Pane>

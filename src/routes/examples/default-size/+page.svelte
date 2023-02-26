@@ -6,7 +6,7 @@
 <script>
 	import { Pane, Splitpanes } from 'svelte-splitpanes'
 <\/script>	
-<Splitpanes class="default-theme" horizontal style="height: 400px">
+<Splitpanes horizontal style="height: 400px">
     <Pane size={65}>
         <span>1</span>
     </Pane>
@@ -29,7 +29,7 @@
 	><br /> Note that setting a default value is different than setting a min or max value.
 </p>
 
-<Splitpanes class="default-theme" horizontal style="height: 400px">
+<Splitpanes horizontal style="height: 400px">
 	<Pane size={65}>
 		<span>1</span>
 	</Pane>

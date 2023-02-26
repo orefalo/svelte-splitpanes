@@ -20,7 +20,7 @@ function onClick() {
 }
 <\/script>
 <Button on:click={onClick}>{visible ? 'Hide' : 'Show'}</Button>
-<Splitpanes class="default-theme" style="height: 400px">
+<Splitpanes style="height: 400px">
     <Pane>
         <span>1</span>
     </Pane>
@@ -38,7 +38,7 @@ function onClick() {
 <h2>Toggle a pane on/off</h2>
 
 <Button on:click={onClick}>{visible ? 'Hide' : 'Show'}</Button>
-<Splitpanes class="default-theme" style="height: 400px">
+<Splitpanes style="height: 400px">
 	<Pane>
 		<span>1</span>
 	</Pane>

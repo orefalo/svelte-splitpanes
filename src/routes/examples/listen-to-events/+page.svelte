@@ -22,7 +22,6 @@
 	}
 <\/script>
 <Splitpanes
-	class="default-theme"
 	style="height: 400px"
 	on:ready={handleMessage}
 	on:resize={handleMessage}
@@ -72,7 +71,6 @@
 </ul>
 
 <Splitpanes
-	class="default-theme"
 	style="height: 400px"
 	on:ready={handleMessage}
 	on:resize={handleMessage}

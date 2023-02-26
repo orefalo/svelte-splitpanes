@@ -6,7 +6,7 @@
 <script>
 	import { Pane, Splitpanes } from 'svelte-splitpanes'
 <\/script>
-<Splitpanes class="default-theme" horizontal={true} style="height: 400px">
+<Splitpanes horizontal={true} style="height: 400px">
 	<Pane minSize={20} maxSize={70}>
 		<span
 			>1
@@ -34,7 +34,7 @@
 	If you want to disable the 'double click splitter to maximize' behavior, you can add this attribute: dblClickSplitter={false}.
 </p>
 
-<Splitpanes class="default-theme" horizontal={true} style="height: 400px">
+<Splitpanes horizontal={true} style="height: 400px">
 	<Pane minSize={20} maxSize={70}>
 		<span
 			>1

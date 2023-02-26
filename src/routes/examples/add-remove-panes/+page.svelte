@@ -22,7 +22,7 @@
 	}}>- REMOVE PANE</Button
 >
 
-<Splitpanes class="default-theme" style="height: 400px">
+<Splitpanes style="height: 400px">
 	{#each { length: panesNumber } as _, i}
 		<Pane minSize={10}>
 			<span>{i + 1}</span>
@@ -45,7 +45,7 @@
 	}}>- REMOVE PANE</Button
 >
 
-<Splitpanes class="default-theme" style="height: 400px">
+<Splitpanes style="height: 400px">
 	{#each { length: panesNumber } as _, i}
 		<Pane minSize={10}>
 			<span>{i + 1}</span>

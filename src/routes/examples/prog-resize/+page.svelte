@@ -14,7 +14,7 @@
 <\/script>
 
 <RangeSlider float bind:values={value} min={0} step={0.01} max={100} />
-<Splitpanes class="default-theme" style="height: 400px">
+<Splitpanes style="height: 400px">
 	<Pane bind:size={value[0]}>
 		<span>{Math.round(value[0])}%</span>
 	</Pane>
@@ -37,7 +37,7 @@
 	</p>
 
 	<RangeSlider float bind:values={value} min={0} step={0.01} max={100} />
-	<Splitpanes class="default-theme" style="height: 400px">
+	<Splitpanes style="height: 400px">
 		<Pane bind:size={value[0]}>
 			<span>{Math.round(value[0])}%</span>
 		</Pane>
