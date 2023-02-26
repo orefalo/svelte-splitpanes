@@ -21,3 +21,9 @@ export function forEachPartial<T>(
 		callback(arr[i], i);
 	}
 }
+
+export const sum3Way = <T>(arr: T[], split: number, valueFunction: (element: T, index: number) => number) => ({
+	start: sumPartial(arr, 0, split, valueFunction),
+	middle: valueFunction(arr[split], split),
+	end: sumPartial(arr, split + 1, arr.length, valueFunction)
+});

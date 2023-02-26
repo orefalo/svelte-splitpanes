@@ -4,11 +4,11 @@
 
 <script lang="ts" strictEvents>
 	import { onMount, onDestroy, setContext, createEventDispatcher, tick, afterUpdate } from 'svelte';
-	import { writable } from 'svelte/store';
+	import { derived, writable } from 'svelte/store';
 	import type { IPane, IPaneSizingEvent, SplitContext, PaneInitFunction, ClientCallbacks } from './index.js';
 	import GatheringRound from './internal/GatheringRound.svelte';
 	import { browser } from './internal/env.js';
-	import { getDimensionName } from './internal/utils/sizing.js';
+	import { getDimensionName, type SizeUnit } from './internal/utils/sizing.js';
 	import {
 		type Position,
 		elementRectWithoutBorder,
@@ -16,7 +16,7 @@
 		positionDiff,
 		getElementRect
 	} from './internal/utils/position.js';
-	import { forEachPartial, sumPartial } from './internal/utils/array.js';
+	import { forEachPartial, sumPartial, sum3Way } from './internal/utils/array.js';
 	import { calcComputedStyle } from './internal/utils/styling.js';
 
 	// TYPE DECLARATIONS ----------------
@@ -126,6 +126,10 @@
 	export let dblClickSplitter = true;
 	// true if RTL
 	export let rtl: boolean | 'auto' = 'auto';
+	/** The size of the splitter in pixels.
+	 *
+	 * Can be override in the pane props by the user. */
+	export let splitterSize = 7;
 	// true to display the first splitter
 	export let firstSplitter = false;
 	// css style
@@ -163,25 +167,35 @@
 	let panes = new Array<IPane>();
 	// passed to the children via the context - writable to ensure proper reactivity
 	let isHorizontal = writable<boolean>(horizontal);
+	const splitterDefaultSize = writable<number>(splitterSize);
+	const splitterSumSize = writable<number>(0);
 	const showFirstSplitter = writable<boolean>(firstSplitter);
 	// tells the key of the very first pane, or undefined if not recieved yet
 	const veryFirstPaneKey = writable<any>(undefined);
-	let activeSplitterElement: HTMLElement | null = null;
 	let activeSplitterDrag: number | null = null;
+	let ssrRegisterPaneSizeCalled = false;
 	let ssrPaneDefinedSizeSum = 0;
 	let ssrPaneUndefinedSizeCount = 0;
 
 	// REACTIVE ----------------
 
 	$: $isHorizontal = horizontal;
+	$: $splitterDefaultSize = splitterSize;
 	$: $showFirstSplitter = firstSplitter;
 
-	function ssrRegisterPaneSize(size: number | null) {
+	const calcPaneSplitterSize = (afterFirst: boolean, paneSplitterSize: number | null) =>
+		afterFirst || firstSplitter ? paneSplitterSize ?? splitterSize : 0;
+
+	function ssrRegisterPaneSize(size: number | null, paneSplitterSize: number | null, unit: SizeUnit) {
 		if (size == null) {
 			++ssrPaneUndefinedSizeCount;
-		} else {
+		} else if (unit === '%') {
 			ssrPaneDefinedSizeSum += size;
 		}
+
+		splitterSumSize.update((prevSum) => prevSum + calcPaneSplitterSize(ssrRegisterPaneSizeCalled, paneSplitterSize));
+
+		ssrRegisterPaneSizeCalled = true;
 	}
 
 	const onPaneInit: PaneInitFunction = (key: any) => {
@@ -198,6 +212,8 @@
 		showFirstSplitter,
 		veryFirstPaneKey,
 		isHorizontal,
+		splitterDefaultSize,
+		splitterSumSize,
 		ssrRegisterPaneSize: browser ? undefined : ssrRegisterPaneSize,
 		onPaneInit,
 		clientOnly: browser
@@ -224,12 +240,14 @@
 		//inserts pane at proper array index
 		panes.splice(index, 0, pane);
 
-		// reindex panes
+		// reindex panes and update splitter sum
 		for (let i = 0; i < panes.length; i++) {
 			panes[i].index = i;
 		}
 
 		if (isReady) {
+			recalcSplitterSizeSum();
+
 			// 2. tick and resize the panes.
 			tickAndResetPaneSizes().then(() => {
 				// 3. Set the pane as ready
@@ -256,7 +274,8 @@
 			onSplitterClick: paneForward(onSplitterClick, false),
 			onSplitterDblClick: paneForward(onSplitterDblClick),
 			onPaneClick: paneForward(onPaneClick),
-			reportGivenSizeChange: paneForward(reportGivenSizeChange)
+			reportGivenSizeChange: paneForward(reportGivenSizeChange),
+			reportSplitterSizeChange: paneForward(reportSplitterSizeChange)
 		};
 	}
 
@@ -278,6 +297,8 @@
 			}
 
 			if (isReady) {
+				recalcSplitterSizeSum();
+
 				// 3. tick and resize the panes.
 				await tickAndResetPaneSizes();
 
@@ -301,9 +322,30 @@
 		tickAndResetPaneSizes();
 	}
 
+	function reportSplitterSizeChange(newSplitterSize: number | null, pane: IPane | undefined) {
+		let newSum = 0;
+
+		for (let i = 0; i < panes.length; i++) {
+			const currentPane = panes[i];
+			if (currentPane === pane) {
+				currentPane.givenSplitterSize = newSplitterSize;
+			}
+
+			newSum += calcPaneSplitterSize(i > 0, currentPane.givenSplitterSize);
+		}
+
+		splitterSumSize.set(newSum);
+	}
+
+	const recalcSplitterSizeSum = () => reportSplitterSizeChange(null, undefined);
+
 	onMount(() => {
 		verifyAndUpdatePanesOrder();
 		resetPaneSizes();
+
+		// Trigger update when the splitpanes properties `splitterDefaultSize` and `showFirstSplitter` are changed,
+		//   and also on the first time before the change.
+		const unsubscriber = derived([splitterDefaultSize, showFirstSplitter], () => 0).subscribe(recalcSplitterSizeSum);
 
 		for (let i = 0; i < panes.length; i++) {
 			panes[i].isReady = true;
@@ -314,6 +356,9 @@
 		setTimeout(() => {
 			isAfterInitialTimeoutZero = true;
 		}, 0);
+
+		// This will tell Svelte to unsubscribe when the component is being unmounted.
+		return unsubscriber;
 	});
 
 	if (browser) {
@@ -404,10 +449,8 @@
 			return; // Don't bind move event on error
 		}
 
-		activeSplitterElement = activeSplitterNode as HTMLElement;
-
 		const globalMousePosition = getGlobalMousePosition(event);
-		const splitterRect = getElementRect(activeSplitterElement);
+		const splitterRect = getElementRect(activeSplitterNode as HTMLElement);
 		activeSplitterDrag = getOrientedDiff(
 			positionDiff(globalMousePosition, splitterRect),
 			splitterRect[getCurrentDimensionName()],
@@ -555,35 +598,13 @@
 			snap: pane.snap()
 		}));
 
-	/**
-	 * Returns the drag percentage of the splitter relative to the 2 parts it's inbetween, meaning the ratio between
-	 *  the size that all the panes before the splitter consumes (ignoring other splitters size) and the total size of the container.
-	 */
+	// Calculate the ratio by taking into account that the splitters also takes up space
 	function getCurrentDragPercentage(tdrag: number, containerSizeWithoutBorder: number) {
-		// Here we want the splitter size **including the borders**.
-		// We need to use `Element.getBoundingClientRect()` and not `Element.clientWidth` and `Element.clientHeight`,
-		//  bacause the latter round the number of pixels to integer, and additionally, they don't include the borders.
-		const splitterSize = (node: Node) => getElementRect(node as HTMLElement)[getCurrentDimensionName()];
-
-		const activeSplitterSize = splitterSize(activeSplitterElement);
-
-		let splittersTotalSizeBefore = 0;
-		let currentBeforeNode = activeSplitterElement.previousSibling;
-		while (currentBeforeNode != null) {
-			if (isSplitterElement(currentBeforeNode)) {
-				splittersTotalSizeBefore += splitterSize(currentBeforeNode);
-			}
-			currentBeforeNode = currentBeforeNode.previousSibling;
-		}
-
-		let splittersTotalSizeAfter = 0;
-		let currentAfterNode = activeSplitterElement.nextSibling;
-		while (currentAfterNode != null) {
-			if (isSplitterElement(currentAfterNode)) {
-				splittersTotalSizeAfter += splitterSize(currentAfterNode);
-			}
-			currentAfterNode = currentAfterNode.nextSibling;
-		}
+		const {
+			start: splittersTotalSizeBefore,
+			middle: activeSplitterSize,
+			end: splittersTotalSizeAfter
+		} = sum3Way(panes, activeSplitter, (pane, i) => calcPaneSplitterSize(i > 0, pane.givenSplitterSize));
 
 		const totalSplitterBefore = splittersTotalSizeBefore + activeSplitterDrag;
 		const totalSplitter = splittersTotalSizeBefore + activeSplitterSize + splittersTotalSizeAfter;
@@ -973,6 +994,8 @@
 
 			panes = newPanes;
 			$veryFirstPaneKey = panes.length > 0 ? panes[0].key : undefined;
+
+			recalcSplitterSizeSum();
 		}
 	}
 </script>
@@ -1089,7 +1112,6 @@
 		}
 		&.splitpanes--vertical > .splitpanes__splitter,
 		.splitpanes--vertical > .splitpanes__splitter {
-			width: 7px;
 			border-left: 1px solid #eee;
 			cursor: col-resize;
 			&:before,
@@ -1107,7 +1129,6 @@
 		}
 		&.splitpanes--horizontal > .splitpanes__splitter,
 		.splitpanes--horizontal > .splitpanes__splitter {
-			height: 7px;
 			border-top: 1px solid #eee;
 			cursor: row-resize;
 			&:before,

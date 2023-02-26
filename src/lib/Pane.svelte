@@ -4,7 +4,7 @@
 	import type { ClientCallbacks, IPane, PaneInitFunction, SplitContext } from './index.js';
 	import { browser } from './internal/env.js';
 	import { gatheringKey } from './internal/GatheringRound.svelte';
-	import { getDimensionName } from './internal/utils/sizing.js';
+	import { getDimensionName, type SizeUnit } from './internal/utils/sizing.js';
 	import { carefullCallbackSource } from './internal/utils/functions';
 
 	const {
@@ -12,6 +12,8 @@
 		onPaneInit,
 		clientOnly: clientOnlyContext,
 		isHorizontal,
+		splitterDefaultSize,
+		splitterSumSize,
 		showFirstSplitter,
 		veryFirstPaneKey
 	} = getContext<SplitContext>(KEY);
@@ -19,9 +21,15 @@
 	// PROPS
 
 	export let size: number | null = null;
+	export let sizeUnit: SizeUnit = '%';
 	export let minSize = 0;
+	export let minSizeUnit: SizeUnit = '%';
 	export let maxSize = 100;
+	export let maxSizeUnit: SizeUnit = '%';
 	export let snapSize = 0;
+	export let snapSizeUnit: SizeUnit = '%';
+	/** The size of the splitter in pixels. */
+	export let splitterSize: number | null = null;
 	// css class
 	let clazz = '';
 	export { clazz as class };
@@ -34,7 +42,7 @@
 	const { undefinedPaneInitSize } = (!gathering ? onPaneInit(key) : {}) as ReturnType<PaneInitFunction>;
 
 	let element: HTMLElement;
-	let sz: number = size ?? undefinedPaneInitSize;
+	let sz: number = size ?? (sizeUnit === '%' ? undefinedPaneInitSize : 0);
 	let isSplitterActive = false;
 
 	// CALLBACKS
@@ -59,23 +67,44 @@
 		}
 	};
 	$: {
+		// TODO: When the user min/max size gets changed, need to calc the size again
 		if (browser && size != null) {
 			reportGivenSizeChangeSafe(size);
 		}
 	}
 
+	$: {
+		if (browser) {
+			carefullClientCallbacks('reportSplitterSizeChange')(splitterSize);
+		}
+	}
+
 	$: dimension = getDimensionName($isHorizontal);
 
-	$: style = `${dimension}: ${sz}%;`;
+	const renderSize = (sz: number, szPx: number) => {
+		if (szPx === 0) {
+			return `${sz}%`;
+		} else if (sz === 0) {
+			return `${szPx}px`;
+		} else {
+			const signPx = szPx < 0 ? '-' : '+';
+			return `calc(${sz}% ${signPx} ${Math.abs(szPx)}px)`;
+		}
+	};
+	/** Removes the relative total splitter size (only on % unit) and render it */
+	const displayedSize = (sz: number, sizeUnit: SizeUnit) =>
+		sizeUnit === '%' ? renderSize(sz, (-sz / 100) * $splitterSumSize) : renderSize(0, sz);
+	$: style = `${dimension}: ${displayedSize(sz, sizeUnit)};`;
 
 	if (gathering) {
-		ssrRegisterPaneSize(size);
+		ssrRegisterPaneSize(size, splitterSize, sizeUnit);
 	} else if (browser) {
 		onMount(() => {
 			const inst: IPane = {
 				key,
 				element: element,
 				givenSize: size,
+				givenSplitterSize: splitterSize,
 				sz: () => sz,
 				setSz: (v) => {
 					sz = v;
@@ -108,6 +137,7 @@
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<div
 			class="splitpanes__splitter {isSplitterActive ? 'splitpanes__splitter__active' : ''}"
+			style="{dimension}: {splitterSize ?? $splitterDefaultSize}px;"
 			on:mousedown={carefullClientCallbacks('onSplitterDown')}
 			on:touchstart={carefullClientCallbacks('onSplitterDown')}
 			on:click={carefullClientCallbacks('onSplitterClick')}

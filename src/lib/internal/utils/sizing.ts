@@ -1,3 +1,5 @@
+export type SizeUnit = '%' | 'px';
+
 export interface SidesStart {
 	left: number;
 	top: number;
