@@ -4,7 +4,7 @@
 	import Button from '$comp/Button.svelte';
 
 	let panesNumber = 3;
-	$: allowToRemove = panesNumber > 1;
+	$: allowToRemove = panesNumber > 0;
 </script>
 
 <Button
