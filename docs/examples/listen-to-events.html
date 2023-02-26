@@ -13,12 +13,12 @@
 		<link href="/svelte-splitpanes/_app/immutable/assets/_page-b54230ae.css" rel="stylesheet">
 		<link href="/svelte-splitpanes/_app/immutable/assets/_page-829a7071.css" rel="stylesheet">
 		<link href="/svelte-splitpanes/_app/immutable/assets/_page-9a081897.css" rel="stylesheet">
-		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/start-c56432e2.js">
-		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/chunks/external-d10ce526.js">
-		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/components/pages/_layout.svelte-aad89f33.js">
+		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/start-1fc78dbb.js">
+		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/chunks/external-0cbe0899.js">
+		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/components/pages/_layout.svelte-21f81f6c.js">
 		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/modules/pages/_layout.ts-9cbb603b.js">
 		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/chunks/_layout-da46b06b.js">
-		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/components/pages/examples/listen-to-events/_page.svelte-6cbb2fe1.js">
+		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/components/pages/examples/listen-to-events/_page.svelte-25dd352f.js">
 		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/modules/pages/examples/listen-to-events/_page.ts-1f4d7490.js">
 		<link rel="modulepreload" href="/svelte-splitpanes/_app/immutable/chunks/_page-fca24c55.js"><title>Svelte-Splitpanes - Listen To Events</title><!-- HEAD_svelte-1cl4sjo_START --><meta name="description" content="A Fantastic pane splitter for Svelte"><!-- HTML_TAG_START --><style>pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}.hljs{background:#011627;color:#d6deeb}.hljs-keyword{color:#c792ea;font-style:italic}.hljs-built_in{color:#addb67;font-style:italic}.hljs-type{color:#82aaff}.hljs-literal{color:#ff5874}.hljs-number{color:#f78c6c}.hljs-regexp{color:#5ca7e4}.hljs-string{color:#ecc48d}.hljs-subst{color:#d3423e}.hljs-symbol{color:#82aaff}.hljs-class{color:#ffcb8b}.hljs-function{color:#82aaff}.hljs-title{color:#dcdcaa;font-style:italic}.hljs-params{color:#7fdbca}.hljs-comment{color:#637777;font-style:italic}.hljs-doctag{color:#7fdbca}.hljs-meta,.hljs-meta .hljs-keyword{color:#82aaff}.hljs-meta .hljs-string{color:#ecc48d}.hljs-section{color:#82b1ff}.hljs-attr,.hljs-name,.hljs-tag{color:#7fdbca}.hljs-attribute{color:#80cbc4}.hljs-variable{color:#addb67}.hljs-bullet{color:#d9f5dd}.hljs-code{color:#80cbc4}.hljs-emphasis{color:#c792ea;font-style:italic}.hljs-strong{color:#addb67;font-weight:700}.hljs-formula{color:#c792ea}.hljs-link{color:#ff869a}.hljs-quote{color:#697098;font-style:italic}.hljs-selector-tag{color:#ff6363}.hljs-selector-id{color:#fad430}.hljs-selector-class{color:#addb67;font-style:italic}.hljs-selector-attr,.hljs-selector-pseudo{color:#c792ea;font-style:italic}.hljs-template-tag{color:#c792ea}.hljs-template-variable{color:#addb67}.hljs-addition{color:#addb67ff;font-style:italic}.hljs-deletion{color:#ef535090;font-style:italic}</style><!-- HTML_TAG_END --><!-- HEAD_svelte-1cl4sjo_END -->
 	</head>
@@ -51,7 +51,7 @@
 		only emitted if dragging did not occur between mousedown and mouseup.
 	</li></ul>
 
-<div class="splitpanes default-theme default-theme  splitpanes--vertical  splitpanes--freeze" style="height: 400px">
+<div><div class="splitpanes default-theme   splitpanes--vertical  splitpanes--freeze" style="height: 400px">
 	
 	
 
@@ -79,16 +79,19 @@
 	<div class="splitpanes__pane " style="width: 33.333333333333336%;"><span>3</span>
 		</div>
 </div>
+
 <p>Try resizing panes and check the logs bellow.</p>
+
 <div class="container svelte-1gm0t61"><pre aria-hidden="true" style="min-height: 5.8em; max-height: 49em" class="svelte-1gm0t61">// Event name: Event params   (Last event at the top)
 </pre>
 	<textarea readonly style="outline: none;" class="svelte-1gm0t61">// Event name: Event params   (Last event at the top)</textarea>
 </div>
 
-<div role="presentation" id="prerendered_area_listen_to_events">
-  <pre data-language="svelte" class=" svelte-d72vtw"><code class="hljs"><!-- HTML_TAG_START -->
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
-	<span class="hljs-keyword">import</span> { <span class="hljs-title class_">Pane</span>, <span class="hljs-title class_">Splitpanes</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;svelte-splitpanes&#x27;</span>
+	<div role="presentation" id="prerendered_area_../../src/routes/examples/listen-to-events/code.svelte">
+  <pre data-language="svelte" class=" svelte-d72vtw"><code class="hljs"><!-- HTML_TAG_START --><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
+	<span class="hljs-keyword">import</span> { <span class="hljs-title class_">Pane</span>, <span class="hljs-title class_">Splitpanes</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;svelte-splitpanes&#x27;</span>;
+
+	<span class="hljs-keyword">import</span> <span class="hljs-title class_">TextArea</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;$comp/TextAreaAutosize.svelte&#x27;</span>;
 
 	<span class="hljs-keyword">let</span> val = <span class="hljs-string">&#x27;// Event name: Event params   (Last event at the top)&#x27;</span>;
 
@@ -97,8 +100,8 @@
 		<span class="hljs-keyword">else</span> val = event.<span class="hljs-property">type</span> + <span class="hljs-string">&#x27;\n&#x27;</span> + val;
 	}
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+
 <span class="hljs-tag">&lt;<span class="hljs-name">Splitpanes</span>
-	<span class="hljs-attr">class</span>=<span class="hljs-string">&quot;default-theme&quot;</span>
 	<span class="hljs-attr">style</span>=<span class="hljs-string">&quot;height: 400px&quot;</span>
 	<span class="hljs-attr">on:ready</span>=<span class="hljs-string">{handleMessage}</span>
 	<span class="hljs-attr">on:resize</span>=<span class="hljs-string">{handleMessage}</span>
@@ -115,10 +118,12 @@
 		<span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
 	{/each}
 <span class="hljs-tag">&lt;/<span class="hljs-name">Splitpanes</span>&gt;</span>
+
 <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Try resizing panes and check the logs bellow.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">TextArea</span> <span class="hljs-attr">bind:value</span>=<span class="hljs-string">{val}</span> <span class="hljs-attr">minRows</span>=<span class="hljs-string">{4}</span> <span class="hljs-attr">maxRows</span>=<span class="hljs-string">{40}</span> /&gt;</span>    
+
+<span class="hljs-tag">&lt;<span class="hljs-name">TextArea</span> <span class="hljs-attr">bind:value</span>=<span class="hljs-string">{val}</span> <span class="hljs-attr">minRows</span>=<span class="hljs-string">{4}</span> <span class="hljs-attr">maxRows</span>=<span class="hljs-string">{40}</span> /&gt;</span>
 <!-- HTML_TAG_END --></code></pre>
-</div>
+</div></div>
 
 		<div class="controls svelte-1xp6paq"><div class="svelte-1xp6paq"><span class="svelte-1xp6paq">previous</span>
 				<a data-sveltekit-preload-data href="/svelte-splitpanes/examples/toggle-panes" class="svelte-1xp6paq">Toggle Panes</a></div>
@@ -166,14 +171,14 @@
 </div>
 
 
-		<script type="module" data-sveltekit-hydrate="nmucqv">
-			import { start } from "/svelte-splitpanes/_app/immutable/start-c56432e2.js";
+		<script type="module" data-sveltekit-hydrate="18unihr">
+			import { start } from "/svelte-splitpanes/_app/immutable/start-1fc78dbb.js";
 
 			start({
 				env: {},
 				paths: {"assets":"/svelte-splitpanes","base":"/svelte-splitpanes"},
-				target: document.querySelector('[data-sveltekit-hydrate="nmucqv"]').parentNode,
-				version: "1677410581148",
+				target: document.querySelector('[data-sveltekit-hydrate="18unihr"]').parentNode,
+				version: "1677434959525",
 				hydrate: {
 					node_ids: [0, 6],
 					data: [null,null],
