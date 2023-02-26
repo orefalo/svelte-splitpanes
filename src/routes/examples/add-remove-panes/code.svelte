@@ -4,17 +4,18 @@
 	import Button from '$comp/Button.svelte';
 
 	let panesNumber = 3;
+	$: allowToRemove = panesNumber > 1;
 </script>
 
 <Button
 	on:click={() => {
-		if (panesNumber >= 0) panesNumber++;
+		panesNumber++;
 	}}>+ ADD PANE</Button
 >
 <Button
-	disabled={panesNumber <= 0}
+	disabled={!allowToRemove}
 	on:click={() => {
-		if (panesNumber > 0) panesNumber--;
+		if (allowToRemove) panesNumber--;
 	}}>- REMOVE PANE</Button
 >
 
