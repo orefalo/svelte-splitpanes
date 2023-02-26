@@ -1,46 +1,7 @@
 <script lang="ts">
-	import { Pane, Splitpanes } from 'svelte-splitpanes';
-	import CodeArea from '$comp/CodeArea.svelte';
-	import TextArea from '$comp/TextAreaAutosize.svelte';
+	import ExampleArea from '$comp/ExampleArea.svelte';
 
-	let val = '// Event name: Event params   (Last event at the top)';
-
-	function handleMessage(event: any) {
-		if (event.detail) val = event.type + ' ' + JSON.stringify(event.detail) + '\n' + val;
-		else val = event.type + '\n' + val;
-	}
-
-	let code = `
-<script>
-	import { Pane, Splitpanes } from 'svelte-splitpanes'
-
-	let val = '// Event name: Event params   (Last event at the top)';
-
-	function handleMessage(event) {
-		if (event.detail) val = event.type + ' ' + JSON.stringify(event.detail) + '\\n' + val;
-		else val = event.type + '\\n' + val;
-	}
-<\/script>
-<Splitpanes
-	style="height: 400px"
-	on:ready={handleMessage}
-	on:resize={handleMessage}
-	on:resized={handleMessage}
-	on:pane-click={handleMessage}
-	on:pane-maximize={handleMessage}
-	on:pane-add={handleMessage}
-	on:pane-remove={handleMessage}
-	on:splitter-click={handleMessage}
->
-	{#each { length: 3 } as _, i}
-		<Pane minSize={10}>
-			<span>{i + 1}</span>
-		</Pane>
-	{/each}
-</Splitpanes>
-<p>Try resizing panes and check the logs bellow.</p>
-<TextArea bind:value={val} minRows={4} maxRows={40} />    
-`;
+	import example from './code.svelte?example';
 </script>
 
 <h2>Listening to emitted events</h2>
@@ -70,24 +31,4 @@
 	</li>
 </ul>
 
-<Splitpanes
-	style="height: 400px"
-	on:ready={handleMessage}
-	on:resize={handleMessage}
-	on:resized={handleMessage}
-	on:pane-click={handleMessage}
-	on:pane-maximize={handleMessage}
-	on:pane-add={handleMessage}
-	on:pane-remove={handleMessage}
-	on:splitter-click={handleMessage}
->
-	{#each { length: 3 } as _, i}
-		<Pane minSize={10}>
-			<span>{i + 1}</span>
-		</Pane>
-	{/each}
-</Splitpanes>
-<p>Try resizing panes and check the logs bellow.</p>
-<TextArea bind:value={val} minRows={4} maxRows={40} />
-
-<CodeArea id="listen_to_events" {code} />
+<ExampleArea {example} />

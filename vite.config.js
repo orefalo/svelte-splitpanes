@@ -2,11 +2,13 @@ import path from 'path';
 
 import { sveltekit } from '@sveltejs/kit/vite';
 
+import { exampleImportPlugin } from './scripts/utils/example-import.js';
+
 import { minifiedSizeAnalyzingPlugin, manualChunksForAnalyzing } from './scripts/utils/minified-size-analyzing.js';
 
 /** @type {import('vite').UserConfig} */
 const config = {
-	plugins: [sveltekit(), minifiedSizeAnalyzingPlugin()],
+	plugins: [sveltekit(), exampleImportPlugin(), minifiedSizeAnalyzingPlugin()],
 	resolve: {
 		optimizeDeps: {
 			include: ['highlight.js', 'highlight.js/lib/core']

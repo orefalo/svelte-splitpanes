@@ -1,22 +1,7 @@
-<script>
-	import { Pane, Splitpanes } from 'svelte-splitpanes';
-	import CodeArea from '$comp/CodeArea.svelte';
+<script lang="ts">
+	import ExampleArea from '$comp/ExampleArea.svelte';
 
-	let code = `
-<script>
-	import { Pane, Splitpanes } from 'svelte-splitpanes'
-<\/script>	
-<Splitpanes horizontal style="height: 400px">
-    <Pane size={65}>
-        <span>1</span>
-    </Pane>
-    <Pane size={10}>
-        <span>2</span>
-    </Pane>
-    <Pane size={25}>
-        <span>3</span>
-    </Pane>
-</Splitpanes>`;
+	import example from './code.svelte?example';
 </script>
 
 <h2>Default pane size</h2>
@@ -29,16 +14,4 @@
 	><br /> Note that setting a default value is different than setting a min or max value.
 </p>
 
-<Splitpanes horizontal style="height: 400px">
-	<Pane size={65}>
-		<span>1</span>
-	</Pane>
-	<Pane size={10}>
-		<span>2</span>
-	</Pane>
-	<Pane size={25}>
-		<span>3</span>
-	</Pane>
-</Splitpanes>
-
-<CodeArea id="default_size" {code} />
+<ExampleArea {example} />

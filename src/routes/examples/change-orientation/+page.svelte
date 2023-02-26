@@ -1,35 +1,7 @@
-<script>
-	import { Pane, Splitpanes } from 'svelte-splitpanes';
-	import CodeArea from '$comp/CodeArea.svelte';
-	import Button from '$comp/Button.svelte';
+<script lang="ts">
+	import ExampleArea from '$comp/ExampleArea.svelte';
 
-	let horizontal = false;
-	let firstSplitter = false;
-
-	let code = `
-<script>
-	import { Pane, Splitpanes } from 'svelte-splitpanes'
-
-	let horizontal = false;
-	let firstSplitter = false;
-<\/script>
-<Button
-	on:click={() => {
-		horizontal = !horizontal;
-	}}>{horizontal ? 'Turn to Vertical' : 'Turn to Horizontal'}</Button
->
-<Button
-	on:click={() => {
-		firstSplitter = !firstSplitter;
-	}}>{firstSplitter ? 'Hide first splitter' : 'Show first Splitter'}</Button
->
-<Splitpanes style="height: 400px" {firstSplitter} {horizontal}>
-	{#each { length: 3 } as _, i}
-		<Pane minSize={5}>
-			<span>{i + 1}</span>
-		</Pane>
-	{/each}
-</Splitpanes>`;
+	import example from './code.svelte?example';
 </script>
 
 <h2>Change orientation & first splitter</h2>
@@ -40,22 +12,4 @@
 	The first splitter does not allow to resize the next pane.
 </p>
 
-<Button
-	on:click={() => {
-		horizontal = !horizontal;
-	}}>{horizontal ? 'Turn to Vertical' : 'Turn to Horizontal'}</Button
->
-<Button
-	on:click={() => {
-		firstSplitter = !firstSplitter;
-	}}>{firstSplitter ? 'Hide first splitter' : 'Show first Splitter'}</Button
->
-<Splitpanes style="height: 400px" {firstSplitter} {horizontal}>
-	{#each { length: 3 } as _, i}
-		<Pane minSize={5}>
-			<span>{i + 1}</span>
-		</Pane>
-	{/each}
-</Splitpanes>
-
-<CodeArea id="change_orientation" {code} />
+<ExampleArea {example} />

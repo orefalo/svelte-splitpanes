@@ -1,55 +1,9 @@
-<script>
-	import { Pane, Splitpanes } from 'svelte-splitpanes';
-	import CodeArea from '$comp/CodeArea.svelte';
-	import Button from '$comp/Button.svelte';
+<script lang="ts">
+	import ExampleArea from '$comp/ExampleArea.svelte';
 
-	function onClick() {
-		visible = !visible;
-	}
-
-	let visible = true;
-
-	let code = `
-<script>
-import { Pane, Splitpanes } from 'svelte-splitpanes'
-
-let visible = true;
-
-function onClick() {
-    visible = !visible;
-}
-<\/script>
-<Button on:click={onClick}>{visible ? 'Hide' : 'Show'}</Button>
-<Splitpanes style="height: 400px">
-    <Pane>
-        <span>1</span>
-    </Pane>
-	{#if visible}
-    <Pane>
-        <span>2</span>
-    </Pane>
-	{/if}
-    <Pane>
-        <span>3</span>
-    </Pane>
-</Splitpanes>`;
+	import example from './code.svelte?example';
 </script>
 
 <h2>Toggle a pane on/off</h2>
 
-<Button on:click={onClick}>{visible ? 'Hide' : 'Show'}</Button>
-<Splitpanes style="height: 400px">
-	<Pane>
-		<span>1</span>
-	</Pane>
-	{#if visible}
-		<Pane>
-			<span>2</span>
-		</Pane>
-	{/if}
-	<Pane>
-		<span>3</span>
-	</Pane>
-</Splitpanes>
-
-<CodeArea id="toggle_panes" {code} />
+<ExampleArea {example} />
