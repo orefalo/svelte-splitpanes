@@ -103,11 +103,9 @@
 
 {#if !gathering}
 	<!-- Splitter -->
-	<!-- TODO: Support aria role="separator" and make this a focusable separtor. Sources:
-	* https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/roles/separator_role
-	* https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/
--->
 	{#if $veryFirstPaneKey !== key || $showFirstSplitter}
+		<!-- this a11y issue is known, and will be taken care of as part of the a11y feature issue in #11 -->
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<div
 			class="splitpanes__splitter {isSplitterActive ? 'splitpanes__splitter__active' : ''}"
 			on:mousedown={carefullClientCallbacks('onSplitterDown')}
@@ -118,6 +116,8 @@
 	{/if}
 
 	<!-- Pane -->
+	<!-- this a11y issue is known, and will be taken care of as part of the a11y feature issue in #11 -->
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<div
 		class={`splitpanes__pane ${clazz || ''}`}
 		bind:this={element}
