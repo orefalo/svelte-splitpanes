@@ -53,6 +53,8 @@ jobs:
       # Build Frontend
       - name: Build Frontend
         run: npm run build
+        env:
+          BASE_PATH: /svelte-splitpanes
 
       # Deploy Docs
       - name: Deploy Docs 🚀

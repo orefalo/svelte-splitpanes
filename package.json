@@ -31,7 +31,7 @@
 		"package": "svelte-package && node scripts/clean-package-json.js",
 		"preview": "vite preview --port 3000",
 		"prepare": "husky install",
-		"static-serv": "serve -l 3000 --no-clipboard",
+		"static-serv": "serve -l 3000 --no-clipboard docs",
 		"test": "playwright test",
 		"check": "svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",

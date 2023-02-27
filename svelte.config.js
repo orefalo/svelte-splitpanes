@@ -1,9 +1,6 @@
 import adapter from '@sveltejs/adapter-static';
 import preprocess from 'svelte-preprocess';
 
-// Althought it's not the vite way, we do so since there is no way to know if on dev for SvelteKit right now.
-const dev = !!process.env.DEV;
-
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	preprocess: preprocess(),
@@ -15,8 +12,10 @@ const config = {
 			fallback: undefined
 		}),
 		paths: {
-			// change below to your repo name
-			base: dev ? '' : '/svelte-splitpanes'
+			// Usually the base path will be the root (i.e. defaults by kit to the empty "" path since the env var is undefined),
+			//  but on the official documentation build we set this environment
+			//  variable to the base path where we're deploying to.
+			base: process.env.BASE_PATH
 		}
 	},
 

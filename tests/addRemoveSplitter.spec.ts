@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 
 test('add, remove all and add again works', async ({ page }) => {
-	await page.goto('/svelte-splitpanes');
+	await page.goto('/');
 
 	const areaLocator = page.locator('text=Add Remove Panes');
 	await areaLocator.click();
