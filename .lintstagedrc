@@ -1,5 +1,5 @@
 {
-	"*.{js,ts,svelte,css,scss,postcss,json,md}": [
+	"*.{js,ts,svelte,json,md}": [
 		"prettier --ignore-path .gitignore --write --cache --plugin-search-dir=. !./pnpm-lock.yaml !./CHANGELOG.md",
 		"eslint --cache --ignore-path .gitignore"
 	],

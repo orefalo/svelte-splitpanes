@@ -20,7 +20,8 @@ const config = {
 	},
 
 	package: {
-		exports: (filename) => filename === 'index.ts'
+		exports: (filename) => filename === 'index.ts',
+		files: (filename) => !filename.endsWith('.scss') // Don't include theme files
 	}
 };
 
