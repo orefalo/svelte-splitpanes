@@ -17,11 +17,6 @@ const config = {
 			//  variable to the base path where we're deploying to.
 			base: process.env.BASE_PATH
 		}
-	},
-
-	package: {
-		exports: (filename) => filename === 'index.ts',
-		files: (filename) => !filename.endsWith('.scss') // Don't include theme files
 	}
 };
 
