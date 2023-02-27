@@ -1,1 +1,1 @@
-import{_ as r}from"./_page-56160fd5.js";import{default as t}from"../components/pages/examples/reordering-panes/_page.svelte-3de0be82.js";export{t as component,r as universal};
+import{_ as r}from"./_page-c9e12f54.js";import{default as t}from"../components/pages/examples/reordering-panes/_page.svelte-3de0be82.js";export{t as component,r as universal};
