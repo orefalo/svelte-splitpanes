@@ -3,11 +3,6 @@ import path from 'path';
 
 const libPath = path.resolve('.', 'src/lib/');
 
-const esmEnvPrefix = '\0esm-env-handling';
-
-/** @type {boolean} */
-let isBuild;
-
 /** @type {boolean} */
 let ssr;
 
@@ -19,35 +14,12 @@ let ssr;
 export const minifiedSizeAnalyzingPlugin = () => ({
 	enforce: 'pre',
 
-	config(_config, env) {
-		isBuild = env.command === 'build';
-	},
-
 	configResolved(config) {
 		ssr = config.build?.ssr ?? false;
 	},
 
-	// We want to make sure that the external dependency for 'esm-env' or 'esm-env-robust' is embedded (if included),
-	//  since otherwise the output server code may have `import { BROWSER } from 'esm-env'`, which is stupid since the
-	//  constant value should be inlined, so it will hint the code minifier for dead code elimination,
-	//  which reduces the server output size dramatically.
-	resolveId(source) {
-		if (isBuild && (source === 'esm-env' || source === 'esm-env-robust')) {
-			return { id: esmEnvPrefix, external: false };
-		} else {
-			return null;
-		}
-	},
-	load(id) {
-		if (isBuild && id === esmEnvPrefix) {
-			return `export const BROWSER = ${!ssr};\nexport const DEV = false;`;
-		} else {
-			return null;
-		}
-	},
-
 	generateBundle(_options, bundle) {
-		// Notice that here we already know that `isBuild === true`.
+		// Notice that this stage happen only on build, and not on dev.
 
 		let found = false;
 
