@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.7.13](https://github.com/orefalo/svelte-splitpanes/compare/v0.7.12...v0.7.13) (2023-02-27)
+
+
+### Bug Fixes
+
+* ignoring the annoying Svelte `a11y-click-events-have-key-events` warnings ([7d9b872](https://github.com/orefalo/svelte-splitpanes/commit/7d9b872f3fc2848310124e96ed220da7f2ffe934))
+
 ## [0.7.12](https://github.com/orefalo/svelte-splitpanes/compare/v0.7.11...v0.7.12) (2023-01-25)
 
 
