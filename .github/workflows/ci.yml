@@ -49,6 +49,10 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Svelte Sync
+        if: success() || failure() # Run even if previous failed
+        run: npx svelte-kit sync
+
       - name: Svelte Check
         if: success() || failure() # Run even if previous failed
         run: npm run check

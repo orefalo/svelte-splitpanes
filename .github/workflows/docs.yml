@@ -50,6 +50,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Svelte Sync
+        run: npx svelte-kit sync
+
       # Build Frontend
       - name: Build Frontend
         run: npm run build
