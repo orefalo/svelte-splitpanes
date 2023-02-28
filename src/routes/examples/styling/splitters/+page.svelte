@@ -1,10 +1,11 @@
 <script>
-	import CodeArea from '$comp/CodeArea.svelte';
+	import Highlighted from '$comp/Highlighted.svelte';
 	import ExampleArea from '$comp/ExampleArea.svelte';
 
 	import example from './code.svelte?example';
 
-	import defaultTheme from 'svelte-splitpanes/internal/default-theme.scss?raw';
+	// Sadly we need to add the `.guard` suffix to avoid conflicts with an internal vite plugin.
+	import defaultTheme from 'svelte-splitpanes/internal/default-theme.scss.guard?example';
 </script>
 
 <h2>Styling Splitters</h2>
@@ -17,7 +18,11 @@
 	so it wouldn't conflict the library theme CSS definition):
 </p>
 
-<CodeArea id="styling_splitters" code={defaultTheme} />
+<Highlighted lang="scss" highlighted={defaultTheme.highlightedHTML} />
+
+<p>Alternatively, here is the default theme compiled to CSS:</p>
+
+<Highlighted lang="scss" highlighted={defaultTheme.cssHighlightedHTML} />
 
 <p>
 	By altering the above styles, it is possible to achieve neat visual adjustments. Please note how each Splitpanes

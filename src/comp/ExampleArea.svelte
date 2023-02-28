@@ -1,12 +1,12 @@
 <script>
-	import CodeArea from '$comp/CodeArea.svelte';
+	import Highlighted from './Highlighted.svelte';
 
-	/** @type {import('./example.js').Example} */
+	/** @type {import('./example.js').SvelteExample} */
 	export let example;
 </script>
 
 <div>
 	<svelte:component this={example.component} />
 
-	<CodeArea id={example.id} code={example.code} />
+	<Highlighted lang="svelte" highlighted={example.highlightedHTML} />
 </div>
