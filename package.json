@@ -86,7 +86,7 @@
 		}
 	},
 	"dependencies": {
-		"esm-env-robust": "^0.0.3"
+		"esm-env": "^1.0.0"
 	},
 	"exports": {
 		"./package.json": "./package.json",

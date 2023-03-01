@@ -1,1 +1,1 @@
-export { BROWSER as browser } from 'esm-env-robust';
+export { BROWSER as browser } from 'esm-env';
