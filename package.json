@@ -29,6 +29,7 @@
 		"dev": "cross-env DEV=1 vite dev --port 3000",
 		"build": "vite build && node ./scripts/create-minified-size-badges.js",
 		"package": "svelte-package",
+		"package-unsafe": "npm run package && node scripts/package-clean-unsafe.js",
 		"preview": "vite preview --port 3000",
 		"prepare": "husky install",
 		"static-serv": "serve -l 3000 --no-clipboard docs",

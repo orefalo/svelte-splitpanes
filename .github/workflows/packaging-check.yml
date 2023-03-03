@@ -1,12 +1,12 @@
-on:
-  push:
-    branches:
-      - master
-name: release-please
+name: Packaging Check
+
+on: [push, pull_request]
+
 jobs:
-  release-please:
-    if: github.repository == 'orefalo/svelte-splitpanes' # Prevent running on forks
+  tests:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+
     steps:
       # Checkout
       - name: Checkout
@@ -31,6 +31,7 @@ jobs:
         id: pnpm-cache
         run: |
           echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+
       - uses: actions/cache@v3
         name: Setup pnpm cache
         with:
@@ -38,38 +39,33 @@ jobs:
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: SvelteKit Sync
         run: pnpm exec svelte-kit sync
 
+      - name: Lint
+        run: npm run lint
+
       - name: Svelte Package
         run: npm run package-unsafe
 
-      - name: Release Please
-        uses: google-github-actions/release-please-action@v3
-        id: release
+      - name: Install Example
+        run: node ../scripts/example/pnpm-install-project-in-example-unsafe.js
+        working-directory: ./example
+
+      - name: Build Example
+        run: npm run build
+        working-directory: ./example
+
+      - name: Simple Test
+        run: node ./scripts/example/verify-example-build.js
+
+      # Upload test results
+      - name: Upload example build
+        uses: actions/upload-artifact@v3
         with:
-          release-type: node
-
-      - name: Pack the package
-        if: ${{ steps.release.outputs.release_created }}
-        run: npm pack
-
-      - name: Upload the packed package
-        uses: actions/upload-release-asset@v1
-        if: ${{ steps.release.outputs.release_created }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.release.outputs.upload_url }}
-          asset_path: svelte-splitpanes-${{ steps.release.outputs.version }}.tgz
-          asset_name: svelte-splitpanes-${{ steps.release.outputs.version }}.tgz
-          asset_content_type: application/gzip
-
-      - name: NPM Publish
-        if: ${{ steps.release.outputs.release_created }}
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm config set _authToken=$NPM_TOKEN && npm publish
+          name: example-build
+          path: example/demo
