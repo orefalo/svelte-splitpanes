@@ -1,5 +1,6 @@
 {
 	"name": "svelte-splitpanes",
+	"private": true,
 	"version": "0.7.13",
 	"description": "A full featured resizable pane layout splitter, ported from vue-splitpanes",
 	"author": {
@@ -28,12 +29,16 @@
 	"scripts": {
 		"dev": "cross-env DEV=1 vite dev --port 3000",
 		"build": "vite build && node ./scripts/create-minified-size-badges.js",
-		"package": "svelte-package",
-		"package-unsafe": "npm run package && node scripts/package-clean-unsafe.js",
+		"package": "npm run package:build && npm run package:pack",
+		"package:build": "rimraf -g ./package/* && svelte-package -o ./package/dist && copyfiles ./README.md ./LICENSE ./package/ && node scripts/package-clean-copy.js",
+		"package:pack": "cd package && npm pack",
 		"preview": "vite preview --port 3000",
 		"prepare": "husky install",
 		"static-serv": "serve -l 3000 --no-clipboard docs",
 		"test": "playwright test",
+		"example-build:setup": "rimraf -g \"./example-temp/!(node_modules)*\" && copyfiles -u 1 \"./example/!(node_modules)*/**/*\" \"./example/!(node_modules)*\" ./example-temp && node ./scripts/example/pnpm-install-project-in-example-temp.js",
+		"example-build:build": "cd example-temp && svelte-kit sync && npm run build",
+		"example-build:test": "node ./scripts/example/verify-example-build.js",
 		"check": "svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "npm run lint-format && npm run lint-es",

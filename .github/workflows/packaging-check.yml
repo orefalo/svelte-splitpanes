@@ -46,26 +46,21 @@ jobs:
       - name: SvelteKit Sync
         run: pnpm exec svelte-kit sync
 
-      - name: Svelte Package
-        run: npm run package-unsafe
+      - name: Package the lib
+        run: npm run package
 
-      - name: Pack the package
-        run: npm pack
+      - name: Setup example test
+        run: npm run example-build:setup
 
-      - name: Install Example
-        run: node ../scripts/example/pnpm-install-project-in-example-unsafe.js
-        working-directory: ./example
+      - name: Build example
+        run: npm run example-build:build
 
-      - name: Build Example
-        run: npm run build
-        working-directory: ./example
-
-      - name: Simple Test
-        run: node ./scripts/example/verify-example-build.js
+      - name: Simple test
+        run: npm run example-build:test
 
       # Upload test results
       - name: Upload example build
         uses: actions/upload-artifact@v3
         with:
           name: example-build
-          path: example/demo
+          path: example-temp/demo

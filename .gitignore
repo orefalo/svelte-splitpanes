@@ -3,8 +3,8 @@ node_modules
 /build
 /.svelte-kit
 /package
-/dist
 /docs
+/example-temp
 /test-results
 .env
 .env.*
