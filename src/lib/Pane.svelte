@@ -1,11 +1,11 @@
 <script lang="ts" strictEvents>
 	import { getContext, onMount, onDestroy, hasContext } from 'svelte';
-	import { KEY } from './Splitpanes.svelte';
-	import type { ClientCallbacks, IPane, PaneInitFunction, SplitContext } from './index.js';
-	import { browser } from './internal/env.js';
-	import { gatheringKey } from './internal/GatheringRound.svelte';
-	import { getDimensionName } from './internal/utils/sizing.js';
-	import { carefullCallbackSource } from './internal/utils/functions';
+	import { KEY } from '$lib/Splitpanes.svelte';
+	import type { ClientCallbacks, IPane, PaneInitFunction, SplitContext } from '$lib/index.js';
+	import { browser } from '$lib/internal/env.js';
+	import { gatheringKey } from '$lib/internal/GatheringRound.svelte';
+	import { getDimensionName } from '$lib/internal/utils/sizing.js';
+	import { carefullCallbackSource } from '$lib/internal/utils/functions';
 
 	const {
 		ssrRegisterPaneSize,

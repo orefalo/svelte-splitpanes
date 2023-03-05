@@ -5,19 +5,19 @@
 <script lang="ts" strictEvents>
 	import { onMount, onDestroy, setContext, createEventDispatcher, tick, afterUpdate } from 'svelte';
 	import { writable } from 'svelte/store';
-	import type { IPane, IPaneSizingEvent, SplitContext, PaneInitFunction, ClientCallbacks } from './index.js';
-	import GatheringRound from './internal/GatheringRound.svelte';
-	import { browser } from './internal/env.js';
-	import { getDimensionName } from './internal/utils/sizing.js';
+	import type { IPane, IPaneSizingEvent, SplitContext, PaneInitFunction, ClientCallbacks } from '$lib/index.js';
+	import GatheringRound from '$lib/internal/GatheringRound.svelte';
+	import { browser } from '$lib/internal/env.js';
+	import { getDimensionName } from '$lib/internal/utils/sizing.js';
 	import {
 		type Position,
 		elementRectWithoutBorder,
 		getGlobalMousePosition,
 		positionDiff,
 		getElementRect
-	} from './internal/utils/position.js';
-	import { forEachPartial, sumPartial } from './internal/utils/array.js';
-	import { calcComputedStyle } from './internal/utils/styling.js';
+	} from '$lib/internal/utils/position.js';
+	import { forEachPartial, sumPartial } from '$lib/internal/utils/array.js';
+	import { calcComputedStyle } from '$lib/internal/utils/styling.js';
 
 	// TYPE DECLARATIONS ----------------
 
