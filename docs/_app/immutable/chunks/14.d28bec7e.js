@@ -1,0 +1,1 @@
+import{_ as r}from"./_page.7f2f0338.js";import{default as t}from"../entry/examples-snap-simple-page.svelte.b7d632ac.js";export{t as component,r as universal};
