@@ -4,8 +4,7 @@
 
 	import example from './code.svelte?example';
 
-	// Sadly we need to add the `.guard` suffix to avoid conflicts with an internal vite plugin.
-	import defaultTheme from 'svelte-splitpanes/internal/default-theme.scss.guard?example';
+	import defaultTheme from 'svelte-splitpanes/internal/default-theme.scss?example';
 </script>
 
 <h2>Styling Splitters</h2>

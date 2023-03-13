@@ -13,14 +13,19 @@ hljs.registerLanguage('xml', xml);
 hljs.registerLanguage('javascript', javascript);
 hljs.registerLanguage('css', css);
 
-const apiGuardSuffix = '.guard'; // Sadly this is needed sometimes for avoiding conflicts with Vite internal plugins
-const apiSuffix = '?example';
+// TODO: Export this Vite(&Rollup!) plugin to be universal in a different package.
+
+const apiQuery = 'example';
+// Vite internally adds this parameter in build, so we must accept it if present. See this comment for info:
+//  https://github.com/vitejs/vite/issues/12239#issuecomment-1466494704
+const apiQueryOptional = 'used';
 
 const apiProxySuffix = '.example-safeguard-proxy'; // This is needed wo other plugins wouldn't transform the file
 const idPrefix = '\0exmple-import-proxy"';
 const encodeId = (/** @type {string} */ id) => idPrefix + id + apiProxySuffix;
 const decodeId = (/** @type {string} */ id) => id.slice(idPrefix.length, -apiProxySuffix.length);
 
+// TODO: Can we just modify some Prettier config to get this result in the straight way?
 /**
  * Change the ">" starting lines to just go to the line before.
  * This both looks nicer for examples, and additionally fix highlighting issues.
@@ -39,15 +44,16 @@ export const exampleImportPlugin = () => ({
 	enforce: 'pre',
 
 	async resolveId(source, importer) {
-		if (!source.endsWith(apiSuffix)) {
+		const [originalSource, sourceUrlSearchParamsStr] = source.split('?', 2);
+		const sourceUrlSearchParams = new URLSearchParams(sourceUrlSearchParamsStr);
+		const quaryKeys = [...sourceUrlSearchParams.keys()];
+		if (
+			!quaryKeys.includes(apiQuery) ||
+			quaryKeys.findIndex((key) => (key !== apiQuery && key !== apiQueryOptional) >= 0)
+		) {
 			return;
 		}
 		// otherwise
-
-		let originalSource = source.slice(0, -apiSuffix.length);
-		if (originalSource.endsWith(apiGuardSuffix)) {
-			originalSource = originalSource.slice(0, -apiGuardSuffix.length);
-		}
 
 		const resolved = (await this.resolve(originalSource, importer)).id;
 
