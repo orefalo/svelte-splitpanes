@@ -46,6 +46,9 @@ Special thanks to all contributors and in particular [Tal500](https://github.com
 | ![Chrome](https://raw.github.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png) | ![Firefox](https://raw.github.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png) | ![Safari](https://raw.github.com/alrra/browser-logos/master/src/safari/safari_48x48.png) | ![Opera](https://raw.github.com/alrra/browser-logos/master/src/opera/opera_48x48.png) | ![Edge](https://raw.github.com/alrra/browser-logos/master/src/edge/edge_48x48.png) | ![IE](https://raw.github.com/alrra/browser-logos/master/src/archive/internet-explorer_9-11/internet-explorer_9-11_48x48.png) |
 | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | Latest ✔                                                                                 | Latest ✔                                                                                    | Latest ✔                                                                                 | Latest ✔                                                                              | Latest ✔                                                                           | 11 ✔                                                                                                                         |
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=orefalo/svelte-splitpanes&type=Date)](https://star-history.com/#orefalo/svelte-splitpanes&Date)
 
 ## Demo & Documentation
 
@@ -299,7 +302,7 @@ git commit --allow-empty -m "chore: release VERSION (you may change the title)" 
 
 Source: https://github.com/googleapis/release-please#how-do-i-change-the-version-number
 
-#### Controling contribution PR
+#### Controlling contribution PR
 
 You can specify additional messages in the PR body that will be included in the changelog (if relevant). An example to a body of PR containing additional messages:
 
