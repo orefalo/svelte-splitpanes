@@ -25,13 +25,6 @@ const config = {
 				manualChunks: manualChunksForAnalyzing
 			}
 		}
-	},
-	ssr: {
-		noExternal: [
-			// So that 'esm-env-robust' dependency will be embedded,
-			//  and (a huge!!) minification could be performed by knowing if we're running on the server or on the client.
-			'esm-env-robust'
-		]
 	}
 };
 
