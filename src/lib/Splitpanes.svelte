@@ -928,6 +928,9 @@
 		and if not update the internal order.
 	 */
 	function verifyAndUpdatePanesOrder() {
+		if (!container) {
+			return
+		}
 		const { children } = container;
 		let currentPaneIndex = 0;
 		let needReorder = false;
