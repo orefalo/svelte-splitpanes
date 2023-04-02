@@ -929,7 +929,7 @@
 	 */
 	function verifyAndUpdatePanesOrder() {
 		if (!container) {
-			return
+			return;
 		}
 		const { children } = container;
 		let currentPaneIndex = 0;
