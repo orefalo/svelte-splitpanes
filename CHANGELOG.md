@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.7.14](https://github.com/orefalo/svelte-splitpanes/compare/v0.7.13...v0.7.14) (2023-06-03)
+
+
+### Bug Fixes
+
+* fix github actions to support node16 ([47ee00c](https://github.com/orefalo/svelte-splitpanes/commit/47ee00c01a9afb55e4ed922123a57be81295e713))
+
 ## [0.7.13](https://github.com/orefalo/svelte-splitpanes/compare/v0.7.12...v0.7.13) (2023-02-27)
 
 
