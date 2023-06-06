@@ -13,8 +13,7 @@ const carefullCallbackGenerator =
 	) => {
 		const callbackObject = callbackObjectGetter();
 		if (callbackObject != null) {
-			// @ts-expect-error it's safe to pass this value, only because of TS reasons it's not accepted
-			callbackObject[callbackName](value);
+			(callbackObject as Record<Callback, (v: typeof value) => void>)[callbackName](value);
 		}
 	};
 
