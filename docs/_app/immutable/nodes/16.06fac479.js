@@ -1,34 +1,37 @@
-import{S as M,i as C,s as F,O as u,P as f,Q as g,n as $,o as _,T as b,a as y,f as k,j as m,g as o,e as z,I as d,b as S,d as x,J as v,k as j,L as T}from"../chunks/external.768903b6.js";import{E as V}from"../chunks/ExampleArea.aad150a6.js";import{S as D,P as w}from"../chunks/svelte-splitpanes.87854b3a.js";const O=!0,ns=Object.freeze(Object.defineProperty({__proto__:null,prerender:O},Symbol.toStringTag,{value:"Module"}));function H(i){let s,l;return{c(){s=z("p"),l=d("MenuBar")},l(t){s=S(t,"P",{});var n=x(s);l=v(n,"MenuBar"),n.forEach(o)},m(t,n){m(t,s,n),j(s,l)},p:T,d(t){t&&o(s)}}}function L(i){let s,l;return{c(){s=z("p"),l=d("ToolBar")},l(t){s=S(t,"P",{});var n=x(s);l=v(n,"ToolBar"),n.forEach(o)},m(t,n){m(t,s,n),j(s,l)},p:T,d(t){t&&o(s)}}}function A(i){let s,l,t,n,p=">",h;return{c(){s=z("p"),l=d("Folder"),t=z("br"),n=d(`
-					Try those --`),h=d(p)},l(e){s=S(e,"P",{});var r=x(s);l=v(r,"Folder"),t=S(r,"BR",{}),n=v(r,`
-					Try those --`),h=v(r,p),r.forEach(o)},m(e,r){m(e,s,r),j(s,l),j(s,t),j(s,n),j(s,h)},p:T,d(e){e&&o(s)}}}function I(i){let s,l;return{c(){s=z("p"),l=d("Views")},l(t){s=S(t,"P",{});var n=x(s);l=v(n,"Views"),n.forEach(o)},m(t,n){m(t,s,n),j(s,l)},p:T,d(t){t&&o(s)}}}function J(i){let s,l;return{c(){s=z("p"),l=d("Details")},l(t){s=S(t,"P",{});var n=x(s);l=v(n,"Details"),n.forEach(o)},m(t,n){m(t,s,n),j(s,l)},p:T,d(t){t&&o(s)}}}function Q(i){let s,l,t,n,p,h;return s=new w({props:{$$slots:{default:[A]},$$scope:{ctx:i}}}),t=new w({props:{$$slots:{default:[I]},$$scope:{ctx:i}}}),p=new w({props:{$$slots:{default:[J]},$$scope:{ctx:i}}}),{c(){u(s.$$.fragment),l=y(),u(t.$$.fragment),n=y(),u(p.$$.fragment)},l(e){f(s.$$.fragment,e),l=k(e),f(t.$$.fragment,e),n=k(e),f(p.$$.fragment,e)},m(e,r){g(s,e,r),m(e,l,r),g(t,e,r),m(e,n,r),g(p,e,r),h=!0},p(e,r){const a={};r&1&&(a.$$scope={dirty:r,ctx:e}),s.$set(a);const c={};r&1&&(c.$$scope={dirty:r,ctx:e}),t.$set(c);const P={};r&1&&(P.$$scope={dirty:r,ctx:e}),p.$set(P)},i(e){h||($(s.$$.fragment,e),$(t.$$.fragment,e),$(p.$$.fragment,e),h=!0)},o(e){_(s.$$.fragment,e),_(t.$$.fragment,e),_(p.$$.fragment,e),h=!1},d(e){b(s,e),e&&o(l),b(t,e),e&&o(n),b(p,e)}}}function R(i){let s,l;return s=new D({props:{theme:"modern-theme",$$slots:{default:[Q]},$$scope:{ctx:i}}}),{c(){u(s.$$.fragment)},l(t){f(s.$$.fragment,t)},m(t,n){g(s,t,n),l=!0},p(t,n){const p={};n&1&&(p.$$scope={dirty:n,ctx:t}),s.$set(p)},i(t){l||($(s.$$.fragment,t),l=!0)},o(t){_(s.$$.fragment,t),l=!1},d(t){b(s,t)}}}function G(i){let s,l;return{c(){s=z("p"),l=d("statusbar")},l(t){s=S(t,"P",{});var n=x(s);l=v(n,"statusbar"),n.forEach(o)},m(t,n){m(t,s,n),j(s,l)},p:T,d(t){t&&o(s)}}}function K(i){let s,l,t,n,p,h,e,r;return s=new w({props:{size:6,minSize:6,maxSize:6,$$slots:{default:[H]},$$scope:{ctx:i}}}),t=new w({props:{size:6,minSize:6,maxSize:6,$$slots:{default:[L]},$$scope:{ctx:i}}}),p=new w({props:{$$slots:{default:[R]},$$scope:{ctx:i}}}),e=new w({props:{size:6,minSize:6,maxSize:6,$$slots:{default:[G]},$$scope:{ctx:i}}}),{c(){u(s.$$.fragment),l=y(),u(t.$$.fragment),n=y(),u(p.$$.fragment),h=y(),u(e.$$.fragment)},l(a){f(s.$$.fragment,a),l=k(a),f(t.$$.fragment,a),n=k(a),f(p.$$.fragment,a),h=k(a),f(e.$$.fragment,a)},m(a,c){g(s,a,c),m(a,l,c),g(t,a,c),m(a,n,c),g(p,a,c),m(a,h,c),g(e,a,c),r=!0},p(a,c){const P={};c&1&&(P.$$scope={dirty:c,ctx:a}),s.$set(P);const E={};c&1&&(E.$$scope={dirty:c,ctx:a}),t.$set(E);const q={};c&1&&(q.$$scope={dirty:c,ctx:a}),p.$set(q);const B={};c&1&&(B.$$scope={dirty:c,ctx:a}),e.$set(B)},i(a){r||($(s.$$.fragment,a),$(t.$$.fragment,a),$(p.$$.fragment,a),$(e.$$.fragment,a),r=!0)},o(a){_(s.$$.fragment,a),_(t.$$.fragment,a),_(p.$$.fragment,a),_(e.$$.fragment,a),r=!1},d(a){b(s,a),a&&o(l),b(t,a),a&&o(n),b(p,a),a&&o(h),b(e,a)}}}function N(i){let s,l;return s=new D({props:{theme:"no-splitter",horizontal:!0,style:"height: 400px",dblClickSplitter:!1,$$slots:{default:[K]},$$scope:{ctx:i}}}),{c(){u(s.$$.fragment)},l(t){f(s.$$.fragment,t)},m(t,n){g(s,t,n),l=!0},p(t,[n]){const p={};n&1&&(p.$$scope={dirty:n,ctx:t}),s.$set(p)},i(t){l||($(s.$$.fragment,t),l=!0)},o(t){_(s.$$.fragment,t),l=!1},d(t){b(s,t)}}}class U extends M{constructor(s){super(),C(this,s,null,N,F,{})}}const W=`<script>
+import{S as E,i as M,s as Y,O as g,P as $,Q as _,n as b,o as d,T as S,a as P,f as w,j as u,g as i,e as z,I as j,b as v,d as k,J as f,k as m,L as T}from"../chunks/external.c3018815.js";import{E as D}from"../chunks/ExampleArea.6fa185e2.js";import{S as F,P as y}from"../chunks/svelte-splitpanes.ade26b14.js";const O=!0,ns=Object.freeze(Object.defineProperty({__proto__:null,prerender:O},Symbol.toStringTag,{value:"Module"}));function H(h){let s,l;return{c(){s=z("p"),l=j("MenuBar - This is a splitpane, note how the splitters made static using CSS")},l(t){s=v(t,"P",{});var e=k(s);l=f(e,"MenuBar - This is a splitpane, note how the splitters made static using CSS"),e.forEach(i)},m(t,e){u(t,s,e),m(s,l)},p:T,d(t){t&&i(s)}}}function L(h){let s,l;return{c(){s=z("p"),l=j("ToolBar - This is another fixed size, locked splitpane")},l(t){s=v(t,"P",{});var e=k(s);l=f(e,"ToolBar - This is another fixed size, locked splitpane"),e.forEach(i)},m(t,e){u(t,s,e),m(s,l)},p:T,d(t){t&&i(s)}}}function R(h){let s,l,t,e,r=">",o;return{c(){s=z("p"),l=j("Folder"),t=z("br"),e=j(`
+					You can move those --`),o=j(r)},l(n){s=v(n,"P",{});var p=k(s);l=f(p,"Folder"),t=v(p,"BR",{}),e=f(p,`
+					You can move those --`),o=f(p,r),p.forEach(i)},m(n,p){u(n,s,p),m(s,l),m(s,t),m(s,e),m(s,o)},p:T,d(n){n&&i(s)}}}function A(h){let s,l;return{c(){s=z("p"),l=j("Sample content")},l(t){s=v(t,"P",{});var e=k(s);l=f(e,"Sample content"),e.forEach(i)},m(t,e){u(t,s,e),m(s,l)},p:T,d(t){t&&i(s)}}}function I(h){let s,l,t,e,r="<",o,n;return{c(){s=z("p"),l=j("Details"),t=z("br"),e=P(),o=j(r),n=j("-- You can move those")},l(p){s=v(p,"P",{});var a=k(s);l=f(a,"Details"),t=v(a,"BR",{}),e=w(a),o=f(a,r),n=f(a,"-- You can move those"),a.forEach(i)},m(p,a){u(p,s,a),m(s,l),m(s,t),m(s,e),m(s,o),m(s,n)},p:T,d(p){p&&i(s)}}}function J(h){let s,l,t,e,r,o;return s=new y({props:{$$slots:{default:[R]},$$scope:{ctx:h}}}),t=new y({props:{$$slots:{default:[A]},$$scope:{ctx:h}}}),r=new y({props:{$$slots:{default:[I]},$$scope:{ctx:h}}}),{c(){g(s.$$.fragment),l=P(),g(t.$$.fragment),e=P(),g(r.$$.fragment)},l(n){$(s.$$.fragment,n),l=w(n),$(t.$$.fragment,n),e=w(n),$(r.$$.fragment,n)},m(n,p){_(s,n,p),u(n,l,p),_(t,n,p),u(n,e,p),_(r,n,p),o=!0},p(n,p){const a={};p&1&&(a.$$scope={dirty:p,ctx:n}),s.$set(a);const c={};p&1&&(c.$$scope={dirty:p,ctx:n}),t.$set(c);const x={};p&1&&(x.$$scope={dirty:p,ctx:n}),r.$set(x)},i(n){o||(b(s.$$.fragment,n),b(t.$$.fragment,n),b(r.$$.fragment,n),o=!0)},o(n){d(s.$$.fragment,n),d(t.$$.fragment,n),d(r.$$.fragment,n),o=!1},d(n){S(s,n),n&&i(l),S(t,n),n&&i(e),S(r,n)}}}function Q(h){let s,l;return s=new F({props:{theme:"modern-theme",$$slots:{default:[J]},$$scope:{ctx:h}}}),{c(){g(s.$$.fragment)},l(t){$(s.$$.fragment,t)},m(t,e){_(s,t,e),l=!0},p(t,e){const r={};e&1&&(r.$$scope={dirty:e,ctx:t}),s.$set(r)},i(t){l||(b(s.$$.fragment,t),l=!0)},o(t){d(s.$$.fragment,t),l=!1},d(t){S(s,t)}}}function G(h){let s,l;return{c(){s=z("p"),l=j("statusbar - and yet, another splitpane, same technique")},l(t){s=v(t,"P",{});var e=k(s);l=f(e,"statusbar - and yet, another splitpane, same technique"),e.forEach(i)},m(t,e){u(t,s,e),m(s,l)},p:T,d(t){t&&i(s)}}}function K(h){let s,l,t,e,r,o,n,p;return s=new y({props:{size:6,minSize:6,maxSize:6,$$slots:{default:[H]},$$scope:{ctx:h}}}),t=new y({props:{size:6,minSize:6,maxSize:6,$$slots:{default:[L]},$$scope:{ctx:h}}}),r=new y({props:{$$slots:{default:[Q]},$$scope:{ctx:h}}}),n=new y({props:{size:6,minSize:6,maxSize:6,$$slots:{default:[G]},$$scope:{ctx:h}}}),{c(){g(s.$$.fragment),l=P(),g(t.$$.fragment),e=P(),g(r.$$.fragment),o=P(),g(n.$$.fragment)},l(a){$(s.$$.fragment,a),l=w(a),$(t.$$.fragment,a),e=w(a),$(r.$$.fragment,a),o=w(a),$(n.$$.fragment,a)},m(a,c){_(s,a,c),u(a,l,c),_(t,a,c),u(a,e,c),_(r,a,c),u(a,o,c),_(n,a,c),p=!0},p(a,c){const x={};c&1&&(x.$$scope={dirty:c,ctx:a}),s.$set(x);const q={};c&1&&(q.$$scope={dirty:c,ctx:a}),t.$set(q);const C={};c&1&&(C.$$scope={dirty:c,ctx:a}),r.$set(C);const B={};c&1&&(B.$$scope={dirty:c,ctx:a}),n.$set(B)},i(a){p||(b(s.$$.fragment,a),b(t.$$.fragment,a),b(r.$$.fragment,a),b(n.$$.fragment,a),p=!0)},o(a){d(s.$$.fragment,a),d(t.$$.fragment,a),d(r.$$.fragment,a),d(n.$$.fragment,a),p=!1},d(a){S(s,a),a&&i(l),S(t,a),a&&i(e),S(r,a),a&&i(o),S(n,a)}}}function N(h){let s,l;return s=new F({props:{theme:"no-splitter",horizontal:!0,style:"height: 400px",dblClickSplitter:!1,$$slots:{default:[K]},$$scope:{ctx:h}}}),{c(){g(s.$$.fragment)},l(t){$(s.$$.fragment,t)},m(t,e){_(s,t,e),l=!0},p(t,[e]){const r={};e&1&&(r.$$scope={dirty:e,ctx:t}),s.$set(r)},i(t){l||(b(s.$$.fragment,t),l=!0)},o(t){d(s.$$.fragment,t),l=!1},d(t){S(s,t)}}}class U extends E{constructor(s){super(),M(this,s,null,N,Y,{})}}const V=`<script>
 	import { Pane, Splitpanes } from 'svelte-splitpanes';
 <\/script>
 
 <Splitpanes theme="no-splitter" horizontal style="height: 400px" dblClickSplitter={false}>
 	<Pane size={6} minSize={6} maxSize={6}>
-		<p>MenuBar</p>
+		<p>MenuBar - This is a splitpane, note how the splitters made static using CSS</p>
 	</Pane>
 	<Pane size={6} minSize={6} maxSize={6}>
-		<p>ToolBar</p>
+		<p>ToolBar - This is another fixed size, locked splitpane</p>
 	</Pane>
 	<Pane>
 		<Splitpanes theme="modern-theme">
 			<Pane>
 				<p>
 					Folder<br />
-					Try those --{'>'}
+					You can move those --{'>'}
 				</p>
 			</Pane>
 			<Pane>
-				<p>Views</p>
+				<p>Sample content</p>
 			</Pane>
 			<Pane>
-				<p>Details</p>
+				<p>
+					Details<br />
+					{'<'}-- You can move those
+				</p>
 			</Pane>
 		</Splitpanes>
 	</Pane>
 	<Pane size={6} minSize={6} maxSize={6}>
-		<p>statusbar</p>
+		<p>statusbar - and yet, another splitpane, same technique</p>
 	</Pane>
 </Splitpanes>
 
@@ -96,35 +99,38 @@ import{S as M,i as C,s as F,O as u,P as f,Q as g,n as $,o as _,T as b,a as y,f a
 		}
 	}
 </style>
-`,X=`<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
+`,W=`<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
 	<span class="hljs-keyword">import</span> { <span class="hljs-title class_">Pane</span>, <span class="hljs-title class_">Splitpanes</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;svelte-splitpanes&#x27;</span>;
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 
 <span class="hljs-tag">&lt;<span class="hljs-name">Splitpanes</span> <span class="hljs-attr">theme</span>=<span class="hljs-string">&quot;no-splitter&quot;</span> <span class="hljs-attr">horizontal</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;height: 400px&quot;</span> <span class="hljs-attr">dblClickSplitter</span>=<span class="hljs-string">{false}</span>&gt;</span>
 	<span class="hljs-tag">&lt;<span class="hljs-name">Pane</span> <span class="hljs-attr">size</span>=<span class="hljs-string">{6}</span> <span class="hljs-attr">minSize</span>=<span class="hljs-string">{6}</span> <span class="hljs-attr">maxSize</span>=<span class="hljs-string">{6}</span>&gt;</span>
-		<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>MenuBar<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>MenuBar - This is a splitpane, note how the splitters made static using CSS<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 	<span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
 	<span class="hljs-tag">&lt;<span class="hljs-name">Pane</span> <span class="hljs-attr">size</span>=<span class="hljs-string">{6}</span> <span class="hljs-attr">minSize</span>=<span class="hljs-string">{6}</span> <span class="hljs-attr">maxSize</span>=<span class="hljs-string">{6}</span>&gt;</span>
-		<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>ToolBar<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>ToolBar - This is another fixed size, locked splitpane<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 	<span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
 	<span class="hljs-tag">&lt;<span class="hljs-name">Pane</span>&gt;</span>
 		<span class="hljs-tag">&lt;<span class="hljs-name">Splitpanes</span> <span class="hljs-attr">theme</span>=<span class="hljs-string">&quot;modern-theme&quot;</span>&gt;</span>
 			<span class="hljs-tag">&lt;<span class="hljs-name">Pane</span>&gt;</span>
 				<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>
 					Folder<span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span>
-					Try those --{&#x27;&gt;&#x27;}
+					You can move those --{&#x27;&gt;&#x27;}
 				<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 			<span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
 			<span class="hljs-tag">&lt;<span class="hljs-name">Pane</span>&gt;</span>
-				<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Views<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+				<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Sample content<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 			<span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
 			<span class="hljs-tag">&lt;<span class="hljs-name">Pane</span>&gt;</span>
-				<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Details<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+				<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>
+					Details<span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span>
+					{&#x27;&lt;&#x27;}-- You can move those
+				<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 			<span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
 		<span class="hljs-tag">&lt;/<span class="hljs-name">Splitpanes</span>&gt;</span>
 	<span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
 	<span class="hljs-tag">&lt;<span class="hljs-name">Pane</span> <span class="hljs-attr">size</span>=<span class="hljs-string">{6}</span> <span class="hljs-attr">minSize</span>=<span class="hljs-string">{6}</span> <span class="hljs-attr">maxSize</span>=<span class="hljs-string">{6}</span>&gt;</span>
-		<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>statusbar<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>statusbar - and yet, another splitpane, same technique<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 	<span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">Splitpanes</span>&gt;</span>
 
@@ -192,6 +198,6 @@ import{S as M,i as C,s as F,O as u,P as f,Q as g,n as $,o as _,T as b,a as y,f a
 		}
 	}
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
-`,Y={code:W,highlightedHTML:X,component:U};function Z(i){let s,l,t,n,p,h,e,r;return e=new V({props:{example:Y}}),{c(){s=z("h2"),l=d("Styling Splitters - Modern"),t=y(),n=z("p"),p=d(`This examples brings few new concepts over the previous one, however it tries to formalize how CSS styling could be
-	applied to panes in order to achieve the desired layout.`),h=y(),u(e.$$.fragment)},l(a){s=S(a,"H2",{});var c=x(s);l=v(c,"Styling Splitters - Modern"),c.forEach(o),t=k(a),n=S(a,"P",{});var P=x(n);p=v(P,`This examples brings few new concepts over the previous one, however it tries to formalize how CSS styling could be
-	applied to panes in order to achieve the desired layout.`),P.forEach(o),h=k(a),f(e.$$.fragment,a)},m(a,c){m(a,s,c),j(s,l),m(a,t,c),m(a,n,c),j(n,p),m(a,h,c),g(e,a,c),r=!0},p:T,i(a){r||($(e.$$.fragment,a),r=!0)},o(a){_(e.$$.fragment,a),r=!1},d(a){a&&o(s),a&&o(t),a&&o(n),a&&o(h),b(e,a)}}}class es extends M{constructor(s){super(),C(this,s,null,Z,F,{})}}export{es as component,ns as universal};
+`,X={code:V,highlightedHTML:W,component:U};function Z(h){let s,l,t,e,r,o,n,p;return n=new D({props:{example:X}}),{c(){s=z("h2"),l=j("Styling Splitters - Modern"),t=P(),e=z("p"),r=j(`This examples uses CSS styles to pixel size panes and lock them in place. applied to panes in order to achieve the
+	desired layout.`),o=P(),g(n.$$.fragment)},l(a){s=v(a,"H2",{});var c=k(s);l=f(c,"Styling Splitters - Modern"),c.forEach(i),t=w(a),e=v(a,"P",{});var x=k(e);r=f(x,`This examples uses CSS styles to pixel size panes and lock them in place. applied to panes in order to achieve the
+	desired layout.`),x.forEach(i),o=w(a),$(n.$$.fragment,a)},m(a,c){u(a,s,c),m(s,l),u(a,t,c),u(a,e,c),m(e,r),u(a,o,c),_(n,a,c),p=!0},p:T,i(a){p||(b(n.$$.fragment,a),p=!0)},o(a){d(n.$$.fragment,a),p=!1},d(a){a&&i(s),a&&i(t),a&&i(e),a&&i(o),S(n,a)}}}class es extends E{constructor(s){super(),M(this,s,null,Z,Y,{})}}export{es as component,ns as universal};
