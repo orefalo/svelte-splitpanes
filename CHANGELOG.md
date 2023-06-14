@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.7.15](https://github.com/orefalo/svelte-splitpanes/compare/v0.7.14...v0.7.15) (2023-06-14)
+
+
+### Bug Fixes
+
+* fix issue 69 - dblClickSplitter={false} does not disable auto-resizing ([8e38809](https://github.com/orefalo/svelte-splitpanes/commit/8e38809b59fb28bbe89816300f3325347e1d6424))
+* set-output is deprecated ([451509b](https://github.com/orefalo/svelte-splitpanes/commit/451509b4f83b39de6f0cbc36c8a7dcde9a495796))
+
 ## [0.7.14](https://github.com/orefalo/svelte-splitpanes/compare/v0.7.13...v0.7.14) (2023-06-03)
 
 
