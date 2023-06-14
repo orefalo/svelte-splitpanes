@@ -6,6 +6,7 @@
 	{#each { length: 8 } as _, i}
 		<Pane minSize={5}>
 			<span>{i + 1}</span>
+			<p>Double click splitter -></p>
 		</Pane>
 	{/each}
 </Splitpanes>

@@ -6,7 +6,7 @@
 	<Pane />
 
 	<Pane snapSize={10}>
-		<span style="font-size: 20px;"> I have a snap size of 10% </span>
+		<p>Try shrinking my size, not how I snap below 10% size</p>
 	</Pane>
 
 	<Pane />

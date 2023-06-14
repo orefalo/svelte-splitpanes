@@ -7,8 +7,8 @@
 <h2>Styling Splitters - Modern</h2>
 
 <p>
-	This examples brings few new concepts over the previous one, however it tries to formalize how CSS styling could be
-	applied to panes in order to achieve the desired layout.
+	This examples uses CSS styles to pixel size panes and lock them in place. applied to panes in order to achieve the
+	desired layout.
 </p>
 
 <ExampleArea {example} />

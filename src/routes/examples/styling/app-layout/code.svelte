@@ -4,29 +4,32 @@
 
 <Splitpanes theme="no-splitter" horizontal style="height: 400px" dblClickSplitter={false}>
 	<Pane size={6} minSize={6} maxSize={6}>
-		<p>MenuBar</p>
+		<p>MenuBar - This is a splitpane, note how the splitters made static using CSS</p>
 	</Pane>
 	<Pane size={6} minSize={6} maxSize={6}>
-		<p>ToolBar</p>
+		<p>ToolBar - This is another fixed size, locked splitpane</p>
 	</Pane>
 	<Pane>
 		<Splitpanes theme="modern-theme">
 			<Pane>
 				<p>
 					Folder<br />
-					Try those --{'>'}
+					You can move those --{'>'}
 				</p>
 			</Pane>
 			<Pane>
-				<p>Views</p>
+				<p>Sample content</p>
 			</Pane>
 			<Pane>
-				<p>Details</p>
+				<p>
+					Details<br />
+					{'<'}-- You can move those
+				</p>
 			</Pane>
 		</Splitpanes>
 	</Pane>
 	<Pane size={6} minSize={6} maxSize={6}>
-		<p>statusbar</p>
+		<p>statusbar - and yet, another splitpane, same technique</p>
 	</Pane>
 </Splitpanes>
 

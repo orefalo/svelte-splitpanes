@@ -20,6 +20,7 @@
 			pages: [
 				{ title: 'Min-Max', path: '/examples/min-max' },
 				{ title: 'Default Size', path: '/examples/default-size' },
+				{ title: 'Disable Double Click', path: '/examples/disable-dbl-click' },
 				{ title: 'Lock Layout', path: '/examples/lock-layout' },
 				{ title: 'Push Other Panes', path: '/examples/push-other-panes' },
 				{ title: 'Add Remove Panes', path: '/examples/add-remove-panes' },
@@ -42,7 +43,7 @@
 			title: 'Styling',
 			pages: [
 				{ title: 'Style Splitters', path: '/examples/styling/splitters' },
-				{ title: 'Style Splitters Modern', path: '/examples/styling/splitters-modern' }
+				{ title: 'App Layout', path: '/examples/styling/app-layout' }
 			]
 		}
 	];
