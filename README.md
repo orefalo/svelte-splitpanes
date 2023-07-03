@@ -1,3 +1,5 @@
+![logo](./static/favicon.svg)
+
 # Svelte-Splitpanes
 
 [![npm](https://badgen.net/npm/v/svelte-splitpanes)](https://www.npmjs.com/package/svelte-splitpanes)

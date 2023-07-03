@@ -106,6 +106,7 @@
 	{#if $veryFirstPaneKey !== key || $showFirstSplitter}
 		<!-- this a11y issue is known, and will be taken care of as part of the a11y feature issue in #11 -->
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<!-- svelte-ignore a11y-no-static-element-interactions -->
 		<div
 			class="splitpanes__splitter {isSplitterActive ? 'splitpanes__splitter__active' : ''}"
 			on:mousedown={carefullClientCallbacks('onSplitterDown')}
@@ -118,6 +119,7 @@
 	<!-- Pane -->
 	<!-- this a11y issue is known, and will be taken care of as part of the a11y feature issue in #11 -->
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
+	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div
 		class={`splitpanes__pane ${clazz || ''}`}
 		bind:this={element}
