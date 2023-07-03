@@ -9,107 +9,16 @@
 		<link href="../_app/immutable/assets/external.131ac458.css" rel="stylesheet">
 		<link href="../_app/immutable/assets/0.815942eb.css" rel="stylesheet">
 		<link href="../_app/immutable/assets/svelte-splitpanes.22acc214.css" rel="stylesheet">
-		<link rel="modulepreload" href="../_app/immutable/entry/start.925d2761.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/external.d956c198.js">
-		<link rel="modulepreload" href="../_app/immutable/entry/app.41eaa038.js">
-		<link rel="modulepreload" href="../_app/immutable/nodes/0.92661cef.js">
-		<link rel="modulepreload" href="../_app/immutable/nodes/11.5ad02ac4.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/ExampleArea.4a3e9740.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/svelte-splitpanes.690467bb.js"><title>Svelte-Splitpanes - Push Other Panes</title><!-- HEAD_svelte-1cl4sjo_START --><meta name="description" content="A Fantastic pane splitter for Svelte"><!-- HTML_TAG_START --><style>pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}.hljs{background:#011627;color:#d6deeb}.hljs-keyword{color:#c792ea;font-style:italic}.hljs-built_in{color:#addb67;font-style:italic}.hljs-type{color:#82aaff}.hljs-literal{color:#ff5874}.hljs-number{color:#f78c6c}.hljs-regexp{color:#5ca7e4}.hljs-string{color:#ecc48d}.hljs-subst{color:#d3423e}.hljs-symbol{color:#82aaff}.hljs-class{color:#ffcb8b}.hljs-function{color:#82aaff}.hljs-title{color:#dcdcaa;font-style:italic}.hljs-params{color:#7fdbca}.hljs-comment{color:#637777;font-style:italic}.hljs-doctag{color:#7fdbca}.hljs-meta,.hljs-meta .hljs-keyword{color:#82aaff}.hljs-meta .hljs-string{color:#ecc48d}.hljs-section{color:#82b1ff}.hljs-attr,.hljs-name,.hljs-tag{color:#7fdbca}.hljs-attribute{color:#80cbc4}.hljs-variable{color:#addb67}.hljs-bullet{color:#d9f5dd}.hljs-code{color:#80cbc4}.hljs-emphasis{color:#c792ea;font-style:italic}.hljs-strong{color:#addb67;font-weight:700}.hljs-formula{color:#c792ea}.hljs-link{color:#ff869a}.hljs-quote{color:#697098;font-style:italic}.hljs-selector-tag{color:#ff6363}.hljs-selector-id{color:#fad430}.hljs-selector-class{color:#addb67;font-style:italic}.hljs-selector-attr,.hljs-selector-pseudo{color:#c792ea;font-style:italic}.hljs-template-tag{color:#c792ea}.hljs-template-variable{color:#addb67}.hljs-addition{color:#addb67ff;font-style:italic}.hljs-deletion{color:#ef535090;font-style:italic}</style><!-- HTML_TAG_END --><!-- HEAD_svelte-1cl4sjo_END -->
+		<link rel="modulepreload" href="../_app/immutable/entry/start.9658f33f.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/external.ebcef968.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/app.ca7d6b90.js">
+		<link rel="modulepreload" href="../_app/immutable/nodes/0.f1c68ec6.js">
+		<link rel="modulepreload" href="../_app/immutable/nodes/11.101361d1.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/ExampleArea.a1faed7b.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/svelte-splitpanes.e1bd6ed9.js"><title>Svelte-Splitpanes - Push Other Panes</title><!-- HEAD_svelte-1cl4sjo_START --><meta name="description" content="A Fantastic pane splitter for Svelte"><!-- HTML_TAG_START --><style>pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}.hljs{background:#011627;color:#d6deeb}.hljs-keyword{color:#c792ea;font-style:italic}.hljs-built_in{color:#addb67;font-style:italic}.hljs-type{color:#82aaff}.hljs-literal{color:#ff5874}.hljs-number{color:#f78c6c}.hljs-regexp{color:#5ca7e4}.hljs-string{color:#ecc48d}.hljs-subst{color:#d3423e}.hljs-symbol{color:#82aaff}.hljs-class{color:#ffcb8b}.hljs-function{color:#82aaff}.hljs-title{color:#dcdcaa;font-style:italic}.hljs-params{color:#7fdbca}.hljs-comment{color:#637777;font-style:italic}.hljs-doctag{color:#7fdbca}.hljs-meta,.hljs-meta .hljs-keyword{color:#82aaff}.hljs-meta .hljs-string{color:#ecc48d}.hljs-section{color:#82b1ff}.hljs-attr,.hljs-name,.hljs-tag{color:#7fdbca}.hljs-attribute{color:#80cbc4}.hljs-variable{color:#addb67}.hljs-bullet{color:#d9f5dd}.hljs-code{color:#80cbc4}.hljs-emphasis{color:#c792ea;font-style:italic}.hljs-strong{color:#addb67;font-weight:700}.hljs-formula{color:#c792ea}.hljs-link{color:#ff869a}.hljs-quote{color:#697098;font-style:italic}.hljs-selector-tag{color:#ff6363}.hljs-selector-id{color:#fad430}.hljs-selector-class{color:#addb67;font-style:italic}.hljs-selector-attr,.hljs-selector-pseudo{color:#c792ea;font-style:italic}.hljs-template-tag{color:#c792ea}.hljs-template-variable{color:#addb67}.hljs-addition{color:#addb67ff;font-style:italic}.hljs-deletion{color:#ef535090;font-style:italic}</style><!-- HTML_TAG_END --><!-- HEAD_svelte-1cl4sjo_END -->
 	</head>
 	<body>
-		<div>
-
-
-
-
-<div class="page-container svelte-1xp6paq"><div role="presentation" class="toc-container-space svelte-1xp6paq"></div>
-
-	<main class="svelte-1xp6paq"><h2>Lots of splitters &amp; push other panes - all panes have a min width of 5%</h2>
-
-<div><div class="splitpanes default-theme   splitpanes--vertical  splitpanes--freeze" style="height: 400px">
-	
-	
-
-	
-	
-	
-	<div class="splitpanes__pane " style="width: 12.5%;"><span>1</span>
-			<p>Double click splitter -&gt;</p>
-		</div>
-	
-		
-		<div class="splitpanes__splitter "></div>
-
-	
-	
-	
-	<div class="splitpanes__pane " style="width: 12.5%;"><span>2</span>
-			<p>Double click splitter -&gt;</p>
-		</div>
-	
-		
-		<div class="splitpanes__splitter "></div>
-
-	
-	
-	
-	<div class="splitpanes__pane " style="width: 12.5%;"><span>3</span>
-			<p>Double click splitter -&gt;</p>
-		</div>
-	
-		
-		<div class="splitpanes__splitter "></div>
-
-	
-	
-	
-	<div class="splitpanes__pane " style="width: 12.5%;"><span>4</span>
-			<p>Double click splitter -&gt;</p>
-		</div>
-	
-		
-		<div class="splitpanes__splitter "></div>
-
-	
-	
-	
-	<div class="splitpanes__pane " style="width: 12.5%;"><span>5</span>
-			<p>Double click splitter -&gt;</p>
-		</div>
-	
-		
-		<div class="splitpanes__splitter "></div>
-
-	
-	
-	
-	<div class="splitpanes__pane " style="width: 12.5%;"><span>6</span>
-			<p>Double click splitter -&gt;</p>
-		</div>
-	
-		
-		<div class="splitpanes__splitter "></div>
-
-	
-	
-	
-	<div class="splitpanes__pane " style="width: 12.5%;"><span>7</span>
-			<p>Double click splitter -&gt;</p>
-		</div>
-	
-		
-		<div class="splitpanes__splitter "></div>
-
-	
-	
-	
-	<div class="splitpanes__pane " style="width: 12.5%;"><span>8</span>
-			<p>Double click splitter -&gt;</p>
-		</div>
-</div>
-
-	<pre data-language="svelte"><code class="hljs"><!-- HTML_TAG_START --><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
+		<div>   <div class="page-container svelte-1xp6paq"><div role="presentation" class="toc-container-space svelte-1xp6paq"></div> <main class="svelte-1xp6paq"><h2 data-svelte-h="svelte-1ifg03p">Lots of splitters &amp; push other panes - all panes have a min width of 5%</h2> <div><div class="splitpanes default-theme   splitpanes--vertical  splitpanes--freeze" style="height: 400px">       <div class="splitpanes__pane " style="width: 12.5%;"><span>1</span> <p data-svelte-h="svelte-1atcipd">Double click splitter -&gt;</p> </div>    <div class="splitpanes__splitter "></div>     <div class="splitpanes__pane " style="width: 12.5%;"><span>2</span> <p data-svelte-h="svelte-1atcipd">Double click splitter -&gt;</p> </div>    <div class="splitpanes__splitter "></div>     <div class="splitpanes__pane " style="width: 12.5%;"><span>3</span> <p data-svelte-h="svelte-1atcipd">Double click splitter -&gt;</p> </div>    <div class="splitpanes__splitter "></div>     <div class="splitpanes__pane " style="width: 12.5%;"><span>4</span> <p data-svelte-h="svelte-1atcipd">Double click splitter -&gt;</p> </div>    <div class="splitpanes__splitter "></div>     <div class="splitpanes__pane " style="width: 12.5%;"><span>5</span> <p data-svelte-h="svelte-1atcipd">Double click splitter -&gt;</p> </div>    <div class="splitpanes__splitter "></div>     <div class="splitpanes__pane " style="width: 12.5%;"><span>6</span> <p data-svelte-h="svelte-1atcipd">Double click splitter -&gt;</p> </div>    <div class="splitpanes__splitter "></div>     <div class="splitpanes__pane " style="width: 12.5%;"><span>7</span> <p data-svelte-h="svelte-1atcipd">Double click splitter -&gt;</p> </div>    <div class="splitpanes__splitter "></div>     <div class="splitpanes__pane " style="width: 12.5%;"><span>8</span> <p data-svelte-h="svelte-1atcipd">Double click splitter -&gt;</p> </div> </div> <pre data-language="svelte"><code class="hljs"><!-- HTML_TAG_START --><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
 	<span class="hljs-keyword">import</span> { <span class="hljs-title class_">Pane</span>, <span class="hljs-title class_">Splitpanes</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;svelte-splitpanes&#x27;</span>;
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 
@@ -121,59 +30,12 @@
 		<span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
 	{/each}
 <span class="hljs-tag">&lt;/<span class="hljs-name">Splitpanes</span>&gt;</span>
-<!-- HTML_TAG_END --></code></pre></div>
-
-		<div class="controls svelte-1xp6paq"><div class="svelte-1xp6paq"><span class="svelte-1xp6paq">previous</span>
-				<a data-sveltekit-preload-data href="/svelte-splitpanes/examples/lock-layout" class="svelte-1xp6paq">Lock Layout</a></div>
-
-			<div class="svelte-1xp6paq"><span class="svelte-1xp6paq">next</span>
-				<a data-sveltekit-preload-data href="/svelte-splitpanes/examples/add-remove-panes" class="svelte-1xp6paq">Add Remove Panes</a></div></div></main>
-
-	<div class="toc-container svelte-1xp6paq"><div role="presentation" class="toc-contents-wrap svelte-1xp6paq"><h1 class="toc-head svelte-1xp6paq"><img src="/svelte-splitpanes/favicon.svg" alt="Icon" width="30" height="30"> Svelte-Splitpane</h1>
-			<nav aria-label="Docs" class="svelte-6bn3ki"><ul class="sidebar svelte-6bn3ki"><li class="svelte-6bn3ki"><span class="section svelte-6bn3ki">Getting started</span>
-
-				<ul class="svelte-6bn3ki"><li class="svelte-6bn3ki"><a data-sveltekit-preload-data class="page svelte-6bn3ki" href="/svelte-splitpanes/">Introduction</a>
-						</li></ul>
-			</li><li class="svelte-6bn3ki"><span class="section svelte-6bn3ki">General Examples</span>
-
-				<ul class="svelte-6bn3ki"><li class="svelte-6bn3ki"><a data-sveltekit-preload-data class="page svelte-6bn3ki" href="/svelte-splitpanes/examples/min-max">Min-Max</a>
-						</li><li class="svelte-6bn3ki"><a data-sveltekit-preload-data class="page svelte-6bn3ki" href="/svelte-splitpanes/examples/default-size">Default Size</a>
-						</li><li class="svelte-6bn3ki"><a data-sveltekit-preload-data class="page svelte-6bn3ki" href="/svelte-splitpanes/examples/disable-dbl-click">Disable Double Click</a>
-						</li><li class="svelte-6bn3ki"><a data-sveltekit-preload-data class="page svelte-6bn3ki" href="/svelte-splitpanes/examples/lock-layout">Lock Layout</a>
-						</li><li class="svelte-6bn3ki"><a data-sveltekit-preload-data class="page svelte-6bn3ki" aria-current="page" href="/svelte-splitpanes/examples/push-other-panes">Push Other Panes</a>
-						</li><li class="svelte-6bn3ki"><a data-sveltekit-preload-data class="page svelte-6bn3ki" href="/svelte-splitpanes/examples/add-remove-panes">Add Remove Panes</a>
-						</li><li class="svelte-6bn3ki"><a data-sveltekit-preload-data class="page svelte-6bn3ki" href="/svelte-splitpanes/examples/reordering-panes">Reordering Panes</a>
-						</li><li class="svelte-6bn3ki"><a data-sveltekit-preload-data class="page svelte-6bn3ki" href="/svelte-splitpanes/examples/change-orientation">ChangeOrientation</a>
-						</li><li class="svelte-6bn3ki"><a data-sveltekit-preload-data class="page svelte-6bn3ki" href="/svelte-splitpanes/examples/prog-resize">Prog Resize</a>
-						</li><li class="svelte-6bn3ki"><a data-sveltekit-preload-data class="page svelte-6bn3ki" href="/svelte-splitpanes/examples/toggle-panes">Toggle Panes</a>
-						</li><li class="svelte-6bn3ki"><a data-sveltekit-preload-data class="page svelte-6bn3ki" href="/svelte-splitpanes/examples/listen-to-events">Listen To Events</a>
-						</li></ul>
-			</li><li class="svelte-6bn3ki"><span class="section svelte-6bn3ki">Snap</span>
-
-				<ul class="svelte-6bn3ki"><li class="svelte-6bn3ki"><a data-sveltekit-preload-data class="page svelte-6bn3ki" href="/svelte-splitpanes/examples/snap/simple">Simple Snap</a>
-						</li><li class="svelte-6bn3ki"><a data-sveltekit-preload-data class="page svelte-6bn3ki" href="/svelte-splitpanes/examples/snap/middle">Middle Snap</a>
-						</li><li class="svelte-6bn3ki"><a data-sveltekit-preload-data class="page svelte-6bn3ki" href="/svelte-splitpanes/examples/snap/min-max">Min-Max Snap</a>
-						</li></ul>
-			</li><li class="svelte-6bn3ki"><span class="section svelte-6bn3ki">Styling</span>
-
-				<ul class="svelte-6bn3ki"><li class="svelte-6bn3ki"><a data-sveltekit-preload-data class="page svelte-6bn3ki" href="/svelte-splitpanes/examples/styling/splitters">Style Splitters</a>
-						</li><li class="svelte-6bn3ki"><a data-sveltekit-preload-data class="page svelte-6bn3ki" href="/svelte-splitpanes/examples/styling/app-layout">App Layout</a>
-						</li></ul>
-			</li></ul>
-</nav></div>
-
-		<div class="input-output-toggle svelte-snxs5h">Splitpane direction:
-	<span aria-hidden="true">LTR</span>
-	<button aria-pressed="false" class="svelte-ki38mm"><span style="display: none;">RTL direction</span>
-</button> <span aria-hidden="true">RTL</span>
-</div></div>
-</div>
-
-
+<!-- HTML_TAG_END --></code></pre></div> <div class="controls svelte-1xp6paq"><div class="svelte-1xp6paq"><span class="svelte-1xp6paq" data-svelte-h="svelte-mb3ar">previous</span> <a data-sveltekit-preload-data href="/svelte-splitpanes/examples/lock-layout" class="svelte-1xp6paq">Lock Layout</a></div> <div class="svelte-1xp6paq"><span class="svelte-1xp6paq" data-svelte-h="svelte-12eob6n">next</span> <a data-sveltekit-preload-data href="/svelte-splitpanes/examples/add-remove-panes" class="svelte-1xp6paq">Add Remove Panes</a></div></div></main> <div class="toc-container svelte-1xp6paq"><div role="presentation" class="toc-contents-wrap svelte-1xp6paq"><h1 class="toc-head svelte-1xp6paq"><img src="/svelte-splitpanes/favicon.svg" alt="Icon" width="30" height="30"> Svelte-Splitpane</h1> <nav aria-label="Docs" class="svelte-6bn3ki"><ul class="sidebar svelte-6bn3ki"><li class="svelte-6bn3ki"><span class="section svelte-6bn3ki">Getting started</span> <ul class="svelte-6bn3ki"><li class="svelte-6bn3ki"><a data-sveltekit-preload-data class="page svelte-6bn3ki" href="/svelte-splitpanes/">Introduction</a> </li></ul> </li><li class="svelte-6bn3ki"><span class="section svelte-6bn3ki">General Examples</span> <ul class="svelte-6bn3ki"><li class="svelte-6bn3ki"><a data-sveltekit-preload-data class="page svelte-6bn3ki" href="/svelte-splitpanes/examples/min-max">Min-Max</a> </li><li class="svelte-6bn3ki"><a data-sveltekit-preload-data class="page svelte-6bn3ki" href="/svelte-splitpanes/examples/default-size">Default Size</a> </li><li class="svelte-6bn3ki"><a data-sveltekit-preload-data class="page svelte-6bn3ki" href="/svelte-splitpanes/examples/disable-dbl-click">Disable Double Click</a> </li><li class="svelte-6bn3ki"><a data-sveltekit-preload-data class="page svelte-6bn3ki" href="/svelte-splitpanes/examples/lock-layout">Lock Layout</a> </li><li class="svelte-6bn3ki"><a data-sveltekit-preload-data class="page svelte-6bn3ki" aria-current="page" href="/svelte-splitpanes/examples/push-other-panes">Push Other Panes</a> </li><li class="svelte-6bn3ki"><a data-sveltekit-preload-data class="page svelte-6bn3ki" href="/svelte-splitpanes/examples/add-remove-panes">Add Remove Panes</a> </li><li class="svelte-6bn3ki"><a data-sveltekit-preload-data class="page svelte-6bn3ki" href="/svelte-splitpanes/examples/reordering-panes">Reordering Panes</a> </li><li class="svelte-6bn3ki"><a data-sveltekit-preload-data class="page svelte-6bn3ki" href="/svelte-splitpanes/examples/change-orientation">ChangeOrientation</a> </li><li class="svelte-6bn3ki"><a data-sveltekit-preload-data class="page svelte-6bn3ki" href="/svelte-splitpanes/examples/prog-resize">Prog Resize</a> </li><li class="svelte-6bn3ki"><a data-sveltekit-preload-data class="page svelte-6bn3ki" href="/svelte-splitpanes/examples/toggle-panes">Toggle Panes</a> </li><li class="svelte-6bn3ki"><a data-sveltekit-preload-data class="page svelte-6bn3ki" href="/svelte-splitpanes/examples/listen-to-events">Listen To Events</a> </li></ul> </li><li class="svelte-6bn3ki"><span class="section svelte-6bn3ki">Snap</span> <ul class="svelte-6bn3ki"><li class="svelte-6bn3ki"><a data-sveltekit-preload-data class="page svelte-6bn3ki" href="/svelte-splitpanes/examples/snap/simple">Simple Snap</a> </li><li class="svelte-6bn3ki"><a data-sveltekit-preload-data class="page svelte-6bn3ki" href="/svelte-splitpanes/examples/snap/middle">Middle Snap</a> </li><li class="svelte-6bn3ki"><a data-sveltekit-preload-data class="page svelte-6bn3ki" href="/svelte-splitpanes/examples/snap/min-max">Min-Max Snap</a> </li></ul> </li><li class="svelte-6bn3ki"><span class="section svelte-6bn3ki">Styling</span> <ul class="svelte-6bn3ki"><li class="svelte-6bn3ki"><a data-sveltekit-preload-data class="page svelte-6bn3ki" href="/svelte-splitpanes/examples/styling/splitters">Style Splitters</a> </li><li class="svelte-6bn3ki"><a data-sveltekit-preload-data class="page svelte-6bn3ki" href="/svelte-splitpanes/examples/styling/app-layout">App Layout</a> </li></ul> </li></ul> </nav></div> <div class="input-output-toggle svelte-snxs5h">Splitpane direction:
+	<span aria-hidden="true" data-svelte-h="svelte-l92ekb">LTR</span> <button aria-pressed="false" class="svelte-ki38mm"><span style="display: none;">RTL direction</span> </button> <span aria-hidden="true" data-svelte-h="svelte-vcr1ub">RTL</span> </div></div> </div> 
 			
 			<script>
 				{
-					__sveltekit_1xjq0sc = {
+					__sveltekit_1i1nv1a = {
 						assets: "/svelte-splitpanes",
 						base: new URL("..", location).pathname.slice(0, -1),
 						env: {}
@@ -184,8 +46,8 @@
 					const data = [null,null];
 
 					Promise.all([
-						import("../_app/immutable/entry/start.925d2761.js"),
-						import("../_app/immutable/entry/app.41eaa038.js")
+						import("../_app/immutable/entry/start.9658f33f.js"),
+						import("../_app/immutable/entry/app.ca7d6b90.js")
 					]).then(([kit, app]) => {
 						kit.start(app, element, {
 							node_ids: [0, 11],
