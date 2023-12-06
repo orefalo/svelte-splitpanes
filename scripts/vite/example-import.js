@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 
-import sass from 'sass';
+import * as sass from 'sass';
 
 // This Highlight.js loading is based on the code in:
 //  https://github.com/metonym/svelte-highlight/blob/master/src/Highlight.svelte
