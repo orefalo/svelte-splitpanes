@@ -43,8 +43,8 @@
 		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "npm run lint-format && npm run lint-es",
 		"lint-es": "eslint --cache --ignore-path .gitignore **/*.{js,ts,svelte,json,md}",
-		"lint-format": "prettier --ignore-path .gitignore --check --cache --plugin-search-dir=. !./pnpm-lock.yaml !./CHANGELOG.md .",
-		"format": "prettier --ignore-path .gitignore --write --cache --plugin-search-dir=. !./pnpm-lock.yaml !./CHANGELOG.md .",
+		"lint-format": "prettier --ignore-path .gitignore --check --cache --plugin-search-dir=. !**/pnpm-lock.yaml !./CHANGELOG.md .",
+		"format": "prettier --ignore-path .gitignore --write --cache --plugin-search-dir=. !**/pnpm-lock.yaml !./CHANGELOG.md .",
 		"commit": "npx lint-staged && cross-env NO_VERIFY=1 node ./node_modules/cz-customizable/standalone.js",
 		"fetch-and-publish": "node scripts/fetch-and-publish.js"
 	},
