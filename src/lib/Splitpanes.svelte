@@ -1,5 +1,33 @@
-<script context="module">
+<script context="module" lang="ts">
 	export const KEY = {};
+
+	type ResultType = boolean | { passive: boolean };
+	/**
+	 * the third argument for event bundler
+	 * @see https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md
+	 */
+	const thirdEventArg = (() => {
+		let result: ResultType = false;
+
+		try {
+			const arg = Object.defineProperty({}, 'passive', {
+				get() {
+					result = { passive: true };
+					return true;
+				}
+			});
+
+			// @ts-expect-error no overload matches
+			window.addEventListener('testpassive', arg, arg);
+
+			// @ts-expect-error no overload matches
+			window.remove('testpassive', arg, arg);
+		} catch (e) {
+			/* */
+		}
+
+		return result;
+	})();
 </script>
 
 <script lang="ts" strictEvents>
@@ -351,12 +379,11 @@
 	function bindEvents() {
 		document.body.style.cursor = isHorizontal ? 'col-resize' : 'row-resize';
 
-		document.addEventListener('mousemove', onMouseMove, { passive: false });
+		document.addEventListener('mousemove', onMouseMove, thirdEventArg);
 		document.addEventListener('mouseup', onMouseUp);
 
-		// Passive: false to prevent scrolling while touch dragging.
 		if ('ontouchstart' in window) {
-			document.addEventListener('touchmove', onMouseMove, { passive: false });
+			document.addEventListener('touchmove', onMouseMove, thirdEventArg);
 			document.addEventListener('touchend', onMouseUp);
 		}
 	}
