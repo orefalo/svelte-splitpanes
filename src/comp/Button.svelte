@@ -64,7 +64,7 @@
 		locationY: number,
 		locationX: number,
 		scale_ratio: number,
-		timer: NodeJS.Timer;
+		timer: string | number | NodeJS.Timeout;
 
 	let coords = { x: 50, y: 50 };
 
