@@ -204,7 +204,7 @@
 			? {
 					onPaneAdd,
 					onPaneRemove
-			  }
+				}
 			: undefined
 	});
 
@@ -244,7 +244,7 @@
 		}
 
 		const paneForward =
-			<T>(cb: (value: T, pane: IPane) => void, includingFirst = true) =>
+			<T,>(cb: (value: T, pane: IPane) => void, includingFirst = true) =>
 			(value: T) => {
 				if (includingFirst || pane.index > 0) {
 					cb(value, pane);
