@@ -74,7 +74,7 @@ jobs:
       # Install Playwright
       - name: Install Playwright
         # if: steps.cache.outputs.cache-hit != 'true'
-        run: npx playwright install --with-deps
+        run: pnpx exec playwright install --with-deps
 
       # Run Tests
       - name: Test
