@@ -51,7 +51,7 @@ jobs:
 
       - name: Svelte Sync
         if: success() || failure() # Run even if previous failed
-        run: pnpx svelte-kit sync
+        run: pnpx exec svelte-kit sync
 
       - name: Svelte Check
         if: success() || failure() # Run even if previous failed
