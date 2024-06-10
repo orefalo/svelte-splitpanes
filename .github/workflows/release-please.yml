@@ -45,7 +45,7 @@ jobs:
         run: pnpm exec svelte-kit sync
 
       - name: Svelte Package
-        run: npm run package
+        run: pnpm run package
 
       - name: Release Please
         uses: googleapis/release-please-action@v4
@@ -65,8 +65,11 @@ jobs:
           asset_name: svelte-splitpanes-${{ steps.release.outputs.version }}.tgz
           asset_content_type: application/gzip
 
-      - name: NPM Publish
-        if: ${{ steps.release.outputs.release_created }}
+      - name: Set NPM publishing config
+        run: pnpm config set '//registry.npmjs.org/:_authToken' "${NODE_AUTH_TOKEN}"
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: cd package && npm config set _authToken=$NPM_TOKEN && npm publish
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+
+      - name: Publish to NPM
+        if: ${{ steps.release.outputs.release_created }}
+        run: pnpm publish --access=public

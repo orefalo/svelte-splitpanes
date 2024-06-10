@@ -47,20 +47,20 @@ jobs:
         run: pnpm exec svelte-kit sync
 
       - name: Lint
-        run: npm run lint
+        run: pnpm run lint
 
       - name: Svelte Sync
         if: success() || failure() # Run even if previous failed
-        run: npx svelte-kit sync
+        run: pnpx svelte-kit sync
 
       - name: Svelte Check
         if: success() || failure() # Run even if previous failed
-        run: npm run check
+        run: pnpm run check
 
       # Build Frontend
       - name: Build Frontend
         if: success() || failure() # Run even if previous failed
-        run: npm run build
+        run: pnpm run build
 
       # Cache Playwright
       - name: Cache Playwright
@@ -78,7 +78,7 @@ jobs:
 
       # Run Tests
       - name: Test
-        run: npm run test
+        run: pnpm run test
         env:
           DEBUG: pw:webserver
 

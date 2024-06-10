@@ -51,11 +51,11 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Svelte Sync
-        run: npx svelte-kit sync
+        run: pnpx svelte-kit sync
 
       # Build Frontend
       - name: Build Frontend
-        run: npm run build
+        run: pnpm run build
         env:
           BASE_PATH: /svelte-splitpanes
 

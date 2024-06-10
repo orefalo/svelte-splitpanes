@@ -47,16 +47,16 @@ jobs:
         run: pnpm exec svelte-kit sync
 
       - name: Package the lib
-        run: npm run package
+        run: pnpm run package
 
       - name: Setup example test
-        run: npm run example-build:setup
+        run: pnpm run example-build:setup
 
       - name: Build example
-        run: npm run example-build:build
+        run: pnpm run example-build:build
 
       - name: Simple test
-        run: npm run example-build:test
+        run: pnpm run example-build:test
 
       # Upload test results
       - name: Upload example build
