@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.8.1](https://github.com/orefalo/svelte-splitpanes/compare/v0.8.0...v0.8.1) (2024-06-10)
+
+
+### Bug Fixes
+
+* now efficiently identify if client supports passive events, fixes [#74](https://github.com/orefalo/svelte-splitpanes/issues/74) ([f2d7ed1](https://github.com/orefalo/svelte-splitpanes/commit/f2d7ed1da856386287a2065d66c79f9fb63706c3))
+
 ## [0.8.0](https://github.com/orefalo/svelte-splitpanes/compare/v0.7.15...v0.8.0) (2023-07-03)
 
 
