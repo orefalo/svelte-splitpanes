@@ -51,7 +51,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Svelte Sync
-        run: pnpx exec svelte-kit sync
+        run: npx svelte-kit sync
 
       # Build Frontend
       - name: Build Frontend

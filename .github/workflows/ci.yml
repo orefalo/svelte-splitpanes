@@ -44,14 +44,14 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: SvelteKit Sync
-        run: pnpm exec svelte-kit sync
+        run: npx exec svelte-kit sync
 
       - name: Lint
         run: pnpm run lint
 
       - name: Svelte Sync
         if: success() || failure() # Run even if previous failed
-        run: pnpx exec svelte-kit sync
+        run: npx exec svelte-kit sync
 
       - name: Svelte Check
         if: success() || failure() # Run even if previous failed
@@ -74,7 +74,7 @@ jobs:
       # Install Playwright
       - name: Install Playwright
         # if: steps.cache.outputs.cache-hit != 'true'
-        run: pnpx exec playwright install --with-deps
+        run: npx playwright install --with-deps
 
       # Run Tests
       - name: Test
