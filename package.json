@@ -1,8 +1,8 @@
 {
 	"name": "svelte-splitpanes",
 	"private": true,
-	"version": "0.8.0",
-	"description": "A full featured resizable pane layout splitter, ported from vue-splitpanes",
+	"version": "0.8.1",
+	"description": "A full featured resizable pane layout splitter, ported from vue-splitpanes and enhanced",
 	"author": {
 		"name": "Olivier Refalo",
 		"url": "https://github.com/orefalo"
