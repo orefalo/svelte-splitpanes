@@ -1,12 +1,8 @@
 {
 	"name": "svelte-splitpanes",
-	"private": true,
 	"version": "0.8.2",
+	"private": true,
 	"description": "A full featured resizable pane layout splitter, ported from vue-splitpanes and enhanced",
-	"author": {
-		"name": "Olivier Refalo",
-		"url": "https://github.com/orefalo"
-	},
 	"keywords": [
 		"svelte",
 		"component",
@@ -18,83 +14,18 @@
 		"resize",
 		"resizable"
 	],
-	"bugs": "https://github.com/orefalo/svelte-splitpanes/issues",
 	"homepage": "https://orefalo.github.io/svelte-splitpanes/",
+	"bugs": "https://github.com/orefalo/svelte-splitpanes/issues",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/orefalo/svelte-splitpanes"
 	},
 	"license": "MIT",
+	"author": {
+		"name": "Olivier Refalo",
+		"url": "https://github.com/orefalo"
+	},
 	"type": "module",
-	"scripts": {
-		"dev": "cross-env DEV=1 vite dev --port 3000",
-		"build": "vite build && node ./scripts/create-minified-size-badges.js",
-		"package": "npm run package:build && npm run package:pack",
-		"package:build": "rimraf -g ./package/* && svelte-package -o ./package/dist && copyfiles ./README.md ./LICENSE ./package/ && node scripts/package-clean-copy.js",
-		"package:pack": "cd package && npm pack",
-		"preview": "vite preview --port 3000",
-		"prepare": "husky install",
-		"static-serv": "serve -l 3000 --no-clipboard docs",
-		"test": "playwright test",
-		"example-build:setup": "rimraf -g \"./example-temp/!(node_modules)*\" && copyfiles -u 1 \"./example/!(node_modules)*/**/*\" \"./example/!(node_modules)*\" ./example-temp && node ./scripts/example/pnpm-install-project-in-example-temp.js",
-		"example-build:build": "cd example-temp && svelte-kit sync && npm run build",
-		"example-build:test": "node ./scripts/example/verify-example-build.js",
-		"check": "svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
-		"lint": "npm run lint-format && npm run lint-es",
-		"lint-es": "eslint --cache --ignore-path .gitignore .",
-		"lint-format": "prettier --ignore-path .gitignore --check --cache !**/pnpm-lock.yaml !./CHANGELOG.md .",
-		"format": "prettier --ignore-path .gitignore --write --cache !**/pnpm-lock.yaml !./CHANGELOG.md .",
-		"commit": "npx lint-staged && cross-env NO_VERIFY=1 node ./node_modules/cz-customizable/standalone.js",
-		"fetch-and-publish": "node scripts/fetch-and-publish.js"
-	},
-	"devDependencies": {
-		"@commitlint/cli": "19.3.0",
-		"@commitlint/config-conventional": "19.2.2",
-		"@sveltejs/adapter-static": "2.0.3",
-		"@sveltejs/kit": "1.30.4",
-		"@sveltejs/package": "2.3.1",
-		"@typescript-eslint/eslint-plugin": "6.21.0",
-		"@typescript-eslint/parser": "6.21.0",
-		"copyfiles": "2.4.1",
-		"cross-env": "7.0.3",
-		"cz-customizable": "7.0.0",
-		"eslint": "8.57.0",
-		"eslint-config-prettier": "9.1.0",
-		"eslint-plugin-markdown": "3.0.1",
-		"eslint-plugin-svelte3": "4.0.0",
-		"highlight.js": "11.9.0",
-		"husky": "9.0.11",
-		"lint-staged": "15.2.5",
-		"prettier": "3.3.1",
-		"prettier-plugin-svelte": "3.2.4",
-		"rimraf": "5.0.7",
-		"sass": "1.77.4",
-		"svelte": "4.2.18",
-		"svelte-check": "3.8.0",
-		"svelte-highlight": "7.6.1",
-		"svelte-preprocess": "5.1.4",
-		"svelte-range-slider-pips": "2.3.1",
-		"tslib": "2.6.3",
-		"typescript": "4.9.5",
-		"vite": "4.5.3"
-	},
-	"optionalDependencies": {
-		"@playwright/test": "1.44.1",
-		"badge-maker": "3.3.1",
-		"serve": "14.2.3"
-	},
-	"peerDependencies": {
-		"svelte": "^4.2.18"
-	},
-	"config": {
-		"cz-customizable": {
-			"config": ".cz-config.cjs"
-		}
-	},
-	"dependencies": {
-		"esm-env-robust": "0.0.3"
-	},
 	"exports": {
 		"./package.json": "./package.json",
 		".": {
@@ -102,12 +33,80 @@
 			"svelte": "./dist/index.js"
 		}
 	},
+	"svelte": "./dist/index.js",
+	"types": "./dist/index.d.ts",
 	"files": [
 		"dist"
 	],
-	"svelte": "./dist/index.js",
-	"types": "./dist/index.d.ts",
+	"scripts": {
+		"build": "vite build && node ./scripts/create-minified-size-badges.js",
+		"check": "svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
+		"commit": "cross-env node ./node_modules/cz-customizable/standalone.js",
+		"dev": "cross-env DEV=1 vite dev --port 3000",
+		"example-build:build": "cd example-temp && svelte-kit sync && npm run build",
+		"example-build:setup": "rimraf -g \"./example-temp/!(node_modules)*\" && copyfiles -u 1 \"./example/!(node_modules)*/**/*\" \"./example/!(node_modules)*\" ./example-temp && node ./scripts/example/pnpm-install-project-in-example-temp.js",
+		"example-build:test": "node ./scripts/example/verify-example-build.js",
+		"fetch-and-publish": "node scripts/fetch-and-publish.js",
+		"format": "prettier --ignore-path .gitignore --write --cache !**/pnpm-lock.yaml !./CHANGELOG.md .",
+		"lint": "npm run lint-format && npm run lint-es",
+		"lint-es": "eslint --cache --ignore-path .gitignore .",
+		"lint-format": "prettier --ignore-path .gitignore --check --cache !**/pnpm-lock.yaml !./CHANGELOG.md .",
+		"package": "npm run package:build && npm run package:pack",
+		"package:build": "rimraf -g ./package/* && svelte-package -o ./package/dist && copyfiles ./README.md ./LICENSE ./package/ && node scripts/package-clean-copy.js",
+		"package:pack": "cd package && npm pack",
+		"prepare": "husky",
+		"preview": "vite preview --port 3000",
+		"static-serv": "serve -l 3000 --no-clipboard docs",
+		"test": "playwright test"
+	},
+	"config": {
+		"cz-customizable": {
+			"config": ".cz-config.cjs"
+		}
+	},
 	"eslintIgnore": [
 		"node_modules"
-	]
+	],
+	"dependencies": {
+		"esm-env-robust": "0.0.3"
+	},
+	"devDependencies": {
+		"@commitlint/cli": "19.3.0",
+		"@commitlint/config-conventional": "19.2.2",
+		"@sveltejs/adapter-static": "2.0.3",
+		"@sveltejs/kit": "1.30.4",
+		"@sveltejs/package": "2.3.1",
+		"@typescript-eslint/eslint-plugin": "7.13.0",
+		"@typescript-eslint/parser": "7.13.0",
+		"copyfiles": "2.4.1",
+		"cross-env": "7.0.3",
+		"cz-customizable": "7.0.0",
+		"eslint": "8.57.0",
+		"eslint-config-prettier": "9.1.0",
+		"eslint-plugin-markdown": "5.0.0",
+		"eslint-plugin-svelte3": "4.0.0",
+		"highlight.js": "11.9.0",
+		"husky": "9.0.11",
+		"prettier": "3.3.2",
+		"prettier-plugin-svelte": "3.2.4",
+		"rimraf": "5.0.7",
+		"sass": "1.77.5",
+		"svelte": "4.2.18",
+		"svelte-check": "3.8.0",
+		"svelte-highlight": "7.6.1",
+		"svelte-preprocess": "5.1.4",
+		"svelte-range-slider-pips": "2.3.1",
+		"tslib": "2.6.3",
+		"typescript": "4.9.5",
+		"vite": "5.2.13"
+	},
+	"peerDependencies": {
+		"svelte": "^4.2.18"
+	},
+	"optionalDependencies": {
+		"@playwright/test": "1.44.1",
+		"badge-maker": "3.3.1",
+		"serve": "14.2.3"
+	}
 }
