@@ -210,7 +210,7 @@ After setting (or update) the environment (discussed in the previous section), y
 
 ### Commiting changes
 
-* run `pnpm commit`
+- run `pnpm commit`
 
 We have very precise rules over how our git commit messages are formatted. This leads to **more readable messages** that are easy to follow when looking through the **project history**. We use the git messages to **auto-generate the change log**.
 
