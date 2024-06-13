@@ -206,17 +206,17 @@ To build the docs for production-ready version, you need to run `pnpm build`, an
 
 ### Developing
 
-After setting (or update) the environment (discussed in the previous section), you may also excecute SvelteKit in development mode by running `pnpm dev`. This will open a Vite server that automatically changes the result in the browser when the code is updated (hot reload).
+After setting (or update) the environment (discussed in the previous section), you may also excecute SvelteKit in development mode by running `pnpm dev`. This will open a Vite server that automatically changes the result in the browser when the code is updated.
 
 ### Commiting changes
 
-We have very precise rules over how our git commit messages are formatted. This leads to **more readable messages** that are easy to follow when looking through the **project history**. We use the git messages to **auto-generate the change log**.
+* run `pnpm commit`
 
-The enforcement is made possible by the enablement of several tools which, when put together, enable strict goverance.
+We have very precise rules over how our git commit messages are formatted. This leads to **more readable messages** that are easy to follow when looking through the **project history**. We use the git messages to **auto-generate the change log**.
 
 Commits are accepted, as long as they comply to the _commit message format_ described below.
 
-We also require the code to be well-formatted and to pass linting(i.e. minimal ts&svelte checks, plus additional code styling rules). Don't worry, the code is automatically being formatted and verified every time you commit your changes. In addition, when you push your commits to Github(by a PR or directly to the repo), your code will be verfied again by Github Actions with even more checks.
+When you push your commits to Github (by a PR or directly to the repo), your code will be verfied again by Github Actions with code formatting and linting checks. be sure to properly use `pnpm format` and `pnpm lint`
 
 To ease the development and to enforce the process of formatting the code, perform checks and formatting the commit message, you're advised to commit using the following steps:
 

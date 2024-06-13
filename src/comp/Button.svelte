@@ -21,7 +21,7 @@
 		shadowActive = 2,
 		disabled = false;
 
-	let shadows = {
+	const shadows = {
 		none: 'none',
 		1: '0 0 0 1px rgba(0, 0, 0, 0.05)',
 		2: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
@@ -66,8 +66,9 @@
 		scale_ratio: number,
 		timer: string | number | NodeJS.Timeout;
 
-	let coords = { x: 50, y: 50 };
+	const coords = { x: 50, y: 50 };
 
+	// eslint-disable-next-line
 	$: (offsetX = Math.abs(w / 2 - coords.x)),
 		(offsetY = Math.abs(h / 2 - coords.y)),
 		(deltaX = w / 2 + offsetX),

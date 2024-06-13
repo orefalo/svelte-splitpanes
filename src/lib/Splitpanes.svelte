@@ -22,7 +22,7 @@
 
 			// @ts-expect-error no overload matches
 			window.remove('testpassive', arg, arg);
-		} catch (e) {
+		} catch (_e) {
 			/* */
 		}
 
@@ -61,6 +61,7 @@
 	// Suggestions for the `TODO` stuff - collect all the breaking changes and perform them after the sizing in pixels,
 	//  since this is another (possibly) breaking change already?
 
+	// eslint-disable-next-line
 	interface $$Events {
 		/**
 		 * When clicking (or touching) a pane.
@@ -145,7 +146,7 @@
 
 	// PROPS ----------------
 
-	export let id: string = undefined;
+	export let id: string;
 	// horiz or verti?
 	export let horizontal = false;
 	// when true, moving a splitter can push other panes
@@ -190,12 +191,12 @@
 	// panes per insertion order (pane.index is the order index)
 	let panes = new Array<IPane>();
 	// passed to the children via the context - writable to ensure proper reactivity
-	let isHorizontal = writable<boolean>(horizontal);
+	const isHorizontal = writable<boolean>(horizontal);
 	const showFirstSplitter = writable<boolean>(firstSplitter);
 	// tells the key of the very first pane, or undefined if not recieved yet
-	const veryFirstPaneKey = writable<any>(undefined);
-	let activeSplitterElement: HTMLElement | null = null;
-	let activeSplitterDrag: number | null = null;
+	const veryFirstPaneKey = writable<unknown>(undefined);
+	let activeSplitterElement: HTMLElement;
+	let activeSplitterDrag: number;
 	let ssrPaneDefinedSizeSum = 0;
 	let ssrPaneUndefinedSizeCount = 0;
 
@@ -212,9 +213,9 @@
 		}
 	}
 
-	const onPaneInit: PaneInitFunction = (key: any) => {
+	const onPaneInit: PaneInitFunction = (_key) => {
 		if ($veryFirstPaneKey === undefined) {
-			$veryFirstPaneKey = key;
+			$veryFirstPaneKey = _key;
 		}
 
 		return {
@@ -288,7 +289,7 @@
 		};
 	}
 
-	async function onPaneRemove(key: any) {
+	async function onPaneRemove(key: unknown) {
 		// 1. Remove the pane from array and redo indexes.
 		const index = panes.findIndex((p) => p.key === key);
 
@@ -323,9 +324,8 @@
 		dispatch('pane-click', pane);
 	}
 
-	function reportGivenSizeChange(newGivenSize: number | null, pane: IPane) {
+	function reportGivenSizeChange(newGivenSize: number, pane: IPane) {
 		pane.setSz(newGivenSize);
-
 		tickAndResetPaneSizes();
 	}
 
@@ -367,7 +367,7 @@
 			// the try catch is to support old browser, flag is preset to false
 			try {
 				return (containerComputedStyle ?? calcComputedStyle(container)).direction === 'rtl';
-			} catch (err) {
+			} catch (_err) {
 				// We want application to not crush, but don't care about the message
 			}
 		}
@@ -734,7 +734,7 @@
 		// Pushing Down.
 		// Going smaller than the current pane min size: take the previous expanded pane.
 		if (dragPercentage < sums.prevPanesSize + panes[paneBeforeIndex].min()) {
-			paneBeforeIndex = findPrevExpandedPane(splitterIndex)?.index;
+			paneBeforeIndex = findPrevExpandedPane(splitterIndex)?.index || 0;
 
 			sums.prevReachedMinPanes = 0;
 			// If pushing a n-2 or less pane, from splitter, then make sure all in between is at min size.
@@ -763,7 +763,7 @@
 		// Pushing Up.
 		// Pushing up beyond min size is reached: take the next expanded pane.
 		if (dragPercentage > 100 - sums.nextPanesSize - panes[paneAfterIndex].min()) {
-			paneAfterIndex = findNextExpandedPane(splitterIndex)?.index;
+			paneAfterIndex = findNextExpandedPane(splitterIndex)?.index || 0;
 			sums.nextReachedMinPanes = 0;
 			// If pushing a n+2 or more pane, from splitter, then make sure all in between is at min size.
 			if (paneAfterIndex > splitterIndex + 1) {
@@ -839,8 +839,8 @@
 		let definedSizesCount = 0;
 		let undefinedSizesNotReadyCount = 0;
 		let undefinedSizesSum = 0;
-		let ungrowable: IPane[] = [];
-		let unshrinkable: IPane[] = [];
+		const ungrowable: IPane[] = [];
+		const unshrinkable: IPane[] = [];
 
 		for (let i = 0; i < panesCount; i++) {
 			const pane = panes[i];
@@ -908,10 +908,8 @@
 		}
 
 		if (!isFinite(leftToAllocate)) {
-			// eslint-disable-next-line no-console
 			console.warn('Splitpanes: Internal error, sizes might be NaN as a result.');
 		} else if (Math.abs(leftToAllocate) > 0.1) {
-			// eslint-disable-next-line no-console
 			console.warn('Splitpanes: Could not resize panes correctly due to their constraints.');
 		}
 	}
@@ -964,14 +962,13 @@
 		let needReorder = false;
 
 		for (let i = 0; i < children.length; i++) {
-			const child = children.item(i);
+			const child = children.item(i) as Element;
 			const isPane = child.classList.contains('splitpanes__pane');
 			const isSplitter = child.classList.contains('splitpanes__splitter');
 
 			// Node is not a Pane or a splitter: remove it.
 			if (!isPane && !isSplitter) {
 				child.parentNode?.removeChild(child); // el.remove() doesn't work on IE11.
-				// eslint-disable-next-line no-console
 				console.warn(
 					'Splitpanes: Only <Pane> elements are allowed at the root of <Splitpanes>. One of your DOM nodes was removed.'
 				);

@@ -12,7 +12,7 @@ const carefullCallbackGenerator =
 		value: Parameters<CallbacksObject[Callback] extends (value: unknown) => void ? CallbacksObject[Callback] : never>[0]
 	) => {
 		const callbackObject = callbackObjectGetter();
-		if (callbackObject != null) {
+		if (callbackObject !== null) {
 			(callbackObject as Record<Callback, (v: typeof value) => void>)[callbackName](value);
 		}
 	};

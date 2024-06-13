@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte';
 	import { tweened } from 'svelte/motion';
 	import { backOut } from 'svelte/easing';
@@ -10,8 +10,8 @@
 		rippleSize.set(size);
 	});
 
-	const rippleSize = tweened(sizeIn, { duration: speed }),
-		rippleOpacity = tweened(opacityIn, { duration: speed + speed * 2.5, easing: backOut });
+	const rippleSize = tweened(sizeIn, { duration: speed });
+	const rippleOpacity = tweened(opacityIn, { duration: speed + speed * 2.5, easing: backOut });
 </script>
 
 <defs>

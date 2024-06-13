@@ -2,22 +2,23 @@
 	"name": "example",
 	"version": "0.0.1",
 	"private": true,
+	"type": "module",
 	"scripts": {
-		"dev": "vite dev",
 		"build": "vite build",
-		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"dev": "vite dev",
+		"preview": "vite preview"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-static": "^2.0.3",
-		"@sveltejs/kit": "^1.22.4",
-		"svelte": "^4.1.2",
-		"svelte-check": "^3.4.6",
-		"svelte-splitpanes": "^0.8.0",
-		"tslib": "^2.6.1",
-		"typescript": "^4.9.5",
-		"vite": "^4.4.8"
-	},
-	"type": "module"
+		"@sveltejs/adapter-static": "^3.0.1",
+		"@sveltejs/kit": "^2.5.10",
+		"@sveltejs/vite-plugin-svelte": "^3.1.1",
+		"svelte": "^4.2.18",
+		"svelte-check": "^3.8.0",
+		"svelte-splitpanes": "^0.8.2",
+		"tslib": "^2.6.3",
+		"typescript": "^5.4.5",
+		"vite": "^5.2.13"
+	}
 }
