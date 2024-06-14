@@ -10,13 +10,13 @@
 		<link href="../_app/immutable/assets/0.BaKohFKZ.css" rel="stylesheet">
 		<link href="../_app/immutable/assets/7.DcpAjKjX.css" rel="stylesheet">
 		<link href="../_app/immutable/assets/svelte-splitpanes.Di3bVnsQ.css" rel="stylesheet">
-		<link rel="modulepreload" href="../_app/immutable/entry/start.2oAlXe2s.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/external.B2Lk-HvR.js">
-		<link rel="modulepreload" href="../_app/immutable/entry/app.Bkhj5616.js">
-		<link rel="modulepreload" href="../_app/immutable/nodes/0.BqkQxm9y.js">
-		<link rel="modulepreload" href="../_app/immutable/nodes/7.DGDmshfP.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/ExampleArea.tFyi-GEL.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/svelte-splitpanes.59ZJovYr.js"><title>Svelte-Splitpanes</title><!-- HEAD_svelte-1cl4sjo_START --><meta name="description" content="A Fantastic pane splitter for Svelte"><!-- HTML_TAG_START --><style>pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
+		<link rel="modulepreload" href="../_app/immutable/entry/start.SyNDQDwm.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/external.VVRZC7Jc.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/app.Dzqe_guz.js">
+		<link rel="modulepreload" href="../_app/immutable/nodes/0.CQu9FAgG.js">
+		<link rel="modulepreload" href="../_app/immutable/nodes/7.B81fM-wY.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/ExampleArea.CGUpeyof.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/svelte-splitpanes.CbQ2S7jR.js"><title>Svelte-Splitpanes</title><!-- HEAD_svelte-1cl4sjo_START --><meta name="description" content="A Fantastic pane splitter for Svelte"><!-- HTML_TAG_START --><style>pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
 /*
 
 Night Owl for highlight.js (c) Carl Baxter <carl@cbax.tech>
@@ -54,14 +54,14 @@ SOFTWARE.
 		panes objects with their dimensions. The event also fires after adding or removing a pane.</li> <li>pane-click returns the clicked pane object with its dimensions.</li> <li>pane-maximize returns the maximized pane object with its dimensions.</li> <li>pane-add returns an object containing the index of the added pane and the new array of panes after resize.</li> <li>pane-remove returns an object containing the removed pane and an array of all the remaining panes objects with their
 		dimensions after resize.</li> <li>splitter-click returns the next pane object (with its dimensions) directly after the clicked splitter. This event is
 		only emitted if dragging did not occur between mousedown and mouseup.</li></ul> <div><div class="splitpanes default-theme   splitpanes--vertical  splitpanes--freeze" style="height: 400px">       <div class="splitpanes__pane " style="width: 33.333333333333336%;"><span>1</span> </div>    <div class="splitpanes__splitter "></div>     <div class="splitpanes__pane " style="width: 33.333333333333336%;"><span>2</span> </div>    <div class="splitpanes__splitter "></div>     <div class="splitpanes__pane " style="width: 33.333333333333336%;"><span>3</span> </div> </div> <p data-svelte-h="svelte-duj1zz">Try resizing panes and check the logs bellow.</p> <div class="container svelte-1gm0t61"><pre aria-hidden="true" style="min-height: 5.8em; max-height: 49em" class="svelte-1gm0t61">// Event name: Event params   (Last event at the top)
-</pre> <textarea readonly style="outline: none;" class="svelte-1gm0t61">// Event name: Event params   (Last event at the top)</textarea> </div> <pre data-language="svelte"><code class="hljs"><!-- HTML_TAG_START --><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
+</pre> <textarea readonly style="outline: none;" class="svelte-1gm0t61">// Event name: Event params   (Last event at the top)</textarea> </div> <pre data-language="svelte"><code class="hljs"><!-- HTML_TAG_START --><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;ts&quot;</span>&gt;</span><span class="language-javascript">
 	<span class="hljs-keyword">import</span> { <span class="hljs-title class_">Pane</span>, <span class="hljs-title class_">Splitpanes</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;svelte-splitpanes&#x27;</span>;
 
 	<span class="hljs-keyword">import</span> <span class="hljs-title class_">TextArea</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;$comp/TextAreaAutosize.svelte&#x27;</span>;
 
 	<span class="hljs-keyword">let</span> val = <span class="hljs-string">&#x27;// Event name: Event params   (Last event at the top)&#x27;</span>;
 
-	<span class="hljs-keyword">function</span> <span class="hljs-title function_">handleMessage</span>(<span class="hljs-params">event</span>) {
+	<span class="hljs-keyword">function</span> <span class="hljs-title function_">handleMessage</span>(<span class="hljs-params">event: any</span>) {
 		<span class="hljs-keyword">if</span> (event.<span class="hljs-property">detail</span>) val = event.<span class="hljs-property">type</span> + <span class="hljs-string">&#x27; &#x27;</span> + <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(event.<span class="hljs-property">detail</span>) + <span class="hljs-string">&#x27;\n&#x27;</span> + val;
 		<span class="hljs-keyword">else</span> val = event.<span class="hljs-property">type</span> + <span class="hljs-string">&#x27;\n&#x27;</span> + val;
 	}
@@ -92,7 +92,7 @@ SOFTWARE.
 			
 			<script>
 				{
-					__sveltekit_goru48 = {
+					__sveltekit_1cotr5g = {
 						base: new URL("..", location).pathname.slice(0, -1),
 						assets: "/svelte-splitpanes"
 					};
@@ -102,8 +102,8 @@ SOFTWARE.
 					const data = [null,null];
 
 					Promise.all([
-						import("../_app/immutable/entry/start.2oAlXe2s.js"),
-						import("../_app/immutable/entry/app.Bkhj5616.js")
+						import("../_app/immutable/entry/start.SyNDQDwm.js"),
+						import("../_app/immutable/entry/app.Dzqe_guz.js")
 					]).then(([kit, app]) => {
 						kit.start(app, element, {
 							node_ids: [0, 7],
