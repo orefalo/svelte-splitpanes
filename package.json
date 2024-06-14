@@ -72,9 +72,9 @@
 		"@commitlint/cli": "^19.3.0",
 		"@commitlint/config-conventional": "^19.2.2",
 		"@playwright/test": "^1.44.1",
-		"@sveltejs/adapter-static": "^3.0.1",
-		"@sveltejs/kit": "^2.5.10",
-		"@sveltejs/package": "^2.3.1",
+		"@sveltejs/adapter-static": "^3.0.2",
+		"@sveltejs/kit": "^2.5.11",
+		"@sveltejs/package": "^2.3.2",
 		"@sveltejs/vite-plugin-svelte": "^3.1.1",
 		"@types/eslint": "^8.56.10",
 		"@typescript-eslint/eslint-plugin": "^7.13.0",
@@ -104,7 +104,7 @@
 		"tslib": "^2.6.3",
 		"typescript": "^5.4.5",
 		"typescript-eslint": "^8.0.0-alpha.30",
-		"vite": "^5.2.13",
+		"vite": "^5.3.0",
 		"vitest": "^1.6.0"
 	},
 	"peerDependencies": {

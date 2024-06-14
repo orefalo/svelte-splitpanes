@@ -13,7 +13,7 @@ export interface ClientCallbacks {
 	onSplitterDblClick: (_event: MouseEvent) => void;
 	onPaneClick: (_event: MouseEvent) => void;
 	/** Report the manual given size was changed. */
-	reportGivenSizeChange: (_newGivenSize: number | null) => void;
+	reportGivenSizeChange: (_newGivenSize: number) => void;
 }
 
 // methods passed from splitpane to children panes

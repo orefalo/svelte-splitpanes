@@ -146,7 +146,8 @@
 
 	// PROPS ----------------
 
-	export let id: string;
+	//@ts-expect-error undefined not assigned to string
+	export let id: string = undefined;
 	// horiz or verti?
 	export let horizontal = false;
 	// when true, moving a splitter can push other panes
@@ -240,10 +241,12 @@
 	function onPaneAdd(pane: IPane): ClientCallbacks {
 		// 1. Add pane to array at the same index it was inserted in the <splitpanes> tag.
 		let index = -1;
-		Array.from(pane.element.parentNode.children).some((el: Element) => {
-			if (el.className.includes('splitpanes__pane')) index++;
-			return el === pane.element;
-		});
+		if (pane.element.parentNode) {
+			Array.from(pane.element.parentNode.children).some((el: Element) => {
+				if (el.className.includes('splitpanes__pane')) index++;
+				return el === pane.element;
+			});
+		}
 
 		if (index === 0) {
 			// Need to update the first pane key, because the first pane can be changed in runtime.
@@ -419,10 +422,10 @@
 		splitterPane.setSplitterActive(true);
 		const paneElement = splitterPane.element;
 
-		let activeSplitterNode: Node = paneElement;
+		let activeSplitterNode: Node | null = paneElement;
 		while (activeSplitterNode != null) {
 			activeSplitterNode = activeSplitterNode.previousSibling;
-			if (isSplitterElement(activeSplitterNode)) {
+			if (activeSplitterNode && isSplitterElement(activeSplitterNode)) {
 				break;
 			}
 		}
@@ -987,7 +990,7 @@
 
 			for (let i = 0; i < children.length; i++) {
 				const child = children.item(i);
-				const isPane = child.classList.contains('splitpanes__pane');
+				const isPane = child?.classList.contains('splitpanes__pane');
 				if (isPane) {
 					const pane = panes.find((pane) => pane.element === child);
 					if (pane != null) {

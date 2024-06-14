@@ -11,7 +11,7 @@ export interface SidesEnd {
 export type Sides = SidesStart & SidesEnd;
 
 export function pxToNumber(pxString: string | undefined) {
-	if (!pxString.endsWith('px')) {
+	if (!pxString?.endsWith('px')) {
 		return undefined;
 	}
 	// otherwise

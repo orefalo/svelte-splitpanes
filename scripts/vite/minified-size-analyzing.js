@@ -3,7 +3,7 @@ import path from 'path';
 
 const libPath = path.resolve('.', 'src/lib/');
 
-/** @type {boolean} */
+/** @type {unknown} */
 let ssr;
 
 /**
@@ -12,6 +12,7 @@ let ssr;
  * @returns {import('vite').PluginOption}
  */
 export const minifiedSizeAnalyzingPlugin = () => ({
+	name: 'vite-plugin-minified-size-analyzing',
 	enforce: 'pre',
 
 	configResolved(config) {

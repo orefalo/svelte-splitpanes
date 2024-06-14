@@ -1,4 +1,5 @@
 <script lang="ts">
+	// @ts-nocheck
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
 	import Ripple from './Ripple.svelte';

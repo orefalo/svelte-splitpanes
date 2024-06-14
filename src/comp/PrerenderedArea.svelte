@@ -31,7 +31,7 @@
 
 	var duplicatedChildren: Node[] | null = null;
 
-	if (area !== null) {
+	if (area != null) {
 		const children = area.childNodes;
 		duplicatedChildren = Array.from(children).map((child) => child.cloneNode(true));
 	}
@@ -39,7 +39,7 @@
 	const areaAction: Action = (node: HTMLElement) => {
 		// After mounting, we need to fill the new area with the prerendered one clones
 		if (area !== null) {
-			duplicatedChildren.forEach((child) => {
+			duplicatedChildren?.forEach((child) => {
 				node.appendChild(child);
 			});
 		}

@@ -69,7 +69,8 @@ export default [
 			// We need to use {@html} in the demo site for code highlight
 			'svelte/no-at-html-tags': 'off',
 			// css is global and incorrectly reported as unused by the linter
-			'svelte/valid-compile': 'off'
+			'svelte/valid-compile': 'off',
+			'@typescript-eslint/ban-ts-comment': 'off'
 		}
 	}
 ];

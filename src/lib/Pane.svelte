@@ -47,7 +47,9 @@
 	 *
 	 * In the case of the object isn't initialized yet, calling this callbacks will do nothing.
 	 */
-	const carefullClientCallbacks = browser ? carefullCallbackSource(() => clientCallbacks) : undefined;
+	const carefullClientCallbacks = browser
+		? carefullCallbackSource(() => clientCallbacks)
+		: carefullCallbackSource(() => clientCallbacks);
 
 	// REACTIVE
 
@@ -68,11 +70,12 @@
 
 	$: style = `${dimension}: ${sz}%;`;
 
-	if (gathering) {
+	if (gathering && ssrRegisterPaneSize) {
 		ssrRegisterPaneSize(size);
 	} else if (browser) {
 		onMount(() => {
 			const inst: IPane = {
+				index: 0,
 				key,
 				element: element,
 				givenSize: size,
@@ -92,11 +95,11 @@
 				isReady: false
 			};
 
-			clientCallbacks = clientOnlyContext.onPaneAdd(inst);
+			clientCallbacks = clientOnlyContext?.onPaneAdd(inst);
 		});
 
 		onDestroy(() => {
-			clientOnlyContext.onPaneRemove(key);
+			clientOnlyContext?.onPaneRemove(key);
 		});
 	}
 </script>

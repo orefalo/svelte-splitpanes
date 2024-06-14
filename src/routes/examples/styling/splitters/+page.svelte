@@ -1,9 +1,7 @@
 <script>
 	import Highlighted from '$comp/Highlighted.svelte';
 	import ExampleArea from '$comp/ExampleArea.svelte';
-
 	import example from './code.svelte?example';
-
 	import defaultTheme from 'svelte-splitpanes/internal/default-theme.scss?example';
 </script>
 
