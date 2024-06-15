@@ -54,7 +54,7 @@
 		"package": "pnpm run package:build && npm run package:pack",
 		"package:build": "rimraf -g ./package/* && svelte-package -o ./package/dist && copyfiles ./README.md ./LICENSE ./package/ && node scripts/package-clean-copy.js",
 		"package:pack": "cd package && npm pack",
-		"prepare": "husky init",
+		"prepare": "husky",
 		"preview": "vite preview --port 3000",
 		"static-serv": "serve -l 3000 --no-clipboard docs",
 		"test": "playwright test"
