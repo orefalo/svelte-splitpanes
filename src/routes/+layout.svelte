@@ -4,8 +4,8 @@
 
 	import theme from 'svelte-highlight/styles/night-owl';
 
-	import Contents, { type Section } from './Contents.svelte';
-	import RTLToggle from './RTLToggle.svelte';
+	import Contents, { type Section } from '../comp/Contents.svelte';
+	import RTLToggle from '$comp/RTLToggle.svelte';
 	import { pathIsCurrent } from './pathUtils';
 
 	let isRTL = false;

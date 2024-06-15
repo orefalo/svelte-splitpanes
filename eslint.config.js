@@ -5,8 +5,7 @@ import prettier from 'eslint-config-prettier';
 import globals from 'globals';
 
 const __dirname = import.meta.dirname;
-// import { readGitignoreFiles } from './scripts/read-gitignore-files.js';
-// import { readGitignoreFiles } from 'eslint-ignore';
+
 import pkg from 'eslint-gitignore';
 const { readGitignoreFiles } = pkg;
 

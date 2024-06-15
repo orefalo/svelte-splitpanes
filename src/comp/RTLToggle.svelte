@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ToggleButton from './ToggleButton.svelte';
+	import ToggleButton from '$comp/ToggleButton.svelte';
 
 	export let isRTL: boolean;
 </script>

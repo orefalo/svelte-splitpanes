@@ -5,8 +5,7 @@
 <img alt="Minified Size" src="{base}/minified-size-badge.svg" />
 
 <p>
-	The badge above tells the amortized size of the library after minification when using all the library features.
+	The badge above shows the minimized size of the library when all features are used.
 	<br />
-	It is computed in the build time of the demo website, specifying how much size it really takes after the Rollup build process,
-	for the client code and the server(SSR) code.
+	Please note, the size includes type definitions, styles and components.
 </p>

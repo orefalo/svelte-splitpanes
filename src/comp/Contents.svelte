@@ -14,7 +14,7 @@
 	import { base } from '$app/paths';
 	import { page } from '$app/stores';
 
-	import { pathIsCurrent } from './pathUtils';
+	import { pathIsCurrent } from '../routes/pathUtils';
 
 	export let contents: Section[] = [];
 </script>
