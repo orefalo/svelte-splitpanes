@@ -449,8 +449,6 @@
 
 	function onMouseMove(event: MouseEvent | TouchEvent) {
 		if (isMouseDown) {
-			// Prevent scrolling while touch dragging (only works with an active event, eg. passive: false).
-			event.preventDefault();
 			isDragging = true;
 
 			const globalMousePosition = getGlobalMousePosition(event);
@@ -487,8 +485,6 @@
 	// If touch device, detect double tap manually (2 taps separated by less than 500ms).
 	function onSplitterClick(event: MouseEvent, splitterPane: IPane) {
 		if ('ontouchstart' in window) {
-			event.preventDefault();
-
 			const splitterIndex = splitterPane.index;
 
 			// Detect splitter double taps if the option is on.
