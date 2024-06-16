@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.0.4](https://github.com/orefalo/svelte-splitpanes/compare/v0.8.3...v8.0.4) (2024-06-16)
+
+
+### Miscellaneous Chores
+
+* release 8.0.4 ([fbd210a](https://github.com/orefalo/svelte-splitpanes/commit/fbd210a0a598f7c70c98f34fc51d7201fc7288b1))
+
 ## [0.8.3](https://github.com/orefalo/svelte-splitpanes/compare/v0.8.2...v0.8.3) (2024-06-15)
 
 
