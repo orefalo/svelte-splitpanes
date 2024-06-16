@@ -65,11 +65,8 @@ jobs:
           asset_name: svelte-splitpanes-${{ steps.release.outputs.version }}.tgz
           asset_content_type: application/gzip
 
-      - name: Set NPM publishing config
-        run: pnpm config set '//registry.npmjs.org/:_authToken' "${NODE_AUTH_TOKEN}"
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-
       - name: Publish to NPM
-        if: ${{ steps.release.outputs.release_created }}
-        run: pnpm publish --access=public
+        uses: JS-DevTools/npm-publish@v3
+        with:
+            token: ${{ secrets.NPM_TOKEN }}
+
