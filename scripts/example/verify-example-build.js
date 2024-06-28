@@ -15,12 +15,12 @@ const fileToInstall = path.resolve(exampleTempDir, `../package/svelte-splitpanes
 const packageInstallationSource = exampleTempPackageJson['devDependencies']['svelte-splitpanes'];
 const packageInstallationSourceExpected = `file:${fileToInstall.replaceAll('\\', '/')}`;
 if (packageInstallationSource !== packageInstallationSourceExpected) {
-	throw (
-		"Error: Example temp package installation wasn't successful! Instead, the value is " +
-		packageInstallationSource +
-		' but was expected to be: ' +
-		packageInstallationSourceExpected
-	);
+  throw (
+    "Error: Example temp package installation wasn't successful! Instead, the value is " +
+    packageInstallationSource +
+    ' but was expected to be: ' +
+    packageInstallationSourceExpected
+  );
 }
 
 const fileDirPath = path.dirname(fileURLToPath(import.meta.url));

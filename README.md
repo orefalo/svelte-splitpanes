@@ -68,19 +68,27 @@ $ npm i svelte-splitpanes
 
 ```svelte
 <script>
-	import { Pane, Splitpanes } from 'svelte-splitpanes';
+  import { Pane, Splitpanes } from 'svelte-splitpanes';
 </script>
 
 <Splitpanes style="height: 400px">
-	<Pane minSize={20}>1<br /><em class="specs">I have a min width of 20%</em></Pane>
-	<Pane>
-		<Splitpanes horizontal={true}>
-			<Pane minSize={15}>2<br /><em class="specs">I have a min height of 15%</em></Pane>
-			<Pane>3</Pane>
-			<Pane>4</Pane>
-		</Splitpanes>
-	</Pane>
-	<Pane>5</Pane>
+  <Pane minSize={20}>
+    1
+    <br />
+    <em class="specs">I have a min width of 20%</em>
+  </Pane>
+  <Pane>
+    <Splitpanes horizontal={true}>
+      <Pane minSize={15}>
+        2
+        <br />
+        <em class="specs">I have a min height of 15%</em>
+      </Pane>
+      <Pane>3</Pane>
+      <Pane>4</Pane>
+    </Splitpanes>
+  </Pane>
+  <Pane>5</Pane>
 </Splitpanes>
 ```
 
@@ -117,35 +125,35 @@ The component can be further styled after the props have been defined by overrid
 /* The following classes can be used to style the splitter, see demos*/
 
 .splitpanes {
-	background-color: #f8f8f8;
+  background-color: #f8f8f8;
 }
 
 .splitpanes__splitter {
-	background-color: #ccc;
-	position: relative;
+  background-color: #ccc;
+  position: relative;
 }
 .splitpanes__splitter:before {
-	content: '';
-	position: absolute;
-	left: 0;
-	top: 0;
-	transition: opacity 0.4s;
-	background-color: rgba(255, 0, 0, 0.3);
-	opacity: 0;
-	z-index: 1;
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: opacity 0.4s;
+  background-color: rgba(255, 0, 0, 0.3);
+  opacity: 0;
+  z-index: 1;
 }
 .splitpanes__splitter:hover:before {
-	opacity: 1;
+  opacity: 1;
 }
 .splitpanes--vertical > .splitpanes__splitter:before {
-	left: -30px;
-	right: -30px;
-	height: 100%;
+  left: -30px;
+  right: -30px;
+  height: 100%;
 }
 .splitpanes--horizontal > .splitpanes__splitter:before {
-	top: -30px;
-	bottom: -30px;
-	width: 100%;
+  top: -30px;
+  bottom: -30px;
+  width: 100%;
 }
 ```
 
@@ -168,23 +176,22 @@ Events are easy to trap
 
 ```svelte
 <script>
-	import { Splitpanes } from 'svelte-splitpanes';
+  import { Splitpanes } from 'svelte-splitpanes';
 
-	function handleMessage(event) {
-		console.log(JSON.stringify(event));
-	}
+  function handleMessage(event) {
+    console.log(JSON.stringify(event));
+  }
 </script>
 
 <Splitpanes
-	on:ready={handleMessage}
-	on:resize={handleMessage}
-	on:resized={handleMessage}
-	on:pane-click={handleMessage}
-	on:pane-maximize={handleMessage}
-	on:pane-add={handleMessage}
-	on:pane-remove={handleMessage}
-	on:splitter-click={handleMessage}
-/>
+  on:ready={handleMessage}
+  on:resize={handleMessage}
+  on:resized={handleMessage}
+  on:pane-click={handleMessage}
+  on:pane-maximize={handleMessage}
+  on:pane-add={handleMessage}
+  on:pane-remove={handleMessage}
+  on:splitter-click={handleMessage} />
 ```
 
 ## Contributing

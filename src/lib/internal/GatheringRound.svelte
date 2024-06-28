@@ -1,11 +1,11 @@
 <script lang="ts" context="module">
-	export const gatheringKey = {};
+  export const gatheringKey = {};
 </script>
 
 <script lang="ts">
-	import { setContext } from 'svelte';
+  import { setContext } from 'svelte';
 
-	setContext(gatheringKey, true);
+  setContext(gatheringKey, true);
 </script>
 
 <slot />

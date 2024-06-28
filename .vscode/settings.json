@@ -1,19 +1,19 @@
 {
-	"files.exclude": {
-		"**/.git": true,
-		"**/.svn": true,
-		"**/.hg": true,
-		"**/CVS": true,
-		"**/.DS_Store": true,
-		"**/Thumbs.db": true
-	},
-	"hide-files.files": [],
-	"files.eol": "\n",
-	"editor.insertSpaces": false,
-	"[typescript]": {
-		"editor.tabSize": 4
-	},
-	"[javascript]": {
-		"editor.tabSize": 4
-	}
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true
+  },
+  "hide-files.files": [],
+  "files.eol": "\n",
+  "editor.insertSpaces": false,
+  "[typescript]": {
+    "editor.tabSize": 4
+  },
+  "[javascript]": {
+    "editor.tabSize": 4
+  }
 }

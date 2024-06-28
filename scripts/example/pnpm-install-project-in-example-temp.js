@@ -13,16 +13,20 @@ const fileToInstall = path.resolve(exampleTempDir, `../package/svelte-splitpanes
 
 console.log(`Installing with the file package: ${fileToInstall}`);
 
-const npmPostfixCommand = (name) => (os.platform() === 'win32' ? `${name}.cmd` : name);
+const npmPostfixCommand = name => (os.platform() === 'win32' ? `${name}.cmd` : name);
 
-const npmProc = child_process.spawn(npmPostfixCommand('pnpm'), ['install', '--save-dev', fileToInstall], {
-	cwd: exampleTempDir
+const npmProc = child_process.spawn(
+  npmPostfixCommand('pnpm'),
+  ['install', '--save-dev', fileToInstall],
+  {
+    cwd: exampleTempDir
+  }
+);
+
+npmProc.stdout.on('data', data => {
+  console.log(data.toString());
 });
 
-npmProc.stdout.on('data', (data) => {
-	console.log(data.toString());
-});
-
-npmProc.stderr.on('data', (data) => {
-	console.error(data.toString());
+npmProc.stderr.on('data', data => {
+  console.error(data.toString());
 });

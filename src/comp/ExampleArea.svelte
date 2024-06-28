@@ -1,10 +1,10 @@
 <script>
-	import Highlighted from './Highlighted.svelte';
-	export let example;
+  import Highlighted from './Highlighted.svelte';
+  export let example;
 </script>
 
 <div>
-	<svelte:component this={example.component} />
+  <svelte:component this={example.component} />
 
-	<Highlighted lang="svelte" highlighted={example.highlightedHTML} />
+  <Highlighted lang="svelte" highlighted={example.highlightedHTML} />
 </div>

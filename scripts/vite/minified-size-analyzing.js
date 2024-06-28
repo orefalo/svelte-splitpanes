@@ -12,46 +12,46 @@ let ssr;
  * @returns {import('vite').PluginOption}
  */
 export const minifiedSizeAnalyzingPlugin = () => ({
-	name: 'vite-plugin-minified-size-analyzing',
-	enforce: 'pre',
+  name: 'vite-plugin-minified-size-analyzing',
+  enforce: 'pre',
 
-	configResolved(config) {
-		ssr = config.build?.ssr ?? false;
-	},
+  configResolved(config) {
+    ssr = config.build?.ssr ?? false;
+  },
 
-	generateBundle(_options, bundle) {
-		// Notice that this stage happen only on build, and not on dev.
+  generateBundle(_options, bundle) {
+    // Notice that this stage happen only on build, and not on dev.
 
-		let found = false;
+    let found = false;
 
-		for (const chunkName in bundle) {
-			const chunk = bundle[chunkName];
+    for (const chunkName in bundle) {
+      const chunk = bundle[chunkName];
 
-			if (
-				chunk.type === 'chunk' &&
-				Object.keys(chunk.modules).find((fileSource) => path.resolve(fileSource).startsWith(libPath))
-			) {
-				if (found) {
-					throw 'Error: the library dependency was already found for minified size computation, so it is separated!';
-				}
-				found = true;
+      if (
+        chunk.type === 'chunk' &&
+        Object.keys(chunk.modules).find(fileSource => path.resolve(fileSource).startsWith(libPath))
+      ) {
+        if (found) {
+          throw 'Error: the library dependency was already found for minified size computation, so it is separated!';
+        }
+        found = true;
 
-				const size = chunk.code.length;
+        const size = chunk.code.length;
 
-				if (!ssr) {
-					console.log('\nClient minified library size (bytes): ' + size);
-					fs.writeFileSync('./.svelte-kit/output/minified-size-client.txt', size.toString());
-				} else {
-					console.log('\nServer minified library size (bytes): ' + size);
-					fs.writeFileSync('./.svelte-kit/output/minified-size-server.txt', size.toString());
-				}
-			}
-		}
+        if (!ssr) {
+          console.log('\nClient minified library size (bytes): ' + size);
+          fs.writeFileSync('./.svelte-kit/output/minified-size-client.txt', size.toString());
+        } else {
+          console.log('\nServer minified library size (bytes): ' + size);
+          fs.writeFileSync('./.svelte-kit/output/minified-size-server.txt', size.toString());
+        }
+      }
+    }
 
-		if (!found) {
-			throw "Error: the library dependency wasn't found for minified size computation!";
-		}
-	}
+    if (!found) {
+      throw "Error: the library dependency wasn't found for minified size computation!";
+    }
+  }
 });
 
 /**
@@ -60,15 +60,15 @@ export const minifiedSizeAnalyzingPlugin = () => ({
  * @param {string} id
  * @returns
  */
-export const manualChunksForAnalyzing = (id) => {
-	const resolvedPath = path.resolve(id);
+export const manualChunksForAnalyzing = id => {
+  const resolvedPath = path.resolve(id);
 
-	if (resolvedPath.search('node_modules') > 0) {
-		// We need to separate the external deps so they won't be in the `svelte-splitpanes` chunk.
-		return 'external';
-	} else if (resolvedPath.startsWith(libPath)) {
-		return 'svelte-splitpanes';
-	} else {
-		return undefined;
-	}
+  if (resolvedPath.search('node_modules') > 0) {
+    // We need to separate the external deps so they won't be in the `svelte-splitpanes` chunk.
+    return 'external';
+  } else if (resolvedPath.startsWith(libPath)) {
+    return 'svelte-splitpanes';
+  } else {
+    return undefined;
+  }
 };

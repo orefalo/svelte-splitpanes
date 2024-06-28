@@ -12,9 +12,9 @@ const packageJsonOutputPath = resolve(__dirname, '../package/package.json');
 // Keys that we want to remove, which are not usefull for the final package that the user consumes.
 const keysToRemove = ['private', 'devDependencies', 'optionalDependencies', 'scripts', 'config'];
 for (const key of keysToRemove) {
-	delete packageJson[key];
+  delete packageJson[key];
 }
 
-writeFile(packageJsonOutputPath, JSON.stringify(packageJson, null, '\t') + '\n', (error) => {
-	if (error) throw error;
+writeFile(packageJsonOutputPath, JSON.stringify(packageJson, null, '\t') + '\n', error => {
+  if (error) throw error;
 });

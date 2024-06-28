@@ -33,7 +33,7 @@ const decodeId = (/** @type {string} */ id) => id.slice(idPrefix.length, -apiPro
  * @param {string} code
  * @returns {string}
  */
-const fixTrailingEnds = (code) => code.replaceAll(/\n>/gm, '>');
+const fixTrailingEnds = code => code.replaceAll(/\n>/gm, '>');
 
 /**
  * A Vite plugin that computes the actual minified size of the library.
@@ -41,54 +41,54 @@ const fixTrailingEnds = (code) => code.replaceAll(/\n>/gm, '>');
  * @returns {import('vite').PluginOption}
  */
 export const exampleImportPlugin = () => ({
-	name: 'vite-plugin-example',
-	enforce: 'pre',
+  name: 'vite-plugin-example',
+  enforce: 'pre',
 
-	async resolveId(source, importer) {
-		const [originalSource, sourceUrlSearchParamsStr] = source.split('?', 2);
-		const sourceUrlSearchParams = new URLSearchParams(sourceUrlSearchParamsStr);
+  async resolveId(source, importer) {
+    const [originalSource, sourceUrlSearchParamsStr] = source.split('?', 2);
+    const sourceUrlSearchParams = new URLSearchParams(sourceUrlSearchParamsStr);
 
-		if (!sourceUrlSearchParams.has(apiQuery) && !sourceUrlSearchParams.has(apiQueryOptional)) {
-			return;
-		}
+    if (!sourceUrlSearchParams.has(apiQuery) && !sourceUrlSearchParams.has(apiQueryOptional)) {
+      return;
+    }
 
-		// otherwise
-		const resolved = (await this.resolve(originalSource, importer))?.id;
-		return resolved ? encodeId(resolved) : null;
-	},
+    // otherwise
+    const resolved = (await this.resolve(originalSource, importer))?.id;
+    return resolved ? encodeId(resolved) : null;
+  },
 
-	async load(id) {
-		if (!id.startsWith(idPrefix)) {
-			return;
-		}
-		// otherwise
+  async load(id) {
+    if (!id.startsWith(idPrefix)) {
+      return;
+    }
+    // otherwise
 
-		const originalId = decodeId(id);
-		const isSvelte = originalId.endsWith('.svelte');
-		const isSass = ['scss', 'sass'].some((suffix) => originalId.endsWith(`.${suffix}`));
-		const isCSS = isSass || originalId.endsWith(`.css`);
+    const originalId = decodeId(id);
+    const isSvelte = originalId.endsWith('.svelte');
+    const isSass = ['scss', 'sass'].some(suffix => originalId.endsWith(`.${suffix}`));
+    const isCSS = isSass || originalId.endsWith(`.css`);
 
-		let code = await fs.readFile(originalId, { encoding: 'utf8' });
-		if (isSvelte) {
-			code = fixTrailingEnds(code);
-		}
-		const highlightedHTML = hljs.highlightAuto(code).value;
+    let code = await fs.readFile(originalId, { encoding: 'utf8' });
+    if (isSvelte) {
+      code = fixTrailingEnds(code);
+    }
+    const highlightedHTML = hljs.highlightAuto(code).value;
 
-		const css = isCSS ? (isSass ? (await sass.compileAsync(originalId)).css : code) : undefined;
-		const cssHighlightedHTML = css ? hljs.highlight(css, { language: 'css' }).value : undefined;
+    const css = isCSS ? (isSass ? (await sass.compileAsync(originalId)).css : code) : undefined;
+    const cssHighlightedHTML = css ? hljs.highlight(css, { language: 'css' }).value : undefined;
 
-		const output = [
-			isSvelte ? `import component from ${JSON.stringify(originalId)};` : '',
-			`export const code = ${JSON.stringify(code)};`,
-			`export const highlightedHTML = ${JSON.stringify(highlightedHTML)};`,
-			isSvelte ? `export { component };` : '',
-			isCSS ? `export const css = ${JSON.stringify(css)};` : '',
-			isCSS ? `export const cssHighlightedHTML = ${JSON.stringify(cssHighlightedHTML)};` : '',
-			`export default { code, highlightedHTML${isSvelte ? ', component' : ''}${
-				isCSS ? ', css, cssHighlightedHTML' : ''
-			} };`
-		].join('\n');
+    const output = [
+      isSvelte ? `import component from ${JSON.stringify(originalId)};` : '',
+      `export const code = ${JSON.stringify(code)};`,
+      `export const highlightedHTML = ${JSON.stringify(highlightedHTML)};`,
+      isSvelte ? `export { component };` : '',
+      isCSS ? `export const css = ${JSON.stringify(css)};` : '',
+      isCSS ? `export const cssHighlightedHTML = ${JSON.stringify(cssHighlightedHTML)};` : '',
+      `export default { code, highlightedHTML${isSvelte ? ', component' : ''}${
+        isCSS ? ', css, cssHighlightedHTML' : ''
+      } };`
+    ].join('\n');
 
-		return output;
-	}
+    return output;
+  }
 });
