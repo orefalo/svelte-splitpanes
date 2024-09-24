@@ -758,27 +758,20 @@
 
   function doPushOtherPanes(sums: Sums, dragPercentage: number) {
     const splitterIndex = activeSplitter - 1;
-    let paneBeforeIndex = splitterIndex;
-    let paneAfterIndex = splitterIndex + 1;
+    let paneBeforeIndex: number | undefined = splitterIndex;
+    let paneAfterIndex: number | undefined = splitterIndex + 1;
     // Pushing Down.
     // Going smaller than the current pane min size: take the previous expanded pane.
     if (dragPercentage < sums.prevPanesSize + panes[paneBeforeIndex].min()) {
-      paneBeforeIndex = findPrevExpandedPane(splitterIndex)?.index || 0;
+      paneBeforeIndex = findPrevExpandedPane(splitterIndex)?.index;
 
       sums.prevReachedMinPanes = 0;
-      // If pushing a n-2 or less pane, from splitter, then make sure all in between is at min size.
-      if (paneBeforeIndex < splitterIndex) {
-        forEachPartial(panes, paneBeforeIndex + 1, splitterIndex + 1, pane => {
-          pane.setSz(pane.min());
-          sums.prevReachedMinPanes += pane.min();
-        });
-      }
-      sums.prevPanesSize = sumPrevPanesSize(paneBeforeIndex);
-      // If nothing else to push down, cancel dragging.
-      if (paneBeforeIndex == null) {
-        sums.prevReachedMinPanes = 0;
+
+      if (paneBeforeIndex === undefined) {
+        // If nothing else to push down, cancel dragging.
+        sums.prevPanesSize = 0;
         panes[0].setSz(panes[0].min());
-        forEachPartial(panes, 1, splitterIndex + 1, pane => {
+        forEachPartial(panes, 1, splitterIndex + 1, (pane: IPane) => {
           pane.setSz(pane.min());
           sums.prevReachedMinPanes += pane.min();
         });
@@ -787,26 +780,29 @@
           100 - sums.prevReachedMinPanes - panes[0].min() - sums.prevPanesSize - sums.nextPanesSize
         );
         return null;
+      } else {
+        // If pushing a n-2 or less pane, from splitter, then make sure all in between is at min size.
+        if (paneBeforeIndex < splitterIndex) {
+          forEachPartial(panes, paneBeforeIndex + 1, splitterIndex + 1, (pane: IPane) => {
+            pane.setSz(pane.min());
+            sums.prevReachedMinPanes += pane.min();
+          });
+        }
+        sums.prevPanesSize = sumPrevPanesSize(paneBeforeIndex);
       }
     }
     // Pushing Up.
     // Pushing up beyond min size is reached: take the next expanded pane.
     if (dragPercentage > 100 - sums.nextPanesSize - panes[paneAfterIndex].min()) {
-      paneAfterIndex = findNextExpandedPane(splitterIndex)?.index || 0;
+      paneAfterIndex = findNextExpandedPane(splitterIndex)?.index;
+      if (paneBeforeIndex === undefined) console.log('Yep undefined paneAfterIndex');
       sums.nextReachedMinPanes = 0;
-      // If pushing a n+2 or more pane, from splitter, then make sure all in between is at min size.
-      if (paneAfterIndex > splitterIndex + 1) {
-        forEachPartial(panes, splitterIndex + 1, paneAfterIndex, pane => {
-          pane.setSz(pane.min());
-          sums.nextReachedMinPanes += pane.min();
-        });
-      }
-      sums.nextPanesSize = sumNextPanesSize(paneAfterIndex);
-      // If nothing else to push up, cancel dragging.
 
-      const panesCount = panes.length;
-      if (paneAfterIndex == null) {
-        sums.nextReachedMinPanes = 0;
+      if (paneAfterIndex === undefined) {
+        // If nothing else to push up, cancel dragging.
+        sums.nextPanesSize = 0;
+
+        const panesCount = panes.length;
         panes[panesCount - 1].setSz(panes[panesCount - 1].min());
 
         forEachPartial(panes, splitterIndex + 1, panesCount - 1, pane => {
@@ -822,6 +818,15 @@
             sums.nextPanesSize
         );
         return null;
+      } else {
+        // If pushing a n+2 or more pane, from splitter, then make sure all in between is at min size.
+        if (paneAfterIndex > splitterIndex + 1) {
+          forEachPartial(panes, splitterIndex + 1, paneAfterIndex, (pane: IPane) => {
+            pane.setSz(pane.min());
+            sums.nextReachedMinPanes += pane.min();
+          });
+        }
+        sums.nextPanesSize = sumNextPanesSize(paneAfterIndex);
       }
     }
     return { sums, paneBeforeIndex, paneAfterIndex };
