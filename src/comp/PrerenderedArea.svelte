@@ -19,7 +19,7 @@
 
     const element = document.getElementById(getIdFull(id));
 
-    if (element == null) {
+    if (!element) {
       return null;
     } else if (
       !dev ||
@@ -34,7 +34,7 @@
 
   var duplicatedChildren: Node[] | null = null;
 
-  if (area != null) {
+  if (area) {
     const children = area.childNodes;
     duplicatedChildren = Array.from(children).map(child => child.cloneNode(true));
   }

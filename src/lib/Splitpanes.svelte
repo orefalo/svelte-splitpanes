@@ -212,8 +212,9 @@
   $: $isHorizontal = horizontal;
   $: $showFirstSplitter = firstSplitter;
 
+  // used to complete rendering service side (SSR mode)
   function ssrRegisterPaneSize(size: number | null) {
-    if (size == null) {
+    if (size === null) {
       ++ssrPaneUndefinedSizeCount;
     } else {
       ssrPaneDefinedSizeSum += size;
@@ -430,13 +431,13 @@
     const paneElement = splitterPane.element;
 
     let activeSplitterNode: Node | null = paneElement;
-    while (activeSplitterNode != null) {
+    while (activeSplitterNode) {
       activeSplitterNode = activeSplitterNode.previousSibling;
       if (activeSplitterNode && isSplitterElement(activeSplitterNode)) {
         break;
       }
     }
-    if (activeSplitterNode == null) {
+    if (activeSplitterNode === null) {
       console.error("Splitpane Error: Active splitter wasn't found!");
       return; // Don't bind move event on error
     }
@@ -570,7 +571,7 @@
         for (let i = splitterIndex + 1; i < panes.length; i++) giveBest(panes[i]);
 
         // at the end of the process, we must have that `leftSpare` is 0
-        if (leftSpare != 0) {
+        if (leftSpare !== 0) {
           console.warn(
             'Splitpanes: there is a left spare size after computation of splitter double click, which means there are issues on the size constains of the panes.'
           );
@@ -608,7 +609,7 @@
 
     let splittersTotalSizeBefore = 0;
     let currentBeforeNode = activeSplitterElement.previousSibling;
-    while (currentBeforeNode != null) {
+    while (currentBeforeNode) {
       if (isSplitterElement(currentBeforeNode)) {
         splittersTotalSizeBefore += splitterSize(currentBeforeNode);
       }
@@ -617,7 +618,7 @@
 
     let splittersTotalSizeAfter = 0;
     let currentAfterNode = activeSplitterElement.nextSibling;
-    while (currentAfterNode != null) {
+    while (currentAfterNode) {
       if (isSplitterElement(currentAfterNode)) {
         splittersTotalSizeAfter += splitterSize(currentAfterNode);
       }
@@ -731,7 +732,7 @@
         paneAfter = panes[paneAfterIndex];
       }
 
-      if (paneBeforeIndex != null) {
+      if (typeof paneBeforeIndex === 'number') {
         paneBefore.setSz(
           Math.min(
             Math.max(
@@ -742,7 +743,7 @@
           )
         );
       }
-      if (paneAfterIndex != null) {
+      if (typeof paneAfterIndex === 'number') {
         paneAfter.setSz(
           Math.min(
             Math.max(
@@ -885,7 +886,7 @@
     for (let i = 0; i < panesCount; i++) {
       const pane = panes[i];
       const sz = pane.sz();
-      if (pane.givenSize == null) {
+      if (pane.givenSize === null) {
         if (pane.isReady) {
           undefinedSizesSum += sz;
           if (sz >= pane.max()) ungrowable.push(pane);
@@ -932,7 +933,7 @@
 
       for (let i = 0; i < panesCount; i++) {
         const pane = panes[i];
-        if (pane.givenSize == null) {
+        if (!(typeof pane.givenSize === 'number')) {
           // add the proportion of the newly added pane if has undefined size
           const currentSz = pane.isReady ? pane.sz() : undefinedSizesNotReadySz;
           const sz = Math.max(Math.min(currentSz * undefinedScaleFactor, pane.max()), pane.min());
@@ -1035,7 +1036,7 @@
         const isPane = child?.classList.contains('splitpanes__pane');
         if (isPane) {
           const pane = panes.find(pane => pane.element === child);
-          if (pane != null) {
+          if (pane) {
             pane.index = newPanes.length;
             newPanes.push(pane);
           } else {

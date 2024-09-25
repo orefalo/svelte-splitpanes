@@ -49,21 +49,22 @@
    *
    * In the case of the object isn't initialized yet, calling this callbacks will do nothing.
    */
+
   const carefullClientCallbacks = browser
     ? carefullCallbackSource(() => clientCallbacks)
-    : carefullCallbackSource(() => clientCallbacks);
+    : carefullCallbackSource(() => undefined);
 
   // REACTIVE
 
   const reportGivenSizeChangeSafe = (size: number) => {
-    // We put an extra check of `size != sz` here and not in the reactive statement, since we don't want a change
-    //  of `sz` to trigger report.
-    if (size != sz) {
+    // This extra check (`size !== sz`) is here and not in the reactive statement, to prevent a trigger on `sz` mutations.
+    if (size !== sz) {
       carefullClientCallbacks('reportGivenSizeChange')(size);
     }
   };
+
   $: {
-    if (browser && size != null) {
+    if (browser && typeof size === 'number') {
       reportGivenSizeChangeSafe(size);
     }
   }
@@ -84,7 +85,7 @@
         sz: () => sz,
         setSz: v => {
           sz = v;
-          if (size != null && size != sz) {
+          if (typeof size === 'number' && size !== sz) {
             size = sz;
           }
         },

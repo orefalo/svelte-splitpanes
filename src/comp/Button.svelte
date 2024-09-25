@@ -89,7 +89,7 @@
   let touch: boolean;
 
   function handleClick(e: MouseEvent | Touch, type: string) {
-    if (type == 'touch') {
+    if (type === 'touch') {
       touch = true;
       ripples.add({ x: e.pageX - locationX, y: e.pageY - locationY, size: scale_ratio });
     } else {
