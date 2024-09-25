@@ -1,4 +1,4 @@
-import{S as y,i as b,s as I,P as h,Q as g,R as $,n as u,o as j,U as x,a as _,f as z,j as c,g as o,e as S,b as P,I as d,W as w,K as C}from"../chunks/external.DyJzEIuv.js";import{E as q}from"../chunks/ExampleArea.BAksc_zo.js";import{S as M,P as v}from"../chunks/svelte-splitpanes.BqdiOjy_.js";const H=!0,W=Object.freeze(Object.defineProperty({__proto__:null,prerender:H},Symbol.toStringTag,{value:"Module"}));function T(m){let s,l=`I have a snap size of 10%
+import{S as y,i as b,s as I,P as h,Q as g,R as $,n as u,o as j,U as x,a as _,f as z,j as c,g as o,e as S,b as P,I as d,W as w,K as C}from"../chunks/external.DDdhX-Re.js";import{E as q}from"../chunks/ExampleArea.K2NVIvEM.js";import{S as M,P as v}from"../chunks/svelte-splitpanes.BpRs9cUI.js";const H=!0,W=Object.freeze(Object.defineProperty({__proto__:null,prerender:H},Symbol.toStringTag,{value:"Module"}));function T(m){let s,l=`I have a snap size of 10%
       <br/>
       I have a min size of 10%
       <br/>
