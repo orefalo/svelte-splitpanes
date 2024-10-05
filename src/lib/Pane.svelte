@@ -52,17 +52,17 @@
 
   const carefullClientCallbacks = browser
     ? carefullCallbackSource(() => clientCallbacks)
-    : carefullCallbackSource(() => undefined);
-
-  // REACTIVE
+    : undefined;
 
   const reportGivenSizeChangeSafe = (size: number) => {
-    // This extra check (`size !== sz`) is here and not in the reactive statement, to prevent a trigger on `sz` mutations.
-    if (size !== sz) {
-      carefullClientCallbacks('reportGivenSizeChange')(size);
+    // We put an extra check of `size != sz` here and not in the reactive statement, since we don't want a change
+    //  of `sz` to trigger report.
+    if (clientCallbacks && size != sz) {
+      carefullClientCallbacks?.('reportGivenSizeChange')(size);
     }
   };
 
+  // REACTIVE
   $: {
     if (browser && typeof size === 'number') {
       reportGivenSizeChangeSafe(size);
@@ -70,7 +70,6 @@
   }
 
   $: dimension = getDimensionName($isHorizontal);
-
   $: style = `${dimension}: ${sz}%;`;
 
   if (gathering && ssrRegisterPaneSize) {
@@ -115,10 +114,10 @@
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div
       class="splitpanes__splitter {isSplitterActive ? 'splitpanes__splitter__active' : ''}"
-      on:mousedown={carefullClientCallbacks('onSplitterDown')}
-      on:touchstart={carefullClientCallbacks('onSplitterDown')}
-      on:click={carefullClientCallbacks('onSplitterClick')}
-      on:dblclick={carefullClientCallbacks('onSplitterDblClick')} />
+      on:mousedown={carefullClientCallbacks?.('onSplitterDown')}
+      on:touchstart={carefullClientCallbacks?.('onSplitterDown')}
+      on:click={carefullClientCallbacks?.('onSplitterClick')}
+      on:dblclick={carefullClientCallbacks?.('onSplitterDblClick')} />
   {/if}
 
   <!-- Pane -->
@@ -128,7 +127,7 @@
   <div
     class={`splitpanes__pane ${clazz || ''}`}
     bind:this={element}
-    on:click={carefullClientCallbacks('onPaneClick')}
+    on:click={carefullClientCallbacks?.('onPaneClick')}
     {style}>
     <slot />
   </div>
