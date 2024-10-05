@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.0.8](https://github.com/orefalo/svelte-splitpanes/compare/v8.0.7...v8.0.8) (2024-10-05)
+
+
+### Bug Fixes
+
+* a regression related to safe callbacks which could generate a 0 width upon certain race conditions ([af34b41](https://github.com/orefalo/svelte-splitpanes/commit/af34b41a9974cd7203d3a0be2cb567666fbcf124))
+
 ## [8.0.7](https://github.com/orefalo/svelte-splitpanes/compare/v8.0.6...v8.0.7) (2024-10-05)
 
 
