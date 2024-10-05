@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.0.7](https://github.com/orefalo/svelte-splitpanes/compare/v8.0.6...v8.0.7) (2024-10-05)
+
+
+### Bug Fixes
+
+* better handling of empty attributes ([7c9c4ad](https://github.com/orefalo/svelte-splitpanes/commit/7c9c4add390f1025c68b13ee9a3e6fa1df706754))
+
 ## [8.0.6](https://github.com/orefalo/svelte-splitpanes/compare/v8.0.5...v8.0.6) (2024-09-24)
 
 
