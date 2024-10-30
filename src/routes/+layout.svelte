@@ -62,7 +62,7 @@
 </svelte:head>
 
 <div class="page-container">
-  <div role="presentation" class="toc-container-space" />
+  <div role="presentation" class="toc-container-space"></div>
 
   <main class:rtl-containers={isRTL}>
     <slot />

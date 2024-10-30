@@ -1069,6 +1069,8 @@
 </div>
 
 <style global lang="scss">
+  @use 'internal/default-theme';
+
   div.splitpanes--horizontal.splitpanes--dragging {
     cursor: row-resize;
   }
@@ -1131,6 +1133,4 @@
       min-height: 1px;
     }
   }
-
-  @import 'internal/default-theme';
 </style>
