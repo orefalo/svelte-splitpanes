@@ -117,7 +117,8 @@
       on:mousedown={carefullClientCallbacks?.('onSplitterDown')}
       on:touchstart={carefullClientCallbacks?.('onSplitterDown')}
       on:click={carefullClientCallbacks?.('onSplitterClick')}
-      on:dblclick={carefullClientCallbacks?.('onSplitterDblClick')} />
+      on:dblclick={carefullClientCallbacks?.('onSplitterDblClick')}>
+	</div>
   {/if}
 
   <!-- Pane -->
