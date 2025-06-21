@@ -1,4 +1,4 @@
-<script lang="ts" strictEvents>
+<script lang="ts">
   import { getContext, onMount, onDestroy, hasContext } from 'svelte';
   import { KEY } from '$lib/Splitpanes.svelte';
   import type { ClientCallbacks, IPane, PaneInitFunction, SplitContext } from '$lib/index.js';
@@ -118,7 +118,7 @@
       on:touchstart={carefullClientCallbacks?.('onSplitterDown')}
       on:click={carefullClientCallbacks?.('onSplitterClick')}
       on:dblclick={carefullClientCallbacks?.('onSplitterDblClick')}>
-	</div>
+    </div>
   {/if}
 
   <!-- Pane -->

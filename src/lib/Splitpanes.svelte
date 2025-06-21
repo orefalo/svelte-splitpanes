@@ -30,7 +30,7 @@
   })();
 </script>
 
-<script lang="ts" strictEvents>
+<script lang="ts">
   import { onMount, onDestroy, setContext, createEventDispatcher, tick, afterUpdate } from 'svelte';
   import { writable } from 'svelte/store';
   import type {
