@@ -60,7 +60,7 @@ jobs:
 
       # Upload test results
       - name: Upload example build
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: example-build
           path: example-temp/demo
