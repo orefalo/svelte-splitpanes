@@ -25,7 +25,7 @@
 <div class="container">
   <pre aria-hidden="true" style="min-height: {minHeight}; max-height: {maxHeight}">{value +
       '\n'}</pre>
-  <textarea readonly bind:value style="outline: none;" />
+  <textarea readonly bind:value style="outline: none;"></textarea>
 </div>
 
 <style>

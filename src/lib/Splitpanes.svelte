@@ -387,7 +387,7 @@
   }
 
   function bindEvents() {
-    document.body.style.cursor = isHorizontal ? 'col-resize' : 'row-resize';
+    document.body.style.cursor = $isHorizontal ? 'col-resize' : 'row-resize';
 
     document.addEventListener('mousemove', onMouseMove, thirdEventArg);
     document.addEventListener('mouseup', onMouseUp);

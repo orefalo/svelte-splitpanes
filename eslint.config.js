@@ -50,6 +50,7 @@ export default [
   {
     rules: {
       // eqeqeq: 'error',
+      'svelte/require-each-key': 'off',
       'prefer-const': ['error', { ignoreReadBeforeAssign: true }],
       '@typescript-eslint/no-explicit-any': 'off',
       // const _a = 'unused, with underscore, no warning'

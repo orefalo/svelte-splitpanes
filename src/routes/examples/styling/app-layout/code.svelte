@@ -15,7 +15,7 @@
         <p>
           Folder
           <br />
-          You can move those --{'>'}
+          You can move those --&gt;
         </p>
       </Pane>
       <Pane>
@@ -25,7 +25,7 @@
         <p>
           Details
           <br />
-          {'<'}-- You can move those
+          &lt;-- You can move those
         </p>
       </Pane>
     </Splitpanes>
