@@ -2,7 +2,7 @@ import child_process from 'node:child_process';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import packageJson from '../../package.json' assert { type: 'json' };
+import packageJson from '../../package.json';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 

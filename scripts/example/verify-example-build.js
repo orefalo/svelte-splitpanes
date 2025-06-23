@@ -2,8 +2,8 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 import { fileURLToPath } from 'url';
-import packageJson from '../../package.json' assert { type: 'json' };
-import exampleTempPackageJson from '../../example-temp/package.json' assert { type: 'json' };
+import packageJson from '../../package.json';
+import exampleTempPackageJson from '../../example-temp/package.json';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
