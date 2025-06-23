@@ -1,4 +1,4 @@
-import{f as c,y as p,b as l,r as t}from"../chunks/external.BXd5N0FW.js";import{E as m}from"../chunks/ExampleArea.Ca6SKEZZ.js";import{S as d,P as n}from"../chunks/svelte-splitpanes.BXcsx3R1.js";const f=!0,k=Object.freeze(Object.defineProperty({__proto__:null,prerender:f},Symbol.toStringTag,{value:"Module"}));var v=t("<p>Try shrinking my size, note how I snap below 10% size</p>"),P=t("<!> <!> <!>",1);function u(a){d(a,{style:"height: 400px",children:(s,e)=>{var r=P(),o=c(r);n(o,{});var i=p(o,2);n(i,{snapSize:10,children:(g,$)=>{var j=v();l(g,j)},$$slots:{default:!0}});var h=p(i,2);n(h,{}),l(s,r)},$$slots:{default:!0}})}const y=`<script>
+import{f as t,J as c,q as p,k as l}from"../chunks/CtqsOppj.js";import{E as j}from"../chunks/nGus_LLE.js";import{S as d,P as n}from"../chunks/CNOt2vSN.js";const f=!0,k=Object.freeze(Object.defineProperty({__proto__:null,prerender:f},Symbol.toStringTag,{value:"Module"}));var u=t("<p>Try shrinking my size, note how I snap below 10% size</p>"),v=t("<!> <!> <!>",1);function P(a){d(a,{style:"height: 400px",children:(s,e)=>{var r=v(),o=c(r);n(o,{});var i=p(o,2);n(i,{snapSize:10,children:(g,x)=>{var m=u();l(g,m)},$$slots:{default:!0}});var h=p(i,2);n(h,{}),l(s,r)},$$slots:{default:!0}})}const _=`<script>
   import { Pane, Splitpanes } from 'svelte-splitpanes';
 <\/script>
 
@@ -11,7 +11,7 @@ import{f as c,y as p,b as l,r as t}from"../chunks/external.BXd5N0FW.js";import{E
 
   <Pane />
 </Splitpanes>
-`,_=`<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
+`,y=`<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
   <span class="hljs-keyword">import</span> { <span class="hljs-title class_">Pane</span>, <span class="hljs-title class_">Splitpanes</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;svelte-splitpanes&#x27;</span>;
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 
@@ -24,4 +24,4 @@ import{f as c,y as p,b as l,r as t}from"../chunks/external.BXd5N0FW.js";import{E
 
   <span class="hljs-tag">&lt;<span class="hljs-name">Pane</span> /&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">Splitpanes</span>&gt;</span>
-`,S={code:y,highlightedHTML:_,component:u};var z=t("<h2>Middle snap</h2> <!>",1);function T(a){var s=z(),e=p(c(s),2);m(e,{example:S}),l(a,s)}export{T as component,k as universal};
+`,S={code:_,highlightedHTML:y,component:P};var z=t("<h2>Middle snap</h2> <!>",1);function T(a){var s=z(),e=p(c(s),2);j(e,{get example(){return S}}),l(a,s)}export{T as component,k as universal};

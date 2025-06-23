@@ -1,4 +1,4 @@
-import{f as j,b as a,y as l,A as z,r as n,C as x}from"../chunks/external.BXd5N0FW.js";import{E as k}from"../chunks/ExampleArea.Ca6SKEZZ.js";import{S as P,P as e}from"../chunks/svelte-splitpanes.BXcsx3R1.js";const w=!0,K=Object.freeze(Object.defineProperty({__proto__:null,prerender:w},Symbol.toStringTag,{value:"Module"}));var T=n("<p>MenuBar - This is a splitpane, note how the splitters made static using CSS</p>"),q=n("<p>ToolBar - This is another fixed size, locked splitpane</p>"),C=n("<p>Folder <br> </p>"),B=n("<p>Sample content</p>"),M=n("<p>Details <br> </p>"),Y=n("<!> <!> <!>",1),F=n("<p>statusbar - and yet, another splitpane, same technique</p>"),D=n("<!> <!> <!> <!>",1);function A(o){P(o,{theme:"no-splitter",horizontal:!0,style:"height: 400px",dblClickSplitter:!1,children:(c,m)=>{var g=D(),u=j(g);e(u,{size:6,minSize:6,maxSize:6,children:(p,i)=>{var t=T();a(p,t)},$$slots:{default:!0}});var d=l(u,2);e(d,{size:6,minSize:6,maxSize:6,children:(p,i)=>{var t=q();a(p,t)},$$slots:{default:!0}});var b=l(d,2);e(b,{children:(p,i)=>{P(p,{theme:"modern-theme",children:(t,L)=>{var _=Y(),f=j(_);e(f,{children:(r,S)=>{var s=C(),h=l(z(s),2);h.nodeValue=" You can move those -->",x(s),a(r,s)},$$slots:{default:!0}});var v=l(f,2);e(v,{children:(r,S)=>{var s=B();a(r,s)},$$slots:{default:!0}});var y=l(v,2);e(y,{children:(r,S)=>{var s=M(),h=l(z(s),2);h.nodeValue=" <-- You can move those",x(s),a(r,s)},$$slots:{default:!0}}),a(t,_)},$$slots:{default:!0}})},$$slots:{default:!0}});var $=l(b,2);e($,{size:6,minSize:6,maxSize:6,children:(p,i)=>{var t=F();a(p,t)},$$slots:{default:!0}}),a(c,g)},$$slots:{default:!0}})}const E=`<script>
+import{f as a,J as h,k as s,q as t}from"../chunks/CtqsOppj.js";import{E as x}from"../chunks/nGus_LLE.js";import{S,P as p}from"../chunks/CNOt2vSN.js";const $=!0,G=Object.freeze(Object.defineProperty({__proto__:null,prerender:$},Symbol.toStringTag,{value:"Module"}));var y=a("<p>MenuBar - This is a splitpane, note how the splitters made static using CSS</p>"),k=a("<p>ToolBar - This is another fixed size, locked splitpane</p>"),w=a("<p>Folder <br/> You can move those --&gt;</p>"),q=a("<p>Sample content</p>"),T=a("<p>Details <br/> &lt;-- You can move those</p>"),C=a("<!> <!> <!>",1),B=a("<p>statusbar - and yet, another splitpane, same technique</p>"),M=a("<!> <!> <!> <!>",1);function Y(o){S(o,{theme:"no-splitter",horizontal:!0,style:"height: 400px",dblClickSplitter:!1,children:(c,j)=>{var m=M(),g=h(m);p(g,{size:6,minSize:6,maxSize:6,children:(n,i)=>{var l=y();s(n,l)},$$slots:{default:!0}});var u=t(g,2);p(u,{size:6,minSize:6,maxSize:6,children:(n,i)=>{var l=k();s(n,l)},$$slots:{default:!0}});var b=t(u,2);p(b,{children:(n,i)=>{S(n,{theme:"modern-theme",children:(l,A)=>{var d=C(),_=h(d);p(_,{children:(e,v)=>{var r=w();s(e,r)},$$slots:{default:!0}});var f=t(_,2);p(f,{children:(e,v)=>{var r=q();s(e,r)},$$slots:{default:!0}});var P=t(f,2);p(P,{children:(e,v)=>{var r=T();s(e,r)},$$slots:{default:!0}}),s(l,d)},$$slots:{default:!0}})},$$slots:{default:!0}});var z=t(b,2);p(z,{size:6,minSize:6,maxSize:6,children:(n,i)=>{var l=B();s(n,l)},$$slots:{default:!0}}),s(c,m)},$$slots:{default:!0}})}const F=`<script>
   import { Pane, Splitpanes } from 'svelte-splitpanes';
 <\/script>
 
@@ -15,7 +15,7 @@ import{f as j,b as a,y as l,A as z,r as n,C as x}from"../chunks/external.BXd5N0F
         <p>
           Folder
           <br />
-          You can move those --{'>'}
+          You can move those --&gt;
         </p>
       </Pane>
       <Pane>
@@ -25,7 +25,7 @@ import{f as j,b as a,y as l,A as z,r as n,C as x}from"../chunks/external.BXd5N0F
         <p>
           Details
           <br />
-          {'<'}-- You can move those
+          &lt;-- You can move those
         </p>
       </Pane>
     </Splitpanes>
@@ -99,7 +99,7 @@ import{f as j,b as a,y as l,A as z,r as n,C as x}from"../chunks/external.BXd5N0F
     }
   }
 </style>
-`,O=`<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
+`,D=`<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
   <span class="hljs-keyword">import</span> { <span class="hljs-title class_">Pane</span>, <span class="hljs-title class_">Splitpanes</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;svelte-splitpanes&#x27;</span>;
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 
@@ -116,7 +116,7 @@ import{f as j,b as a,y as l,A as z,r as n,C as x}from"../chunks/external.BXd5N0F
         <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>
           Folder
           <span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span>
-          You can move those --{&#x27;&gt;&#x27;}
+          You can move those --<span class="hljs-symbol">&amp;gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">Pane</span>&gt;</span>
@@ -126,7 +126,7 @@ import{f as j,b as a,y as l,A as z,r as n,C as x}from"../chunks/external.BXd5N0F
         <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>
           Details
           <span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span>
-          {&#x27;&lt;&#x27;}-- You can move those
+          <span class="hljs-symbol">&amp;lt;</span>-- You can move those
         <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">Splitpanes</span>&gt;</span>
@@ -200,5 +200,5 @@ import{f as j,b as a,y as l,A as z,r as n,C as x}from"../chunks/external.BXd5N0F
     }
   }
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
-`,V={code:E,highlightedHTML:O,component:A};var H=n(`<h2>Styling Splitters - Modern</h2> <p>This examples uses CSS styles to pixel size panes and lock them in place. applied to panes in
-  order to achieve the desired layout.</p> <!>`,1);function N(o){var c=H(),m=l(j(c),4);k(m,{example:V}),a(o,c)}export{N as component,K as universal};
+`,E={code:F,highlightedHTML:D,component:Y};var O=a(`<h2>Styling Splitters - Modern</h2> <p>This examples uses CSS styles to pixel size panes and lock them in place. applied to panes in
+  order to achieve the desired layout.</p> <!>`,1);function I(o){var c=O(),j=t(h(c),4);x(j,{get example(){return E}}),s(o,c)}export{I as component,G as universal};

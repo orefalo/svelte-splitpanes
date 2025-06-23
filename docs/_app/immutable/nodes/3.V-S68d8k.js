@@ -1,4 +1,4 @@
-import{p as B,l as S,m as w,f as r,R as d,S as v,b as n,y as c,x as a,c as k,T as A,d as R,r as i,O as f,U as T,E as _,v as D,V as O}from"../chunks/external.BXd5N0FW.js";import{E as M}from"../chunks/ExampleArea.Ca6SKEZZ.js";import{S as z,P as V}from"../chunks/svelte-splitpanes.BXcsx3R1.js";import{B as $}from"../chunks/Button.BQ3Xb4sO.js";const q=!0,Z=Object.freeze(Object.defineProperty({__proto__:null,prerender:q},Symbol.toStringTag,{value:"Module"}));var C=i("<span></span>"),H=i("<!> <!> <!>",1);function L(o,p){B(p,!1);const t=_();let l=_(3);S(()=>a(l),()=>{D(t,a(l)>0)}),w();var h=H(),m=r(h);$(m,{$$events:{click:()=>{d(l)}},children:(e,j)=>{f();var s=v("+ ADD PANE");n(e,s)},$$slots:{default:!0}});var g=c(m,2),b=O(()=>!a(t));$(g,{get disabled(){return a(b)},$$events:{click:()=>{a(t)&&d(l,-1)}},children:(e,j)=>{f();var s=v("- REMOVE PANE");n(e,s)},$$slots:{default:!0}});var P=c(g,2);z(P,{style:"height: 400px",children:(e,j)=>{var s=k(),x=r(s);A(x,1,()=>({length:a(l)}),T,(N,J,E)=>{V(N,{minSize:10,children:(y,K)=>{var u=C();u.textContent=E+1,n(y,u)},$$slots:{default:!0}})}),n(e,s)},$$slots:{default:!0}}),n(o,h),R()}const U=`<script>
+import{p as S,l as y,B as k,v as a,C as d,e as w,f as i,J as r,N as v,S as f,k as n,T as _,q as c,u as A,I as R,U as T,V as D,m as M}from"../chunks/CtqsOppj.js";import{E as O}from"../chunks/nGus_LLE.js";import{S as q,P as z}from"../chunks/CNOt2vSN.js";import{B as $}from"../chunks/Caxl4JVu.js";const V=!0,Z=Object.freeze(Object.defineProperty({__proto__:null,prerender:V},Symbol.toStringTag,{value:"Module"}));var C=i("<span></span>"),H=i("<!> <!> <!>",1);function I(o,p){S(p,!1);const t=d();let e=d(3);y(()=>a(e),()=>{k(t,a(e)>0)}),w();var h=H(),m=r(h);$(m,{$$events:{click:()=>{_(e)}},children:(l,u)=>{v();var s=f("+ ADD PANE");n(l,s)},$$slots:{default:!0}});var g=c(m,2);const b=A(()=>!a(t));$(g,{get disabled(){return a(b)},$$events:{click:()=>{a(t)&&_(e,-1)}},children:(l,u)=>{v();var s=f("- REMOVE PANE");n(l,s)},$$slots:{default:!0}});var P=c(g,2);q(P,{style:"height: 400px",children:(l,u)=>{var s=R(),x=r(s);T(x,1,()=>({length:a(e)}),D,(N,G,B)=>{z(N,{minSize:10,children:(E,K)=>{var j=C();j.textContent=B+1,n(E,j)},$$slots:{default:!0}})}),n(l,s)},$$slots:{default:!0}}),n(o,h),M()}const J=`<script>
   import { Pane, Splitpanes } from 'svelte-splitpanes';
 
   import Button from '$comp/Button.svelte';
@@ -28,7 +28,7 @@ import{p as B,l as S,m as w,f as r,R as d,S as v,b as n,y as c,x as a,c as k,T a
     </Pane>
   {/each}
 </Splitpanes>
-`,F=`<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
+`,L=`<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
   <span class="hljs-keyword">import</span> { <span class="hljs-title class_">Pane</span>, <span class="hljs-title class_">Splitpanes</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;svelte-splitpanes&#x27;</span>;
 
   <span class="hljs-keyword">import</span> <span class="hljs-title class_">Button</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;$comp/Button.svelte&#x27;</span>;
@@ -58,4 +58,4 @@ import{p as B,l as S,m as w,f as r,R as d,S as v,b as n,y as c,x as a,c as k,T a
     <span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
   {/each}
 <span class="hljs-tag">&lt;/<span class="hljs-name">Splitpanes</span>&gt;</span>
-`,G={code:U,highlightedHTML:F,component:L};var I=i("<h2>Adding and removing panes programmatically</h2> <!>",1);function ss(o){var p=I(),t=c(r(p),2);M(t,{example:G}),n(o,p)}export{ss as component,Z as universal};
+`,U={code:J,highlightedHTML:L,component:I};var F=i("<h2>Adding and removing panes programmatically</h2> <!>",1);function ss(o){var p=F(),t=c(r(p),2);O(t,{get example(){return U}}),n(o,p)}export{ss as component,Z as universal};

@@ -1,5 +1,5 @@
-import{f as b,b as s,y as n,r as a,p as P,i as S,d as k}from"../chunks/external.BXd5N0FW.js";import{H as _,E as $}from"../chunks/ExampleArea.Ca6SKEZZ.js";import{S as x,P as r}from"../chunks/svelte-splitpanes.BXcsx3R1.js";const w=!0,Q=Object.freeze(Object.defineProperty({__proto__:null,prerender:w},Symbol.toStringTag,{value:"Module"}));var q=a("<span>1</span>"),H=a("<span>2</span>"),T=a("<span>3</span>"),C=a("<!> <!> <!>",1),M=a(`<em class="specs"><p>In this example the splitters are thin lines but the reactive touch zone is spread to 30
-        pixels all around!</p></em>`),L=a("<!> <!>",1);function I(c){x(c,{theme:"my-theme",horizontal:!0,style:"height: 400px",children:(i,o)=>{var l=L(),e=b(l);r(e,{children:(j,z)=>{x(j,{theme:"my-theme",children:(u,G)=>{var m=C(),d=b(m);r(d,{children:(p,g)=>{var t=q();s(p,t)},$$slots:{default:!0}});var f=n(d,2);r(f,{children:(p,g)=>{var t=H();s(p,t)},$$slots:{default:!0}});var y=n(f,2);r(y,{children:(p,g)=>{var t=T();s(p,t)},$$slots:{default:!0}}),s(u,m)},$$slots:{default:!0}})},$$slots:{default:!0}});var h=n(e,2);r(h,{children:(j,z)=>{var u=M();s(j,u)},$$slots:{default:!0}}),s(i,l)},$$slots:{default:!0}})}const X=`<script>
+import{f as a,J as m,k as s,q as n,p as S,i as $,m as w,R as x,D as v}from"../chunks/CtqsOppj.js";import{H as z,E as q}from"../chunks/nGus_LLE.js";import{S as y,P as r}from"../chunks/CNOt2vSN.js";const H=!0,U=Object.freeze(Object.defineProperty({__proto__:null,prerender:H},Symbol.toStringTag,{value:"Module"}));var T=a("<span>1</span>"),C=a("<span>2</span>"),M=a("<span>3</span>"),L=a("<!> <!> <!>",1),I=a(`<em class="specs"><p>In this example the splitters are thin lines but the reactive touch zone is spread to 30
+        pixels all around!</p></em>`),X=a("<!> <!>",1);function Y(i){y(i,{theme:"my-theme",horizontal:!0,style:"height: 400px",children:(o,h)=>{var l=X(),e=m(l);r(e,{children:(u,k)=>{y(u,{theme:"my-theme",children:(b,G)=>{var d=L(),f=m(d);r(f,{children:(p,_)=>{var t=T();s(p,t)},$$slots:{default:!0}});var g=n(f,2);r(g,{children:(p,_)=>{var t=C();s(p,t)},$$slots:{default:!0}});var P=n(g,2);r(P,{children:(p,_)=>{var t=M();s(p,t)},$$slots:{default:!0}}),s(b,d)},$$slots:{default:!0}})},$$slots:{default:!0}});var j=n(e,2);r(j,{children:(u,k)=>{var b=I();s(u,b)},$$slots:{default:!0}}),s(o,l)},$$slots:{default:!0}})}const A=`<script>
   import { Pane, Splitpanes } from 'svelte-splitpanes';
 <\/script>
 
@@ -68,7 +68,7 @@ import{f as b,b as s,y as n,r as a,p as P,i as S,d as k}from"../chunks/external.
     }
   }
 </style>
-`,Y=`<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
+`,E=`<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
   <span class="hljs-keyword">import</span> { <span class="hljs-title class_">Pane</span>, <span class="hljs-title class_">Splitpanes</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;svelte-splitpanes&#x27;</span>;
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 
@@ -137,7 +137,7 @@ import{f as b,b as s,y as n,r as a,p as P,i as S,d as k}from"../chunks/external.
     }
   }
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
-`,A={code:X,highlightedHTML:Y,component:I},E=`.splitpanes.default-theme {
+`,F={code:A,highlightedHTML:E,component:Y},O=`.splitpanes.default-theme {
   .splitpanes__pane {
     background-color: #f2f2f2;
   }
@@ -205,7 +205,7 @@ import{f as b,b as s,y as n,r as a,p as P,i as S,d as k}from"../chunks/external.
     }
   }
 }
-`,F=`<span class="hljs-selector-class">.splitpanes</span><span class="hljs-selector-class">.default-theme</span> {
+`,B=`<span class="hljs-selector-class">.splitpanes</span><span class="hljs-selector-class">.default-theme</span> {
   <span class="hljs-selector-class">.splitpanes__pane</span> {
     <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#f2f2f2</span>;
   }
@@ -273,7 +273,7 @@ import{f as b,b as s,y as n,r as a,p as P,i as S,d as k}from"../chunks/external.
     }
   }
 }
-`,O=`.splitpanes.default-theme .splitpanes__pane {
+`,D=`.splitpanes.default-theme .splitpanes__pane {
   background-color: #f2f2f2;
 }
 .splitpanes.default-theme .splitpanes__splitter {
@@ -341,7 +341,7 @@ import{f as b,b as s,y as n,r as a,p as P,i as S,d as k}from"../chunks/external.
 .default-theme.splitpanes--horizontal > .splitpanes__splitter:after,
 .default-theme .splitpanes--horizontal > .splitpanes__splitter:after {
   margin-top: 1px;
-}`,B=`<span class="hljs-selector-class">.splitpanes</span><span class="hljs-selector-class">.default-theme</span> <span class="hljs-selector-class">.splitpanes__pane</span> {
+}`,J=`<span class="hljs-selector-class">.splitpanes</span><span class="hljs-selector-class">.default-theme</span> <span class="hljs-selector-class">.splitpanes__pane</span> {
   <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#f2f2f2</span>;
 }
 <span class="hljs-selector-class">.splitpanes</span><span class="hljs-selector-class">.default-theme</span> <span class="hljs-selector-class">.splitpanes__splitter</span> {
@@ -409,4 +409,4 @@ import{f as b,b as s,y as n,r as a,p as P,i as S,d as k}from"../chunks/external.
 <span class="hljs-selector-class">.default-theme</span><span class="hljs-selector-class">.splitpanes--horizontal</span> &gt; <span class="hljs-selector-class">.splitpanes__splitter</span><span class="hljs-selector-pseudo">:after</span>,
 <span class="hljs-selector-class">.default-theme</span> <span class="hljs-selector-class">.splitpanes--horizontal</span> &gt; <span class="hljs-selector-class">.splitpanes__splitter</span><span class="hljs-selector-pseudo">:after</span> {
   <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">1px</span>;
-}`,v={code:E,highlightedHTML:F,css:O,cssHighlightedHTML:B};var D=a('<h2>Styling Splitters</h2> <p>Styling splitters is fully customizable using CSS (or SCSS), the `theme` property is used to\n  select the proper styling class and apply it to the Splitpanes component. <br> The default style is called `default-theme`, its SCSS definition can be found below ( <b>warning</b> : This is for reference only! If you decide to copy this CSS code, you must rename the ".default-theme"\n  specifier to something else, so it wouldn\'t conflict the library theme CSS definition):</p> <!> <p>Alternatively, here is the default theme compiled to CSS:</p> <!> <p>By altering the above styles, it is possible to achieve neat visual adjustments. Please note how\n  each Splitpanes references our new `theme="my-theme"`</p> <!>',1);function R(c,i){P(i,!1),S();var o=D(),l=n(b(o),4);_(l,{lang:"scss",get highlighted(){return v.highlightedHTML}});var e=n(l,4);_(e,{lang:"scss",get highlighted(){return v.cssHighlightedHTML}});var h=n(e,4);$(h,{example:A}),s(c,o),k()}export{R as component,Q as universal};
+}`,c={code:O,highlightedHTML:B,css:D,cssHighlightedHTML:J};var R=a('<h2>Styling Splitters</h2> <p>Styling splitters is fully customizable using CSS (or SCSS), the `theme` property is used to\n  select the proper styling class and apply it to the Splitpanes component. <br/> The default style is called `default-theme`, its SCSS definition can be found below ( <b>warning</b> : This is for reference only! If you decide to copy this CSS code, you must rename the ".default-theme"\n  specifier to something else, so it wouldn\'t conflict the library theme CSS definition):</p> <!> <p>Alternatively, here is the default theme compiled to CSS:</p> <!> <p>By altering the above styles, it is possible to achieve neat visual adjustments. Please note how\n  each Splitpanes references our new `theme="my-theme"`</p> <!>',1);function V(i,o){S(o,!1),$();var h=R(),l=n(m(h),4);z(l,{lang:"scss",get highlighted(){return v(c),x(()=>c.highlightedHTML)}});var e=n(l,4);z(e,{lang:"scss",get highlighted(){return v(c),x(()=>c.cssHighlightedHTML)}});var j=n(e,4);q(j,{get example(){return F}}),s(i,h),w()}export{V as component,U as universal};

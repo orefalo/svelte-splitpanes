@@ -1,4 +1,4 @@
-import{c as m,f as n,T as j,b as p,U as d,O as f,r as c,y as u}from"../chunks/external.BXd5N0FW.js";import{E as _}from"../chunks/ExampleArea.Ca6SKEZZ.js";import{S as v,P as S}from"../chunks/svelte-splitpanes.BXcsx3R1.js";const x=!0,C=Object.freeze(Object.defineProperty({__proto__:null,prerender:x},Symbol.toStringTag,{value:"Module"}));var P=c("<span></span> <p>Double click splitter -></p>",1);function $(a){v(a,{style:"height: 400px",children:(s,t)=>{var l=m(),i=n(l);j(i,0,()=>({length:8}),d,(r,w,h)=>{S(r,{minSize:5,children:(o,D)=>{var e=P(),g=n(e);g.textContent=h+1,f(2),p(o,e)},$$slots:{default:!0}})}),p(s,l)},$$slots:{default:!0}})}const b=`<script>
+import{I as m,J as n,U as j,k as p,V as f,f as c,N as u,q as d}from"../chunks/CtqsOppj.js";import{E as _}from"../chunks/nGus_LLE.js";import{S as v,P as S}from"../chunks/CNOt2vSN.js";const x=!0,L=Object.freeze(Object.defineProperty({__proto__:null,prerender:x},Symbol.toStringTag,{value:"Module"}));var P=c("<span></span> <p>Double click splitter -></p>",1);function $(a){v(a,{style:"height: 400px",children:(s,t)=>{var l=m(),r=n(l);j(r,0,()=>({length:8}),f,(i,q,h)=>{S(i,{minSize:5,children:(o,w)=>{var e=P(),g=n(e);g.textContent=h+1,u(2),p(o,e)},$$slots:{default:!0}})}),p(s,l)},$$slots:{default:!0}})}const b=`<script>
   import { Pane, Splitpanes } from 'svelte-splitpanes';
 <\/script>
 
@@ -22,4 +22,4 @@ import{c as m,f as n,T as j,b as p,U as d,O as f,r as c,y as u}from"../chunks/ex
     <span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
   {/each}
 <span class="hljs-tag">&lt;/<span class="hljs-name">Splitpanes</span>&gt;</span>
-`,k={code:b,highlightedHTML:y,component:$};var z=c("<h2>Lots of splitters & push other panes - all panes have a min width of 5%</h2> <!>",1);function E(a){var s=z(),t=u(n(s),2);_(t,{example:k}),p(a,s)}export{E as component,C as universal};
+`,k={code:b,highlightedHTML:y,component:$};var z=c("<h2>Lots of splitters & push other panes - all panes have a min width of 5%</h2> <!>",1);function M(a){var s=z(),t=d(n(s),2);_(t,{get example(){return k}}),p(a,s)}export{M as component,L as universal};

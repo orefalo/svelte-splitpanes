@@ -1,4 +1,4 @@
-import{f as c,X as _,x as p,v as x,y as o,Y as $,t as y,b as l,r as t,E as P,A as S,C as b,W as w}from"../chunks/external.BXd5N0FW.js";import{E as z}from"../chunks/ExampleArea.Ca6SKEZZ.js";import{S as k,P as j}from"../chunks/svelte-splitpanes.BXcsx3R1.js";const A=!0,D=Object.freeze(Object.defineProperty({__proto__:null,prerender:A},Symbol.toStringTag,{value:"Module"}));var C=t("<span> </span>"),M=t("<span>Auto-Calculated</span>"),R=t("<!> <!>",1),E=t("<!> <!>",1);function T(r){let s=P([50]);var e=E(),h=c(e);_(h,{float:!0,get values(){return p(s)},set values(i){x(s,i)},min:0,step:.01,max:100,$$legacy:!0});var d=o(h,2);k(d,{style:"height: 400px",children:(i,W)=>{var g=R(),m=c(g);j(m,{get size(){return p(s)[0]},set size(a){$(s,p(s)[0]=a)},children:(a,v)=>{var n=C(),f=S(n);y(()=>w(f,`${Math.round(p(s)[0])??""}%`)),b(n),l(a,n)},$$slots:{default:!0},$$legacy:!0});var u=o(m,2);j(u,{children:(a,v)=>{var n=M();l(a,n)},$$slots:{default:!0}}),l(i,g)},$$slots:{default:!0}}),l(r,e)}const q=`<script>
+import{f as e,J as c,X as x,B as $,v as l,q as o,k as t,C as y,t as P,u as S,R as w,W as b,Y as k,r as z,E as C}from"../chunks/CtqsOppj.js";import{E as R}from"../chunks/nGus_LLE.js";import{S as A,P as j}from"../chunks/CNOt2vSN.js";const M=!0,G=Object.freeze(Object.defineProperty({__proto__:null,prerender:M},Symbol.toStringTag,{value:"Module"}));var q=e("<span> </span>"),E=e("<span>Auto-Calculated</span>"),T=e("<!> <!>",1),O=e("<!> <!>",1);function B(r){let s=y([50]);var p=O(),h=c(p);x(h,{float:!0,min:0,step:.01,max:100,get values(){return l(s)},set values(i){$(s,i)},$$legacy:!0});var u=o(h,2);A(u,{style:"height: 400px",children:(i,X)=>{var g=T(),m=c(g);j(m,{get size(){return l(s)[0]},set size(a){k(s,l(s)[0]=a)},children:(a,v)=>{var n=q(),f=z(n);C(n),P(_=>b(f,`${_??""}%`),[()=>(l(s),w(()=>Math.round(l(s)[0])))],S),t(a,n)},$$slots:{default:!0},$$legacy:!0});var d=o(m,2);j(d,{children:(a,v)=>{var n=E();t(a,n)},$$slots:{default:!0}}),t(i,g)},$$slots:{default:!0}}),t(r,p)}const H=`<script>
   import { Pane, Splitpanes } from 'svelte-splitpanes';
 
   import RangeSlider from 'svelte-range-slider-pips';
@@ -15,7 +15,7 @@ import{f as c,X as _,x as p,v as x,y as o,Y as $,t as y,b as l,r as t,E as P,A a
     <span>Auto-Calculated</span>
   </Pane>
 </Splitpanes>
-`,O=`<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
+`,J=`<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
   <span class="hljs-keyword">import</span> { <span class="hljs-title class_">Pane</span>, <span class="hljs-title class_">Splitpanes</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;svelte-splitpanes&#x27;</span>;
 
   <span class="hljs-keyword">import</span> <span class="hljs-title class_">RangeSlider</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;svelte-range-slider-pips&#x27;</span>;
@@ -32,6 +32,6 @@ import{f as c,X as _,x as p,v as x,y as o,Y as $,t as y,b as l,r as t,E as P,A a
     <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Auto-Calculated<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">Splitpanes</span>&gt;</span>
-`,H={code:q,highlightedHTML:O,component:T};var L=t(`<h2>Programmatic resizing</h2> <p>This example shows the programmatic way of resizing panes with two-way data biding. And how it
-  works both ways. <br> Changing programmatically the size one pane, will shrink/expand the other panes that have no specified
-  size, as you can see in the example.</p> <!>`,1);function F(r){var s=L(),e=o(c(s),4);z(e,{example:H}),l(r,s)}export{F as component,D as universal};
+`,L={code:H,highlightedHTML:J,component:B};var W=e(`<h2>Programmatic resizing</h2> <p>This example shows the programmatic way of resizing panes with two-way data biding. And how it
+  works both ways. <br/> Changing programmatically the size one pane, will shrink/expand the other panes that have no specified
+  size, as you can see in the example.</p> <!>`,1);function I(r){var s=W(),p=o(c(s),4);R(p,{get example(){return L}}),t(r,s)}export{I as component,G as universal};

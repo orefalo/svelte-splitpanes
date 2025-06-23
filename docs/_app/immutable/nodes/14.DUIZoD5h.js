@@ -1,4 +1,4 @@
-import{f as h,y as p,b as l,r as t}from"../chunks/external.BXd5N0FW.js";import{E as j}from"../chunks/ExampleArea.Ca6SKEZZ.js";import{S as f,P as n}from"../chunks/svelte-splitpanes.BXcsx3R1.js";const v=!0,q=Object.freeze(Object.defineProperty({__proto__:null,prerender:v},Symbol.toStringTag,{value:"Module"}));var z=t('<span style="font-size: 20px;">I have a snap size of 10% <br> I have a min size of 10% <br> I have a max size of 70%</span>'),d=t("<!> <!> <!>",1);function u(a){f(a,{style:"height: 400px",children:(s,e)=>{var i=d(),r=h(i);n(r,{});var o=p(r,2);n(o,{snapSize:10,minSize:10,maxSize:70,children:(m,b)=>{var g=z();l(m,g)},$$slots:{default:!0}});var c=p(o,2);n(c,{}),l(s,i)},$$slots:{default:!0}})}const x=`<script>
+import{f as t,J as h,q as p,k as l}from"../chunks/CtqsOppj.js";import{E as j}from"../chunks/nGus_LLE.js";import{S as f,P as n}from"../chunks/CNOt2vSN.js";const v=!0,q=Object.freeze(Object.defineProperty({__proto__:null,prerender:v},Symbol.toStringTag,{value:"Module"}));var z=t('<span style="font-size: 20px;">I have a snap size of 10% <br/> I have a min size of 10% <br/> I have a max size of 70%</span>'),u=t("<!> <!> <!>",1);function x(a){f(a,{style:"height: 400px",children:(s,e)=>{var i=u(),r=h(i);n(r,{});var o=p(r,2);n(o,{snapSize:10,minSize:10,maxSize:70,children:(m,b)=>{var g=z();l(m,g)},$$slots:{default:!0}});var c=p(o,2);n(c,{}),l(s,i)},$$slots:{default:!0}})}const d=`<script>
   import { Pane, Splitpanes } from 'svelte-splitpanes';
 <\/script>
 
@@ -36,4 +36,4 @@ import{f as h,y as p,b as l,r as t}from"../chunks/external.BXd5N0FW.js";import{E
 
   <span class="hljs-tag">&lt;<span class="hljs-name">Pane</span> /&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">Splitpanes</span>&gt;</span>
-`,P={code:x,highlightedHTML:S,component:u};var _=t("<h2>Min & max with snap</h2> <p>You can also snap to the panel maximum and minimum size.</p> <!>",1);function w(a){var s=_(),e=p(h(s),4);j(e,{example:P}),l(a,s)}export{w as component,q as universal};
+`,P={code:d,highlightedHTML:S,component:x};var _=t("<h2>Min & max with snap</h2> <p>You can also snap to the panel maximum and minimum size.</p> <!>",1);function k(a){var s=_(),e=p(h(s),4);j(e,{get example(){return P}}),l(a,s)}export{k as component,q as universal};

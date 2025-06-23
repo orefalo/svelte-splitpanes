@@ -1,4 +1,4 @@
-import{f as i,b as n,y as o,r as p}from"../chunks/external.BXd5N0FW.js";import{E as m}from"../chunks/ExampleArea.Ca6SKEZZ.js";import{S as j,P as r}from"../chunks/svelte-splitpanes.BXcsx3R1.js";const d=!0,x=Object.freeze(Object.defineProperty({__proto__:null,prerender:d},Symbol.toStringTag,{value:"Module"}));var f=p("<p>Try shrinking my size, note how I snap below 10% size</p>"),S=p("<!> <!>",1);function u(a){j(a,{style:"height: 400px",children:(s,t)=>{var l=S(),e=i(l);r(e,{snapSize:10,children:(h,z)=>{var g=f();n(h,g)},$$slots:{default:!0}});var c=o(e,2);r(c,{}),n(s,l)},$$slots:{default:!0}})}const v=`<script>
+import{f as p,J as o,k as n,q as i}from"../chunks/CtqsOppj.js";import{E as m}from"../chunks/nGus_LLE.js";import{S as j,P as r}from"../chunks/CNOt2vSN.js";const d=!0,w=Object.freeze(Object.defineProperty({__proto__:null,prerender:d},Symbol.toStringTag,{value:"Module"}));var f=p("<p>Try shrinking my size, note how I snap below 10% size</p>"),u=p("<!> <!>",1);function S(a){j(a,{style:"height: 400px",children:(s,t)=>{var l=u(),e=o(l);r(e,{snapSize:10,children:(h,z)=>{var g=f();n(h,g)},$$slots:{default:!0}});var c=i(e,2);r(c,{}),n(s,l)},$$slots:{default:!0}})}const v=`<script>
   import { Pane, Splitpanes } from 'svelte-splitpanes';
 <\/script>
 
@@ -9,7 +9,7 @@ import{f as i,b as n,y as o,r as p}from"../chunks/external.BXd5N0FW.js";import{E
 
   <Pane />
 </Splitpanes>
-`,y=`<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
+`,_=`<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
   <span class="hljs-keyword">import</span> { <span class="hljs-title class_">Pane</span>, <span class="hljs-title class_">Splitpanes</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;svelte-splitpanes&#x27;</span>;
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 
@@ -20,4 +20,4 @@ import{f as i,b as n,y as o,r as p}from"../chunks/external.BXd5N0FW.js";import{E
 
   <span class="hljs-tag">&lt;<span class="hljs-name">Pane</span> /&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">Splitpanes</span>&gt;</span>
-`,P={code:v,highlightedHTML:y,component:u};var _=p("<h2>Simple snap</h2> <p>Using snapSize on a pane makes it snap to his adjacent splitters and borders.</p> <!>",1);function k(a){var s=_(),t=o(i(s),4);m(t,{example:P}),n(a,s)}export{k as component,x as universal};
+`,y={code:v,highlightedHTML:_,component:S};var P=p("<h2>Simple snap</h2> <p>Using snapSize on a pane makes it snap to his adjacent splitters and borders.</p> <!>",1);function k(a){var s=P(),t=i(o(s),4);m(t,{get example(){return y}}),n(a,s)}export{k as component,w as universal};
