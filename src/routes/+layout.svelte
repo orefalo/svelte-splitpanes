@@ -48,7 +48,7 @@
     }
   ];
 
-  $: pages = sections.map(section => section.pages).flat();
+  const pages = sections.map(section => section.pages).flat();
   $: pageIdx = pages.findIndex(({ path }) => pathIsCurrent(path, $page));
   $: curPage = pageIdx >= 0 ? pages[pageIdx] : undefined;
   $: prevPage = pageIdx >= 1 ? pages[pageIdx - 1] : undefined;

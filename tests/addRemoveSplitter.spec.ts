@@ -7,10 +7,10 @@ test('add, remove all and add again works', async ({ page }) => {
   await areaLocator.click();
 
   const addPaneLocator = page.locator(
-    ':has-text("Adding and removing panes programmatically")~div button:has-text("Add pane")'
+    ':has-text("Adding and removing panes programmatically")~div button:has-text("+ ADD PANE")'
   );
   const removePaneLocator = page.locator(
-    ':has-text("Adding and removing panes programmatically")~div button:has-text("Remove pane")'
+    ':has-text("Adding and removing panes programmatically")~div button:has-text("- REMOVE PANE")'
   );
   const splitpanesLocator = page
     .locator(':has-text("Adding and removing panes programmatically")~div div.splitpanes')
