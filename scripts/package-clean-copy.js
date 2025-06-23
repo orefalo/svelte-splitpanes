@@ -2,7 +2,7 @@ import { writeFile } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
-import packageJson from '../package.json';
+import packageJson from '../package.json' with { type: 'json' };
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
