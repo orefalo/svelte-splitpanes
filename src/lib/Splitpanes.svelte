@@ -1,6 +1,13 @@
 <script context="module" lang="ts">
   export const KEY = {};
 
+  // Constants for better maintainability
+  const DOUBLE_CLICK_TIMEOUT = 500;
+  const DRAG_FINISH_DELAY = 100;
+  const INITIAL_TRANSITION_DELAY = 0;
+  const SIZE_THRESHOLD = 0.1; // Minimum size threshold for calculations
+  const FULL_SIZE = 100; // Full percentage size
+
   type ResultType = boolean | { passive: boolean };
   /**
    * the third argument for event bundler
@@ -206,6 +213,11 @@
   let activeSplitterDrag: number;
   let ssrPaneDefinedSizeSum = 0;
   let ssrPaneUndefinedSizeCount = 0;
+  
+  // Cache for drag operations to avoid repeated style calculations
+  let cachedContainerStyle: CSSStyleDeclaration | null = null;
+  let cachedContainerRect: ReturnType<typeof elementRectWithoutBorder> | null = null;
+  let cachedIsRTL = false;
 
   // REACTIVE ----------------
 
@@ -227,7 +239,7 @@
     }
 
     return {
-      undefinedPaneInitSize: browser ? 0 : (100 - ssrPaneDefinedSizeSum) / ssrPaneUndefinedSizeCount
+      undefinedPaneInitSize: browser ? 0 : (FULL_SIZE - ssrPaneDefinedSizeSum) / ssrPaneUndefinedSizeCount
     };
   };
 
@@ -446,31 +458,31 @@
 
     const globalMousePosition = getGlobalMousePosition(event);
     const splitterRect = getElementRect(activeSplitterElement);
+    
+    // Cache container style and dimensions for the drag operation
+    cachedContainerStyle = calcComputedStyle(container);
+    cachedContainerRect = elementRectWithoutBorder(container, cachedContainerStyle);
+    cachedIsRTL = isRTL(cachedContainerStyle);
+    
     activeSplitterDrag = getOrientedDiff(
       positionDiff(globalMousePosition, splitterRect),
       splitterRect[getCurrentDimensionName()],
-      isRTL()
+      cachedIsRTL
     );
 
     bindEvents();
   }
 
   function onMouseMove(event: MouseEvent | TouchEvent) {
-    if (isMouseDown) {
+    if (isMouseDown && cachedContainerRect) {
       isDragging = true;
 
       const globalMousePosition = getGlobalMousePosition(event);
-      const containerComputedStyle = calcComputedStyle(container);
-      const containerRectWithoutBorder = elementRectWithoutBorder(
-        container,
-        containerComputedStyle
-      );
-      const containerSizeWithoutBorder: number =
-        containerRectWithoutBorder[getCurrentDimensionName()];
-      const _isRTL = isRTL(containerComputedStyle);
+      // Use cached values to avoid repeated expensive DOM calculations
+      const containerSizeWithoutBorder: number = cachedContainerRect[getCurrentDimensionName()];
 
-      const currentMouseDrag = positionDiff(globalMousePosition, containerRectWithoutBorder);
-      const tdrag = getOrientedDiff(currentMouseDrag, containerSizeWithoutBorder, _isRTL);
+      const currentMouseDrag = positionDiff(globalMousePosition, cachedContainerRect);
+      const tdrag = getOrientedDiff(currentMouseDrag, containerSizeWithoutBorder, cachedIsRTL);
       calculatePanesSize(tdrag, containerSizeWithoutBorder);
 
       dispatch('resize', prepareSizeEvent());
@@ -485,13 +497,17 @@
 
     const pane = panes[activeSplitter];
     pane.setSplitterActive(false);
+    
+    // Clear caches after drag operation
+    cachedContainerStyle = null;
+    cachedContainerRect = null;
 
     // Keep dragging flag until click event is finished (click happens immediately after mouseup)
     // in order to prevent emitting `splitter-click` event if splitter was dragged.
     setTimeout(() => {
       isDragging = false;
       unbindEvents();
-    }, 100);
+    }, DRAG_FINISH_DELAY);
   }
 
   // If touch device, detect double tap manually (2 taps separated by less than 500ms).
@@ -510,7 +526,7 @@
           clickedSplitter = splitterIndex;
           timeoutId = setTimeout(() => {
             clickedSplitter = -1;
-          }, 500);
+          }, DOUBLE_CLICK_TIMEOUT);
         }
       }
     }
@@ -531,17 +547,17 @@
         }
       }
 
-      const maxExtendedSize = Math.min(Math.max(0, 100 - totalMinSizes), splitterPane.max());
+      const maxExtendedSize = Math.min(Math.max(0, FULL_SIZE - totalMinSizes), splitterPane.max());
 
       const totalMaxExtendedPlusMinSizes = totalMinSizes + maxExtendedSize;
-      if (totalMaxExtendedPlusMinSizes >= 100) {
+      if (totalMaxExtendedPlusMinSizes >= FULL_SIZE) {
         // put everything to the minimum, and in the splitterPane put the rest of the size
         for (let i = 0; i < panes.length; i++) {
           const pane = panes[i];
           if (pane !== splitterPane) {
             pane.setSz(pane.min());
           } else {
-            pane.setSz(100 - totalMinSizes);
+            pane.setSz(FULL_SIZE - totalMinSizes);
           }
         }
       } else {
@@ -551,7 +567,7 @@
         //  and give the spare to left pane (or to the right pane, if the splitterPane is the first pane)
         // if this spare size is beyond the pane maximum, need to pass it along to the other panes
 
-        let leftSpare = 100 - totalMaxExtendedPlusMinSizes;
+        let leftSpare = FULL_SIZE - totalMaxExtendedPlusMinSizes;
 
         splitterPane.setSz(maxExtendedSize);
 
@@ -643,7 +659,7 @@
     // And solving it yeild the answer:
     // `x1 + ... + xn = (tdrag - totalSplitterBefore) / (containerSizeWithoutBorder - totalSplitter)`
 
-    return ((tdrag - totalSplitterBefore) / (containerSizeWithoutBorder - totalSplitter)) * 100;
+    return ((tdrag - totalSplitterBefore) / (containerSizeWithoutBorder - totalSplitter)) * FULL_SIZE;
   }
 
   /**
