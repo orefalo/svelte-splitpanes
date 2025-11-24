@@ -4,7 +4,6 @@
   // Constants for better maintainability
   const DOUBLE_CLICK_TIMEOUT = 500;
   const DRAG_FINISH_DELAY = 100;
-  const INITIAL_TRANSITION_DELAY = 0;
   const SIZE_THRESHOLD = 0.1; // Minimum size threshold for calculations
   const FULL_SIZE = 100; // Full percentage size
 
@@ -35,6 +34,13 @@
 
     return result;
   })();
+
+  /**
+   * Type guard to check if an event is a TouchEvent.
+   */
+  // function isTouchEvent(event: MouseEvent | TouchEvent): event is TouchEvent {
+  //   return 'touches' in event;
+  // }
 </script>
 
 <script lang="ts">
@@ -213,11 +219,26 @@
   let activeSplitterDrag: number;
   let ssrPaneDefinedSizeSum = 0;
   let ssrPaneUndefinedSizeCount = 0;
-  
+
   // Cache for drag operations to avoid repeated style calculations
   let cachedContainerStyle: CSSStyleDeclaration | null = null;
   let cachedContainerRect: ReturnType<typeof elementRectWithoutBorder> | null = null;
   let cachedIsRTL = false;
+
+  // Cache for splitter size calculations during drag
+  // const cachedSplitterSizes: {
+  //   activeSplitterSize: number;
+  //   totalBefore: number;
+  //   totalAfter: number;
+  //   totalSplitter: number;
+  // } | null = null;
+
+  // Request animation frame ID for drag updates
+  // let rafId: number | null = null;
+  // let pendingDragData: { tdrag: number; containerSize: number } | null = null;
+
+  // Snapshot for verifyAndUpdatePanesOrder optimization
+  let lastChildrenSnapshot: Element[] = [];
 
   // REACTIVE ----------------
 
@@ -239,7 +260,9 @@
     }
 
     return {
-      undefinedPaneInitSize: browser ? 0 : (FULL_SIZE - ssrPaneDefinedSizeSum) / ssrPaneUndefinedSizeCount
+      undefinedPaneInitSize: browser
+        ? 0
+        : (FULL_SIZE - ssrPaneDefinedSizeSum) / ssrPaneUndefinedSizeCount
     };
   };
 
@@ -257,15 +280,34 @@
       : undefined
   });
 
+  /**
+   * Calculates the index of a pane element within its parent container.
+   * Optimized to avoid array allocation by iterating through siblings directly.
+   *
+   * @param paneElement - The HTML element of the pane
+   * @returns The zero-based index of the pane among all pane elements
+   */
+  function calculatePaneIndex(paneElement: HTMLElement): number {
+    let index = -1;
+    let currentNode = paneElement.parentNode?.firstChild;
+
+    while (currentNode) {
+      if (
+        currentNode.nodeType === Node.ELEMENT_NODE &&
+        (currentNode as Element).classList.contains('splitpanes__pane')
+      ) {
+        index++;
+      }
+      if (currentNode === paneElement) break;
+      currentNode = currentNode.nextSibling;
+    }
+
+    return index;
+  }
+
   function onPaneAdd(pane: IPane): ClientCallbacks {
     // 1. Add pane to array at the same index it was inserted in the <splitpanes> tag.
-    let index = -1;
-    if (pane.element.parentNode) {
-      Array.from(pane.element.parentNode.children).some((el: Element) => {
-        if (el.className.includes('splitpanes__pane')) index++;
-        return el === pane.element;
-      });
-    }
+    const index = calculatePaneIndex(pane.element);
 
     if (index === 0) {
       // Need to update the first pane key, because the first pane can be changed in runtime.
@@ -458,12 +500,12 @@
 
     const globalMousePosition = getGlobalMousePosition(event);
     const splitterRect = getElementRect(activeSplitterElement);
-    
+
     // Cache container style and dimensions for the drag operation
     cachedContainerStyle = calcComputedStyle(container);
     cachedContainerRect = elementRectWithoutBorder(container, cachedContainerStyle);
     cachedIsRTL = isRTL(cachedContainerStyle);
-    
+
     activeSplitterDrag = getOrientedDiff(
       positionDiff(globalMousePosition, splitterRect),
       splitterRect[getCurrentDimensionName()],
@@ -497,7 +539,7 @@
 
     const pane = panes[activeSplitter];
     pane.setSplitterActive(false);
-    
+
     // Clear caches after drag operation
     cachedContainerStyle = null;
     cachedContainerRect = null;
@@ -659,7 +701,9 @@
     // And solving it yeild the answer:
     // `x1 + ... + xn = (tdrag - totalSplitterBefore) / (containerSizeWithoutBorder - totalSplitter)`
 
-    return ((tdrag - totalSplitterBefore) / (containerSizeWithoutBorder - totalSplitter)) * FULL_SIZE;
+    return (
+      ((tdrag - totalSplitterBefore) / (containerSizeWithoutBorder - totalSplitter)) * FULL_SIZE
+    );
   }
 
   /**
@@ -928,7 +972,7 @@
     if (undefinedSizesReadyCount > 0) {
       // if has undefined sizes panes that are ready:
       undefinedSizesNotReadySz = undefinedSizesSum / undefinedSizesReadyCount;
-      if (undefinedSizesNotReadySz > 0.1 && leftToAllocate > 0.1) {
+      if (undefinedSizesNotReadySz > SIZE_THRESHOLD && leftToAllocate > SIZE_THRESHOLD) {
         undefinedSizesSum += undefinedSizesNotReadyCount * undefinedSizesNotReadySz;
         undefinedScaleFactor = leftToAllocate / undefinedSizesSum;
       } else {
@@ -944,7 +988,7 @@
     }
 
     // whenever `leftToAllocate` or `undefinedSizesSum` aren't negligible, need to adjact the sizes
-    if (leftToAllocate + undefinedSizesSum > 0.1) {
+    if (leftToAllocate + undefinedSizesSum > SIZE_THRESHOLD) {
       leftToAllocate = 100; // reset the space calculation
 
       for (let i = 0; i < panesCount; i++) {
@@ -959,14 +1003,14 @@
       }
 
       // since we multiply by scaling, there might be left space that is needed to be saturated
-      if (Math.abs(leftToAllocate) > 0.1) {
+      if (Math.abs(leftToAllocate) > SIZE_THRESHOLD) {
         leftToAllocate = readjustSizes(leftToAllocate, ungrowable, unshrinkable);
       }
     }
 
     if (!isFinite(leftToAllocate)) {
       console.warn('Splitpanes: Internal error, sizes might be NaN as a result.');
-    } else if (Math.abs(leftToAllocate) > 0.1) {
+    } else if (Math.abs(leftToAllocate) > SIZE_THRESHOLD) {
       console.warn('Splitpanes: Could not resize panes correctly due to their constraints.');
     }
   }
@@ -1012,14 +1056,28 @@
   }
 
   /**
-	 * Checks that <Splitpanes> is composed of <Pane>, and verify that the panes are still in the right order,
-		and if not update the internal order.
-	 */
+   * Checks that <Splitpanes> is composed of <Pane>, and verify that the panes are still in the right order,
+   * and if not update the internal order.
+   *
+   * Optimized with early exit guards to avoid unnecessary DOM iterations.
+   */
   function verifyAndUpdatePanesOrder() {
     if (!container) {
       return;
     }
+
     const { children } = container;
+
+    // Quick check: if length hasn't changed and first/last elements are same, skip
+    if (
+      children.length === lastChildrenSnapshot.length &&
+      children.length > 0 &&
+      children[0] === lastChildrenSnapshot[0] &&
+      children[children.length - 1] === lastChildrenSnapshot[children.length - 1]
+    ) {
+      return; // No changes detected
+    }
+
     let currentPaneIndex = 0;
     let needReorder = false;
 
@@ -1034,9 +1092,10 @@
         console.warn(
           'Splitpanes: Only <Pane> elements are allowed at the root of <Splitpanes>. One of your DOM nodes was removed.'
         );
+        lastChildrenSnapshot = Array.from(children);
         return;
       } else if (isPane) {
-        if (!needReorder && panes[currentPaneIndex].element !== child) {
+        if (!needReorder && panes[currentPaneIndex]?.element !== child) {
           needReorder = true;
         }
 
@@ -1066,6 +1125,9 @@
       panes = newPanes;
       $veryFirstPaneKey = panes.length > 0 ? panes[0].key : undefined;
     }
+
+    // Update snapshot after verification
+    lastChildrenSnapshot = Array.from(children);
   }
 </script>
 

@@ -1,5 +1,7 @@
 <script lang="ts">
-  import { base } from '$app/paths';
+  import { asset, resolve } from '$app/paths';
+  import { page } from '$app/state';
+  const origin = page.url.origin;
 </script>
 
 <h1>Welcome to Svelte-Splitpane demo!</h1>
@@ -10,7 +12,9 @@
 
 <h2>Features</h2>
 
-<a href="{base}/minified-size"><img alt="Minified Size" src="{base}/minified-size-badge.svg" /></a>
+<a href={origin + resolve('/minified-size')}>
+  <img alt="Minified Size" src={origin + asset('/minified-size-badge.svg')} />
+</a>
 
 <ul>
   <li>Support both dynamic horizontal and vertical splits</li>

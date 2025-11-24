@@ -1,1 +1,4 @@
-# pnpm test
+# Run format, lint, and type checking before commit
+pnpm run format
+pnpm run lint-es
+pnpm run check

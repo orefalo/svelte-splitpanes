@@ -1,58 +1,59 @@
 <script lang="ts">
-  import { base } from '$app/paths';
-  import { page } from '$app/stores';
-
+  import { page } from '$app/state';
   import theme from 'svelte-highlight/styles/night-owl';
-
   import Contents, { type Section } from '$comp/Contents.svelte';
   import RTLToggle from '$comp/RTLToggle.svelte';
   import { pathIsCurrent } from './pathUtils';
+  import { asset, resolve } from '$app/paths';
+
+  const origin = page.url.origin;
+  const base = origin + resolve('/');
 
   let isRTL = false;
 
   const sections: Section[] = [
     {
       title: 'Getting started',
-      pages: [{ title: 'Introduction', path: '/' }]
+      pages: [{ title: 'Introduction', path: '' }]
     },
     {
       title: 'General Examples',
       pages: [
-        { title: 'Min-Max', path: '/examples/min-max' },
-        { title: 'Default Size', path: '/examples/default-size' },
-        { title: 'Disable Double Click', path: '/examples/disable-dbl-click' },
-        { title: 'Lock Layout', path: '/examples/lock-layout' },
-        { title: 'Push Other Panes', path: '/examples/push-other-panes' },
-        { title: 'Add Remove Panes', path: '/examples/add-remove-panes' },
-        { title: 'Reordering Panes', path: '/examples/reordering-panes' },
-        { title: 'ChangeOrientation', path: '/examples/change-orientation' },
-        { title: 'Prog Resize', path: '/examples/prog-resize' },
-        { title: 'Toggle Panes', path: '/examples/toggle-panes' },
-        { title: 'Listen To Events', path: '/examples/listen-to-events' }
+        { title: 'Min-Max', path: 'examples/min-max' },
+        { title: 'Default Size', path: 'examples/default-size' },
+        { title: 'Disable Double Click', path: 'examples/disable-dbl-click' },
+        { title: 'Lock Layout', path: 'examples/lock-layout' },
+        { title: 'Push Other Panes', path: 'examples/push-other-panes' },
+        { title: 'Add Remove Panes', path: 'examples/add-remove-panes' },
+        { title: 'Reordering Panes', path: 'examples/reordering-panes' },
+        { title: 'ChangeOrientation', path: 'examples/change-orientation' },
+        { title: 'Prog Resize', path: 'examples/prog-resize' },
+        { title: 'Toggle Panes', path: 'examples/toggle-panes' },
+        { title: 'Listen To Events', path: 'examples/listen-to-events' }
       ]
     },
     {
       title: 'Snap',
       pages: [
-        { title: 'Simple Snap', path: '/examples/snap/simple' },
-        { title: 'Middle Snap', path: '/examples/snap/middle' },
-        { title: 'Min-Max Snap', path: '/examples/snap/min-max' }
+        { title: 'Simple Snap', path: 'examples/snap/simple' },
+        { title: 'Middle Snap', path: 'examples/snap/middle' },
+        { title: 'Min-Max Snap', path: 'examples/snap/min-max' }
       ]
     },
     {
       title: 'Styling',
       pages: [
-        { title: 'Style Splitters', path: '/examples/styling/splitters' },
-        { title: 'App Layout', path: '/examples/styling/app-layout' }
+        { title: 'Style Splitters', path: 'examples/styling/splitters' },
+        { title: 'App Layout', path: 'examples/styling/app-layout' }
       ]
     }
   ];
 
   const pages = sections.map(section => section.pages).flat();
-  $: pageIdx = pages.findIndex(({ path }) => pathIsCurrent(path, $page));
-  $: curPage = pageIdx >= 0 ? pages[pageIdx] : undefined;
-  $: prevPage = pageIdx >= 1 ? pages[pageIdx - 1] : undefined;
-  $: nextPage = pageIdx >= 0 && pageIdx < pages.length - 1 ? pages[pageIdx + 1] : undefined;
+  const pageIdx = pages.findIndex(({ path }) => pathIsCurrent(path, page));
+  const curPage = pageIdx >= 0 ? pages[pageIdx] : undefined;
+  const prevPage = pageIdx >= 1 ? pages[pageIdx - 1] : undefined;
+  const nextPage = pageIdx >= 0 && pageIdx < pages.length - 1 ? pages[pageIdx + 1] : undefined;
 </script>
 
 <svelte:head>
@@ -87,7 +88,7 @@
   <div class="toc-container">
     <div role="presentation" class="toc-contents-wrap">
       <h1 class="toc-head">
-        <img src="{base}/favicon.svg" alt="Icon" width="30" height="30" />
+        <img src={origin + asset('/favicon.svg')} alt="Icon" width="30" height="30" />
         Svelte-Splitpane
       </h1>
       <Contents contents={sections} />

@@ -1,7 +1,7 @@
 <script context="module" lang="ts">
   export interface Page {
     title: string;
-    path: `/${string}`;
+    path: string;
   }
 
   export interface Section {
@@ -11,10 +11,11 @@
 </script>
 
 <script lang="ts">
-  import { base } from '$app/paths';
-  import { page } from '$app/stores';
-
+  import { page } from '$app/state';
   import { pathIsCurrent } from '../routes/pathUtils';
+  import { resolve } from '$app/paths';
+
+  const base = page.url.origin + resolve('/');
 
   export let contents: Section[] = [];
 </script>
@@ -33,7 +34,7 @@
               <a
                 data-sveltekit-preload-data
                 class="page"
-                aria-current={pathIsCurrent(path, $page) ? 'page' : undefined}
+                aria-current={pathIsCurrent(path, page) ? 'page' : undefined}
                 href={base + path}>
                 {title}
               </a>
@@ -132,37 +133,5 @@
     nav {
       min-height: calc(100vh - 4.2rem);
     }
-
-    /* nav::after {
-			content: '';
-			position: fixed;
-			left: 0;
-			bottom: 4.2rem;
-			width: calc(20rem - 1px);
-			height: 2em;
-			pointer-events: none;
-			background: linear-gradient(
-				to bottom,
-				rgba(247, 250, 253, 0) 0%,
-				rgba(247, 250, 253, 0.7) 50%,
-				rgb(247, 250, 253) 100%
-			);
-			background-repeat: no-repeat;
-			background-size: calc(100% - 2.5rem) 100%; */ /* cover text but not scrollbar */ /*
-		} */
-
-    /* [aria-current='page']::after {
-			content: '';
-			position: absolute;
-			width: 1rem;
-			height: 1rem;
-			top: -0.1rem;
-			right: calc(-0.5 * 1rem);
-			background-color: rgb(26, 26, 26);
-			border-left: 1px solid rgb(102, 102, 102);
-			border-bottom: 1px solid rgb(102, 102, 102);
-			transform: translateY(0.2rem) rotate(45deg);
-			z-index: 2;
-		} */
   }
 </style>

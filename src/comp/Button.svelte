@@ -70,11 +70,11 @@
   const coords = { x: 50, y: 50 };
 
   // eslint-disable-next-line
-  $: (offsetX = Math.abs(w / 2 - coords.x)),
+  $: ((offsetX = Math.abs(w / 2 - coords.x)),
     (offsetY = Math.abs(h / 2 - coords.y)),
     (deltaX = w / 2 + offsetX),
     (deltaY = h / 2 + offsetY),
-    (scale_ratio = Math.sqrt(Math.pow(deltaX, 2.2) + Math.pow(deltaY, 2.2)));
+    (scale_ratio = Math.sqrt(Math.pow(deltaX, 2.2) + Math.pow(deltaY, 2.2))));
 
   const debounce = () => {
     clearTimeout(timer);

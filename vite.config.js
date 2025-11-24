@@ -13,7 +13,8 @@ export default defineConfig({
     include: ['highlight.js', 'highlight.js/lib/core']
   },
   build: {
-    minify: 'esbuild', // We specify this explicitly, since we need the server code to be minified for size computation.
+    minify: 'esbuild',
+    reportCompressedSize: true,
     rollupOptions: {
       output: {
         manualChunks: manualChunksForAnalyzing
@@ -21,13 +22,12 @@ export default defineConfig({
     }
   },
   ssr: {
-    noExternal: [
-      // So that 'esm-env-robust' dependency will be embedded,
-      //  and (a huge!!) minification could be performed by knowing if we're running on the server or on the client.
-      'esm-env-robust'
-    ]
+    noExternal: []
   },
   test: {
-    include: ['src/**/*.{test,spec}.{js,ts}']
+    include: ['tests/unit/**/*.{test,spec}.{js,ts}'],
+    benchmark: {
+      include: ['tests/benchmarks/**/*.{bench,benchmark}.{js,ts}']
+    }
   }
 });

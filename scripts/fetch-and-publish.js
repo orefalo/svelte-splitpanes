@@ -1,7 +1,7 @@
 import child_process from 'node:child_process';
 import os from 'node:os';
 import packageJson from '../package.json' with { type: 'json' };
- 
+
 if (process.argv.length < 3) {
   console.error('Usage: fetch-and-publish <NPM_OTP>');
   process.exit(1);
