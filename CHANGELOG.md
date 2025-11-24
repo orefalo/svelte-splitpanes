@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.0.10](https://github.com/orefalo/svelte-splitpanes/compare/v8.0.9...v8.0.10) (2025-11-24)
+
+
+### Bug Fixes
+
+* missing pkg mgmr in package.json and url path / issue ([3684920](https://github.com/orefalo/svelte-splitpanes/commit/3684920ac2bdf46f50ac6ed84dd5b70f23ef36c3))
+* vibe coding: major performance optimization be caching DOM requests ([23c7980](https://github.com/orefalo/svelte-splitpanes/commit/23c7980f0bcf7490c49b43720be0e018bfa58bda))
+
 ## [8.0.9](https://github.com/orefalo/svelte-splitpanes/compare/v8.0.8...v8.0.9) (2024-10-30)
 
 
