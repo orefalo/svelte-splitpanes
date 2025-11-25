@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.0.11](https://github.com/orefalo/svelte-splitpanes/compare/v8.0.10...v8.0.11) (2025-11-25)
+
+
+### Bug Fixes
+
+* turn off prerender and ssr for the demo ([1dddb02](https://github.com/orefalo/svelte-splitpanes/commit/1dddb02d1a3713d34e7c6708531d2c39e5792bdc))
+
 ## [8.0.10](https://github.com/orefalo/svelte-splitpanes/compare/v8.0.9...v8.0.10) (2025-11-24)
 
 
