@@ -18,7 +18,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
 
       - uses: pnpm/action-setup@v4
         name: Install pnpm
@@ -58,7 +58,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          node-version: 22
+          node-version: 24
           upload_url: ${{ steps.release.outputs.upload_url }}
           asset_path: package/svelte-splitpanes-${{ steps.release.outputs.version }}.tgz
           asset_name: svelte-splitpanes-${{ steps.release.outputs.version }}.tgz
