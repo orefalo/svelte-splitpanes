@@ -4,10 +4,7 @@
   import Contents, { type Section } from '$comp/Contents.svelte';
   import RTLToggle from '$comp/RTLToggle.svelte';
   import { pathIsCurrent } from './pathUtils';
-  import { asset, resolve } from '$app/paths';
-
-  const origin = page.url.origin;
-  const base = origin + resolve('/');
+  import { asset } from '$app/paths';
 
   let isRTL = false;
 
@@ -52,8 +49,8 @@
   const pages = sections.map(section => section.pages).flat();
   const pageIdx = pages.findIndex(({ path }) => pathIsCurrent(path, page));
   const curPage = pageIdx >= 0 ? pages[pageIdx] : undefined;
-  const prevPage = pageIdx >= 1 ? pages[pageIdx - 1] : undefined;
-  const nextPage = pageIdx >= 0 && pageIdx < pages.length - 1 ? pages[pageIdx + 1] : undefined;
+  // const prevPage = pageIdx >= 1 ? pages[pageIdx - 1] : undefined;
+  // const nextPage = pageIdx >= 0 && pageIdx < pages.length - 1 ? pages[pageIdx + 1] : undefined;
 </script>
 
 <svelte:head>
@@ -67,28 +64,12 @@
 
   <main class:rtl-containers={isRTL}>
     <slot />
-
-    <div class="controls">
-      <div>
-        <span class:faded={!prevPage}>previous</span>
-        {#if prevPage}
-          <a data-sveltekit-preload-data href={base + prevPage.path}>{prevPage.title}</a>
-        {/if}
-      </div>
-
-      <div>
-        <span class:faded={!nextPage}>next</span>
-        {#if nextPage}
-          <a data-sveltekit-preload-data href={base + nextPage.path}>{nextPage.title}</a>
-        {/if}
-      </div>
-    </div>
   </main>
 
   <div class="toc-container">
     <div role="presentation" class="toc-contents-wrap">
       <h1 class="toc-head">
-        <img src={origin + asset('/favicon.svg')} alt="Icon" width="30" height="30" />
+        <img src={asset('/favicon.svg')} alt="Icon" width="30" height="30" />
         Svelte-Splitpane
       </h1>
       <Contents contents={sections} />
@@ -157,46 +138,6 @@
     margin-right: auto;
     padding: 10px;
     overflow-x: auto;
-  }
-
-  .controls {
-    border-top: 1.6px solid rgb(232, 228, 253);
-    padding: 12px 0 0 0;
-    display: flex;
-    justify-content: space-between;
-    margin: 40px 0;
-    gap: 15px;
-  }
-
-  .controls > :first-child {
-    text-align: left;
-  }
-
-  .controls > :last-child {
-    text-align: right;
-  }
-
-  .controls span {
-    display: block;
-    font-size: 14px;
-    text-transform: uppercase;
-    font-weight: 600;
-    color: rgb(103, 103, 121);
-    margin-bottom: 4px;
-  }
-
-  .controls span.faded {
-    opacity: 0.4;
-  }
-
-  .controls a {
-    text-decoration: none;
-    font-size: 16px;
-    color: rgb(255, 64, 0);
-  }
-
-  .controls a:not(:hover) {
-    text-decoration: none;
   }
 
   .rtl-containers :global(.splitpanes) {

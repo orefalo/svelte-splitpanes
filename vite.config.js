@@ -12,8 +12,11 @@ export default defineConfig({
   optimizeDeps: {
     include: ['highlight.js', 'highlight.js/lib/core']
   },
+  esbuild: {
+    legalComments: 'none'
+  },
   build: {
-    minify: 'esbuild',
+    minify: true,
     reportCompressedSize: true,
     rollupOptions: {
       output: {
