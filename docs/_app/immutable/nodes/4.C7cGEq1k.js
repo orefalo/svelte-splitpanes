@@ -1,4 +1,4 @@
-import{f as o,I as r,T as m,t as u,k as l,v as d,y as n,q as i,x as S,H as y,W as P,N as x,Y as $,X as T}from"../chunks/BExWhfJl.js";import{E as H}from"../chunks/CqC_iv4i.js";import{S as b,P as q}from"../chunks/W1JU3AeR.js";import{B as v}from"../chunks/BzQxWVEh.js";const C=!0,G=Object.freeze(Object.defineProperty({__proto__:null,prerender:C},Symbol.toStringTag,{value:"Module"}));var V=o("<span></span>"),E=o("<!> <!> <!>",1);function M(p){let t=S(!1),a=S(!1);var c=E(),h=r(c);v(h,{$$events:{click:()=>{d(t,!n(t))}},children:(e,f)=>{x();var s=m();u(()=>$(s,n(t)?"Turn to Vertical":"Turn to Horizontal")),l(e,s)},$$slots:{default:!0}});var g=i(h,2);v(g,{$$events:{click:()=>{d(a,!n(a))}},children:(e,f)=>{x();var s=m();u(()=>$(s,n(a)?"Hide first splitter":"Show first Splitter")),l(e,s)},$$slots:{default:!0}});var _=i(g,2);b(_,{style:"height: 400px",get firstSplitter(){return n(a)},get horizontal(){return n(t)},children:(e,f)=>{var s=y(),z=r(s);P(z,0,()=>({length:3}),T,(w,L,k)=>{q(w,{minSize:5,children:(B,N)=>{var j=V();j.textContent=k+1,l(B,j)},$$slots:{default:!0}})}),l(e,s)},$$slots:{default:!0}}),l(p,c)}const O=`<script>
+import{m as o,f as r,U as j,t as u,b as l,y as d,A as n,u as i,z as S,c as y,X as P,O as x,Z as $,Y as T}from"../chunks/CmnOdeeZ.js";import{E as b}from"../chunks/CIhderJa.js";import{S as H,P as C}from"../chunks/Y56HQ0XO.js";import{B as v}from"../chunks/lgBEUItY.js";const O=!0,G=Object.freeze(Object.defineProperty({__proto__:null,prerender:O},Symbol.toStringTag,{value:"Module"}));var V=o("<span></span>"),q=o("<!> <!> <!>",1);function A(p){let t=S(!1),a=S(!1);var c=q(),h=r(c);v(h,{$$events:{click:()=>{d(t,!n(t))}},children:(e,f)=>{x();var s=j();u(()=>$(s,n(t)?"Turn to Vertical":"Turn to Horizontal")),l(e,s)},$$slots:{default:!0}});var g=i(h,2);v(g,{$$events:{click:()=>{d(a,!n(a))}},children:(e,f)=>{x();var s=j();u(()=>$(s,n(a)?"Hide first splitter":"Show first Splitter")),l(e,s)},$$slots:{default:!0}});var _=i(g,2);H(_,{style:"height: 400px",get firstSplitter(){return n(a)},get horizontal(){return n(t)},children:(e,f)=>{var s=y(),z=r(s);P(z,0,()=>({length:3}),T,(w,W,B)=>{C(w,{minSize:5,children:(k,X)=>{var m=V();m.textContent=B+1,l(k,m)},$$slots:{default:!0}})}),l(e,s)},$$slots:{default:!0}}),l(p,c)}const E=`<script>
   import { Pane, Splitpanes } from 'svelte-splitpanes';
 
   import Button from '$comp/Button.svelte';
@@ -26,7 +26,7 @@ import{f as o,I as r,T as m,t as u,k as l,v as d,y as n,q as i,x as S,H as y,W a
     </Pane>
   {/each}
 </Splitpanes>
-`,W=`<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
+`,M=`<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
   <span class="hljs-keyword">import</span> { <span class="hljs-title class_">Pane</span>, <span class="hljs-title class_">Splitpanes</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;svelte-splitpanes&#x27;</span>;
 
   <span class="hljs-keyword">import</span> <span class="hljs-title class_">Button</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;$comp/Button.svelte&#x27;</span>;
@@ -54,6 +54,6 @@ import{f as o,I as r,T as m,t as u,k as l,v as d,y as n,q as i,x as S,H as y,W a
     <span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
   {/each}
 <span class="hljs-tag">&lt;/<span class="hljs-name">Splitpanes</span>&gt;</span>
-`,A={code:O,highlightedHTML:W,component:M};var I=o(`<h2>Change orientation & first splitter</h2> <p>When changing direction, all the panes current width or height will flip to adapt to the new
+`,L={code:E,highlightedHTML:M,component:A};var U=o(`<h2>Change orientation & first splitter</h2> <p>When changing direction, all the panes current width or height will flip to adapt to the new
   layout.</p> <p>Showing the first splitter is an option which allows user to double click the splitter to maximize
-  the next pane. <br/> The first splitter does not allow to resize the next pane.</p> <!>`,1);function J(p){var t=I(),a=i(r(t),6);H(a,{get example(){return A}}),l(p,t)}export{J as component,G as universal};
+  the next pane. <br/> The first splitter does not allow to resize the next pane.</p> <!>`,1);function I(p){var t=U(),a=i(r(t),6);b(a,{get example(){return L}}),l(p,t)}export{I as component,G as universal};

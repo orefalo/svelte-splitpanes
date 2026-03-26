@@ -1,4 +1,4 @@
-import{f as l,I as j,T as b,t as k,k as a,q as o,v as S,y as h,x as y,g as B,N as w,Y as C}from"../chunks/BExWhfJl.js";import{E as H}from"../chunks/CqC_iv4i.js";import{S as T,P as g}from"../chunks/W1JU3AeR.js";import{B as q}from"../chunks/BzQxWVEh.js";const E=!0,R=Object.freeze(Object.defineProperty({__proto__:null,prerender:E},Symbol.toStringTag,{value:"Module"}));var M=l("<span>1</span>"),O=l("<span>2</span>"),z=l("<span>3</span>"),A=l("<!> <!> <!>",1),I=l("<!> <!>",1);function L(c){function p(){S(n,!h(n))}let n=y(!0);var m=I(),v=j(m);q(v,{$$events:{click:p},children:(r,_)=>{w();var t=b();k(()=>C(t,h(n)?"Hide":"Show")),a(r,t)},$$slots:{default:!0}});var d=o(v,2);T(d,{style:"height: 400px",children:(r,_)=>{var t=A(),u=j(t);g(u,{children:(s,i)=>{var e=M();a(s,e)},$$slots:{default:!0}});var f=o(u,2);{var $=s=>{g(s,{children:(i,e)=>{var x=O();a(i,x)},$$slots:{default:!0}})};B(f,s=>{h(n)&&s($)})}var P=o(f,2);g(P,{children:(s,i)=>{var e=z();a(s,e)},$$slots:{default:!0}}),a(r,t)},$$slots:{default:!0}}),a(c,m)}const N=`<script>
+import{m as l,f as j,U as b,t as k,b as a,u as o,y as S,A as h,z as y,n as B,O as w,Z as C}from"../chunks/CmnOdeeZ.js";import{E as H}from"../chunks/CIhderJa.js";import{S as O,P as g}from"../chunks/Y56HQ0XO.js";import{B as T}from"../chunks/lgBEUItY.js";const q=!0,Q=Object.freeze(Object.defineProperty({__proto__:null,prerender:q},Symbol.toStringTag,{value:"Module"}));var z=l("<span>1</span>"),A=l("<span>2</span>"),E=l("<span>3</span>"),M=l("<!> <!> <!>",1),L=l("<!> <!>",1);function U(c){function p(){S(n,!h(n))}let n=y(!0);var m=L(),u=j(m);T(u,{$$events:{click:p},children:(r,_)=>{w();var t=b();k(()=>C(t,h(n)?"Hide":"Show")),a(r,t)},$$slots:{default:!0}});var d=o(u,2);O(d,{style:"height: 400px",children:(r,_)=>{var t=M(),v=j(t);g(v,{children:(s,i)=>{var e=z();a(s,e)},$$slots:{default:!0}});var f=o(v,2);{var $=s=>{g(s,{children:(i,e)=>{var x=A();a(i,x)},$$slots:{default:!0}})};B(f,s=>{h(n)&&s($)})}var P=o(f,2);g(P,{children:(s,i)=>{var e=E();a(s,e)},$$slots:{default:!0}}),a(r,t)},$$slots:{default:!0}}),a(c,m)}const Z=`<script>
   import { Pane, Splitpanes } from 'svelte-splitpanes';
 
   import Button from '$comp/Button.svelte';
@@ -25,7 +25,7 @@ import{f as l,I as j,T as b,t as k,k as a,q as o,v as S,y as h,x as y,g as B,N a
     <span>3</span>
   </Pane>
 </Splitpanes>
-`,Y=`<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
+`,D=`<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
   <span class="hljs-keyword">import</span> { <span class="hljs-title class_">Pane</span>, <span class="hljs-title class_">Splitpanes</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;svelte-splitpanes&#x27;</span>;
 
   <span class="hljs-keyword">import</span> <span class="hljs-title class_">Button</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;$comp/Button.svelte&#x27;</span>;
@@ -52,4 +52,4 @@ import{f as l,I as j,T as b,t as k,k as a,q as o,v as S,y as h,x as y,g as B,N a
     <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>3<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">Pane</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">Splitpanes</span>&gt;</span>
-`,D={code:N,highlightedHTML:Y,component:L};var F=l("<h2>Toggle a pane on/off</h2> <!>",1);function U(c){var p=F(),n=o(j(p),2);H(n,{get example(){return D}}),a(c,p)}export{U as component,R as universal};
+`,F={code:Z,highlightedHTML:D,component:U};var G=l("<h2>Toggle a pane on/off</h2> <!>",1);function R(c){var p=G(),n=o(j(p),2);H(n,{get example(){return F}}),a(c,p)}export{R as component,Q as universal};
