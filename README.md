@@ -8,7 +8,7 @@
 ![deps](https://badgen.net/bundlephobia/dependency-count/svelte-splitpanes)
 ![contributors](https://badgen.net/github/contributors/orefalo/svelte-splitpanes)
 
-A _predictable_ responsive component to layout resizable view panels supporting an multitude of advanced features (min/max bounderies, snap, expand on double click, fixed size, rtl).
+A _predictable_ responsive component to layout resizable view panels supporting a multitude of advanced features (min/max bounderies, snap, expand on double click, fixed size, rtl).
 
 ![screenshot](./static/screenshot.jpg)
 
