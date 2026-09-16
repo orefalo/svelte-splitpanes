@@ -2,6 +2,62 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.0.5](https://github.com/orefalo/svelte-splitpanes/compare/v8.0.15...v8.0.5) (2026-09-16)
+
+
+### Features
+
+* add License and Code of conduct ([c8e9ecd](https://github.com/orefalo/svelte-splitpanes/commit/c8e9ecd9809a749df75198456cac4c70b7a88bba))
+* add snap ([699e233](https://github.com/orefalo/svelte-splitpanes/commit/699e233369c293bb4015ef13510ff5d40fc07f3f))
+* add snap ([b6cb06d](https://github.com/orefalo/svelte-splitpanes/commit/b6cb06d94cec4027971322c92a151aee0130d601))
+* add the \`strictEvents\` attribute to components, so the user will know that no other events happen ([db15de3](https://github.com/orefalo/svelte-splitpanes/commit/db15de3f79994690e5a259ca78e7b603c0012e2c))
+
+
+### Bug Fixes
+
+* 7, dragging the splitter fast flickers the cursor ([288acd9](https://github.com/orefalo/svelte-splitpanes/commit/288acd92583fc906b9625ee3b66ed9f9ba72af1e))
+* a regression related to safe callbacks which could generate a 0 width upon certain race conditions ([af34b41](https://github.com/orefalo/svelte-splitpanes/commit/af34b41a9974cd7203d3a0be2cb567666fbcf124))
+* avoid equalizing on the edge case that there is not even a single pane ([0adb387](https://github.com/orefalo/svelte-splitpanes/commit/0adb38772490d61e84af4eb893af33c1483c4319))
+* better handling of empty attributes ([7c9c4ad](https://github.com/orefalo/svelte-splitpanes/commit/7c9c4add390f1025c68b13ee9a3e6fa1df706754))
+* check for container ([daa2e60](https://github.com/orefalo/svelte-splitpanes/commit/daa2e607b08395b5f91e7c9c3c82094b54ed0b7b))
+* cleaner dragging calculation, and omit the buggy `margin-left: -1px;` from the splitter ([b453d74](https://github.com/orefalo/svelte-splitpanes/commit/b453d74ee7aff3c4812a3de2f2bbd2372ad597f3))
+* demo package.json ([c7c1448](https://github.com/orefalo/svelte-splitpanes/commit/c7c1448afa88f7a58b6a9b363af617000766cf7e))
+* dynamic loading of content when splitpanes are rendered in a separate part of the DOM tree ([9b7f5b9](https://github.com/orefalo/svelte-splitpanes/commit/9b7f5b94ff4df2f5597c17ee8a4ff259464ed117))
+* events are now passive by default, remove preventDefaults() in the code ([1bc9045](https://github.com/orefalo/svelte-splitpanes/commit/1bc90455c558e40b174c2270d19ea0e4636d912e))
+* fix github actions to support node16 ([47ee00c](https://github.com/orefalo/svelte-splitpanes/commit/47ee00c01a9afb55e4ed922123a57be81295e713))
+* fix issue 69 - dblClickSplitter={false} does not disable auto-resizing ([8e38809](https://github.com/orefalo/svelte-splitpanes/commit/8e38809b59fb28bbe89816300f3325347e1d6424))
+* fix panel pushing bug introduct in 0.8.3 ([b4c71f8](https://github.com/orefalo/svelte-splitpanes/commit/b4c71f8a22c512d77eed0ad533f7b7989f69db61))
+* ignoring the annoying Svelte `a11y-click-events-have-key-events` warnings ([7d9b872](https://github.com/orefalo/svelte-splitpanes/commit/7d9b872f3fc2848310124e96ed220da7f2ffe934))
+* improved snap, fixed bug ([903ad71](https://github.com/orefalo/svelte-splitpanes/commit/903ad71b8d64a30b8333661fbb1833cc34e4d526))
+* missing pkg mgmr in package.json and url path / issue ([3684920](https://github.com/orefalo/svelte-splitpanes/commit/3684920ac2bdf46f50ac6ed84dd5b70f23ef36c3))
+* now efficiently identify if client supports passive events, fixes [#74](https://github.com/orefalo/svelte-splitpanes/issues/74) ([f2d7ed1](https://github.com/orefalo/svelte-splitpanes/commit/f2d7ed1da856386287a2065d66c79f9fb63706c3))
+* pane object not being returned ([#45](https://github.com/orefalo/svelte-splitpanes/issues/45)) ([118a1ad](https://github.com/orefalo/svelte-splitpanes/commit/118a1ad1a19682feaf7175136bdc6c796fb6a542))
+* readd panes push ([a61f101](https://github.com/orefalo/svelte-splitpanes/commit/a61f101dff9a1cdf216744139ff789ba9a3e75dd))
+* replace "$app/environment" with standard browser detection ([1fbc5ec](https://github.com/orefalo/svelte-splitpanes/commit/1fbc5ecf09483b56fc5ddb58a8770779a9a35ecd))
+* replace `$app/environment` with standard browser detection ([89008ae](https://github.com/orefalo/svelte-splitpanes/commit/89008aef24263f636ad5d6230fb146ac75b0589e))
+* repo url ([686e38d](https://github.com/orefalo/svelte-splitpanes/commit/686e38dd7308859b0aa87225d6afcf96a21d3ab2))
+* require svelte to be installed as a peer dependency ([ec13655](https://github.com/orefalo/svelte-splitpanes/commit/ec136552979b37f28f25edb16c62fa19f2928a9c))
+* set-output is deprecated ([451509b](https://github.com/orefalo/svelte-splitpanes/commit/451509b4f83b39de6f0cbc36c8a7dcde9a495796))
+* snap with multiple panes ([01f93a7](https://github.com/orefalo/svelte-splitpanes/commit/01f93a7a45188f3e0d2d2257d3570db12327c899))
+* ssr issue on partially defined sizes ([5fb6661](https://github.com/orefalo/svelte-splitpanes/commit/5fb6661b7bd5d1b388a9e4ecd390a528eccce281))
+* support for svelte5 ([91b395f](https://github.com/orefalo/svelte-splitpanes/commit/91b395f179ec89679dd5e845f49dce94faa23462))
+* turn off prerender and ssr for the demo ([1dddb02](https://github.com/orefalo/svelte-splitpanes/commit/1dddb02d1a3713d34e7c6708531d2c39e5792bdc))
+* typo ([7827078](https://github.com/orefalo/svelte-splitpanes/commit/78270786aa495f80384c62d69bf89c3a61895112))
+* typo in README description ([bbc8485](https://github.com/orefalo/svelte-splitpanes/commit/bbc848507226198bd9d17979911fae1ef0786004))
+* vibe coding: major performance optimization be caching DOM requests ([23c7980](https://github.com/orefalo/svelte-splitpanes/commit/23c7980f0bcf7490c49b43720be0e018bfa58bda))
+
+
+### Miscellaneous Chores
+
+* bump version to 0.7.9 ([16b7fab](https://github.com/orefalo/svelte-splitpanes/commit/16b7fab73cd011b5dba1dcfdd0b00a1f2c8d486d))
+* release 0.7.10 (you may change the title) ([c23db34](https://github.com/orefalo/svelte-splitpanes/commit/c23db34b446e361bd89a8db694b5682c1303b964))
+* release 0.7.11 ([1df8854](https://github.com/orefalo/svelte-splitpanes/commit/1df8854bcf66365c39cd04ece32d6a5ce5a92287))
+* release 0.8.1 ([14170b6](https://github.com/orefalo/svelte-splitpanes/commit/14170b6fe0c842f9016b26d1aaddc91fa3eae061))
+* release 0.8.2 ([19e6b20](https://github.com/orefalo/svelte-splitpanes/commit/19e6b207ad8a179d6c9a05c49d07a45c2ebb25c0))
+* release 8.0.4 ([fbd210a](https://github.com/orefalo/svelte-splitpanes/commit/fbd210a0a598f7c70c98f34fc51d7201fc7288b1))
+* release 8.0.5 ([9f7ec2e](https://github.com/orefalo/svelte-splitpanes/commit/9f7ec2e317594b4079ccb39a5c1292fb3c705bba))
+* update to svelte 4 ([ddb4402](https://github.com/orefalo/svelte-splitpanes/commit/ddb44027ef8a15f63ae01dbcdea8c957e4c82662))
+
 ## [8.0.15](https://github.com/orefalo/svelte-splitpanes/compare/v8.0.14...v8.0.15) (2026-03-26)
 
 
